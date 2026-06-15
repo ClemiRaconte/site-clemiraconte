@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La mallette pédagogique — Clémi Raconte</title>
+<meta name="description" content="Pour chaque thématique de vie scolaire : une histoire, une fiche d'accompagnement et une activité. Une séance de 45 minutes prête à l'emploi, environ 1€ par élève.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="marque" href="index.html">Clémi Raconte<span class="point" aria-hidden="true"></span></a>
+    <button class="burger" aria-label="Ouvrir ou fermer le menu" aria-expanded="false"
+      onclick="var n=this.closest('.nav');n.classList.toggle('ouvert');this.setAttribute('aria-expanded',n.classList.contains('ouvert'));">&#9776;</button>
+    <ul>
+      <li><a class="lien" href="histoires.html">Les histoires</a></li>
+      <li><a class="lien actif" href="mallette.html" aria-current="page">La mallette pédagogique</a></li>
+      <li><a class="lien" href="demarche.html">La démarche</a></li>
+      <li><a class="lien" href="contact.html">Contact</a></li>
+    </ul>
+    <a class="btn btn-jaune" href="#specimen">Recevoir un spécimen</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ======== HERO ======== -->
+  <div class="hero">
+    <div>
+      <p class="sur-titre">La mallette pédagogique · cycles 1, 2 et 3</p>
+      <h1>La vie scolaire racontée, <span class="surligne">prête à vivre en classe</span>.</h1>
+      <p class="chapo">Pour chaque thématique de vie scolaire : une histoire originale, une fiche d'accompagnement éducatif et une activité ludique. Une séance complète de 45&nbsp;minutes, sans autre préparation que la photocopie.</p>
+      <div class="actions">
+        <a class="btn" href="#specimen">Recevoir un spécimen gratuit</a>
+        <a class="btn btn-ligne" href="histoire-ange-le-loup.html">Découvrir une séance complète</a>
+      </div>
+      <p class="devise"><span class="manuscrit">« La mallette propose, l'enseignant dispose. »</span></p>
+    </div>
+
+    <div class="cahier" role="img" aria-label="Déroulé d'une séance type de 45 minutes : histoire, échange guidé, activité.">
+      <span class="etiquette">Une séance type</span>
+      <h3>Bloc « Vivre ensemble »</h3>
+      <ol>
+        <li><span><b>1. L'histoire</b> — lue, écoutée ou projetée</span><span class="duree">15 min</span></li>
+        <li><span><b>2. L'échange</b> — questions guidées par âge (4-5, 6-7, 8-9 ans)</span><span class="duree">15 min</span></li>
+        <li><span><b>3. L'activité</b> — jeu, coloriage, labyrinthe…</span><span class="duree">15 min</span></li>
+      </ol>
+      <div class="total"><span>Préparation enseignant</span><span>la photocopie, c'est tout</span></div>
+    </div>
+  </div>
+
+  <!-- ======== BANDE REPÈRES ======== -->
+  <div class="reperes">
+    <div class="inner">
+      <span class="item"><b>15</b> blocs thématiques</span>
+      <span class="item"><b>45</b> minutes par séance</span>
+      <span class="item"><b>3</b> formats : papier, audio, vidéo</span>
+      <span class="item"><b>~1€</b> par élève</span>
+    </div>
+  </div>
+
+  <!-- ======== LE TRIO ======== -->
+  <section id="trio">
+    <div class="inner-s">
+      <h2 class="titre-section">Trois outils qui travaillent ensemble</h2>
+      <p class="intro-section">Chaque bloc thématique réunit le même trio. L'histoire ouvre, l'échange creuse, l'activité ancre — et l'enseignant reste maître du rythme, de l'ordre et de l'usage.</p>
+      <div class="trio">
+        <article class="carte">
+          <div class="pastille" aria-hidden="true">1</div>
+          <h3>L'histoire</h3>
+          <p>Un récit original de 800 à 1&nbsp;100 mots, construit en quatre actes, sans antagoniste violent. La résolution vient d'une surprise, pas d'un affrontement&nbsp;; la fin reste ouverte pour nourrir le débat.</p>
+          <p class="note-marge manuscrit">à lire, à écouter ou à projeter</p>
+        </article>
+        <article class="carte">
+          <div class="pastille" aria-hidden="true">2</div>
+          <h3>La fiche d'accompagnement</h3>
+          <p>Deux pages recto-verso&nbsp;: un éclairage psychopédagogique, une boîte à questions graduée par âge, un rituel de connexion et un conseil concret. Tout est prêt, rien n'est imposé.</p>
+          <p class="note-marge manuscrit">questions graduées 4-5, 6-7, 8-9 ans</p>
+        </article>
+        <article class="carte">
+          <div class="pastille" aria-hidden="true">3</div>
+          <h3>L'activité ludique</h3>
+          <p>Un jeu, un coloriage, un labyrinthe ou des mots mêlés qui prolongent l'histoire par le faire. Photocopiable, réalisable en classe entière, en petit groupe ou en autonomie.</p>
+          <p class="note-marge manuscrit">zéro matériel à acheter</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== JUGEZ SUR PIÈCE ======== -->
+  <section class="fond-2" id="vitrine">
+    <div class="inner-s">
+      <h2 class="titre-section">Jugez sur pièce&nbsp;: une séance complète en accès libre</h2>
+      <p class="intro-section">Plutôt qu'un long discours, voici un bloc entier de la mallette, tel que vos équipes le recevront&nbsp;: l'histoire <i>Ange, le loup qui chantait avec le vent</i> (5-7 ans, appartenance et différence), sa fiche d'accompagnement et ses 14 activités.</p>
+      <div class="telechargements">
+        <div class="tele">
+          <h3>L'histoire</h3>
+          <p>Le texte intégral, à lire à voix haute ou à projeter — bientôt aussi en audio et en vidéo.</p>
+          <a class="btn btn-ligne" href="assets/pdf/histoire-ange-le-loup.pdf" download>Télécharger (PDF)</a>
+        </div>
+        <div class="tele">
+          <h3>La fiche d'accompagnement</h3>
+          <p>Le Décodeur, la Boîte à Questions, le rituel de connexion et le Conseil — le format commun à tous les blocs.</p>
+          <a class="btn btn-ligne" href="assets/pdf/fae-ange-le-loup.pdf" download>Télécharger (PDF)</a>
+        </div>
+        <div class="tele">
+          <h3>Les 14 activités</h3>
+          <p>Fiches en autonomie, jeux coopératifs sans perdant, ateliers d'expression et formats signatures.</p>
+          <a class="btn btn-ligne" href="assets/pdf/activites-ange-le-loup.pdf" download>Télécharger (PDF)</a>
+        </div>
+      </div>
+      <p style="margin-top:1.4rem"><a class="btn" href="histoire-ange-le-loup.html">Voir la page complète de la séance vitrine →</a></p>
+    </div>
+  </section>
+
+  <!-- ======== LANGUE DE L'ÉCOLE ======== -->
+  <section>
+    <div class="inner-s">
+      <h2 class="titre-section">Adossée aux priorités de l'École</h2>
+      <p class="intro-section">Les thématiques ne sortent pas de nulle part&nbsp;: elles sont choisies dans ce dont l'École a la charge. Chaque bloc indique explicitement les repères institutionnels sur lesquels il s'appuie.</p>
+      <div class="chips">
+        <span class="chip"><b>Socle commun</b> · domaine 3 — la formation de la personne et du citoyen</span>
+        <span class="chip"><b>EMC</b> — enseignement moral et civique</span>
+        <span class="chip"><b>pHARe</b> — prévention du harcèlement</span>
+        <span class="chip"><b>Égalité filles-garçons</b></span>
+        <span class="chip"><b>Climat scolaire</b></span>
+        <span class="chip"><b>Parcours citoyen</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== LES 15 BLOCS ======== -->
+  <section id="blocs">
+    <div class="inner-s">
+      <h2 class="titre-section">Les 15 blocs thématiques</h2>
+      <p class="intro-section">Quinze entrées dans la vie scolaire et le vivre-ensemble. Chaque bloc se suffit à lui-même&nbsp;: on peut en vivre un seul, les enchaîner sur l'année, ou piocher selon l'actualité de la classe.</p>
+      <div class="grille-blocs">
+        <div class="bloc"><h3>Mon corps, mon territoire</h3><p>Consentement, intimité, respect de soi.</p></div>
+        <div class="bloc"><h3>Filles, garçons&nbsp;: libres d'être</h3><p>Déconstruire les stéréotypes, ouvrir tous les possibles.</p></div>
+        <div class="bloc"><h3>Grandir garçon, autrement</h3><p>Émotions, douceur et nouvelles masculinités.</p></div>
+        <div class="bloc jaune"><h3>Accueillir l'autre</h3><p>Différence, handicap, hospitalité.</p></div>
+        <div class="bloc"><h3>Stop au harcèlement</h3><p>Repérer, dire, protéger — en appui du programme pHARe.</p></div>
+        <div class="bloc"><h3>La météo des émotions</h3><p>Nommer, traverser et apprivoiser ce qu'on ressent.</p></div>
+        <div class="bloc jaune"><h3>Tous citoyens</h3><p>Règles communes, entraide, vie de la classe.</p></div>
+        <div class="bloc"><h3>Les écrans et nous</h3><p>Usages, limites et vraie vie.</p></div>
+        <div class="bloc"><h3>Familles d'aujourd'hui</h3><p>Toutes les familles ont leur histoire.</p></div>
+        <div class="bloc"><h3>La nature, notre alliée</h3><p>Vivant, saisons et transition écologique.</p></div>
+        <div class="bloc jaune"><h3>L'erreur, ma copine</h3><p>Confiance en soi, persévérance, droit de se tromper.</p></div>
+        <div class="bloc"><h3>Les mots qui font du bien</h3><p>Politesse, gratitude et pouvoir du langage.</p></div>
+        <div class="bloc"><h3>Riches, pauvres, et nous</h3><p>Fractures sociales, regard sur l'autre, solidarité.</p></div>
+        <div class="bloc"><h3>Bien dans son assiette</h3><p>Alimentation, goût et santé.</p></div>
+        <div class="bloc jaune"><h3>Le sommeil et le calme</h3><p>Repos, retour au calme, attention.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== LIBERTÉ PÉDAGOGIQUE ======== -->
+  <section>
+    <div class="liberte seyes">
+      <blockquote>« Clé en main ne veut pas dire menottes aux poignets. »</blockquote>
+      <p>La mallette donne un déroulé complet à qui veut le suivre tel quel — et un matériau souple à qui préfère le détourner. Lire l'histoire sans la fiche, garder l'activité pour un autre jour, transformer l'échange en débat philo&nbsp;: chaque enseignant se l'approprie selon sa liberté pédagogique. C'est ainsi qu'elle a été pensée, c'est ainsi qu'elle est écrite.</p>
+    </div>
+  </section>
+
+  <!-- ======== LE SUPPORT ======== -->
+  <section class="fond-2" id="support">
+    <div class="inner-s support">
+      <div>
+        <h2 class="titre-section">Un cahier, et tout dedans</h2>
+        <p class="intro-section" style="margin-bottom:0">Le support est volontairement simple&nbsp;: du papier, qui ne tombe jamais en panne.</p>
+        <ul>
+          <li><b>Le cahier physique</b> regroupe les histoires, les fiches d'accompagnement et les activités photocopiables.</li>
+          <li><b>Des QR codes</b> accompagnent chaque histoire et ouvrent sa version audio (podcast) et sa version vidéo — pour écouter en classe, au coin regroupement, ou à la maison.</li>
+          <li><b>Aucun compte, aucun abonnement, aucune installation</b>&nbsp;: on flashe, ça joue.</li>
+        </ul>
+      </div>
+      <div class="faux-qr">
+        <div class="qr" aria-hidden="true"></div>
+        <p><b>Flashez, écoutez.</b><br>Chaque histoire existe en trois formats&nbsp;: à lire, à écouter, à regarder. Le même outil sert la classe unique de montagne et l'école de ville.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FINANCEMENT ======== -->
+  <section id="financement">
+    <div class="inner-s">
+      <h2 class="titre-section">Un coût pensé pour les circuits de l'école</h2>
+      <p class="intro-section">Environ 1€ par élève&nbsp;: un montant calibré pour se décider simplement, sans dossier ni délibération.</p>
+      <div class="cartes-fi">
+        <div class="carte-fi">
+          <h3>La coopérative scolaire</h3>
+          <p>Le circuit le plus court&nbsp;: une décision entre le directeur et le mandataire, à l'échelle d'une classe ou de l'école.</p>
+        </div>
+        <div class="carte-fi">
+          <h3>La commune</h3>
+          <p>Sur les crédits pédagogiques de fonctionnement. Une lettre type prête à transmettre au maire est fournie avec le devis.</p>
+        </div>
+        <div class="carte-fi">
+          <h3>L'association de parents</h3>
+          <p>Un financement qui parle aux familles&nbsp;: harcèlement, confiance, vivre-ensemble — leurs sujets du quotidien.</p>
+        </div>
+      </div>
+      <div class="emplacement" style="max-width:560px;margin:0 auto 1rem">
+        <p><b>Grille tarifaire définitive</b> — le «&nbsp;~1€ par élève&nbsp;» est l'ordre de grandeur de travail. À valider&nbsp;: prix du cahier à l'unité, tarif école, tarif commune, et ce que contient exactement chaque formule.</p>
+      </div>
+      <div class="prix">
+        <div class="chiffre">~1€ <small>/ élève</small></div>
+        <p>Devis détaillés sur demande, à l'échelle d'une classe, d'une école ou d'une commune.</p>
+        <div class="actions">
+          <a class="btn btn-ligne" href="contact.html">Demander un devis école</a>
+          <a class="btn btn-ligne" href="contact.html">Demander un devis commune</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== QUI JE SUIS ======== -->
+  <section class="fond-2">
+    <div class="inner-s qui">
+      <div class="portrait emplacement-visuel">
+        <span><b>Emplacement à fournir</b>Photo de Clément dans le décor de forêt conteuse — format vertical 4:5, lumière chaude (guirlandes allumées), en train de raconter ou regard caméra. À tourner au GH5.</span>
+      </div>
+      <div>
+        <h2 class="titre-section">Qui raconte&nbsp;?</h2>
+        <p>Je m'appelle Clément Joubert. Je dirige un accueil de loisirs dans les Hautes-Alpes depuis quinze ans, et j'écris depuis l'âge de douze ans — le slam d'abord, puis le rap, et aujourd'hui les histoires pour enfants.</p>
+        <p>Clémi Raconte est né de ces deux vies&nbsp;: celle qui observe les enfants au quotidien, et celle qui écrit. Chaque histoire part d'une situation vraie de vie collective, et chaque fiche traduit ce que quinze ans de terrain m'ont appris&nbsp;: on ne fait pas la morale aux enfants, on leur ouvre des portes.</p>
+        <a class="btn btn-ligne" href="demarche.html">Lire toute la démarche</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CTA FINAL ======== -->
+  <section class="final" id="specimen">
+    <div class="inner-s">
+      <h2>Jugez sur pièce&nbsp;: recevez un spécimen gratuit.</h2>
+      <p>Une histoire complète, sa fiche d'accompagnement et son activité, envoyées à votre école ou à votre circonscription. <span class="manuscrit">La meilleure façon de se faire un avis, c'est de la vivre en classe.</span></p>
+      <a class="btn btn-jaune" href="contact.html">Demander le spécimen</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="inner">
+    <span>© 2026 Clémi Raconte — Clément Joubert · Saint-Bonnet-en-Champsaur (05)</span>
+    <span><a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

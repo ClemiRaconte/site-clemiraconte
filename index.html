@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clémi Raconte — Des histoires qui font grandir</title>
+<meta name="description" content="Des histoires originales pour les 4-10 ans, à lire, à écouter et à regarder. Et pour les écoles : une mallette pédagogique clé en main sur la vie scolaire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="marque" href="index.html">Clémi Raconte<span class="point" aria-hidden="true"></span></a>
+    <button class="burger" aria-label="Ouvrir ou fermer le menu" aria-expanded="false"
+      onclick="var n=this.closest('.nav');n.classList.toggle('ouvert');this.setAttribute('aria-expanded',n.classList.contains('ouvert'));">&#9776;</button>
+    <ul>
+      <li><a class="lien" href="histoires.html">Les histoires</a></li>
+      <li><a class="lien" href="mallette.html">La mallette pédagogique</a></li>
+      <li><a class="lien" href="demarche.html">La démarche</a></li>
+      <li><a class="lien" href="contact.html">Contact</a></li>
+    </ul>
+    <a class="btn btn-jaune" href="histoires.html">Écouter une histoire</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ======== HERO ======== -->
+  <div class="hero">
+    <div>
+      <p class="sur-titre">Histoires pour les 4-10 ans · Hautes-Alpes</p>
+      <h1>Des histoires qui <span class="surligne">ouvrent des portes</span>, jamais qui font la morale.</h1>
+      <p class="chapo">Je m'appelle Clément, et je raconte des histoires sur ce que vivent vraiment les enfants&nbsp;: l'école, les copains, les émotions, la famille, la différence. À lire, à écouter, à regarder — à la maison comme en classe.</p>
+      <div class="actions">
+        <a class="btn" href="histoires.html">Découvrir les histoires</a>
+        <a class="btn btn-ligne" href="mallette.html">Je suis enseignant·e</a>
+      </div>
+      <p class="devise"><span class="manuscrit">« Les familles ont changé. Les histoires aussi. »</span></p>
+    </div>
+
+    <div class="cahier" role="img" aria-label="Une histoire en trois formats : à lire, à écouter, à regarder.">
+      <span class="etiquette">Chaque histoire existe en</span>
+      <h3>Trois formats</h3>
+      <ol>
+        <li><span><b>À lire</b> — dans le cahier, le soir ou en classe</span><span class="duree">papier</span></li>
+        <li><span><b>À écouter</b> — le podcast, en voiture ou au calme</span><span class="duree">audio</span></li>
+        <li><span><b>À regarder</b> — racontée dans la forêt conteuse</span><span class="duree">vidéo</span></li>
+      </ol>
+      <div class="total"><span>Pour y accéder</span><span>on flashe, ça joue</span></div>
+    </div>
+  </div>
+
+  <!-- ======== BANDE REPÈRES ======== -->
+  <div class="reperes">
+    <div class="inner">
+      <span class="item"><b>56+</b> histoires originales</span>
+      <span class="item"><b>4-10</b> ans</span>
+      <span class="item"><b>0</b> méchant, <b>0</b> morale</span>
+      <span class="item"><b>100%</b> écrites dans les Alpes</span>
+    </div>
+  </div>
+
+  <!-- ======== TROIS PORTES ======== -->
+  <section>
+    <div class="inner-s">
+      <h2 class="titre-section">Par où voulez-vous entrer&nbsp;?</h2>
+      <div class="portes" style="margin-top:1.6rem">
+        <a class="porte" href="histoires.html">
+          <h3>Je suis parent</h3>
+          <p>Des histoires à partager le soir, dans la voiture, ou quand un sujet du quotidien a besoin d'un coup de pouce pour se dire.</p>
+          <span class="fleche">Écouter les histoires →</span>
+        </a>
+        <a class="porte mise-avant" href="mallette.html">
+          <h3>Je suis enseignant·e ou IEN</h3>
+          <p>La mallette pédagogique&nbsp;: 15 blocs sur la vie scolaire, chacun avec une histoire, une fiche d'accompagnement et une activité. 45 minutes clé en main.</p>
+          <span class="fleche">Découvrir la mallette →</span>
+        </a>
+        <a class="porte" href="demarche.html">
+          <h3>Je veux comprendre la démarche</h3>
+          <p>Pourquoi pas de méchant&nbsp;? Pourquoi des fins ouvertes&nbsp;? D'où viennent ces histoires&nbsp;? Quinze ans de terrain répondent.</p>
+          <span class="fleche">Lire la démarche →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== HISTOIRE MISE EN AVANT ======== -->
+  <section class="fond-2">
+    <div class="inner-s qui">
+      <div class="portrait emplacement-visuel" style="aspect-ratio:16/11;">
+        <span><b>Emplacement à fournir</b>Illustration d'Ange (format paysage 16:9), par l'illustratrice. La même image servira sur la page histoire et la carte du catalogue.</span>
+      </div>
+      <div>
+        <p class="sur-titre">La séance vitrine</p>
+        <h2 class="titre-section">Ange, le loup qui chantait avec le vent</h2>
+        <p>Dans la forêt de Daillon vit un loup si discret qu'il marche sur la pointe des pattes — jusqu'au soir où la forêt a besoin de sa voix. L'histoire, sa fiche d'accompagnement et ses 14 activités sont en accès libre&nbsp;: c'est la séance qui montre tout ce que sait faire Clémi Raconte.</p>
+        <a class="btn" href="histoire-ange-le-loup.html">Découvrir la séance complète</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== LA PROMESSE ======== -->
+  <section>
+    <div class="liberte seyes">
+      <blockquote>« On ne fait pas la morale aux enfants. On leur ouvre des portes.&nbsp;»</blockquote>
+      <p>Mes histoires sont construites en quatre actes, sans antagoniste violent&nbsp;: la résolution vient d'une surprise, d'un retournement, d'un regard qui change — jamais d'un combat. Et la fin reste ouverte, pour que la vraie conversation commence quand l'histoire s'arrête.</p>
+    </div>
+  </section>
+
+  <!-- ======== CTA FINAL ======== -->
+  <section class="final">
+    <div class="inner-s">
+      <h2>Une histoire, ça s'essaie.</h2>
+      <p>Les premières histoires arrivent en ligne tout l'été, en audio et en vidéo. <span class="manuscrit">Le lancement, c'est pour la rentrée 2026.</span></p>
+      <a class="btn btn-jaune" href="contact.html">Être prévenu du lancement</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="inner">
+    <span>© 2026 Clémi Raconte — Clément Joubert · Saint-Bonnet-en-Champsaur (05)</span>
+    <span><a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
