@@ -4,13 +4,13 @@
    Identité : papier d'écolier (lignes Seyès, marge rose),
    surligneur jaune, notes manuscrites.
    ========================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap');
 
 :root{
   --sapin:#2D6A4F;
   --sapin-fonce:#1B3A2C;
   --soleil:#F4C430;
-  --papier:#FBFAF6;
+  --papier:#FDF6E9;
   --papier-2:#F3F1E9;
   --seyes:#C9D8E8;
   --marge:#E8A0A8;
@@ -31,7 +31,7 @@ body{
   font-size:17px;
   line-height:1.65;
 }
-h1,h2,h3{font-family:"Baloo 2",system-ui,sans-serif;color:var(--sapin-fonce);line-height:1.15;}
+h1,h2,h3{font-family:"Bubblegum Sans",system-ui,sans-serif;color:var(--sapin-fonce);line-height:1.15;}
 a{color:var(--sapin);}
 img{max-width:100%;display:block;}
 
@@ -58,7 +58,7 @@ header.site{
   padding:.8rem 1.2rem;gap:1rem;
 }
 .marque{
-  font-family:"Baloo 2",system-ui,sans-serif;font-weight:700;font-size:1.35rem;
+  font-family:"Bubblegum Sans",system-ui,sans-serif;font-weight:700;font-size:1.35rem;
   color:var(--sapin-fonce);text-decoration:none;display:flex;align-items:baseline;gap:.45rem;
   white-space:nowrap;
 }
@@ -165,7 +165,7 @@ main section{padding:4rem 1.2rem;}
   display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
 }
 .reperes .item{display:flex;align-items:baseline;gap:.55rem;font-size:1rem;}
-.reperes .item b{font-family:"Baloo 2",system-ui,sans-serif;font-size:1.5rem;color:var(--soleil);}
+.reperes .item b{font-family:"Bubblegum Sans",system-ui,sans-serif;font-size:1.5rem;color:var(--soleil);}
 
 /* ---------- Cartes ---------- */
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
@@ -174,7 +174,7 @@ main section{padding:4rem 1.2rem;}
   width:2.6rem;height:2.6rem;border-radius:50%;
   background:var(--papier-2);border:2px solid var(--sapin);
   display:flex;align-items:center;justify-content:center;
-  font-family:"Baloo 2",system-ui,sans-serif;font-weight:700;color:var(--sapin);font-size:1.15rem;
+  font-family:"Bubblegum Sans",system-ui,sans-serif;font-weight:700;color:var(--sapin);font-size:1.15rem;
   margin-bottom:1rem;
 }
 .carte h3{font-size:1.2rem;margin-bottom:.5rem;}
@@ -240,7 +240,7 @@ main section{padding:4rem 1.2rem;}
 
 /* ---------- Liberté / citation ---------- */
 .liberte{max-width:760px;margin:0 auto;}
-.liberte blockquote{font-family:"Baloo 2",system-ui,sans-serif;font-size:clamp(1.3rem,2.6vw,1.7rem);color:var(--sapin-fonce);font-weight:600;line-height:1.35;}
+.liberte blockquote{font-family:"Bubblegum Sans",system-ui,sans-serif;font-size:clamp(1.3rem,2.6vw,1.7rem);color:var(--sapin-fonce);font-weight:600;line-height:1.35;}
 .liberte p{margin-top:1rem;color:var(--gris);}
 
 /* ---------- Support / QR ---------- */
@@ -266,7 +266,7 @@ main section{padding:4rem 1.2rem;}
 .carte-fi h3{font-size:1.1rem;margin-bottom:.4rem;}
 .carte-fi p{font-size:.95rem;color:var(--gris);}
 .prix{text-align:center;margin:2.6rem auto 0;max-width:560px;background:#fff;border:2px solid var(--sapin);border-radius:.9rem;padding:1.8rem 1.5rem;}
-.prix .chiffre{font-family:"Baloo 2",system-ui,sans-serif;font-size:2.6rem;font-weight:700;color:var(--sapin-fonce);}
+.prix .chiffre{font-family:"Bubblegum Sans",system-ui,sans-serif;font-size:2.6rem;font-weight:700;color:var(--sapin-fonce);}
 .prix .chiffre small{font-size:1.1rem;font-weight:600;color:var(--gris);}
 .prix p{color:var(--gris);font-size:.98rem;margin-top:.4rem;}
 .prix .actions{margin-top:1.2rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
@@ -375,7 +375,7 @@ footer.site a{color:#CFE0D6;}
 /* ---------- Le Coin des Activités (page histoire) ---------- */
 .activites-rubrique{ margin-top:2.4rem; }
 .activites-rubrique > h3{
-  font-family:"Baloo 2",system-ui,sans-serif; font-size:1.15rem; color:var(--sapin-fonce);
+  font-family:"Bubblegum Sans",system-ui,sans-serif; font-size:1.15rem; color:var(--sapin-fonce);
   display:flex; align-items:center; gap:.6rem; margin-bottom:.3rem;
 }
 .activites-rubrique > h3 .puce{
@@ -411,3 +411,7 @@ footer.site a{color:#CFE0D6;}
 .portes-4{ grid-template-columns:repeat(4,1fr); }
 @media(max-width:980px){ .portes-4{ grid-template-columns:1fr 1fr; } }
 @media(max-width:560px){ .portes-4{ grid-template-columns:1fr; } }
+
+/* ---------- Bubblegum Sans n'a qu'une graisse : on normalise les titres ---------- */
+h1,h2,h3,.titre-section,.hero h1,.final h2,.marque,.liberte blockquote,
+.prix .chiffre,.reperes .item b,.carte .pastille,.activites-rubrique > h3{font-weight:400;}
