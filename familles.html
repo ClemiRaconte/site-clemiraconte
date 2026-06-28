@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour les familles — Clémi Raconte</title>
+<meta name="description" content="Des histoires à partager en famille : le soir, dans la voiture, ou quand un sujet du quotidien a besoin d'un coup de pouce pour se dire. À lire, à écouter, à regarder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ===== Familles — habillage autonome (cocon du soir) ===== */
+body{font-family:"Nunito",system-ui,sans-serif;background:#FDF6E9;}
+h1,h2,h3{font-family:"Baloo 2",system-ui,sans-serif;}
+.marque{font-family:"Baloo 2",system-ui,sans-serif;}
+header.site{background:rgba(253,246,233,.92);}
+
+.fam-hero{position:relative;overflow:hidden;}
+.fam-hero .blob1{position:absolute;top:-90px;right:-70px;width:380px;height:350px;
+  background:#F8DE93;border-radius:46% 54% 60% 40%/52% 44% 56% 48%;z-index:0;opacity:.65;}
+.fam-hero .blob2{position:absolute;bottom:-120px;left:-90px;width:300px;height:280px;
+  background:#D8EBDD;border-radius:54% 46% 40% 60%/48% 56% 44% 52%;z-index:0;opacity:.7;}
+.fam-hero .inner-hero{position:relative;z-index:2;max-width:var(--max,1080px);margin:0 auto;
+  padding:4rem 1.2rem 3.2rem;display:grid;grid-template-columns:1.12fr .88fr;gap:2.6rem;align-items:center;}
+@media(max-width:880px){.fam-hero .inner-hero{grid-template-columns:1fr;}}
+.fam-star{position:absolute;z-index:1;}
+
+.fam-eyebrow{text-transform:uppercase;letter-spacing:.13em;font-weight:700;font-size:.8rem;color:#2D6A4F;}
+.fam-hero h1{font-size:clamp(2rem,4.4vw,3rem);font-weight:700;color:#1B3A2C;line-height:1.12;margin:.7rem 0 1rem;}
+.fam-hero .mark{background:linear-gradient(180deg,transparent 56%,#F7D257 56%);padding:0 .15em;border-radius:.15em;}
+.fam-hero .chapo{font-size:1.15rem;color:#4a5a50;max-width:32em;line-height:1.55;}
+.fam-hero .actions{margin-top:1.7rem;display:flex;gap:.8rem;flex-wrap:wrap;}
+.fam-hero .devise{margin-top:1.5rem;font-family:"Caveat",cursive;font-size:1.55rem;color:#2D6A4F;transform:rotate(-2deg);display:inline-block;}
+
+/* Panneau "histoire du soir" */
+.soir{position:relative;background:linear-gradient(165deg,#2C5A41 0%,#173228 100%);
+  border-radius:1rem;padding:1.6rem 1.5rem 1.4rem;box-shadow:0 18px 38px rgba(23,50,40,.28);
+  transform:rotate(1.6deg);overflow:hidden;}
+@media(max-width:880px){.soir{transform:rotate(.6deg);max-width:460px;}}
+.soir .lune{position:absolute;top:14px;right:16px;}
+.soir .petite-etoile{position:absolute;}
+.soir .tag{display:inline-block;background:#F4C430;color:#1B3A2C;font-weight:700;font-size:.72rem;
+  letter-spacing:.07em;text-transform:uppercase;padding:.25rem .6rem;border-radius:.3rem;transform:rotate(-2deg);}
+.soir h3{color:#fff;font-size:1.3rem;margin:.7rem 0 .8rem;position:relative;z-index:2;}
+.soir .ligne{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding:.3rem 0;color:#cfe0d6;font-size:1rem;position:relative;z-index:2;}
+.soir .ligne b{color:#fff;}
+.soir .ligne .d{font-family:"Caveat",cursive;font-size:1.25rem;color:#F4C430;white-space:nowrap;}
+.soir .pied{margin-top:.7rem;border-top:1px solid rgba(255,255,255,.25);padding-top:.6rem;
+  font-family:"Caveat",cursive;font-size:1.2rem;color:#F7D873;position:relative;z-index:2;}
+
+/* Trois moments */
+.moments{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:1.4rem;}
+@media(max-width:760px){.moments{grid-template-columns:1fr;}}
+.moment{background:#fff;border:1px solid #EFE6D2;border-radius:.9rem;padding:1.4rem 1.4rem 1.5rem;text-align:center;}
+.moment .ico{width:64px;height:64px;border-radius:18px;margin:0 auto .8rem;display:flex;align-items:center;justify-content:center;background:#FBF0CF;}
+.moment h3{font-size:1.12rem;color:#1B3A2C;margin-bottom:.3rem;}
+.moment p{color:#5C6B63;font-size:.96rem;}
+
+.fam-fond{background:#F7EFDD;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="marque" href="index.html">Clémi Raconte<span class="point" aria-hidden="true"></span></a>
+    <button class="burger" aria-label="Ouvrir ou fermer le menu" aria-expanded="false"
+      onclick="var n=this.closest('.nav');n.classList.toggle('ouvert');this.setAttribute('aria-expanded',n.classList.contains('ouvert'));">&#9776;</button>
+    <ul>
+      <li><a class="lien" href="histoires.html">Les histoires</a></li>
+      <li><a class="lien" href="mallette.html">Enseignants</a></li>
+      <li><a class="lien" href="social.html">Travailleurs sociaux</a></li>
+      <li><a class="lien" href="demarche.html">La démarche</a></li>
+      <li><a class="lien" href="contact.html">Contact</a></li>
+      <li><a class="lien" href="equipe.html">L'équipe</a></li>
+    </ul>
+    <a class="btn btn-jaune" href="histoires.html">Écouter une histoire</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ======== HERO FAMILLES ======== -->
+  <div class="fam-hero">
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    <svg class="fam-star" style="top:40px;left:46%" width="24" height="24" viewBox="0 0 24 24"><path d="M12 1 L13.6 9.2 L22 11 L13.6 12.8 L12 22 L10.4 12.8 L2 11 L10.4 9.2 Z" fill="#F4C430"/></svg>
+    <svg class="fam-star" style="top:150px;left:36%" width="15" height="15" viewBox="0 0 24 24"><path d="M12 1 L13.6 9.2 L22 11 L13.6 12.8 L12 22 L10.4 12.8 L2 11 L10.4 9.2 Z" fill="#2D6A4F" opacity=".45"/></svg>
+
+    <div class="inner-hero">
+      <div>
+        <span class="fam-eyebrow">Pour la maison · Hautes-Alpes</span>
+        <h1>Une histoire à partager, et <span class="mark">le moment change</span>.</h1>
+        <p class="chapo">Des histoires sur ce que vivent vraiment les enfants — les émotions, la famille, les copains, la différence. À glisser le soir avant de dormir, dans la voiture, ou quand un sujet du quotidien a besoin d'un petit coup de pouce pour se dire.</p>
+        <div class="actions">
+          <a class="btn" href="histoires.html">Écouter une histoire</a>
+          <a class="btn btn-ligne" href="histoire-ange-le-loup.html">Essayer une histoire complète</a>
+        </div>
+        <span class="devise">« Les familles ont changé. Les histoires aussi. »</span>
+      </div>
+
+      <div class="soir">
+        <svg class="lune" width="44" height="44" viewBox="0 0 40 40"><path d="M28 6 A13 13 0 1 0 28 32 A9 9 0 1 1 28 6 Z" fill="#F4C430"/></svg>
+        <svg class="petite-etoile" style="bottom:54px;right:62px" width="13" height="13" viewBox="0 0 24 24"><path d="M12 1 L13.6 9.2 L22 11 L13.6 12.8 L12 22 L10.4 12.8 L2 11 L10.4 9.2 Z" fill="#F7D873" opacity=".85"/></svg>
+        <span class="tag">Chaque histoire existe en</span>
+        <h3>Trois formats</h3>
+        <div class="ligne"><span><b>À lire</b> — le soir, blottis</span><span class="d">papier</span></div>
+        <div class="ligne"><span><b>À écouter</b> — en voiture, au calme</span><span class="d">audio</span></div>
+        <div class="ligne"><span><b>À regarder</b> — racontée dans la forêt</span><span class="d">vidéo</span></div>
+        <div class="pied">l'histoire du soir, à partager</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== TROIS MOMENTS ======== -->
+  <section>
+    <div class="inner-s">
+      <h2 class="titre-section">Trois moments où une histoire fait du bien</h2>
+      <div class="moments">
+
+        <div class="moment">
+          <div class="ico" style="background:#E7E0F2">
+            <svg width="40" height="40" viewBox="0 0 40 40"><path d="M27 6 A12 12 0 1 0 27 30 A9 9 0 1 1 27 6 Z" fill="#7C6BB0"/></svg>
+          </div>
+          <h3>Le soir, avant de dormir</h3>
+          <p>Un rituel doux pour fermer la journée, sans écran, avec une histoire qui apaise et qui rapproche.</p>
+        </div>
+
+        <div class="moment">
+          <div class="ico" style="background:#FBF0CF">
+            <svg width="42" height="42" viewBox="0 0 48 48"><rect x="6" y="22" width="36" height="13" rx="4" fill="#F4C430" stroke="#2D6A4F" stroke-width="2"/><path d="M11 22 L15 14 L33 14 L37 22" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linejoin="round"/><circle cx="15" cy="36" r="4" fill="#1B3A2C"/><circle cx="33" cy="36" r="4" fill="#1B3A2C"/></svg>
+          </div>
+          <h3>Dans la voiture</h3>
+          <p>Les trajets passent plus vite quand une voix raconte. Le podcast occupe les oreilles et calme l'arrière.</p>
+        </div>
+
+        <div class="moment">
+          <div class="ico" style="background:#F6E5E2">
+            <svg width="40" height="40" viewBox="0 0 64 64"><path d="M32 23 C30 18 22 18 22 25 C22 31 32 37 32 37 C32 37 42 31 42 25 C42 18 34 18 32 23 Z" fill="#E8A0A8" stroke="#C76B74" stroke-width="1.6"/><path d="M13 39 C16 50 26 55 32 55 C38 55 48 50 51 39" fill="none" stroke="#2D6A4F" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Quand un sujet coince</h3>
+          <p>Une dispute, une peur, un chagrin. Le personnage en parle à la place de l'enfant, et la parole se libère.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== L'HISTOIRE À ESSAYER ======== -->
+  <section class="fam-fond">
+    <div class="inner-s qui">
+      <div class="portrait emplacement-visuel" style="aspect-ratio:4/5;">
+        <span><b>Emplacement à fournir</b>Illustration d'Ange — format vertical 4:5.</span>
+      </div>
+      <div>
+        <p class="sur-titre">À essayer ce soir</p>
+        <h2 class="titre-section">Ange, le loup qui chantait avec le vent</h2>
+        <p>Dans la forêt de Daillon vit un loup si discret qu'il marche sur la pointe des pattes — persuadé que s'il se montre, tout le monde fuira. Jusqu'au soir où la forêt a besoin, justement, de sa voix.</p>
+        <p>L'histoire est en accès libre. Lisez-la à votre enfant, et voyez l'effet d'une histoire qui ne fait pas la morale mais qui ouvre une porte.</p>
+        <a class="btn" href="histoire-ange-le-loup.html">Découvrir Ange</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== ABONNEMENT FAMILLE ======== -->
+  <section>
+    <div class="inner-s">
+      <div class="prix">
+        <div class="chiffre">50&nbsp;€ <small>/ an, par famille</small></div>
+        <p>Accès à toutes les histoires, leurs versions audio et vidéo, et tout ce qui les accompagne. Une histoire nouvelle, encore et encore, pour toute l'année.</p>
+        <div class="actions">
+          <a class="btn" href="histoires.html">Voir les histoires</a>
+          <a class="btn btn-ligne" href="contact.html">Être prévenu du lancement</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CTA FINAL ======== -->
+  <section class="final">
+    <div class="inner-s">
+      <h2>Ce soir, offrez-leur une histoire.</h2>
+      <p>Les premières arrivent en ligne tout l'été, en audio et en vidéo. <span class="manuscrit">Le lancement, c'est pour la rentrée 2026.</span></p>
+      <a class="btn btn-jaune" href="histoires.html">Écouter une histoire</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="inner">
+    <span>© 2026 Clémi Raconte — Clément Joubert · Saint-Bonnet-en-Champsaur (05)</span>
+    <span><a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
