@@ -4,7 +4,7 @@
    Identité : papier d'écolier (lignes Seyès, marge rose),
    surligneur jaune, notes manuscrites.
    ========================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap');
 
 :root{
   --sapin:#2D6A4F;
@@ -31,7 +31,7 @@ body{
   font-size:17px;
   line-height:1.65;
 }
-h1,h2,h3{font-family:"Bubblegum Sans",system-ui,sans-serif;color:var(--sapin-fonce);line-height:1.15;}
+h1,h2,h3{font-family:"Sniglet",system-ui,sans-serif;color:var(--sapin-fonce);line-height:1.15;}
 a{color:var(--sapin);}
 img{max-width:100%;display:block;}
 
@@ -58,7 +58,7 @@ header.site{
   padding:.8rem 1.2rem;gap:1rem;
 }
 .marque{
-  font-family:"Bubblegum Sans",system-ui,sans-serif;font-weight:700;font-size:1.35rem;
+  font-family:"Sniglet",system-ui,sans-serif;font-weight:700;font-size:1.35rem;
   color:var(--sapin-fonce);text-decoration:none;display:flex;align-items:baseline;gap:.45rem;
   white-space:nowrap;
 }
@@ -165,7 +165,7 @@ main section{padding:4rem 1.2rem;}
   display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
 }
 .reperes .item{display:flex;align-items:baseline;gap:.55rem;font-size:1rem;}
-.reperes .item b{font-family:"Bubblegum Sans",system-ui,sans-serif;font-size:1.5rem;color:var(--soleil);}
+.reperes .item b{font-family:"Sniglet",system-ui,sans-serif;font-size:1.5rem;color:var(--soleil);}
 
 /* ---------- Cartes ---------- */
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
@@ -174,7 +174,7 @@ main section{padding:4rem 1.2rem;}
   width:2.6rem;height:2.6rem;border-radius:50%;
   background:var(--papier-2);border:2px solid var(--sapin);
   display:flex;align-items:center;justify-content:center;
-  font-family:"Bubblegum Sans",system-ui,sans-serif;font-weight:700;color:var(--sapin);font-size:1.15rem;
+  font-family:"Sniglet",system-ui,sans-serif;font-weight:700;color:var(--sapin);font-size:1.15rem;
   margin-bottom:1rem;
 }
 .carte h3{font-size:1.2rem;margin-bottom:.5rem;}
@@ -240,7 +240,7 @@ main section{padding:4rem 1.2rem;}
 
 /* ---------- Liberté / citation ---------- */
 .liberte{max-width:760px;margin:0 auto;}
-.liberte blockquote{font-family:"Bubblegum Sans",system-ui,sans-serif;font-size:clamp(1.3rem,2.6vw,1.7rem);color:var(--sapin-fonce);font-weight:600;line-height:1.35;}
+.liberte blockquote{font-family:"Sniglet",system-ui,sans-serif;font-size:clamp(1.3rem,2.6vw,1.7rem);color:var(--sapin-fonce);font-weight:600;line-height:1.35;}
 .liberte p{margin-top:1rem;color:var(--gris);}
 
 /* ---------- Support / QR ---------- */
@@ -266,7 +266,7 @@ main section{padding:4rem 1.2rem;}
 .carte-fi h3{font-size:1.1rem;margin-bottom:.4rem;}
 .carte-fi p{font-size:.95rem;color:var(--gris);}
 .prix{text-align:center;margin:2.6rem auto 0;max-width:560px;background:#fff;border:2px solid var(--sapin);border-radius:.9rem;padding:1.8rem 1.5rem;}
-.prix .chiffre{font-family:"Bubblegum Sans",system-ui,sans-serif;font-size:2.6rem;font-weight:700;color:var(--sapin-fonce);}
+.prix .chiffre{font-family:"Sniglet",system-ui,sans-serif;font-size:2.6rem;font-weight:700;color:var(--sapin-fonce);}
 .prix .chiffre small{font-size:1.1rem;font-weight:600;color:var(--gris);}
 .prix p{color:var(--gris);font-size:.98rem;margin-top:.4rem;}
 .prix .actions{margin-top:1.2rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
@@ -375,7 +375,7 @@ footer.site a{color:#CFE0D6;}
 /* ---------- Le Coin des Activités (page histoire) ---------- */
 .activites-rubrique{ margin-top:2.4rem; }
 .activites-rubrique > h3{
-  font-family:"Bubblegum Sans",system-ui,sans-serif; font-size:1.15rem; color:var(--sapin-fonce);
+  font-family:"Sniglet",system-ui,sans-serif; font-size:1.15rem; color:var(--sapin-fonce);
   display:flex; align-items:center; gap:.6rem; margin-bottom:.3rem;
 }
 .activites-rubrique > h3 .puce{
@@ -415,3 +415,83 @@ footer.site a{color:#CFE0D6;}
 /* ---------- Bubblegum Sans n'a qu'une graisse : on normalise les titres ---------- */
 h1,h2,h3,.titre-section,.hero h1,.final h2,.marque,.liberte blockquote,
 .prix .chiffre,.reperes .item b,.carte .pastille,.activites-rubrique > h3{font-weight:400;}
+
+/* ============================================================
+   DÉCOR & AMBIANCES — couche enfantine
+   (Sniglet, halos crème, galets, motifs, témoignages, vidéos)
+   ============================================================ */
+
+/* Fond crème avec halos doux, sans gêner le contenu */
+body{
+  background-image:
+    radial-gradient(closest-side at 90% -2%, rgba(244,196,48,.16), transparent 72%),
+    radial-gradient(closest-side at -5% 101%, rgba(45,106,79,.10), transparent 72%);
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+/* Boutons galets + petit rebond */
+.btn{border-radius:30px;transition:transform .12s ease, box-shadow .12s ease;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(27,58,44,.16);}
+
+/* Cartes plus douces */
+.carte,.porte,.carte-histoire,.carte-fi,.bloc,.tele,.faux-qr,.prix,.cahier{border-radius:1.1rem;}
+.porte:hover,.carte-histoire:hover{box-shadow:0 14px 28px rgba(27,58,44,.14);}
+
+/* Petite étoile devant les sur-titres */
+.sur-titre{display:inline-flex;align-items:center;gap:.45rem;}
+.sur-titre::before{
+  content:"";width:.9rem;height:.9rem;flex:0 0 auto;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1l1.6 8.2L22 11l-8.4 1.8L12 22l-1.6-9.2L2 11l8.4-1.8z' fill='%23F4C430'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* Boutons d'audience : place pour un petit motif (le SVG va dans le HTML) */
+.btn-audience{display:inline-flex;align-items:center;gap:.6rem;}
+.btn-audience svg{width:1.35rem;height:1.35rem;flex:0 0 auto;}
+
+/* ---------- Ambiances par public (via <body class="skin-..."> ) ---------- */
+.skin-enseignant{--accent:#2D6A4F;}
+.skin-famille{--accent:#7C6BB0;}
+.skin-social{--accent:#C76B74;}
+.skin-famille .surligne{background:linear-gradient(104deg,transparent .5%,rgba(244,196,48,.55) 3%,rgba(244,196,48,.62) 92%,transparent 96%);}
+body[class*="skin-"] .sur-titre{color:var(--accent);}
+
+/* ---------- Témoignages de professionnels / familles ---------- */
+.temoignages{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+@media(max-width:880px){.temoignages{grid-template-columns:1fr;}}
+.temoignage{
+  background:#fff;border:1px solid #EFE6D2;border-radius:1.1rem;padding:1.5rem 1.4rem;
+  display:flex;flex-direction:column;gap:1rem;
+}
+.temoignage .citation{font-size:1rem;line-height:1.55;color:#33433a;}
+.temoignage .citation::before{
+  content:"\201C";font-family:"Sniglet",cursive;color:var(--soleil);
+  font-size:2.2rem;line-height:0;vertical-align:-.42em;margin-right:.12rem;
+}
+.temoignage .auteur{display:flex;align-items:center;gap:.7rem;margin-top:auto;}
+.temoignage .avatar{
+  width:46px;height:46px;border-radius:50%;background:var(--papier-2);
+  border:2px solid var(--sapin);flex:0 0 auto;display:flex;align-items:center;
+  justify-content:center;color:var(--sapin);font-weight:800;font-size:.95rem;
+}
+.temoignage .nom{font-weight:800;color:var(--sapin-fonce);font-size:.95rem;}
+.temoignage .role{font-size:.85rem;color:var(--gris);}
+
+/* ---------- Zone vidéo / "à regarder" ---------- */
+.grille-videos{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+@media(max-width:880px){.grille-videos{grid-template-columns:1fr;}}
+.zone-video{
+  aspect-ratio:16/9;border-radius:1.1rem;border:2px dashed #C9D8C0;
+  background:linear-gradient(150deg,#2C5A41,#173228);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;
+  color:#fff;text-align:center;padding:1.4rem;
+}
+.zone-video .play{
+  width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;
+}
+.zone-video .play::before{
+  content:"";border-style:solid;border-width:11px 0 11px 18px;
+  border-color:transparent transparent transparent #fff;margin-left:5px;
+}
+.zone-video .leg{font-family:"Caveat",cursive;font-size:1.3rem;color:var(--soleil);}
