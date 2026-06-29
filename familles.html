@@ -7,13 +7,14 @@
 <meta name="description" content="Des histoires à partager en famille : le soir, dans la voiture, ou quand un sujet du quotidien a besoin d'un coup de pouce pour se dire. À lire, à écouter, à regarder.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 <style>
 /* ===== Familles — habillage autonome (cocon du soir) ===== */
 body{font-family:"Nunito",system-ui,sans-serif;background:#FDF6E9;}
-h1,h2,h3{font-family:"Baloo 2",system-ui,sans-serif;}
-.marque{font-family:"Baloo 2",system-ui,sans-serif;}
+h1,h2,h3{font-family:"Sniglet",system-ui,sans-serif;font-weight:800;}
+.titre-section{font-weight:800;}
+.marque{font-family:"Sniglet",system-ui,sans-serif;}
 header.site{background:rgba(253,246,233,.92);}
 
 .fam-hero{position:relative;overflow:hidden;}
@@ -27,7 +28,7 @@ header.site{background:rgba(253,246,233,.92);}
 .fam-star{position:absolute;z-index:1;}
 
 .fam-eyebrow{text-transform:uppercase;letter-spacing:.13em;font-weight:700;font-size:.8rem;color:#2D6A4F;}
-.fam-hero h1{font-size:clamp(2rem,4.4vw,3rem);font-weight:700;color:#1B3A2C;line-height:1.12;margin:.7rem 0 1rem;}
+.fam-hero h1{font-size:clamp(2rem,4.4vw,3rem);font-weight:800;color:#1B3A2C;line-height:1.12;margin:.7rem 0 1rem;}
 .fam-hero .mark{background:linear-gradient(180deg,transparent 56%,#F7D257 56%);padding:0 .15em;border-radius:.15em;}
 .fam-hero .chapo{font-size:1.15rem;color:#4a5a50;max-width:32em;line-height:1.55;}
 .fam-hero .actions{margin-top:1.7rem;display:flex;gap:.8rem;flex-wrap:wrap;}
@@ -61,7 +62,7 @@ header.site{background:rgba(253,246,233,.92);}
 .fam-fond{background:#F7EFDD;}
 </style>
 </head>
-<body>
+<body class="skin-famille">
 
 <header class="site">
   <nav class="nav" aria-label="Navigation principale">
@@ -174,6 +175,42 @@ header.site{background:rgba(253,246,233,.92);}
           <a class="btn" href="histoires.html">Voir les histoires</a>
           <a class="btn btn-ligne" href="contact.html">Être prévenu du lancement</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== PAROLES DE FAMILLES ======== -->
+  <section class="fam-fond">
+    <div class="inner-s">
+      <p class="sur-titre">Ce qu'en disent les familles</p>
+      <h2 class="titre-section">Paroles de familles</h2>
+      <p class="intro-section">Les premiers retours de parents qui ont testé une histoire à la maison. <em>(Emplacements à remplacer par de vrais témoignages dès qu'ils arrivent.)</em></p>
+      <div class="temoignages">
+        <div class="temoignage">
+          <p class="citation">Le soir, c'était la bagarre pour aller au lit. Depuis qu'on écoute une histoire ensemble, c'est devenu le moment qu'il réclame.</p>
+          <div class="auteur"><span class="avatar">A.</span><span><span class="nom">À recueillir</span><br><span class="role">parent d'un enfant de 6 ans</span></span></div>
+        </div>
+        <div class="temoignage">
+          <p class="citation">On a parlé de sa colère sans jamais la nommer directement. L'histoire a fait le travail à notre place.</p>
+          <div class="auteur"><span class="avatar">B.</span><span><span class="nom">À recueillir</span><br><span class="role">parent d'un enfant de 8 ans</span></span></div>
+        </div>
+        <div class="temoignage">
+          <p class="citation">En voiture, fini les écrans : on met le podcast et tout le monde écoute, même les grands.</p>
+          <div class="auteur"><span class="avatar">C.</span><span><span class="nom">À recueillir</span><br><span class="role">parent de deux enfants</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== À REGARDER EN FAMILLE ======== -->
+  <section>
+    <div class="inner-s">
+      <p class="sur-titre">En vidéo</p>
+      <h2 class="titre-section">À regarder ensemble</h2>
+      <p class="intro-section">Chaque histoire racontée en vidéo, dans le décor de la forêt conteuse. <em>(Emplacement pour la première vidéo — elle prendra place ici dès qu'elle sera prête.)</em></p>
+      <div class="zone-video">
+        <div class="play" aria-hidden="true"></div>
+        <span class="leg">la première vidéo arrive bientôt</span>
       </div>
     </div>
   </section>
