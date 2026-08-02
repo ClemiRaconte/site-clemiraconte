@@ -3,164 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La démarche — Clémi Raconte</title>
-<meta name="description" content="D'où viennent ces histoires, pourquoi il n'y a pas de méchant, pourquoi les fins restent ouvertes : la démarche de Clémi Raconte, racontée à la première personne.">
+<title>La démarche · Clémi Raconte (rendu approximatif)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sapin:#2D6A4F;
+    --sapin-clair:#3f8266;
+    --soleil:#F4C430;
+    --encre:#243b32;
+    --gris:#5b6b63;
+    --blanc:#ffffff;
+    --creme-legere:#f7f4ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Source Sans 3',system-ui,sans-serif;
+    color:var(--encre);
+    background:var(--blanc);
+    line-height:1.75;
+    font-size:18px;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  .avertissement{
+    background:var(--creme-legere);
+    color:var(--gris);
+    font-size:14px;
+    text-align:center;
+    padding:8px 16px;
+    border-bottom:1px solid #e7e0d2;
+  }
+
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 40px;
+    border-bottom:1px solid #ece7dc;
+    position:sticky;top:0;background:var(--blanc);z-index:10;
+    flex-wrap:wrap;gap:12px;
+  }
+  .logo{
+    font-family:'Fraunces',serif;font-weight:600;font-size:24px;
+    color:var(--sapin);letter-spacing:.2px;
+  }
+  .liens{display:flex;gap:26px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:16px;color:var(--encre);}
+  .liens a:hover{color:var(--sapin);}
+  .liens a.actif{color:var(--sapin);font-weight:600;border-bottom:2px solid var(--soleil);padding-bottom:2px;}
+  .btn-contact{
+    background:var(--sapin);color:var(--blanc);
+    padding:9px 18px;border-radius:24px;font-size:15px;font-weight:600;
+  }
+  .btn-contact:hover{background:var(--sapin-clair);color:var(--blanc);}
+
+  .page{max-width:760px;margin:0 auto;padding:64px 28px 40px;}
+
+  .hero{margin-bottom:56px;}
+  .surtitre{
+    font-family:'Caveat',cursive;font-size:28px;color:var(--sapin);
+    display:block;margin-bottom:4px;
+  }
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;font-size:52px;line-height:1.05;
+    color:var(--sapin);margin-bottom:18px;letter-spacing:-.5px;
+  }
+  .chapeau{font-size:21px;color:var(--encre);max-width:640px;}
+
+  section{margin-bottom:48px;}
+  h2{
+    font-family:'Fraunces',serif;font-weight:600;font-size:30px;
+    color:var(--sapin);margin-bottom:14px;line-height:1.15;
+    position:relative;padding-top:8px;
+  }
+  h2::before{
+    content:"";position:absolute;top:-10px;left:0;
+    width:48px;height:4px;background:var(--soleil);border-radius:2px;
+  }
+  p{margin-bottom:16px;}
+  p:last-child{margin-bottom:0;}
+
+  .citation{
+    border-left:4px solid var(--soleil);
+    background:var(--creme-legere);
+    padding:28px 32px;border-radius:0 12px 12px 0;
+    margin:56px 0 24px;
+  }
+  .citation .mot{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+    font-size:26px;line-height:1.3;color:var(--sapin);margin-bottom:14px;
+  }
+  .citation .apres{font-size:18px;color:var(--encre);margin:0;}
+
+  .cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:40px;}
+  .cta a{padding:14px 26px;border-radius:28px;font-weight:600;font-size:16px;}
+  .cta .plein{background:var(--sapin);color:var(--blanc);}
+  .cta .plein:hover{background:var(--sapin-clair);}
+  .cta .contour{border:2px solid var(--sapin);color:var(--sapin);}
+  .cta .contour:hover{background:var(--sapin);color:var(--blanc);}
+
+  footer{
+    border-top:1px solid #ece7dc;
+    padding:28px;text-align:center;color:var(--gris);font-size:14px;
+    line-height:1.7;
+  }
+  footer a{color:var(--sapin);}
+
+  @media(max-width:640px){
+    nav{padding:14px 18px;}
+    .liens{display:none;}
+    h1{font-size:40px;}
+    h2{font-size:26px;}
+    .page{padding:44px 20px 30px;}
+  }
+</style>
 </head>
 <body>
 
-<header class="site">
-  <nav class="nav" aria-label="Navigation principale">
-    <a class="marque" href="index.html">Clémi Raconte<span class="point" aria-hidden="true"></span></a>
-    <button class="burger" aria-label="Ouvrir ou fermer le menu" aria-expanded="false"
-      onclick="var n=this.closest('.nav');n.classList.toggle('ouvert');this.setAttribute('aria-expanded',n.classList.contains('ouvert'));">&#9776;</button>
-    <ul>
-      <li><a class="lien" href="histoires.html">Les histoires</a></li>
-      <li><a class="lien" href="mallette.html">Enseignants</a></li>
-      <li><a class="lien" href="social.html">Travailleurs sociaux</a></li>
-      <li><a class="lien actif" href="demarche.html" aria-current="page">La démarche</a></li>
-      <li><a class="lien" href="contact.html">Contact</a></li>
-      <li><a class="lien" href="equipe.html">L'équipe</a></li>
-    </ul>
-    <a class="btn btn-jaune" href="contact.html">Me contacter</a>
+  <div class="avertissement">Rendu approximatif pour validation · les polices et espacements exacts dépendent de ta feuille de style en ligne</div>
+
+  <nav>
+    <span class="logo">Clémi Raconte</span>
+    <div class="liens">
+      <a href="#">Les histoires</a>
+      <a href="#">Enseignants</a>
+      <a href="#">Travailleurs sociaux</a>
+      <a href="#" class="actif">La démarche</a>
+      <a href="#">Contact</a>
+    </div>
+    <a href="#" class="btn-contact">Me contacter</a>
   </nav>
-</header>
 
-<main>
+  <main class="page">
 
-  <div class="hero simple">
-    <p class="sur-titre">La démarche</p>
-    <h1>D'où viennent ces histoires</h1>
-    <p class="chapo">Quinze ans auprès des enfants, vingt ans d'écriture. Clémi Raconte est né au croisement des deux — et tout ce que vous trouverez ici en découle.</p>
-  </div>
+    <div class="hero">
+      <span class="surtitre">D'où viennent ces histoires</span>
+      <h1>La démarche</h1>
+      <p class="chapeau">Quinze ans auprès des enfants, vingt ans d'écriture. Clémi Raconte est né au croisement des deux, et tout ce que vous trouverez ici en découle.</p>
+    </div>
 
-  <section style="padding-top:1rem">
-    <div class="inner-s prose">
-
+    <section>
       <h2>Le parcours</h2>
-      <p>J'écris depuis l'âge de douze ans. Le slam d'abord, puis le rap — deux écoles de la phrase qui claque et du mot juste. Et puis la vie m'a mis au milieu des enfants&nbsp;: animateur, puis directeur d'un accueil de loisirs dans les Hautes-Alpes, où je travaille depuis quinze ans.</p>
-      <p>C'est là que les deux vies se sont rejointes. Au quotidien, je voyais des enfants traverser des choses immenses — une dispute qui déborde, un copain différent, une famille qui change, un mot qui blesse — et je voyais qu'une histoire bien choisie, au bon moment, faisait souvent plus qu'un long discours. Alors j'ai commencé à écrire les histoires qui manquaient.</p>
+      <p>J'écris depuis l'âge de douze ans. Le slam d'abord, puis le rap, deux écoles de la phrase qui claque et du mot juste. Et puis la vie m'a mis au milieu des enfants. Cela fait quinze ans que je travaille dans l'animation, et cinq ans que je dirige le centre de loisirs de mon village, dans le Champsaur.</p>
+      <p>C'est là que mes deux vies se sont rejointes. Au quotidien, je voyais des enfants traverser des choses immenses : une dispute qui déborde, un copain différent, une famille qui change, un mot qui blesse. Et je voyais qu'une histoire bien choisie, au bon moment, faisait souvent plus qu'un long discours. Alors j'ai commencé à écrire les histoires qui manquaient.</p>
+    </section>
 
-      <h2>Pas de méchant, pas de morale</h2>
-      <p>Mes histoires sont construites en quatre actes, sans antagoniste violent. La résolution ne vient jamais d'un combat&nbsp;: elle vient d'une surprise, d'un retournement, d'un regard qui change. Parce que dans la vraie vie d'un enfant, les difficultés ne sont presque jamais des méchants à vaincre — ce sont des situations à comprendre.</p>
-      <p>Et les fins restent ouvertes. Une histoire qui conclut à la place de l'enfant lui vole la conversation. Une histoire qui s'arrête au bon endroit la lui offre. C'est pour ça que chaque récit se termine par une porte entrouverte — et que la fiche d'accompagnement existe&nbsp;: pour aider l'adulte à franchir cette porte avec l'enfant, à sa façon.</p>
+    <section>
+      <h2>Pas de méchant, pas de morale imposée</h2>
+      <p>Une morale, ce n'est pas un gros mot. Une belle histoire porte forcément un sens, et c'est tant mieux. Ce que je refuse, c'est la morale imposée, celle qui tombe d'en haut et dit à l'enfant quoi penser à sa place.</p>
+      <p>Mes histoires sont construites en quatre actes, sans antagoniste violent. La résolution ne vient jamais d'un combat : elle naît d'une surprise, d'un retournement, d'un regard qui change. Parce que dans la vraie vie d'un enfant, les difficultés ne sont presque jamais des méchants à vaincre, ce sont des situations à comprendre.</p>
+      <p>Et les fins restent ouvertes. Une histoire qui conclut à la place de l'enfant lui vole la conversation. Une histoire qui s'arrête au bon endroit la lui offre. C'est pour ça que chaque récit se termine sur une porte entrouverte, et que la fiche d'accompagnement existe : pour aider l'adulte à la franchir avec l'enfant, à sa façon.</p>
+    </section>
 
+    <section>
       <h2>Des thématiques qui ne sortent pas de nulle part</h2>
-      <p>Les sujets de mes histoires, je ne les invente pas&nbsp;: je les ramasse sur le terrain. Le consentement, les stéréotypes, le harcèlement, la différence, les émotions, les écrans, les nouvelles familles — c'est le quotidien des enfants que j'accompagne. Et ce sont aussi, sans hasard, les sujets dont l'École a la charge&nbsp;: la formation de la personne et du citoyen, l'enseignement moral et civique, la prévention du harcèlement, l'égalité filles-garçons.</p>
-      <p>C'est cette double racine — le vécu des enfants d'un côté, les repères de l'École de l'autre — qui fait la mallette pédagogique. Elle est clé en main parce que je sais ce que c'est, de préparer une journée pour trente enfants. Et elle est souple parce que je sais aussi qu'aucun outil ne remplace le regard du professionnel qui l'utilise&nbsp;: la mallette propose, l'enseignant dispose.</p>
+      <p>Je veux accompagner les générations qui viennent, les parents, les professionnels comme les jeunes, à travers les questions qui les concernent ou qui les concerneront un jour. Ces sujets, je ne les invente pas : je les ramasse sur le terrain. Le consentement, les stéréotypes, le harcèlement, la différence, les émotions, les écrans, les nouvelles familles, c'est le quotidien des enfants que j'accompagne. Et ce sont aussi, sans hasard, les sujets dont l'École a la charge : la formation de la personne et du citoyen, l'enseignement moral et civique, la prévention du harcèlement, l'égalité filles-garçons.</p>
+      <p>C'est cette double racine, le vécu des enfants d'un côté, les repères de l'École de l'autre, qui fait la mallette pédagogique. Elle est clé en main parce que je sais ce que c'est, de préparer une journée pour trente enfants. Et elle est souple parce que je sais aussi qu'aucun outil ne remplace le regard du professionnel qui l'utilise : la mallette propose, l'enseignant dispose.</p>
+    </section>
 
+    <section>
       <h2>Écrites dans les Alpes</h2>
-      <p>J'écris dans le Champsaur, une vallée des Hautes-Alpes, et ça s'entend&nbsp;: une partie de mes histoires sont enracinées ici — la montagne, les bêtes, les saisons, les gens. Les autres se passent partout où il y a des enfants. Toutes sont racontées depuis ma forêt conteuse, un décor de bois flotté et de lumières construit pour leur donner une maison.</p>
+      <p>J'écris dans le Champsaur, une vallée des Hautes-Alpes que j'aime comme on aime un être vivant. Le matin, la lumière descend des sommets bien avant de toucher les prés. L'hiver, le silence de la neige a une épaisseur qu'on n'oublie pas. L'été sent le foin coupé et l'orage qui rôde au loin. Tout cela finit par passer dans les pages.</p>
+      <p>Une partie de mes histoires sont enracinées ici, dans cette montagne, ses bêtes, ses saisons, ses gens. Les autres se passent partout où il y a des enfants. Mais toutes, sans exception, sont racontées depuis ma forêt conteuse, un décor de bois flotté et de lumières douces, bâti pour leur donner une maison.</p>
+    </section>
 
-      <div class="liberte seyes" style="margin:2.4rem 0">
-        <blockquote>« Les histoires qu'on raconte aux enfants aujourd'hui changent le monde de demain.&nbsp;»</blockquote>
-        <p>C'est la conviction qui tient tout le projet. Le reste — les formats, les fiches, les activités, le cahier, les QR codes — n'est que de l'artisanat à son service.</p>
-      </div>
-
-      <p style="display:flex;gap:.9rem;flex-wrap:wrap">
-        <a class="btn" href="histoires.html">Découvrir les histoires</a>
-        <a class="btn btn-ligne" href="mallette.html">Voir la mallette pédagogique</a>
-      </p>
-
+    <div class="citation">
+      <p class="mot">« Les histoires qu'on raconte aux enfants aujourd'hui changent le monde de demain. »</p>
+      <p class="apres">C'est la conviction qui tient tout le projet. Le reste, les formats, les fiches, les activités, le cahier, les QR codes, n'est que de l'artisanat à son service.</p>
     </div>
-  </section>
 
-  <!-- ======== LES HISTOIRES DE CLÉMI ======== -->
-  <section class="fond-2">
-    <div class="inner-s">
-      <p class="sur-titre">La racine vécue</p>
-      <h2 class="titre-section">Les histoires de Clémi</h2>
-      <p class="chapo" style="margin-bottom:.5rem">Avant d'écrire pour les autres enfants, j'ai été cet enfant-là. Ces récits-ci partent de mon enfance dans le Champsaur&nbsp;: le village de l'Aullagnier, les Combes en septembre, le gymnase du BBCV. Clémi, c'est moi en plus petit. C'est de là que vient tout le reste.</p>
-
-      <div class="grille-histoires" style="margin-top:1.6rem">
-
-        <div class="carte-histoire" aria-disabled="true">
-          <div class="visuel soleil">Dimanche aux Combes</div>
-          <div class="corps">
-            <h3>Dimanche aux Combes</h3>
-            <p>Septembre sent la pomme écrasée. Certaines histoires se transmettent de main en main, sans qu'on sache plus qui les a commencées.</p>
-            <div class="meta">
-              <span class="badge">Transmission &amp; territoire</span>
-              <span class="badge bientot">Bientôt en ligne</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="carte-histoire" aria-disabled="true">
-          <div class="visuel">La Pointe du Carré Noir</div>
-          <div class="corps">
-            <h3>La Pointe du Carré Noir</h3>
-            <p>Un ballon orange plus gros que sa tête, deux coachs patientes, et trente ans d'amitié qui commencent sur un parquet qui couine.</p>
-            <div class="meta">
-              <span class="badge">Amitié &amp; sport</span>
-              <span class="badge bientot">Bientôt en ligne</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="carte-histoire" aria-disabled="true">
-          <div class="visuel">Le Siège de Fort Clémi</div>
-          <div class="corps">
-            <h3>Le Siège de Fort Clémi</h3>
-            <p>La meilleure forteresse n'est pas celle qui repousse l'ennemi&nbsp;: c'est celle qui a une porte à ouvrir aux copains.</p>
-            <div class="meta">
-              <span class="badge">Amitié &amp; ouverture</span>
-              <span class="badge bientot">Bientôt en ligne</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="carte-histoire" aria-disabled="true">
-          <div class="visuel">Clémi-Peractif</div>
-          <div class="corps">
-            <h3>Clémi-Peractif</h3>
-            <p>On ne range pas certaines énergies dans des boîtes, et on ne les aligne pas entre deux pierres. On leur trouve juste le bon endroit pour s'exprimer.</p>
-            <div class="meta">
-              <span class="badge">Hyperactivité &amp; différence</span>
-              <span class="badge bientot">Bientôt en ligne</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="carte-histoire" aria-disabled="true">
-          <div class="visuel">Octogone Fourmi-Doryphore</div>
-          <div class="corps">
-            <h3>Octogone Fourmi-Doryphore</h3>
-            <p>Deux insectes refusent de se battre parce qu'ils ont mieux à faire. « Ici, on regarde, on ne touche pas. »</p>
-            <div class="meta">
-              <span class="badge">Respect du vivant</span>
-              <span class="badge bientot">Bientôt en ligne</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="carte-histoire" aria-disabled="true">
-          <div class="visuel">Spider-Clémi en Italie</div>
-          <div class="corps">
-            <h3>Spider-Clémi en Italie</h3>
-            <p>On peut sauter douze fois d'un lit superposé, pas treize. On ne choisit pas ses chutes, mais on se souvient de ceux qui nous relèvent.</p>
-            <div class="meta">
-              <span class="badge">Entraide &amp; gratitude</span>
-              <span class="badge bientot">Bientôt en ligne</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div class="cta">
+      <a href="#" class="plein">Découvrir les histoires</a>
+      <a href="#" class="contour">Voir la mallette pédagogique</a>
     </div>
-  </section>
 
-</main>
+  </main>
 
-<footer class="site">
-  <div class="inner">
-    <span>© 2026 Clémi Raconte — Clément Joubert · Saint-Bonnet-en-Champsaur (05)</span>
-    <span><a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a></span>
-  </div>
-</footer>
+  <footer>
+    © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
+    <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="#">Mentions légales</a>
+  </footer>
 
 </body>
 </html>
