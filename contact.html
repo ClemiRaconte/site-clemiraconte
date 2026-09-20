@@ -4,36 +4,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Clémi Raconte</title>
-<meta name="description" content="Contacter Clémi Raconte : demander un spécimen, un devis école ou commune, ou simplement être prévenu du lancement.">
+<meta name="description" content="Contacter Clémi Raconte : demander un avant-goût, un devis école ou commune, ou simplement être prévenu du lancement.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<style>
+  :root{
+    --sapin:#2D6A4F;--sapin-clair:#3f8266;--soleil:#F4C430;--soleil-doux:#f7d873;--soleil-fonce:#a9781a;
+    --encre:#243b32;--gris:#5b6b63;--creme:#FBF3E3;--creme-carte:#fffdf7;--ligne:#e7ddc8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--encre);background:var(--creme);line-height:1.75;font-size:18px;}
+  a{color:inherit;text-decoration:none;} img{max-width:100%;}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--creme);border-bottom:1px solid var(--ligne);flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:20;}
+  .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--sapin);}
+  .liens{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:15px;} .liens a:hover{color:var(--sapin);}
+  .liens a.actif{color:var(--sapin);font-weight:600;border-bottom:2px solid var(--soleil);padding-bottom:2px;}
+  .btn-nav{background:var(--sapin);color:#fff !important;padding:8px 16px;border-radius:22px;font-size:14px;font-weight:600;}
+  .btn-nav:hover{background:var(--sapin-clair);}
+  main{max-width:960px;margin:0 auto;padding:0 28px;}
+  section{padding:34px 0;}
+  .inner-s,.inner{max-width:760px;margin:0 auto;}
+  .hero.simple{padding:52px 0 18px;max-width:760px;}
+  .sur-titre{font-weight:600;letter-spacing:2px;font-size:14px;color:var(--sapin);text-transform:uppercase;margin-bottom:14px;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:42px;line-height:1.1;color:var(--encre);letter-spacing:-.5px;margin-bottom:18px;}
+  .chapo{font-size:20px;color:var(--gris);} .chapo a{color:var(--sapin);}
+  h2,.titre-section{font-family:'Fraunces',serif;font-weight:600;font-size:28px;color:var(--sapin);margin-bottom:14px;line-height:1.2;}
+  .prose h2{margin-top:28px;} .prose p{margin-bottom:14px;} .prose p a{color:var(--sapin);}
+  .intro-section{color:var(--gris);margin-bottom:20px;}
+  .manuscrit{font-family:'Caveat',cursive;font-size:26px;color:var(--sapin);font-weight:600;}
+  .btn{display:inline-block;background:var(--sapin);color:#fff !important;padding:12px 22px;border-radius:26px;font-weight:600;font-size:16px;border:none;cursor:pointer;font-family:inherit;}
+  .btn:hover{background:var(--sapin-clair);}
+  .btn-jaune{background:var(--soleil);color:#5c4600 !important;} .btn-jaune:hover{background:var(--soleil-doux);}
+  .btn-ligne{background:transparent;color:var(--sapin) !important;border:2px solid var(--sapin);}
+  .btn-ligne:hover{background:var(--sapin);color:#fff !important;}
+  .formulaire{display:flex;flex-direction:column;gap:4px;background:var(--creme-carte);border:1px solid var(--ligne);border-radius:16px;padding:28px;}
+  .formulaire label{font-weight:600;color:var(--encre);margin-top:12px;font-size:15px;}
+  .formulaire input,.formulaire select,.formulaire textarea{font-family:inherit;font-size:16px;padding:11px 14px;border:1px solid var(--ligne);border-radius:10px;background:#fff;color:var(--encre);width:100%;}
+  .formulaire input:focus,.formulaire select:focus,.formulaire textarea:focus{outline:2px solid var(--soleil);border-color:var(--soleil);}
+  .indication{font-size:13px;color:var(--gris);margin-top:8px;}
+  .fiche-histoire{max-width:760px;margin:0 auto;}
+  .lecteur{width:100%;aspect-ratio:16/9;border:none;border-radius:14px;background:#e7f0ea;}
+  .emplacement{background:#f4efe1;border:1px dashed #d3c6a3;border-radius:12px;padding:16px 18px;color:var(--gris);font-size:14px;margin-top:16px;}
+  .emplacement b{color:var(--encre);}
+  .extrait{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:14px;padding:22px 24px;}
+  .extrait p{margin-bottom:12px;} .extrait .fondu{color:var(--gris);}
+  .telechargements{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:8px;}
+  .tele{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:14px;padding:20px;}
+  .tele h3{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--encre);margin-bottom:8px;}
+  .tele p{font-size:14px;color:var(--gris);margin-bottom:14px;}
+  .liberte{background:#e7f0ea;border-radius:14px;padding:24px 26px;}
+  .liberte blockquote{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:var(--sapin);margin-bottom:10px;}
+  .liberte p{color:var(--encre);}
+  .activites-rubrique{margin-top:26px;}
+  .activites-rubrique h3{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--sapin);display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+  .activites-rubrique .sous{color:var(--gris);font-size:15px;margin-bottom:14px;}
+  .puce{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--soleil);color:#5c4600;border-radius:50%;font-family:'Fraunces',serif;font-size:15px;flex-shrink:0;}
+  .activite{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--creme-carte);border:1px solid var(--ligne);border-radius:12px;padding:14px 18px;margin-bottom:10px;}
+  .titre-a{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:var(--encre);margin-bottom:5px;}
+  .signature{font-family:'Caveat',cursive;font-size:17px;color:var(--soleil-fonce);font-weight:600;margin-left:6px;}
+  .meta-a{display:flex;flex-wrap:wrap;gap:8px;}
+  .etiq{font-size:12px;padding:3px 9px;border-radius:12px;}
+  .etiq.age{background:#e7f0ea;color:var(--sapin);font-weight:600;}
+  .etiq.peda{background:#f4efe1;color:var(--gris);}
+  .dl{flex-shrink:0;background:var(--sapin);color:#fff !important;font-weight:600;font-size:13px;padding:8px 14px;border-radius:20px;}
+  .dl:hover{background:var(--sapin-clair);}
+  .qui{display:grid;grid-template-columns:280px 1fr;gap:32px;align-items:center;}
+  .portrait,.emplacement-visuel{background:#e7f0ea;border:1px solid var(--ligne);border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;color:var(--gris);font-size:14px;min-height:200px;}
+  .portrait span b{display:block;color:var(--encre);font-family:'Fraunces',serif;margin-bottom:6px;}
+  .fond-2{background:var(--creme-carte);border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne);}
+  .portes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+  .porte{background:var(--creme);border:1px solid var(--ligne);border-radius:14px;padding:20px;}
+  .porte h3{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--encre);margin-bottom:6px;}
+  .porte p{font-size:15px;color:var(--gris);margin-bottom:12px;} .fleche{font-weight:600;color:var(--sapin);font-size:14px;}
+  .final{text-align:center;background:var(--sapin);border-radius:16px;margin:24px auto;max-width:760px;padding:38px 28px;}
+  .final h2{color:#fff;} .final p{color:#d6e7dd;margin-bottom:18px;} .final .manuscrit{color:var(--soleil-doux);}
+  footer{border-top:1px solid var(--ligne);padding:30px 28px;text-align:center;color:var(--gris);font-size:14px;line-height:1.8;margin-top:20px;}
+  footer a{color:var(--sapin);} .fnav{margin-bottom:8px;} .fnav a{margin:0 10px;}
+  @media(max-width:760px){nav{padding:14px 20px;} .liens{display:none;} h1{font-size:33px;} .qui{grid-template-columns:1fr;} .activite{flex-direction:column;align-items:flex-start;}}
+</style>
 </head>
 <body>
 
-<header class="site">
-  <nav class="nav" aria-label="Navigation principale">
-    <a class="marque" href="index.html">Clémi Raconte<span class="point" aria-hidden="true"></span></a>
-    <button class="burger" aria-label="Ouvrir ou fermer le menu" aria-expanded="false"
-      onclick="var n=this.closest('.nav');n.classList.toggle('ouvert');this.setAttribute('aria-expanded',n.classList.contains('ouvert'));">&#9776;</button>
-    <ul>
-      <li><a class="lien" href="histoires.html">Les histoires</a></li>
-      <li><a class="lien" href="mallette.html">Enseignants</a></li>
-      <li><a class="lien" href="social.html">Travailleurs sociaux</a></li>
-      <li><a class="lien" href="demarche.html">La démarche</a></li>
-      <li><a class="lien actif" href="contact.html" aria-current="page">Contact</a></li>
-    </ul>
-    <a class="btn btn-jaune" href="#formulaire">Écrire un message</a>
+  <nav>
+    <a class="logo" href="index.html">Clémi Raconte</a>
+    <div class="liens">
+      <a href="histoires.html">Les histoires</a>
+      <a href="familles.html">Familles</a>
+      <a href="enseignants.html">Enseignants</a>
+      <a href="travailleurs-sociaux.html">Travailleurs sociaux</a>
+      <a href="cse.html">CSE</a>
+      <a href="demarche.html">La démarche</a>
+      <a href="equipe.html">L'équipe</a>
+    </div>
+    <a href="contact.html" class="btn-nav">Me contacter</a>
   </nav>
-</header>
 
 <main>
 
   <div class="hero simple">
     <p class="sur-titre">Contact</p>
     <h1>Parlons-en simplement</h1>
-    <p class="chapo">Un spécimen pour votre classe&nbsp;? Un devis pour votre école ou votre commune&nbsp;? Une question sur les histoires&nbsp;? Le formulaire ci-dessous, ou directement&nbsp;: <a href="mailto:contact@clemiraconte.fr"><b>contact@clemiraconte.fr</b></a>. Je réponds moi-même, sous quelques jours.</p>
+    <p class="chapo">Un avant-goût pour votre classe&nbsp;? Un devis pour votre école ou votre commune&nbsp;? Une question sur les histoires&nbsp;? Le formulaire ci-dessous, ou directement&nbsp;: <a href="mailto:contact@clemiraconte.fr"><b>contact@clemiraconte.fr</b></a>. Je réponds moi-même, sous quelques jours.</p>
   </div>
 
   <section style="padding-top:1rem" id="formulaire">
@@ -67,7 +140,7 @@
         <label for="objet">Votre demande</label>
         <select id="objet" name="objet" required>
           <option value="">— Choisir —</option>
-          <option>Recevoir un spécimen gratuit de la mallette</option>
+          <option>Recevoir un avant-goût gratuit de la mallette</option>
           <option>Demander un devis école</option>
           <option>Demander un devis commune</option>
           <option>Être prévenu·e du lancement</option>
@@ -88,12 +161,13 @@
 
 </main>
 
-<footer class="site">
-  <div class="inner">
-    <span>© 2026 Clémi Raconte — Clément Joubert · Saint-Bonnet-en-Champsaur (05)</span>
-    <span><a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a></span>
-  </div>
-</footer>
+  <footer>
+    <div class="fnav">
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L’équipe</a><a href="contact.html">Contact</a>
+    </div>
+    © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
+    <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>
+  </footer>
 
 </body>
 </html>
