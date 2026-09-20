@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travailleurs sociaux · Clémi Raconte (rendu approximatif)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sapin:#2D6A4F;--sapin-clair:#3f8266;--soleil:#F4C430;--soleil-doux:#f7d873;
+    --encre:#243b32;--gris:#5b6b63;--creme:#FBF3E3;--creme-carte:#fffdf7;--blanc:#fff;--ligne:#e7ddc8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--encre);background:var(--creme);line-height:1.7;font-size:18px;}
+  a{color:inherit;text-decoration:none;}
+  .avert{background:#efe7d4;color:var(--gris);font-size:13px;text-align:center;padding:7px 16px;}
+
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--creme);border-bottom:1px solid var(--ligne);flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:20;}
+  .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--sapin);}
+  .liens{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:15px;}
+  .liens a.actif{color:var(--sapin);font-weight:600;border-bottom:2px solid var(--soleil);padding-bottom:2px;}
+  .liens a:hover{color:var(--sapin);}
+  .btn-nav{background:var(--sapin);color:#fff;padding:8px 16px;border-radius:22px;font-size:14px;font-weight:600;}
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 28px;}
+
+  .tete{padding:52px 0 20px;max-width:720px;}
+  .eyebrow{font-weight:600;letter-spacing:2px;font-size:14px;color:var(--sapin);text-transform:uppercase;margin-bottom:14px;}
+  .eyebrow .etoile{color:var(--soleil);}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:42px;line-height:1.1;color:var(--encre);letter-spacing:-.5px;margin-bottom:18px;}
+  .cle-line{display:inline-block;background:#e7f0ea;color:var(--sapin);font-weight:600;font-size:16px;padding:9px 18px;border-radius:24px;margin-bottom:22px;}
+  .btn{padding:13px 24px;border-radius:26px;font-weight:600;font-size:16px;display:inline-block;}
+  .btn.plein{background:var(--sapin);color:#fff;}
+  .btn.plein:hover{background:var(--sapin-clair);}
+
+  section.bloc{padding:40px 0;border-top:1px solid var(--ligne);}
+  .h2{font-family:'Fraunces',serif;font-weight:600;font-size:28px;color:var(--sapin);margin-bottom:8px;line-height:1.15;}
+  .h2::before{content:"";display:block;width:46px;height:4px;background:var(--soleil);border-radius:2px;margin-bottom:12px;}
+  .sous-sec{color:var(--gris);margin-bottom:24px;max-width:680px;}
+  p.corps{margin-bottom:16px;max-width:720px;}
+  p.corps b{color:var(--encre);}
+  .detour{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:var(--sapin);max-width:640px;margin:6px 0 4px;line-height:1.4;}
+
+  .usages{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+  .usage{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:14px;padding:22px;}
+  .usage h4{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--encre);margin-bottom:6px;}
+  .usage p{font-size:15px;color:var(--gris);}
+
+  .themes{display:flex;flex-wrap:wrap;gap:10px;}
+  .theme{background:#e7f0ea;color:var(--sapin);font-weight:600;font-size:14px;padding:8px 14px;border-radius:20px;}
+
+  .temps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+  .temp{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:14px;padding:20px;}
+  .temp .num{font-family:'Fraunces',serif;font-weight:600;font-size:26px;color:var(--soleil);margin-bottom:6px;}
+  .temp h4{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--encre);margin-bottom:4px;}
+  .temp p{font-size:15px;color:var(--gris);}
+
+  .exemple{display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:center;background:var(--creme-carte);border:1px solid var(--ligne);border-radius:16px;padding:24px;}
+  .exemple .visuel{height:180px;border-radius:12px;background:#e7f0ea;border:1px solid var(--ligne);display:flex;align-items:center;justify-content:center;color:var(--sapin);font-family:'Caveat',cursive;font-size:24px;}
+  .exemple .chapo{font-family:'Caveat',cursive;font-size:21px;color:var(--sapin);margin-bottom:6px;}
+  .exemple h3{font-family:'Fraunces',serif;font-weight:600;font-size:24px;color:var(--encre);margin-bottom:10px;}
+  .exemple p{color:var(--gris);font-size:16px;margin-bottom:16px;}
+
+  .tarif{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;background:var(--creme-carte);border:1px solid var(--ligne);border-radius:16px;padding:28px 30px;}
+  .tarif .prix{font-family:'Fraunces',serif;font-weight:600;font-size:42px;color:var(--sapin);line-height:1;}
+  .tarif .prix span{font-size:18px;color:var(--gris);font-family:'Source Sans 3';}
+  .tarif ul{list-style:none;color:var(--gris);font-size:16px;}
+  .tarif li{margin-bottom:8px;padding-left:22px;position:relative;}
+  .tarif li::before{content:"\2713";position:absolute;left:0;color:var(--sapin);font-weight:700;}
+
+  .final{background:var(--sapin);color:#eaf4ee;border-radius:16px;padding:38px 32px;text-align:center;margin:44px 0;}
+  .final h3{font-family:'Fraunces',serif;font-weight:600;font-size:26px;color:#fff;margin-bottom:10px;}
+  .final p{max-width:520px;margin:0 auto 20px;color:#d6e7dd;}
+  .final .btn-final{background:var(--soleil);color:#5c4600;padding:13px 24px;border-radius:24px;font-weight:600;border:none;font-size:16px;cursor:pointer;display:inline-block;}
+
+  footer{border-top:1px solid var(--ligne);padding:30px 28px;text-align:center;color:var(--gris);font-size:14px;line-height:1.8;}
+  footer a{color:var(--sapin);}
+  footer .fnav{margin-bottom:8px;}
+  footer .fnav a{margin:0 10px;}
+
+  @media(max-width:760px){
+    .liens{display:none;}nav{padding:14px 20px;}h1{font-size:33px;}.tarif,.exemple{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+
+  <nav>
+    <span class="logo">Clémi Raconte</span>
+    <div class="liens">
+      <a href="histoires.html">Les histoires</a>
+      <a href="familles.html">Familles</a>
+      <a href="mallette.html">Enseignants</a>
+      <a href="#" class="actif">Travailleurs sociaux</a>
+      <a href="cse.html">CSE</a>
+      <a href="demarche.html">La démarche</a>
+      <a href="demarche.html">L'équipe</a>
+    </div>
+    <a href="contact.html" class="btn-nav">Me contacter</a>
+  </nav>
+
+  <div class="wrap">
+
+    <div class="tete">
+      <div class="eyebrow"><span class="etoile">✦</span> Pour les travailleurs sociaux</div>
+      <h1>Quand l'histoire ouvre la parole là où les mots manquent.</h1>
+      <span class="cle-line">Un support de médiation clé en main : l'histoire, sa fiche et douze activités, prêts pour l'entretien ou le petit groupe.</span>
+      <div>
+        <a href="contact.html" class="btn plein">Demander un échange ou un devis</a>
+      </div>
+    </div>
+
+    <section class="bloc">
+      <div class="h2">Le récit comme détour</div>
+      <p class="corps">Il y a des choses qu'un enfant n'arrive pas à dire de face. Une histoire, elle, passe par le côté : elle met en scène, à bonne distance, ce qui pèse.</p>
+      <p class="detour">Et soudain, l'enfant trouve ses mots. Pas les vôtres, pas ceux d'une leçon : les siens.</p>
+      <p class="corps">Vous n'avez rien à préparer. L'histoire ouvre le sujet, la fiche vous donne des appuis pour accompagner l'échange et les activités prolongent le travail à votre rythme.</p>
+    </section>
+
+    <section class="bloc">
+      <div class="h2">Trois façons de l'utiliser</div>
+      <div class="usages">
+        <div class="usage">
+          <h4>En individuel</h4>
+          <p>Un support pour l'entretien. L'histoire ouvre un sujet sans la frontalité d'une question directe.</p>
+        </div>
+        <div class="usage">
+          <h4>En petit groupe</h4>
+          <p>La parole se partage. Chacun réagit à l'histoire et se reconnaît dans un détour commun.</p>
+        </div>
+        <div class="usage">
+          <h4>En relais famille</h4>
+          <p>Un objet qui circule entre l'enfant, le professionnel et la maison. Le récit continue de travailler après l'entretien.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc">
+      <div class="h2">Les thématiques</div>
+      <p class="sous-sec">Des sujets choisis pour le travail de médiation, à hauteur d'enfant.</p>
+      <div class="themes">
+        <span class="theme">Estime de soi & image de soi</span>
+        <span class="theme">Émotions</span>
+        <span class="theme">Différence & exclusion</span>
+        <span class="theme">Lien & place dans le groupe</span>
+        <span class="theme">Confiance & droit à l'erreur</span>
+        <span class="theme">Le corps, l'intime, le consentement</span>
+      </div>
+    </section>
+
+    <section class="bloc">
+      <div class="h2">Trois temps par histoire</div>
+      <div class="temps">
+        <div class="temp">
+          <div class="num">1</div>
+          <h4>L'histoire</h4>
+          <p>Pour ouvrir le sujet, en douceur et par le détour.</p>
+        </div>
+        <div class="temp">
+          <div class="num">2</div>
+          <h4>La fiche</h4>
+          <p>Pour accompagner l'échange, avec des appuis adaptés à l'âge.</p>
+        </div>
+        <div class="temp">
+          <div class="num">3</div>
+          <h4>Douze activités au choix</h4>
+          <p>Pour prolonger le travail selon l'enfant et le moment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc">
+      <div class="h2">Un exemple</div>
+      <div class="exemple">
+        <div class="visuel">Ange</div>
+        <div>
+          <p class="chapo">Appartenance, différence, courage d'être soi</p>
+          <h3>Ange, le loup qui se cachait</h3>
+          <p>Un loup qui a peur d'être vu et qui apprend que sa différence peut devenir sa voix. Un support parlant pour aborder l'estime de soi et la place dans le groupe.</p>
+          <a href="histoire-ange-le-loup.html" class="btn plein">Découvrir la séance complète</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc">
+      <div class="h2">Un accès simple</div>
+      <div class="tarif">
+        <div>
+          <div class="prix">50 € <span>/ an et par travailleur social</span></div>
+          <p style="color:var(--gris);margin-top:10px;">Accès individuel à toutes les histoires, leurs fiches et leurs activités. Aucun compte partagé, aucune installation.</p>
+        </div>
+        <ul>
+          <li>Une nouvelle histoire chaque semaine</li>
+          <li>Trois formats : à lire, à écouter, à regarder</li>
+          <li>La fiche et ses douze activités par histoire</li>
+          <li>En individuel, en petit groupe ou en relais famille</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="final">
+      <h3>Parlons de votre besoin</h3>
+      <p>Un échange, un devis pour votre structure, ou une histoire à essayer : écrivez-moi, je réponds moi-même.</p>
+      <a href="contact.html" class="btn-final">Demander un échange ou un devis</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="fnav">
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="mallette.html">Enseignants</a><a href="social.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="demarche.html">L'équipe</a><a href="contact.html">Contact</a>
+    </div>
+    © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
+    <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>
+  </footer>
+
+</body>
+</html>
