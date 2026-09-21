@@ -87,13 +87,17 @@
   @media(max-width:760px){
     .liens{display:none;}nav{padding:14px 20px;}h1{font-size:34px;}.tarif{grid-template-columns:1fr;}
   }
+
+  .nav-droite{display:flex;gap:10px;align-items:center;}
+  .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
+  .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
 </style>
 </head>
 <body>
 
 
   <nav>
-    <span class="logo">Clémi Raconte</span>
+    <a class="logo" href="index.html">Clémi Raconte</a>
     <div class="liens">
       <a href="histoires.html">Les histoires</a>
       <a href="familles.html">Familles</a>
@@ -101,9 +105,12 @@
       <a href="travailleurs-sociaux.html">Travailleurs sociaux</a>
       <a href="cse.html">CSE</a>
       <a href="demarche.html">La démarche</a>
-      <a href="demarche.html">L'équipe</a>
+      <a href="equipe.html">L'équipe</a>
     </div>
-    <a href="contact.html" class="btn-nav">Me contacter</a>
+    <div class="nav-droite">
+      <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
+      <a href="contact.html" class="btn-nav">Me contacter</a>
+    </div>
   </nav>
 
   <div class="wrap">
@@ -225,7 +232,7 @@
 
   <footer>
     <div class="fnav">
-      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="demarche.html">L'équipe</a><a href="contact.html">Contact</a>
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="contact.html">Contact</a>
     </div>
     © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>
