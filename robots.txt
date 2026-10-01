@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://clemiraconte.fr/sitemap.xml
