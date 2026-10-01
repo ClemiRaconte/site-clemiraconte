@@ -19,8 +19,8 @@
 
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--creme);border-bottom:1px solid var(--ligne);flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:20;}
   .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--sapin);}
-  .liens{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
-  .liens a{font-size:15px;}
+  .liens{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:14.5px;}
   .liens a.actif{color:var(--sapin);font-weight:600;border-bottom:2px solid var(--soleil);padding-bottom:2px;}
   .liens a:hover{color:var(--sapin);}
   .btn-nav{background:var(--sapin);color:#fff;padding:8px 16px;border-radius:22px;font-size:14px;font-weight:600;}
@@ -100,6 +100,18 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+
+  .paliers{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;margin-top:18px;}
+  .palier{background:#fffdf7;border:1px solid #e7ddc8;border-radius:12px;padding:12px 10px;text-align:center;}
+  .palier b{display:block;font-family:'Fraunces',serif;font-size:20px;color:#2D6A4F;}
+  .palier span{font-size:12.5px;color:#5b6b63;line-height:1.4;display:block;}
+  .palier-note{font-size:14px;color:#5b6b63;margin-top:12px;}
+  .adapt-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+  .adapt{background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:18px 20px;}
+  .adapt .age{font-family:'Caveat',cursive;font-size:24px;color:#a9781a;font-weight:600;line-height:1.2;}
+  .adapt p{font-size:15px;color:#5b6b63;margin-top:4px;}
+  @media(max-width:700px){.adapt-duo{grid-template-columns:1fr;}}
+  .hero{grid-template-columns:1fr;max-width:760px;}
 </style>
 </head>
 <body>
@@ -115,6 +127,7 @@
       <a href="#" class="actif">CSE</a>
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
+    <a href="soutenir.html">Soutenir</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
@@ -128,17 +141,16 @@
       <div>
         <div class="eyebrow"><span class="etoile">✦</span> Pour les comités sociaux et économiques</div>
         <h1>Un cadeau qui compte, pour <span class="surlig">les enfants du personnel.</span></h1>
-        <p class="sous">Offrez aux enfants de vos salariés une histoire nouvelle chaque semaine, toute l'année. Un cadeau culturel et sans écran, qui dure bien plus longtemps qu'un jouet.</p>
+        <p class="sous">Offrez aux enfants de vos salariés une histoire nouvelle chaque samedi, toute l'année. Un cadeau culturel qui dure bien plus longtemps qu'un jouet.</p>
         <span class="pastille">Zéro logistique de votre côté</span>
         <span class="cle">Vous offrez, on s'occupe de tout.</span>
         <a href="contact.html" class="btn plein">Demander une offre CSE</a>
       </div>
-      <div class="hero-visuel">Illustration<br>d'un cadeau à offrir<br>aux enfants</div>
     </div>
 
     <section class="bloc">
       <div class="h2">Vous cherchez une idée qui fasse vraiment plaisir, sans vous ajouter du travail.</div>
-      <p class="corps">C'est exactement là qu'on intervient. Plutôt qu'un objet vite oublié, vous offrez aux familles un abonnement d'histoires pour les 4-10 ans. Une nouvelle chaque semaine, à lire, à écouter ou à regarder, à la maison.</p>
+      <p class="corps">C'est exactement là qu'on intervient. Plutôt qu'un objet vite oublié, vous offrez aux familles un abonnement d'histoires pour les 4-9 ans. Une nouvelle chaque semaine, à lire, à écouter ou à regarder, à la maison.</p>
       <p class="corps"><b>Et pour vous, rien à gérer.</b> Pas de stock, pas de distribution, pas de casse-tête. On prépare les accès, les familles reçoivent leurs histoires.</p>
     </section>
 
@@ -151,9 +163,9 @@
           <p>Pas un gadget de plus. Une histoire par semaine, toute l'année, qui grandit avec l'enfant.</p>
         </div>
         <div class="atout">
-          <div class="tag">sans écran</div>
+          <div class="tag">au choix</div>
           <h4>Le papier et la voix d'abord</h4>
-          <p>Un cadeau qui éloigne des tablettes plutôt que d'en rajouter. L'audio et la vidéo restent un bonus.</p>
+          <p>Un cahier à imprimer et une voix, plutôt qu'un écran de plus. Le podcast et la vidéo restent là pour les familles qui en veulent.</p>
         </div>
         <div class="atout">
           <div class="tag">pour tous</div>
@@ -218,6 +230,8 @@
       </div>
     </section>
 
+<section class="bloc"><div class="h2">Deux adaptations pour chaque histoire</div><p class="sous-sec">Chaque enfant reçoit la version qui correspond à son âge. Une fratrie de 5 et de 8 ans, c'est la même histoire, racontée à chacun à sa hauteur.</p><div class="adapt-duo"><div class="adapt"><div class="age">4-6 ans</div><p>Le texte adapté aux plus jeunes, sa fiche pour en discuter et ses 12 activités au choix.</p></div><div class="adapt"><div class="age">7-9 ans</div><p>Le même récit porté plus loin, avec sa fiche et ses 12 activités au choix.</p></div></div></section>
+
     <section class="bloc">
       <div class="h2">Une offre à votre taille</div>
       <div class="devis">
@@ -229,9 +243,11 @@
           <li>Devis clair, sans engagement</li>
           <li>Mise en place des accès incluse</li>
           <li>Idéal pour un cadeau de fin d'année</li>
-          <li>Les premières histoires arrivent pour les fêtes</li>
+          <li>Les premières histoires arrivent courant novembre</li>
         </ul>
       </div>
+      <p class="corps" style="margin-top:26px">Le repère de départ, c'est 60 € par famille et par an. À partir de là, plus il y a de familles concernées, moins c'est cher. Le barème est le même pour tout le monde, affiché d'avance, sans négociation.</p>
+      <div class="paliers"><div class="palier"><b>60 €</b><span>1 famille</span></div><div class="palier"><b>55 €</b><span>à partir de 2 familles</span></div><div class="palier"><b>50 €</b><span>à partir de 5 familles</span></div><div class="palier"><b>45 €</b><span>à partir de 10 familles</span></div><div class="palier"><b>40 €</b><span>à partir de 20 familles</span></div><div class="palier"><b>35 €</b><span>à partir de 50 familles</span></div><div class="palier"><b>30 €</b><span>à partir de 100 familles</span></div></div><p class="palier-note">Prix par famille et par an, prix de lancement. Le tarif baisse pour tout le monde, y compris pour celles et ceux qui se sont abonnés en premier.</p>
     </section>
 
     <div class="final">
@@ -244,7 +260,7 @@
 
   <footer>
     <div class="fnav">
-      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="contact.html">Contact</a>
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="soutenir.html">Soutenir</a><a href="contact.html">Contact</a>
     </div>
     © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>

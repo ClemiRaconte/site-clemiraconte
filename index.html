@@ -42,8 +42,8 @@
     position:sticky;top:0;z-index:20;
   }
   .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--sapin);}
-  .liens{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
-  .liens a{font-size:15px;}
+  .liens{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:14.5px;}
   .liens a:hover{color:var(--sapin);}
   .btn-nav{background:var(--sapin);color:#fff;padding:8px 16px;border-radius:22px;font-size:14px;font-weight:600;}
 
@@ -157,6 +157,18 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+
+  .paliers{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:18px;}
+  .palier{background:#fffdf7;border:1px solid #e7ddc8;border-radius:12px;padding:12px 14px;text-align:center;}
+  .palier b{display:block;font-family:'Fraunces',serif;font-size:20px;color:#2D6A4F;}
+  .palier span{font-size:13px;color:#5b6b63;}
+  .palier-note{font-size:14px;color:#5b6b63;margin-top:12px;}
+  .adapt-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+  .adapt{background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:18px 20px;}
+  .adapt .age{font-family:'Caveat',cursive;font-size:24px;color:#a9781a;font-weight:600;line-height:1.2;}
+  .adapt p{font-size:15px;color:#5b6b63;margin-top:4px;}
+  @media(max-width:700px){.adapt-duo{grid-template-columns:1fr;}}
+  .vitrine{grid-template-columns:1fr;}
 </style>
 </head>
 <body>
@@ -174,6 +186,7 @@
       <a href="cse.html">CSE</a>
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
+    <a href="soutenir.html">Soutenir</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
@@ -185,10 +198,10 @@
 
     <div class="hero">
       <div>
-        <div class="eyebrow"><span class="etoile">✦</span> Histoires pour les 4-10 ans · Hautes-Alpes</div>
+        <div class="eyebrow"><span class="etoile">✦</span> Histoires pour les 4-9 ans · Hautes-Alpes</div>
         <h1>Des histoires d'aujourd'hui, pour <span class="surlig">la jeunesse de demain.</span></h1>
         <p class="sous">Je m'appelle Clément. Je raconte ce que vivent vraiment les enfants : l'école, les copains, les émotions, la famille, la différence. À lire, à écouter ou à regarder, à la maison comme en classe.</p>
-        <span class="sansecran">Ça se vit d'abord sans écran</span>
+        <span class="sansecran">Le papier et la voix d'abord, l'écran si vous voulez</span>
         <div class="cta-row">
           <a href="histoires.html" class="btn plein">Découvrir les histoires</a>
         </div>
@@ -230,7 +243,7 @@
       <div class="portes">
         <div class="porte famille">
           <div class="nom">Je suis parent ou un proche</div>
-          <span class="cle">Rien à préparer</span>
+          <span class="cle">Rien à préparer, juste à imprimer</span>
           <p>Le soir, dans la voiture, ou quand un sujet du quotidien a besoin d'un coup de pouce pour trouver ses mots. L'histoire est prête, il n'y a qu'à la partager.</p>
           <span class="fleche">Entrer dans l'espace Familles →</span>
         </div>
@@ -258,7 +271,6 @@
 
     <section class="bloc">
       <div class="vitrine">
-        <div class="visuel">Illustration d'Ange</div>
         <div>
           <p class="chapo">La séance vitrine</p>
           <h3>Ange, le loup qui chantait avec le vent</h3>
@@ -270,27 +282,24 @@
 
     <section class="bloc">
       <div class="chiffres">
-        <div class="chiffre"><div class="gros">52 / an</div><div class="lab">histoires garanties, une nouvelle chaque semaine</div></div>
-        <div class="chiffre"><div class="gros">4-10 ans</div><div class="lab">de la maternelle au CM2</div></div>
+        <div class="chiffre"><div class="gros">52 / an</div><div class="lab">histoires garanties, une nouvelle chaque samedi à 9h</div></div>
+        <div class="chiffre"><div class="gros">4-9 ans</div><div class="lab">deux adaptations, 4-6 ans et 7-9 ans</div></div>
         <div class="chiffre"><div class="gros">0 · 0</div><div class="lab">zéro méchant, zéro morale imposée</div></div>
         <div class="chiffre"><div class="gros">100%</div><div class="lab">écrites dans les Alpes</div></div>
       </div>
     </section>
 
     <div class="final">
-      <h3>Les premières histoires arrivent pour les fêtes de fin d'année</h3>
-      <p>Laissez votre adresse, je vous préviens dès la première parution. Une nouvelle histoire suivra chaque semaine.</p>
-      <div class="champ">
-        <input type="email" placeholder="votre adresse email">
-        <button class="btn-final">Être prévenu·e</button>
-      </div>
+      <h3>Les premières histoires arrivent courant novembre</h3>
+      <p>Écrivez-moi pour être prévenu·e du lancement. Ensuite, une nouvelle histoire chaque samedi à 9h.</p>
+      <a href="contact.html" class="btn-final">Être prévenu·e du lancement</a>
     </div>
 
   </div>
 
   <footer>
     <div class="fnav">
-      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="contact.html">Contact</a>
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="soutenir.html">Soutenir</a><a href="contact.html">Contact</a>
     </div>
     © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>

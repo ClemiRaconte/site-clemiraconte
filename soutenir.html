@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mentions légales — Clémi Raconte</title>
-<meta name="robots" content="noindex">
+<title>Soutenir — Clémi Raconte</title>
+<meta name="description" content="Soutenir Clémi Raconte : la campagne Ulule et le Tipeee, pour que les histoires continuent à sortir chaque samedi.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
@@ -87,6 +87,19 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+
+  .soutien{background:var(--sapin);border-radius:20px;padding:34px 36px;color:#fff;}
+  .soutien .etiq-s{display:inline-block;background:var(--soleil);color:#5c4600;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:16px;margin-bottom:14px;}
+  .soutien h2{color:#fff;font-size:30px;margin-bottom:12px;}
+  .soutien p{color:#d6e7dd;margin-bottom:12px;}
+  .soutien .manuscrit{color:var(--soleil-doux);}
+  .soutien-2{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:20px;padding:32px 34px;margin-top:22px;}
+  .soutien-2 h2{font-size:27px;margin-bottom:12px;}
+  .soutien-2 p{color:var(--gris);margin-bottom:12px;}
+  .autres{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px;}
+  .autre{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:14px;padding:20px 22px;}
+  .autre h3{font-family:'Fraunces',serif;font-weight:600;font-size:18px;margin-bottom:6px;}
+  .autre p{font-size:15px;color:var(--gris);}
 </style>
 </head>
 <body>
@@ -101,7 +114,7 @@
       <a href="cse.html">CSE</a>
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
-    <a href="soutenir.html">Soutenir</a>
+    <a href="soutenir.html" class="actif">Soutenir</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
@@ -110,38 +123,57 @@
   </nav>
 
 <main>
+
   <div class="hero simple">
-    <h1>Mentions légales</h1>
+    <p class="sur-titre">Soutenir</p>
+    <h1>Pour que les histoires continuent</h1>
+    <p class="chapo">Clémi Raconte, c'est un projet artisanal, écrit ici, dans le Champsaur. Chaque soutien paie du temps d'écriture, du matériel, des illustrations et des heures de montage. Voici deux façons de donner un coup de main.</p>
   </div>
 
-  <section style="padding-top:0">
-    <div class="inner-s prose">
+  <section style="padding-top:1rem">
+    <div class="inner-s">
 
-      <h2>Éditeur du site</h2>
-      <p>Clément Joubert — Clémi Raconte<br>
-      Entrepreneur individuel (micro-entreprise)<br>
-      Saint-Bonnet-en-Champsaur (05500)<br>
-      Contact&nbsp;: <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a></p>
+      <div class="soutien">
+        <span class="etiq-s">La campagne en cours</span>
+        <h2>Le financement participatif Ulule</h2>
+        <p>Une campagne, une durée limitée, un objectif clair : lancer la collection et offrir aux premières histoires de vraies illustrations, de vraies voix, de vraies vidéos. Il y a des contreparties, des histoires imprimées et quelques surprises.</p>
+        <p class="manuscrit">C'est le coup de pouce qui compte le plus en ce moment.</p>
+        <p style="margin-top:18px">
+          <a class="btn btn-jaune" href="https://fr.ulule.com/les-histoires-d-aujourd-hui-pour-les-adultes-de-demain-/" target="_blank" rel="noopener">Découvrir la campagne Ulule</a>
+        </p>
+      </div>
 
-      <h2>Directeur de la publication</h2>
-      <p>Clément Joubert.</p>
+      <div class="soutien-2">
+        <h2>Le Tipeee, pour la route</h2>
+        <p>Le Tipeee, c'est le soutien qui dure. Un petit montant chaque mois, libre, arrêtable quand vous voulez, qui me permet de tenir le rythme d'une histoire chaque samedi sans courir après le temps.</p>
+        <p>Même un euro par mois, à plusieurs, ça change tout.</p>
+        <p style="margin-top:16px">
+          <a class="btn btn-ligne" href="https://fr.tipeee.com/clemi-raconte/" target="_blank" rel="noopener">Voir le Tipeee</a>
+        </p>
+      </div>
 
-      <h2>Hébergement</h2>
-      <p>Ce site est hébergé par Netlify, Inc. — 512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis — <a href="https://www.netlify.com" rel="noopener">www.netlify.com</a>.<br>
-      Nom de domaine enregistré auprès d'OVH SAS — 2 rue Kellermann, 59100 Roubaix, France.</p>
+      <h2 class="titre-section" style="margin-top:2.6rem">Et si vous ne pouvez pas donner</h2>
+      <p class="intro-section">Le soutien n'est pas qu'une histoire d'argent. Ces trois gestes aident autant.</p>
+      <div class="autres">
+        <div class="autre">
+          <h3>En parler</h3>
+          <p>À un enseignant, à un parent, au CSE de votre entreprise, à la médiathèque du coin. Le bouche-à-oreille fait tout, dans un projet comme celui-ci.</p>
+        </div>
+        <div class="autre">
+          <h3>Partager une histoire</h3>
+          <p>Ange est en accès libre, de bout en bout. Partagez-la, testez-la, dites-moi ce qu'en pensent les enfants.</p>
+        </div>
+        <div class="autre">
+          <h3>S'abonner</h3>
+          <p>Un abonnement, c'est le soutien le plus direct : vous recevez les histoires et vous permettez aux suivantes d'exister.</p>
+        </div>
+      </div>
 
-      <h2>Propriété intellectuelle</h2>
-      <p>L'ensemble des contenus de ce site (textes, histoires, fiches d'accompagnement, activités, enregistrements audio et vidéo, illustrations, charte graphique) est la propriété de Clément Joubert, sauf mention contraire. Toute reproduction ou diffusion sans autorisation écrite est interdite. <b>Exception assumée et revendiquée&nbsp;:</b> les supports pédagogiques sont photocopiables par les écoles et structures qui en ont fait l'acquisition, dans le cadre de leur usage avec les enfants.</p>
-      <p>La marque Clémi Raconte fait l'objet d'un dépôt auprès de l'INPI.</p>
-
-      <h2>Données personnelles</h2>
-      <p>Les informations transmises via le formulaire de contact (nom, adresse email, message) servent uniquement à répondre à votre demande. Elles ne sont ni cédées, ni revendues, ni utilisées pour de la prospection sans votre accord. Conformément au Règlement général sur la protection des données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression de vos données&nbsp;: il suffit d'écrire à <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a>.</p>
-
-      <h2>Cookies</h2>
-      <p>Ce site ne dépose pas de cookies de suivi publicitaire. Les lecteurs vidéo et audio intégrés (YouTube, Ausha) peuvent déposer leurs propres cookies lors de la lecture&nbsp;; la version « youtube-nocookie » est utilisée chaque fois que possible.</p>
+      <p style="margin-top:2rem"><a class="btn" href="histoires.html">Découvrir les histoires</a></p>
 
     </div>
   </section>
+
 </main>
 
   <footer>

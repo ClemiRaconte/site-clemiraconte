@@ -19,8 +19,8 @@
 
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--creme);border-bottom:1px solid var(--ligne);flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:20;}
   .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--sapin);}
-  .liens{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
-  .liens a{font-size:15px;}
+  .liens{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:14.5px;}
   .liens a.actif{color:var(--sapin);font-weight:600;border-bottom:2px solid var(--soleil);padding-bottom:2px;}
   .liens a:hover{color:var(--sapin);}
   .btn-nav{background:var(--sapin);color:#fff;padding:8px 16px;border-radius:22px;font-size:14px;font-weight:600;}
@@ -91,6 +91,18 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+
+  .paliers{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;margin-top:18px;}
+  .palier{background:#fffdf7;border:1px solid #e7ddc8;border-radius:12px;padding:12px 10px;text-align:center;}
+  .palier b{display:block;font-family:'Fraunces',serif;font-size:20px;color:#2D6A4F;}
+  .palier span{font-size:12.5px;color:#5b6b63;line-height:1.4;display:block;}
+  .palier-note{font-size:14px;color:#5b6b63;margin-top:12px;}
+  .adapt-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+  .adapt{background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:18px 20px;}
+  .adapt .age{font-family:'Caveat',cursive;font-size:24px;color:#a9781a;font-weight:600;line-height:1.2;}
+  .adapt p{font-size:15px;color:#5b6b63;margin-top:4px;}
+  @media(max-width:700px){.adapt-duo{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
@@ -106,6 +118,7 @@
       <a href="cse.html">CSE</a>
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
+    <a href="soutenir.html">Soutenir</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
@@ -177,25 +190,9 @@
     </section>
 
     <section class="bloc">
-      <div class="h2">Des thèmes qui collent au programme</div>
-      <p class="sous-sec">Les histoires sont organisées par grands blocs de vie scolaire, chacun avec son histoire, sa fiche et ses activités.</p>
-      <div class="blocs">
-        <span class="bloc-tag">Mon corps, mon territoire</span>
-        <span class="bloc-tag">Filles, garçons : libres d'être</span>
-        <span class="bloc-tag">Grandir garçon, autrement</span>
-        <span class="bloc-tag">Accueillir l'autre</span>
-        <span class="bloc-tag">Stop au harcèlement</span>
-        <span class="bloc-tag">La météo des émotions</span>
-        <span class="bloc-tag">Tous citoyens</span>
-        <span class="bloc-tag">Les écrans et nous</span>
-        <span class="bloc-tag">Familles d'aujourd'hui</span>
-        <span class="bloc-tag">La nature, notre alliée</span>
-        <span class="bloc-tag">L'erreur, ma copine</span>
-        <span class="bloc-tag">Les mots qui font du bien</span>
-        <span class="bloc-tag">Riches, pauvres, et nous</span>
-        <span class="bloc-tag">Bien dans son assiette</span>
-        <span class="bloc-tag">Le sommeil et le calme</span>
-      </div>
+      <div class="h2">Des repères que vous connaissez</div>
+      <p class="sous-sec">Les histoires parlent de la vie de la classe et de la cour. Les thèmes arrivent au fil des parutions, chacun avec son histoire, sa fiche et ses douze activités.</p>
+      <p class="sous-sec" style="margin-top:18px">La collection se construit semaine après semaine, une histoire chaque samedi à 9h, et vient nourrir ces repères tout au long de l'année.</p>
       <div class="reperes">
         <span class="repere">Socle commun, domaine 3</span>
         <span class="repere">EMC</span>
@@ -210,8 +207,8 @@
       <div class="h2">Simple et vraiment clé en main</div>
       <div class="tarif">
         <div>
-          <div class="prix">50 € <span>/ an et par enseignant·e</span></div>
-          <p style="color:var(--gris);margin-top:10px;">Un cahier papier, plus un QR code par histoire pour l'audio et la vidéo. Aucun compte à créer, aucune installation.</p>
+          <div class="prix">60 € <span>/ an et par enseignant·e</span></div>
+          <p style="color:var(--gris);margin-top:10px;">Prix de lancement. Un cahier à imprimer, plus un QR code par histoire pour l'audio et la vidéo. Aucune installation.</p>
         </div>
         <ul>
           <li>Une nouvelle histoire chaque semaine</li>
@@ -220,6 +217,9 @@
           <li>La préparation ? La photocopie et c'est tout</li>
         </ul>
       </div>
+      <div class="h2" style="margin-top:34px">À plusieurs classes, c'est moins cher</div>
+      <p class="sous-sec">Vous embarquez un collègue, un cycle entier, toute l'école ou toute une circonscription ? Dès deux abonnements, le tarif baisse pour chacun.</p>
+      <div class="paliers"><div class="palier"><b>60 €</b><span>1 enseignant·e</span></div><div class="palier"><b>55 €</b><span>à partir de 2 enseignant·es</span></div><div class="palier"><b>50 €</b><span>à partir de 5 enseignant·es</span></div><div class="palier"><b>45 €</b><span>à partir de 10 enseignant·es</span></div><div class="palier"><b>40 €</b><span>à partir de 20 enseignant·es</span></div><div class="palier"><b>35 €</b><span>à partir de 50 enseignant·es</span></div><div class="palier"><b>30 €</b><span>à partir de 100 enseignant·es</span></div></div><p class="palier-note">Prix par enseignant·e et par an, prix de lancement. Le tarif baisse pour tout le monde, y compris pour celles et ceux qui se sont abonnés en premier.</p>
     </section>
 
     <div class="final">
@@ -232,7 +232,7 @@
 
   <footer>
     <div class="fnav">
-      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="contact.html">Contact</a>
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="soutenir.html">Soutenir</a><a href="contact.html">Contact</a>
     </div>
     © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>

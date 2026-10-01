@@ -19,8 +19,8 @@
 
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--creme);border-bottom:1px solid var(--ligne);flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:20;}
   .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--sapin);}
-  .liens{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
-  .liens a{font-size:15px;}
+  .liens{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:14.5px;}
   .liens a.actif{color:var(--sapin);font-weight:600;border-bottom:2px solid var(--soleil);padding-bottom:2px;}
   .liens a:hover{color:var(--sapin);}
   .btn-nav{background:var(--sapin);color:#fff;padding:8px 16px;border-radius:22px;font-size:14px;font-weight:600;}
@@ -101,6 +101,19 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+
+  .paliers{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:18px;}
+  .palier{background:#fffdf7;border:1px solid #e7ddc8;border-radius:12px;padding:12px 14px;text-align:center;}
+  .palier b{display:block;font-family:'Fraunces',serif;font-size:20px;color:#2D6A4F;}
+  .palier span{font-size:13px;color:#5b6b63;}
+  .palier-note{font-size:14px;color:#5b6b63;margin-top:12px;}
+  .adapt-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+  .adapt{background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:18px 20px;}
+  .adapt .age{font-family:'Caveat',cursive;font-size:24px;color:#a9781a;font-weight:600;line-height:1.2;}
+  .adapt p{font-size:15px;color:#5b6b63;margin-top:4px;}
+  @media(max-width:700px){.adapt-duo{grid-template-columns:1fr;}}
+
+  .teaser,.carte-histoire{grid-template-columns:1fr;}
 </style>
 </head>
 <body>
@@ -116,6 +129,7 @@
       <a href="cse.html">CSE</a>
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
+    <a href="soutenir.html">Soutenir</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
@@ -128,7 +142,7 @@
     <div class="tete">
       <div class="eyebrow"><span class="etoile">✦</span> Le catalogue</div>
       <h1>Les histoires</h1>
-      <p class="accroche"><b>52 histoires par an, une nouvelle chaque semaine.</b></p>
+      <p class="accroche"><b>52 histoires par an, une nouvelle chaque samedi à 9h.</b></p>
       <div class="sch">
         <div class="sch-flux">
           <div class="sch-etape">
@@ -154,26 +168,16 @@
         </div>
         <div class="sch-pied">Une histoire et tout ce qui va avec.</div>
       </div>
-      <p class="intro">Ici commence l'univers Clémi : des récits pour les 4-10 ans, ancrés dans ce que vivent vraiment les enfants. La bibliothèque se remplit comme une étagère d'école, une histoire après l'autre.</p>
+      <p class="intro">Ici commence l'univers Clémi : des récits pour les 4-9 ans, ancrés dans ce que vivent vraiment les enfants. La bibliothèque se remplit comme une étagère d'école, une histoire après l'autre.</p>
     </div>
 
-    <div class="teaser">
-      <div class="visuel">Illustration de<br>la prochaine histoire</div>
-      <div>
-        <span class="tag">Prochaine sortie · vendredi</span>
-        <h2>Une nouvelle aventure de Clémi</h2>
-        <p>Cette semaine, Clémi découvre qu'un silence peut faire plus de bruit qu'un cri. Une histoire sur les mots qu'on n'ose pas dire et sur le courage de les laisser sortir.</p>
-        <a href="contact.html" class="btn">Être prévenu·e de la sortie</a>
-      </div>
-    </div>
 
     <div class="section-titre">À découvrir maintenant</div>
     <p class="section-sous">Les histoires déjà en ligne, prêtes à lire, écouter et vivre.</p>
 
     <div class="carte-histoire">
-      <div class="visuel">Ange</div>
       <div>
-        <span class="badge">Séance vitrine · 5-7 ans</span>
+        <span class="badge">Séance vitrine · 4-6 et 7-9 ans</span>
         <h3>Ange, le loup qui chantait avec le vent</h3>
         <p class="chapo">Appartenance, différence, courage d'être soi</p>
         <p class="contenu">La séance complète, de bout en bout : l'histoire, sa fiche d'accompagnement et les 12 activités au choix. À lire, à écouter, à regarder.</p>
@@ -181,25 +185,31 @@
       </div>
     </div>
 
+    <div class="teaser">
+      <div>
+        <span class="tag">Prochaine sortie · samedi 9h</span>
+        <h2>La prochaine histoire</h2>
+        <p>Une nouvelle histoire chaque samedi à 9h, avec ses deux adaptations, leurs fiches et leurs 12 activités au choix.</p>
+        <a href="contact.html" class="btn">Être prévenu·e de la sortie</a>
+      </div>
+    </div>
+
     <div class="etagere">
       <b>Les aventures de Clémi arrivent ici, une par une.</b><br>
-      Chaque semaine, une nouvelle histoire rejoint l'étagère. Revenez souvent, ou laissez votre adresse pour ne rien manquer.
+      Chaque samedi à 9h, une nouvelle histoire rejoint l'étagère. Revenez souvent, ou laissez votre adresse pour ne rien manquer.
     </div>
 
     <div class="final">
       <h3>Une nouvelle histoire chaque semaine</h3>
-      <p>Les premières arrivent pour les fêtes de fin d'année. Laissez votre adresse, je vous préviens à chaque parution.</p>
-      <div class="champ">
-        <input type="email" placeholder="votre adresse email">
-        <button class="btn-final">Être prévenu·e</button>
-      </div>
+      <p>Les premières arrivent courant novembre, puis c'est chaque samedi à 9h. Écrivez-moi pour être prévenu·e du lancement.</p>
+      <a href="contact.html" class="btn-final">Être prévenu·e du lancement</a>
     </div>
 
   </div>
 
   <footer>
     <div class="fnav">
-      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="contact.html">Contact</a>
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="soutenir.html">Soutenir</a><a href="contact.html">Contact</a>
     </div>
     © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>

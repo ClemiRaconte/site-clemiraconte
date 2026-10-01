@@ -18,8 +18,8 @@
   a{color:inherit;text-decoration:none;} img{max-width:100%;}
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--creme);border-bottom:1px solid var(--ligne);flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:20;}
   .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--sapin);}
-  .liens{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
-  .liens a{font-size:15px;} .liens a:hover{color:var(--sapin);}
+  .liens{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:14.5px;} .liens a:hover{color:var(--sapin);}
   .liens a.actif{color:var(--sapin);font-weight:600;border-bottom:2px solid var(--soleil);padding-bottom:2px;}
   .btn-nav{background:var(--sapin);color:#fff !important;padding:8px 16px;border-radius:22px;font-size:14px;font-weight:600;}
   .btn-nav:hover{background:var(--sapin-clair);}
@@ -87,6 +87,13 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+  .qui{grid-template-columns:1fr;}
+  .cercle{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:1.6rem;}
+  .proche{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:16px;padding:22px 24px;}
+  .proche h3{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--encre);margin-bottom:4px;}
+  .proche .role{font-family:'Caveat',cursive;font-size:21px;color:var(--soleil-fonce);font-weight:600;line-height:1.2;margin-bottom:8px;}
+  .proche p{font-size:16px;color:var(--gris);}
+  @media(max-width:700px){.cercle{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -101,6 +108,7 @@
       <a href="cse.html">CSE</a>
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html" class="actif">L'équipe</a>
+    <a href="soutenir.html">Soutenir</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
@@ -118,9 +126,6 @@
 
   <section style="padding-top:1rem">
     <div class="inner-s qui">
-      <div class="portrait emplacement-visuel" style="aspect-ratio:4/5;">
-        <span><b>Emplacement à fournir</b>Photo de Clément dans le décor de forêt conteuse — format vertical 4:5, lumière chaude.</span>
-      </div>
       <div>
         <p class="sur-titre">Le conteur</p>
         <h2 class="titre-section">Clément Joubert</h2>
@@ -133,12 +138,31 @@
 
   <section class="fond-2">
     <div class="inner-s">
+      <h2 class="titre-section">Celles qui sont là depuis le début</h2>
+      <p class="intro-section">Clémi Raconte n'aurait pas la même tête sans elles. Rien de tout ça ne s'est fait seul.</p>
+      <div class="cercle">
+        <div class="proche">
+          <div class="role">ma compagne</div>
+          <h3>Coline</h3>
+          <p>Elle relit les histoires, teste les fiches et les activités, repère ce qui coince avant tout le monde. Elle est là depuis le premier texte, elle y croit souvent avant moi et elle me dit quand ça ne va pas.</p>
+        </div>
+        <div class="proche">
+          <div class="role">ma maman</div>
+          <h3>Annette, ma maman</h3>
+          <p>Elle m'aide à construire les supports pédagogiques et ouvre grand son carnet d'adresses pour faire connaître le projet. Beaucoup de portes se sont ouvertes grâce à elle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="inner-s">
       <h2 class="titre-section">L'aventure ne fait que commencer</h2>
       <div class="portes" style="margin-top:1.6rem">
         <div class="porte">
-          <h3>Une illustratrice</h3>
-          <p>Pour donner un visage à Ange et à tous les habitants de la forêt de Daillon. Les premières images arrivent.</p>
-          <span class="fleche">Bientôt</span>
+          <h3>Une jeune illustratrice d'ici</h3>
+          <p>Elle a déjà commencé à dessiner Ange et les habitants de la forêt de Daillon. Les premières images arrivent bientôt.</p>
+          <span class="fleche">En cours</span>
         </div>
         <div class="porte">
           <h3>Des voix, des musiques</h3>
@@ -166,7 +190,7 @@
 
   <footer>
     <div class="fnav">
-      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L’équipe</a><a href="contact.html">Contact</a>
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L’équipe</a><a href="soutenir.html">Soutenir</a><a href="contact.html">Contact</a>
     </div>
     © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>

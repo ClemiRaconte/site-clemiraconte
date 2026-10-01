@@ -19,8 +19,8 @@
 
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--creme);border-bottom:1px solid var(--ligne);flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:20;}
   .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--sapin);}
-  .liens{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
-  .liens a{font-size:15px;}
+  .liens{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .liens a{font-size:14.5px;}
   .liens a.actif{color:var(--sapin);font-weight:600;border-bottom:2px solid var(--soleil);padding-bottom:2px;}
   .liens a:hover{color:var(--sapin);}
   .btn-nav{background:var(--sapin);color:#fff;padding:8px 16px;border-radius:22px;font-size:14px;font-weight:600;}
@@ -88,6 +88,18 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+
+  .paliers{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;margin-top:18px;}
+  .palier{background:#fffdf7;border:1px solid #e7ddc8;border-radius:12px;padding:12px 10px;text-align:center;}
+  .palier b{display:block;font-family:'Fraunces',serif;font-size:20px;color:#2D6A4F;}
+  .palier span{font-size:12.5px;color:#5b6b63;line-height:1.4;display:block;}
+  .palier-note{font-size:14px;color:#5b6b63;margin-top:12px;}
+  .adapt-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+  .adapt{background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:18px 20px;}
+  .adapt .age{font-family:'Caveat',cursive;font-size:24px;color:#a9781a;font-weight:600;line-height:1.2;}
+  .adapt p{font-size:15px;color:#5b6b63;margin-top:4px;}
+  @media(max-width:700px){.adapt-duo{grid-template-columns:1fr;}}
+  .exemple{grid-template-columns:1fr;}
 </style>
 </head>
 <body>
@@ -103,6 +115,7 @@
       <a href="cse.html">CSE</a>
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
+    <a href="soutenir.html">Soutenir</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
@@ -125,7 +138,7 @@
       <div class="h2">Le récit comme détour</div>
       <p class="corps">Il y a des choses qu'un enfant n'arrive pas à dire de face. Une histoire, elle, passe par le côté : elle met en scène, à bonne distance, ce qui pèse.</p>
       <p class="detour">Et soudain, l'enfant trouve ses mots. Pas les vôtres, pas ceux d'une leçon : les siens.</p>
-      <p class="corps">Vous n'avez rien à préparer. L'histoire ouvre le sujet, la fiche vous donne des appuis pour accompagner l'échange et les activités prolongent le travail à votre rythme.</p>
+      <p class="corps">Vous n'avez rien à préparer, juste à imprimer. L'histoire ouvre le sujet, la fiche vous donne des appuis pour accompagner l'échange et les activités prolongent le travail à votre rythme.</p>
     </section>
 
     <section class="bloc">
@@ -159,6 +172,8 @@
       </div>
     </section>
 
+<section class="bloc"><div class="h2">Deux adaptations pour chaque histoire</div><p class="sous-sec">Chaque histoire est écrite deux fois, pour coller à l'âge de l'enfant que vous accompagnez. Vous prenez la version qui lui parle.</p><div class="adapt-duo"><div class="adapt"><div class="age">4-6 ans</div><p>Le texte adapté aux plus jeunes, sa fiche pour en discuter et ses 12 activités au choix.</p></div><div class="adapt"><div class="age">7-9 ans</div><p>Le même récit porté plus loin, avec sa fiche et ses 12 activités au choix.</p></div></div></section>
+
     <section class="bloc">
       <div class="h2">Trois temps par histoire</div>
       <div class="temps">
@@ -183,7 +198,6 @@
     <section class="bloc">
       <div class="h2">Un exemple</div>
       <div class="exemple">
-        <div class="visuel">Ange</div>
         <div>
           <p class="chapo">Appartenance, différence, courage d'être soi</p>
           <h3>Ange, le loup qui se cachait</h3>
@@ -197,16 +211,19 @@
       <div class="h2">Un accès simple</div>
       <div class="tarif">
         <div>
-          <div class="prix">50 € <span>/ an et par travailleur social</span></div>
-          <p style="color:var(--gris);margin-top:10px;">Accès individuel à toutes les histoires, leurs fiches et leurs activités. Aucun compte partagé, aucune installation.</p>
+          <div class="prix">60 € <span>/ an et par travailleur social</span></div>
+          <p style="color:var(--gris);margin-top:10px;">Prix de lancement. Accès individuel à toutes les histoires, leurs deux adaptations, leurs fiches et leurs activités.</p>
         </div>
         <ul>
-          <li>Une nouvelle histoire chaque semaine</li>
+          <li>Une nouvelle histoire chaque samedi à 9h</li>
           <li>Trois formats : à lire, à écouter, à regarder</li>
           <li>La fiche et ses douze activités par histoire</li>
           <li>En individuel, en petit groupe ou en relais famille</li>
         </ul>
       </div>
+      <div class="h2" style="margin-top:34px">À plusieurs dans la structure, c'est moins cher</div>
+      <p class="sous-sec">Plusieurs professionnels d'un même service, d'une même MECS ou d'un même pôle ? Dès deux abonnements, le tarif baisse pour chacun.</p>
+      <div class="paliers"><div class="palier"><b>60 €</b><span>1 professionnel</span></div><div class="palier"><b>55 €</b><span>à partir de 2 professionnels</span></div><div class="palier"><b>50 €</b><span>à partir de 5 professionnels</span></div><div class="palier"><b>45 €</b><span>à partir de 10 professionnels</span></div><div class="palier"><b>40 €</b><span>à partir de 20 professionnels</span></div><div class="palier"><b>35 €</b><span>à partir de 50 professionnels</span></div><div class="palier"><b>30 €</b><span>à partir de 100 professionnels</span></div></div><p class="palier-note">Prix par professionnel et par an, prix de lancement. Le tarif baisse pour tout le monde, y compris pour celles et ceux qui se sont abonnés en premier.</p>
     </section>
 
     <div class="final">
@@ -219,7 +236,7 @@
 
   <footer>
     <div class="fnav">
-      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="contact.html">Contact</a>
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="soutenir.html">Soutenir</a><a href="contact.html">Contact</a>
     </div>
     © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>
