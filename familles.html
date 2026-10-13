@@ -3,10 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Familles · Clémi Raconte (rendu approximatif)</title>
+<title>Familles · Clémi Raconte</title>
+<meta name="description" content="Des histoires à partager le soir ou quand un sujet du quotidien a besoin de mots : émotions, différence, nouvelles familles. Pour les 4-9 ans.">
+<link rel="canonical" href="https://clemiraconte.fr/familles.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clémi Raconte">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Clémi Raconte pour les familles">
+<meta property="og:description" content="Des histoires à partager le soir ou quand un sujet du quotidien a besoin de mots : émotions, différence, nouvelles familles. Pour les 4-9 ans.">
+<meta property="og:url" content="https://clemiraconte.fr/familles.html">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&family=Nunito+Sans:opsz,wght@6..12,700&display=swap" rel="stylesheet">
 <style>
   :root{
     --sapin:#2D6A4F;--sapin-clair:#3f8266;--soleil:#F4C430;
@@ -36,20 +45,20 @@
   .sous{font-size:19px;color:var(--gris);margin-bottom:16px;max-width:520px;}
   .pastille{display:inline-block;background:var(--rose-clair);color:var(--rose-fonce);font-weight:600;font-size:14px;padding:6px 14px;border-radius:20px;margin-bottom:12px;}
   .pastille::before{content:"\2713  ";}
-  .cle{font-family:'Caveat',cursive;font-size:26px;color:var(--sapin);margin-bottom:22px;display:block;}
+  .cle{font-family:'Nunito Sans',system-ui,sans-serif;font-size:16px;color:var(--sapin);margin-bottom:22px;display:block;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .btn{padding:13px 26px;border-radius:28px;font-weight:600;font-size:16px;display:inline-block;}
   .btn.plein{background:var(--sapin);color:#fff;}
   .btn.plein:hover{background:var(--sapin-clair);}
-  .hero-visuel{background:var(--rose-doux);border-radius:24px;height:280px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--rose-fonce);font-family:'Caveat',cursive;font-size:24px;padding:20px;border:1px solid var(--rose-clair);}
+  .hero-visuel{background:var(--rose-doux);border-radius:24px;height:280px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--rose-fonce);font-family:'Nunito Sans',system-ui,sans-serif;font-size:14px;padding:20px;border:1px solid var(--rose-clair);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
 
   section.bloc{padding:42px 0;border-top:1px solid var(--ligne);}
   .h2{font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:var(--encre);margin-bottom:8px;line-height:1.15;}
   .h2::before{content:"";display:block;width:46px;height:4px;background:var(--rose);border-radius:2px;margin-bottom:12px;}
   .sous-sec{color:var(--gris);margin-bottom:26px;max-width:660px;}
 
-  .moments{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;}
+  .moments{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;}
   .moment{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:18px;padding:22px;}
-  .moment .ico{font-family:'Caveat',cursive;font-size:22px;color:var(--rose-fonce);font-weight:700;margin-bottom:6px;}
+  .moment .ico{font-family:'Nunito Sans',system-ui,sans-serif;font-size:13px;color:var(--rose-fonce);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .moment h4{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--encre);margin-bottom:6px;}
   .moment p{font-size:15px;color:var(--gris);}
 
@@ -57,7 +66,7 @@
   .sansecran h3{font-family:'Fraunces',serif;font-weight:600;font-size:26px;color:var(--rose-fonce);margin-bottom:10px;}
   .sansecran p{color:var(--gris);margin-bottom:12px;}
   .sansecran p:last-child{margin-bottom:0;}
-  .sansecran .grand{font-family:'Caveat',cursive;font-size:60px;color:var(--sapin);text-align:center;line-height:1.1;}
+  .sansecran .grand{font-family:'Nunito Sans',system-ui,sans-serif;font-size:42px;color:var(--sapin);text-align:center;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .sansecran .grand small{display:block;font-family:'Source Sans 3';font-size:15px;color:var(--gris);font-weight:600;}
 
   .sujets{display:flex;flex-wrap:wrap;gap:10px;}
@@ -65,7 +74,7 @@
 
   .recu{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
   .r-item{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:18px;padding:20px;}
-  .r-item .tag{font-family:'Caveat',cursive;font-size:20px;color:var(--sapin);font-weight:700;}
+  .r-item .tag{font-family:'Nunito Sans',system-ui,sans-serif;font-size:12px;color:var(--sapin);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .r-item h4{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--encre);margin:2px 0 5px;}
   .r-item p{font-size:15px;color:var(--gris);}
 
@@ -104,11 +113,97 @@
   .palier-note{font-size:14px;color:#5b6b63;margin-top:12px;}
   .adapt-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
   .adapt{background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:18px 20px;}
-  .adapt .age{font-family:'Caveat',cursive;font-size:24px;color:#a9781a;font-weight:600;line-height:1.2;}
+  .adapt .age{font-family:'Nunito Sans',system-ui,sans-serif;font-size:14px;color:#a9781a;line-height:1.2;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .adapt p{font-size:15px;color:#5b6b63;margin-top:4px;}
   @media(max-width:700px){.adapt-duo{grid-template-columns:1fr;}}
   .hero{grid-template-columns:1fr;max-width:740px;}
+  /* ===== MOBILE (telephone) : n'agit qu'en dessous de 820px, l'ordinateur ne change pas ===== */
+  .burger{display:none;}
+  @media(max-width:820px){
+    html{-webkit-text-size-adjust:100%;}
+    body{font-size:17px;}
+    .bandeau{font-size:13.5px;padding:7px 16px;line-height:1.45;}
+    nav{position:sticky;top:0;z-index:50;padding:10px 16px !important;flex-wrap:nowrap;gap:8px;}
+    nav .logo{font-size:19px;margin-right:auto;white-space:nowrap;line-height:1.1;}
+    nav .nav-droite{gap:6px;}
+    nav .btn-abonnes{padding:7px 10px;font-size:13px;border-width:1.5px;}
+    nav .btn-nav{padding:8.5px 12px;font-size:13px;white-space:nowrap;}
+    nav .btn-abonnes{padding:7px 12px;}
+    nav .btn-abonnes,nav .btn-nav{font-size:0 !important;}
+    nav .btn-abonnes::after{content:"Abonnés";font-size:13.5px;}
+    nav .btn-nav::after{content:"Contact";font-size:13.5px;}
+    .burger{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:0 10px;
+      background:transparent;border:1.5px solid var(--sapin,#2D6A4F);border-radius:12px;cursor:pointer;flex-shrink:0;}
+    .burger span{display:block;height:2px;background:var(--sapin,#2D6A4F);border-radius:2px;transition:transform .2s,opacity .2s;}
+    nav.ouvert .burger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    nav.ouvert .burger span:nth-child(2){opacity:0;}
+    nav.ouvert .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    nav .liens{display:none !important;}
+    nav.ouvert .liens{display:flex !important;flex-direction:column;align-items:stretch;gap:0;
+      position:absolute;left:0;right:0;top:100%;background:var(--creme,#FBF3E3);
+      border-bottom:1px solid var(--ligne,#e7ddc8);box-shadow:0 14px 24px rgba(36,59,50,.12);
+      padding:6px 16px 16px;max-height:calc(100vh - 70px);overflow-y:auto;}
+    nav.ouvert .liens a{font-size:17px;padding:13px 4px;border-bottom:1px solid var(--ligne,#e7ddc8);}
+    nav.ouvert .liens a.actif{color:var(--sapin,#2D6A4F);font-weight:600;}
+    nav.ouvert .liens a.menu-abonnes{display:none;border:2px solid var(--sapin,#2D6A4F);border-radius:24px;text-align:center;
+      margin-top:14px;color:var(--sapin,#2D6A4F);font-weight:600;padding:11px;}
+    .menu-abonnes{display:none;}
+    .wrap{padding-left:18px;padding-right:18px;}
+    h1{font-size:33px !important;line-height:1.12;}
+    .btn,.btn-final,.cta-row a{min-height:46px;display:inline-flex;align-items:center;justify-content:center;}
+    .cta-row .btn{width:100%;}
+    footer{padding:26px 18px;}
+    footer .fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 6px;margin-bottom:14px;}
+    footer .fnav a{margin:0 !important;padding:6px 10px;white-space:nowrap;}
+  }
+  @media(min-width:821px){.menu-abonnes{display:none !important;}}
+
+  .qr-box2{display:flex;align-items:center;gap:12px;background:#f6f1e4;border:1px dashed #cbb98a;border-radius:10px;padding:12px 16px;margin-top:16px;max-width:300px;}
+  .qr-vignette2{width:42px;height:42px;border-radius:6px;background:repeating-linear-gradient(90deg,#c7b48a 0 4px, transparent 4px 8px),repeating-linear-gradient(0deg,#c7b48a 0 4px, transparent 4px 8px);background-color:#fff;flex-shrink:0;}
+  .qr-lab{font-size:14px;color:#5b6b63;} .qr-lab b{color:#243b32;}
+  .formats-plus{margin-top:14px;font-size:16px;color:#5b6b63;}
+
+  .moments-f{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .mf{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:20px;padding:22px;position:relative;}
+  .mf .heure{font-family:'Nunito Sans',system-ui,sans-serif;font-size:14px;color:#a9781a;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+  .mf h4{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--encre);margin:6px 0;}
+  .mf p{font-size:15px;color:var(--gris);}
+  .mf .rond{position:absolute;top:-14px;right:18px;width:34px;height:34px;border-radius:50%;background:var(--soleil);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;color:#5c4600;font-size:15px;}
+  @media(max-width:820px){.moments-f{grid-template-columns:1fr;gap:22px;} .mf{padding:20px;}}
+
+
+  .formules{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px;}
+  .formule{background:#fffdf7;border:1px solid #e7ddc8;border-radius:16px;padding:20px 18px;}
+  .formule.vedette{border:2px solid #2D6A4F;}
+  .formule .nom{font-weight:600;color:#243b32;font-size:16px;}
+  .formule .montant{font-family:'Fraunces',serif;font-weight:600;font-size:34px;color:#2D6A4F;line-height:1.1;margin:6px 0 4px;}
+  .formule .montant span{font-family:'Source Sans 3',sans-serif;font-size:15px;color:#5b6b63;font-weight:400;}
+  .formule p{font-size:14.5px;color:#5b6b63;margin:6px 0 0;line-height:1.5;}
+  .lecture{background:#fffdf7;border:1px solid #e7ddc8;border-left:4px solid #F4C430;border-radius:12px;padding:16px 20px;margin-top:22px;}
+  .lecture b{color:#243b32;}
+  .lecture ul{margin:8px 0 0;padding-left:20px;color:#243b32;font-size:15.5px;line-height:1.55;}
+  .lecture li{margin-bottom:6px;}
+  .reserver{display:block;margin-top:auto;padding-top:0;text-align:center;font:600 15px 'Source Sans 3',sans-serif;background:#2D6A4F;color:#fff !important;border:none;border-radius:24px;padding:10px 14px;cursor:pointer;}
+  .formule{display:flex;flex-direction:column;}
+  .formule p{margin-bottom:14px !important;}
+  .formule .montant + .reserver{margin-top:10px;}
+  .formule.vedette .reserver{background:#F4C430;color:#4a3800 !important;}
+  .reserver:hover{filter:brightness(1.08);}
+  .reserver.large{display:inline-block;padding:12px 26px;font-size:16px;}
+  .foyers{margin-top:18px;background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:4px 18px;}
+  .foyers summary{cursor:pointer;font-weight:600;color:#2D6A4F;padding:12px 0;list-style-position:inside;}
+  .foyers[open] summary{border-bottom:1px solid #e7ddc8;margin-bottom:12px;}
+  .foyers > p{font-size:15px;color:#5b6b63;}
+  .foyers .formules{margin-bottom:16px;}
+  .surplace{margin-top:22px;font-size:15.5px;color:#5b6b63;}
+  .surplace b{color:#243b32;}
+
+  .themes-annee{font-family:'Nunito Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13.5px;color:#a9781a;margin:-10px 0 14px;}
+  .btn-final-2{background:transparent !important;color:#fff !important;border:2px solid rgba(255,255,255,.6) !important;margin-left:6px;}
+  @media(max-width:820px){.btn-final-2{margin:10px 0 0 !important;}}
+  [hidden]{display:none !important;}
 </style>
+<script>if('scrollRestoration' in history){history.scrollRestoration='manual';}addEventListener('pageshow',function(){if(!location.hash){scrollTo(0,0);}});</script>
 </head>
 <body>
 
@@ -124,10 +219,12 @@
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
     <a href="soutenir.html">Soutenir</a>
+      <a href="connexion.html" class="menu-abonnes">Espace abonnés</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
       <a href="contact.html" class="btn-nav">Me contacter</a>
+      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -137,10 +234,10 @@
       <div>
         <div class="eyebrow"><span class="etoile">✦</span> Pour les familles</div>
         <h1>Le soir venu, une histoire <span class="doux">à partager.</span></h1>
-        <p class="sous">Des histoires à raconter le soir, dans la voiture, ou quand un sujet du quotidien a besoin d'un coup de pouce pour trouver ses mots. Pour les 4-9 ans.</p>
+        <p class="sous">Des histoires à raconter le soir, dans la voiture, ou quand un sujet du quotidien a besoin d'un coup de pouce pour trouver ses mots. Pour les 4-9 ans, écrites dans les Hautes-Alpes.</p>
         <span class="pastille">Avec ou sans écran, comme vous voulez</span>
-        <span class="cle">Rien à préparer, juste à imprimer. L'histoire est prête, il n'y a qu'à la partager.</span>
-        <a href="contact.html" class="btn plein">Recevoir la première histoire</a>
+        <span class="cle">Rien à préparer. L'histoire est prête, il n'y a qu'à la raconter.</span>
+        <a href="histoire-ange-le-loup.html" class="btn plein">Découvrir Ange, en accès libre</a>
       </div>
     </div>
 
@@ -175,7 +272,7 @@
       <div class="sansecran">
         <div>
           <h3>Avec ou sans écran</h3>
-          <p>Le cœur de chaque histoire, c'est le papier et la voix. Vous imprimez le cahier à la maison, vous le gardez, l'enfant l'annote et le colorie.</p>
+          <p>Le cœur de chaque histoire, c'est la voix. Vous lisez l'histoire à voix haute depuis votre espace abonné, l'enfant écoute et imagine. Puis il prolonge avec les activités imprimées, qu'il colorie et qu'il garde.</p>
           <p>Et si l'écran vous arrange, le podcast et la vidéo sont là pour ça. Dans la voiture, un soir de fatigue, quand ça dépanne. Chacun fait comme il le sent.</p>
         </div>
         <div class="grand">0<small>écran obligatoire</small></div>
@@ -183,15 +280,27 @@
     </section>
 
     <section class="bloc">
+      <div class="h2">Chaque histoire existe en trois formats</div>
+      <p class="sous-sec">Vous prenez celui qui va avec votre moment. Les trois arrivent en même temps, chaque samedi à 9h.</p>
+      <div class="moments-f">
+        <div class="mf"><span class="rond">1</span><div class="heure">le soir venu</div><h4>À lire</h4><p>L'histoire lue à voix haute par l'adulte, au bord du lit. L'enfant écoute, imagine, pose ses questions.</p></div>
+        <div class="mf"><span class="rond">2</span><div class="heure">sur la route</div><h4>À écouter</h4><p>Le podcast, dans la voiture ou au calme, les yeux ailleurs. Pour les trajets d'école et les longs voyages.</p></div>
+        <div class="mf"><span class="rond">3</span><div class="heure">un temps libre</div><h4>À regarder</h4><p>La vidéo, racontée dans la forêt conteuse, quand on a envie de se poser tous ensemble.</p></div>
+      </div>
+      <p class="formats-plus">Et avec chaque histoire&nbsp;: sa fiche papote pour en discuter et ses 12 activités à explorer.</p>
+      <div class="qr-box2"><span class="qr-vignette2"></span><span class="qr-lab"><b>QR code</b> · bientôt actif</span></div>
+    </section>
+
+    <section class="bloc">
       <div class="h2">Les familles ont changé, les histoires aussi</div>
       <p class="sous-sec">Des histoires d'aujourd'hui, qui parlent de ce que vivent vraiment les enfants, à leur hauteur et sans faire la leçon.</p>
+      <p class="themes-annee">Les thèmes qui arrivent au fil de l'année</p>
       <div class="sujets">
-        <span class="sujet">Le TDAH</span>
-        <span class="sujet">Les troubles DYS</span>
-        <span class="sujet">Le haut potentiel</span>
         <span class="sujet">La différence</span>
+        <span class="sujet">Apprendre autrement</span>
         <span class="sujet">Le handicap, visible et invisible</span>
-        <span class="sujet">Le deuil</span>
+        <span class="sujet">Trouver sa place dans le groupe</span>
+        <span class="sujet">Les émotions</span>
         <span class="sujet">La séparation des parents</span>
         <span class="sujet">Les nouvelles familles</span>
         <span class="sujet">Le harcèlement</span>
@@ -201,7 +310,7 @@
       </div>
     </section>
 
-<section class="bloc"><div class="h2">Deux adaptations pour chaque histoire</div><p class="sous-sec">Le même récit, écrit deux fois, pour que chaque enfant de la fratrie ait sa version. Vous choisissez celle qui lui va.</p><div class="adapt-duo"><div class="adapt"><div class="age">4-6 ans</div><p>Le texte adapté aux plus jeunes, sa fiche pour en discuter et ses 12 activités au choix.</p></div><div class="adapt"><div class="age">7-9 ans</div><p>Le même récit porté plus loin, avec sa fiche et ses 12 activités au choix.</p></div></div></section>
+<section class="bloc"><div class="h2">Deux adaptations pour chaque histoire</div><p class="sous-sec">Le même récit, écrit deux fois, pour que chaque enfant de la fratrie ait sa version. Vous choisissez celle qui lui va.</p><div class="adapt-duo"><div class="adapt"><div class="age">4-6 ans</div><p>Le texte adapté aux plus jeunes, sa fiche papote pour en discuter et ses 12 activités à explorer.</p></div><div class="adapt"><div class="age">7-9 ans</div><p>Le même récit porté plus loin, avec sa fiche papote et ses 12 activités à explorer.</p></div></div></section>
 
     <section class="bloc">
       <div class="h2">Ce que vous recevez</div>
@@ -209,12 +318,12 @@
         <div class="r-item">
           <div class="tag">chaque semaine</div>
           <h4>Une nouvelle histoire</h4>
-          <p>Une parution chaque samedi à 9h, toute l'année. La bibliothèque de la maison qui grandit.</p>
+          <p>Une parution chaque samedi à 9h, toute l'année. La bibliothèque de la maison grandit au fil des mois.</p>
         </div>
         <div class="r-item">
           <div class="tag">trois formats</div>
           <h4>À lire, écouter, regarder</h4>
-          <p>Le cahier à imprimer, le podcast pour la route, la vidéo racontée dans la forêt conteuse.</p>
+          <p>L'histoire à lire à voix haute, le podcast pour la route, la vidéo racontée dans la forêt conteuse.</p>
         </div>
         <div class="r-item">
           <div class="tag">l'esprit maison</div>
@@ -225,28 +334,38 @@
     </section>
 
     <section class="bloc">
-      <div class="h2">Un abonnement pour toute la famille</div>
-      <div class="tarif">
-        <div>
-          <div class="prix">60 € <span>/ an et par famille</span></div>
-          <p style="color:var(--gris);margin-top:10px;">Prix de lancement. Toutes les histoires, leurs deux adaptations, leurs formats et leurs activités, pour vos enfants, toute l'année.</p>
+      <div class="h2">Les formules familles</div>
+      <p class="sous-sec">Prix de lancement, à l'année. Toutes les histoires de l'année, leurs fiches papote et leurs 12 activités, à garder.</p>
+      <div class="formules">
+        <div class="formule"><div class="nom">Une adaptation</div><div class="montant">50 € <span>/ an</span></div><p>Les histoires en 4-6 ans ou en 7-9 ans, au choix. Un accès.</p><a class="reserver" href="abonnement.html?formule=famille-1-adaptation#reserver">Je réserve cette formule</a></div>
+        <div class="formule vedette"><div class="nom">Les deux adaptations</div><div class="montant">60 € <span>/ an</span></div><p>4-6 ans et 7-9 ans : chaque enfant de la fratrie a sa version. Un accès.</p><a class="reserver" href="abonnement.html?formule=famille-2-adaptations#reserver">Je réserve cette formule</a></div>
+        <div class="formule"><div class="nom">Au mois</div><div class="montant">8 € <span>/ mois</span></div><p>Un accès, sans engagement. Les histoires reçues pendant un mois payé restent à vous.</p><a class="reserver" href="abonnement.html?formule=famille-mois#reserver">Je réserve cette formule</a></div>
+      </div>
+      <details class="foyers">
+        <summary>Plusieurs foyers&nbsp;? La famille élargie</summary>
+        <p>Pour que les grands-parents, la nounou ou l'autre maison aient aussi leur accès. Un accès, c'est un identifiant. Les deux adaptations sont comprises.</p>
+        <div class="formules">
+          <div class="formule"><div class="nom">2 accès</div><div class="montant">100 € <span>/ an</span></div><a class="reserver" href="abonnement.html?formule=famille-2-acces#reserver">Je réserve</a></div>
+          <div class="formule"><div class="nom">3 accès</div><div class="montant">120 € <span>/ an</span></div><a class="reserver" href="abonnement.html?formule=famille-3-acces#reserver">Je réserve</a></div>
+          <div class="formule"><div class="nom">5 accès</div><div class="montant">150 € <span>/ an</span></div><a class="reserver" href="abonnement.html?formule=famille-5-acces#reserver">Je réserve</a></div>
         </div>
+      </details>
+      <div class="lecture">
+        <b>Une fois abonné(e), comment ça se passe&nbsp;?</b>
         <ul>
-          <li>Une nouvelle histoire chaque semaine</li>
-          <li>À lire, à écouter, à regarder</li>
-          <li>Les activités à imprimer à la maison</li>
-          <li>Un accès pour toute la fratrie</li>
+          <li>L'histoire et sa fiche papote se lisent en ligne, dans une visionneuse, depuis votre espace abonné. Elles ne se téléchargent pas.</li>
+          <li>Les 12 activités se téléchargent et s'impriment.</li>
+          <li>Le podcast et la vidéo vous attendent aussi dans votre espace abonné.</li>
+          <li>Pour l'enfant, zéro écran : l'adulte lit à voix haute, l'enfant écoute, joue et colorie.</li>
+          <li>Avec une formule à l'année, ce que vous avez reçu reste accessible tant que le service existe.</li>
         </ul>
       </div>
-      <div class="h2" style="margin-top:34px">À plusieurs familles, c'est moins cher</div>
-      <p class="sous-sec">Vous êtes plusieurs familles à vous lancer ensemble, entre voisins, entre copains d'école ou via une association de parents ? À partir de deux familles, le tarif baisse pour tout le monde.</p>
-      <div class="paliers"><div class="palier"><b>60 €</b><span>1 famille</span></div><div class="palier"><b>55 €</b><span>à partir de 2 familles</span></div><div class="palier"><b>50 €</b><span>à partir de 5 familles</span></div><div class="palier"><b>45 €</b><span>à partir de 10 familles</span></div><div class="palier"><b>40 €</b><span>à partir de 20 familles</span></div><div class="palier"><b>35 €</b><span>à partir de 50 familles</span></div><div class="palier"><b>30 €</b><span>à partir de 100 familles</span></div></div><p class="palier-note">Prix par famille et par an, prix de lancement. Le tarif baisse pour tout le monde, y compris pour celles et ceux qui se sont abonnés en premier.</p>
     </section>
 
     <div class="final">
       <h3>Les premières histoires arrivent courant novembre</h3>
-      <p>Écrivez-moi pour être prévenu·e du lancement. Ensuite, une nouvelle histoire chaque samedi à 9h.</p>
-      <a href="contact.html" class="btn-final">Être prévenu·e du lancement</a>
+      <p>Écrivez-moi pour être prévenu(e) du lancement. Ensuite, une nouvelle histoire chaque samedi à 9h.</p>
+      <a href="contact.html?profil=parent" class="btn-final">Être prévenu(e) du lancement</a> <a href="abonnement.html" class="btn-final btn-final-2">Choisir ma formule</a>
     </div>
 
   </div>
@@ -259,5 +378,10 @@
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>
   </footer>
 
+<script>
+(function(){var n=document.querySelector('nav'),b=n&&n.querySelector('.burger');if(!b)return;
+b.addEventListener('click',function(){var o=n.classList.toggle('ouvert');b.setAttribute('aria-expanded',o);});
+n.querySelectorAll('.liens a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('ouvert');b.setAttribute('aria-expanded','false');});});})();
+</script>
 </body>
 </html>

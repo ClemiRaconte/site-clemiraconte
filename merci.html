@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Message envoyé — Clémi Raconte</title>
+<title>Message envoyé · Clémi Raconte</title>
+<meta name="description" content="Votre message est bien arrivé.">
+<link rel="canonical" href="https://clemiraconte.fr/merci.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clémi Raconte">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Message envoyé · Clémi Raconte">
+<meta property="og:description" content="Votre message est bien arrivé.">
+<meta property="og:url" content="https://clemiraconte.fr/merci.html">
+<meta name="twitter:card" content="summary">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:opsz,wght@6..12,700&display=swap" rel="stylesheet">
 <style>
   :root{
     --sapin:#2D6A4F;--sapin-clair:#3f8266;--soleil:#F4C430;--soleil-doux:#f7d873;--soleil-fonce:#a9781a;
@@ -33,7 +42,7 @@
   h2,.titre-section{font-family:'Fraunces',serif;font-weight:600;font-size:28px;color:var(--sapin);margin-bottom:14px;line-height:1.2;}
   .prose h2{margin-top:28px;} .prose p{margin-bottom:14px;} .prose p a{color:var(--sapin);}
   .intro-section{color:var(--gris);margin-bottom:20px;}
-  .manuscrit{font-family:'Caveat',cursive;font-size:26px;color:var(--sapin);font-weight:600;}
+  .manuscrit{font-family:'Nunito Sans',system-ui,sans-serif;font-size:16px;color:var(--sapin);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .btn{display:inline-block;background:var(--sapin);color:#fff !important;padding:12px 22px;border-radius:26px;font-weight:600;font-size:16px;border:none;cursor:pointer;font-family:inherit;}
   .btn:hover{background:var(--sapin-clair);}
   .btn-jaune{background:var(--soleil);color:#5c4600 !important;} .btn-jaune:hover{background:var(--soleil-doux);}
@@ -63,7 +72,7 @@
   .puce{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--soleil);color:#5c4600;border-radius:50%;font-family:'Fraunces',serif;font-size:15px;flex-shrink:0;}
   .activite{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--creme-carte);border:1px solid var(--ligne);border-radius:12px;padding:14px 18px;margin-bottom:10px;}
   .titre-a{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:var(--encre);margin-bottom:5px;}
-  .signature{font-family:'Caveat',cursive;font-size:17px;color:var(--soleil-fonce);font-weight:600;margin-left:6px;}
+  .signature{font-family:'Nunito Sans',system-ui,sans-serif;font-size:12px;color:var(--soleil-fonce);margin-left:6px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .meta-a{display:flex;flex-wrap:wrap;gap:8px;}
   .etiq{font-size:12px;padding:3px 9px;border-radius:12px;}
   .etiq.age{background:#e7f0ea;color:var(--sapin);font-weight:600;}
@@ -87,7 +96,48 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+  /* ===== MOBILE (telephone) : n'agit qu'en dessous de 820px, l'ordinateur ne change pas ===== */
+  .burger{display:none;}
+  @media(max-width:820px){
+    html{-webkit-text-size-adjust:100%;}
+    body{font-size:17px;}
+    .bandeau{font-size:13.5px;padding:7px 16px;line-height:1.45;}
+    nav{position:sticky;top:0;z-index:50;padding:10px 16px !important;flex-wrap:nowrap;gap:8px;}
+    nav .logo{font-size:19px;margin-right:auto;white-space:nowrap;line-height:1.1;}
+    nav .nav-droite{gap:6px;}
+    nav .btn-abonnes{padding:7px 10px;font-size:13px;border-width:1.5px;}
+    nav .btn-nav{padding:8.5px 12px;font-size:13px;white-space:nowrap;}
+    nav .btn-abonnes{padding:7px 12px;}
+    nav .btn-abonnes,nav .btn-nav{font-size:0 !important;}
+    nav .btn-abonnes::after{content:"Abonnés";font-size:13.5px;}
+    nav .btn-nav::after{content:"Contact";font-size:13.5px;}
+    .burger{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:0 10px;
+      background:transparent;border:1.5px solid var(--sapin,#2D6A4F);border-radius:12px;cursor:pointer;flex-shrink:0;}
+    .burger span{display:block;height:2px;background:var(--sapin,#2D6A4F);border-radius:2px;transition:transform .2s,opacity .2s;}
+    nav.ouvert .burger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    nav.ouvert .burger span:nth-child(2){opacity:0;}
+    nav.ouvert .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    nav .liens{display:none !important;}
+    nav.ouvert .liens{display:flex !important;flex-direction:column;align-items:stretch;gap:0;
+      position:absolute;left:0;right:0;top:100%;background:var(--creme,#FBF3E3);
+      border-bottom:1px solid var(--ligne,#e7ddc8);box-shadow:0 14px 24px rgba(36,59,50,.12);
+      padding:6px 16px 16px;max-height:calc(100vh - 70px);overflow-y:auto;}
+    nav.ouvert .liens a{font-size:17px;padding:13px 4px;border-bottom:1px solid var(--ligne,#e7ddc8);}
+    nav.ouvert .liens a.actif{color:var(--sapin,#2D6A4F);font-weight:600;}
+    nav.ouvert .liens a.menu-abonnes{display:none;border:2px solid var(--sapin,#2D6A4F);border-radius:24px;text-align:center;
+      margin-top:14px;color:var(--sapin,#2D6A4F);font-weight:600;padding:11px;}
+    .menu-abonnes{display:none;}
+    .wrap{padding-left:18px;padding-right:18px;}
+    h1{font-size:33px !important;line-height:1.12;}
+    .btn,.btn-final,.cta-row a{min-height:46px;display:inline-flex;align-items:center;justify-content:center;}
+    .cta-row .btn{width:100%;}
+    footer{padding:26px 18px;}
+    footer .fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 6px;margin-bottom:14px;}
+    footer .fnav a{margin:0 !important;padding:6px 10px;white-space:nowrap;}
+  }
+  @media(min-width:821px){.menu-abonnes{display:none !important;}}
 </style>
+<script>if('scrollRestoration' in history){history.scrollRestoration='manual';}addEventListener('pageshow',function(){if(!location.hash){scrollTo(0,0);}});</script>
 </head>
 <body>
 
@@ -102,31 +152,44 @@
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
     <a href="soutenir.html">Soutenir</a>
+      <a href="connexion.html" class="menu-abonnes">Espace abonnés</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
       <a href="contact.html" class="btn-nav">Me contacter</a>
+      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
 <main>
   <div class="hero simple" style="text-align:center;padding-bottom:4rem">
     <p class="manuscrit" style="font-size:2rem">C'est bien arrivé&nbsp;!</p>
-    <h1>Merci pour votre message</h1>
-    <p class="chapo" style="margin:0 auto">Je le lis moi-même et je vous réponds sous quelques jours, à l'adresse que vous avez indiquée.</p>
+    <h1 id="merci-titre">Merci pour votre message</h1>
+    <p class="chapo" id="merci-texte" style="margin:0 auto">Je le lis moi-même et je vous réponds sous quelques jours, à l'adresse que vous avez indiquée.</p>
     <p style="margin-top:2rem">
-      <a class="btn" href="histoires.html">En attendant, écouter une histoire</a>
+      <a class="btn" href="histoire-ange-le-loup.html">En attendant, découvrir Ange</a>
     </p>
   </div>
 </main>
 
   <footer>
     <div class="fnav">
-      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L’équipe</a><a href="soutenir.html">Soutenir</a><a href="contact.html">Contact</a>
+      <a href="histoires.html">Les histoires</a><a href="familles.html">Familles</a><a href="enseignants.html">Enseignants</a><a href="travailleurs-sociaux.html">Travailleurs sociaux</a><a href="cse.html">CSE</a><a href="demarche.html">La démarche</a><a href="equipe.html">L'équipe</a><a href="soutenir.html">Soutenir</a><a href="contact.html">Contact</a>
     </div>
     © 2026 Clémi Raconte · Clément Joubert · Saint-Bonnet-en-Champsaur (05)<br>
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>
   </footer>
 
+<script>
+(function(){var n=document.querySelector('nav'),b=n&&n.querySelector('.burger');if(!b)return;
+b.addEventListener('click',function(){var o=n.classList.toggle('ouvert');b.setAttribute('aria-expanded',o);});
+n.querySelectorAll('.liens a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('ouvert');b.setAttribute('aria-expanded','false');});});})();
+</script>
+<script>
+if(location.hash==='#reservation'){
+  document.getElementById('merci-titre').textContent='Votre formule est réservée';
+  document.getElementById('merci-texte').textContent="Je vous écris au lancement, courant novembre, avec le lien pour finaliser votre abonnement. Rien n'est à payer d'ici là.";
+}
+</script>
 </body>
 </html>

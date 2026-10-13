@@ -3,10 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La démarche · Clémi Raconte (rendu approximatif)</title>
+<title>La démarche · Clémi Raconte</title>
+<meta name="description" content="Quinze ans d&#x27;animation, vingt ans d&#x27;écriture : d&#x27;où viennent les histoires de Clémi Raconte, sans méchant ni morale imposée.">
+<link rel="canonical" href="https://clemiraconte.fr/demarche.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clémi Raconte">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="La démarche de Clémi Raconte">
+<meta property="og:description" content="Quinze ans d&#x27;animation, vingt ans d&#x27;écriture : d&#x27;où viennent les histoires de Clémi Raconte, sans méchant ni morale imposée.">
+<meta property="og:url" content="https://clemiraconte.fr/demarche.html">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&family=Nunito+Sans:opsz,wght@6..12,700&display=swap" rel="stylesheet">
 <style>
   :root{
     --sapin:#2D6A4F;
@@ -61,9 +70,9 @@
 
   .hero{margin-bottom:56px;}
   .surtitre{
-    font-family:'Caveat',cursive;font-size:28px;color:var(--sapin);
+    font-family:'Nunito Sans',system-ui,sans-serif;font-size:17px;color:var(--sapin);
     display:block;margin-bottom:4px;
-  }
+  ;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   h1{
     font-family:'Fraunces',serif;font-weight:600;font-size:52px;line-height:1.05;
     color:var(--sapin);margin-bottom:18px;letter-spacing:-.5px;
@@ -120,7 +129,51 @@
   .nav-droite{display:flex;gap:10px;align-items:center;}
   .btn-abonnes{border:2px solid var(--sapin);color:var(--sapin) !important;padding:6px 14px;border-radius:22px;font-size:14px;font-weight:600;white-space:nowrap;}
   .btn-abonnes:hover{background:var(--sapin);color:#fff !important;}
+  /* ===== MOBILE (telephone) : n'agit qu'en dessous de 820px, l'ordinateur ne change pas ===== */
+  .burger{display:none;}
+  @media(max-width:820px){
+    html{-webkit-text-size-adjust:100%;}
+    body{font-size:17px;}
+    .bandeau{font-size:13.5px;padding:7px 16px;line-height:1.45;}
+    nav{position:sticky;top:0;z-index:50;padding:10px 16px !important;flex-wrap:nowrap;gap:8px;}
+    nav .logo{font-size:19px;margin-right:auto;white-space:nowrap;line-height:1.1;}
+    nav .nav-droite{gap:6px;}
+    nav .btn-abonnes{padding:7px 10px;font-size:13px;border-width:1.5px;}
+    nav .btn-nav{padding:8.5px 12px;font-size:13px;white-space:nowrap;}
+    nav .btn-abonnes{padding:7px 12px;}
+    nav .btn-abonnes,nav .btn-nav{font-size:0 !important;}
+    nav .btn-abonnes::after{content:"Abonnés";font-size:13.5px;}
+    nav .btn-nav::after{content:"Contact";font-size:13.5px;}
+    .burger{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:0 10px;
+      background:transparent;border:1.5px solid var(--sapin,#2D6A4F);border-radius:12px;cursor:pointer;flex-shrink:0;}
+    .burger span{display:block;height:2px;background:var(--sapin,#2D6A4F);border-radius:2px;transition:transform .2s,opacity .2s;}
+    nav.ouvert .burger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    nav.ouvert .burger span:nth-child(2){opacity:0;}
+    nav.ouvert .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    nav .liens{display:none !important;}
+    nav.ouvert .liens{display:flex !important;flex-direction:column;align-items:stretch;gap:0;
+      position:absolute;left:0;right:0;top:100%;background:var(--creme,#FBF3E3);
+      border-bottom:1px solid var(--ligne,#e7ddc8);box-shadow:0 14px 24px rgba(36,59,50,.12);
+      padding:6px 16px 16px;max-height:calc(100vh - 70px);overflow-y:auto;}
+    nav.ouvert .liens a{font-size:17px;padding:13px 4px;border-bottom:1px solid var(--ligne,#e7ddc8);}
+    nav.ouvert .liens a.actif{color:var(--sapin,#2D6A4F);font-weight:600;}
+    nav.ouvert .liens a.menu-abonnes{display:none;border:2px solid var(--sapin,#2D6A4F);border-radius:24px;text-align:center;
+      margin-top:14px;color:var(--sapin,#2D6A4F);font-weight:600;padding:11px;}
+    .menu-abonnes{display:none;}
+    .wrap{padding-left:18px;padding-right:18px;}
+    h1{font-size:33px !important;line-height:1.12;}
+    .btn,.btn-final,.cta-row a{min-height:46px;display:inline-flex;align-items:center;justify-content:center;}
+    .cta-row .btn{width:100%;}
+    footer{padding:26px 18px;}
+    footer .fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 6px;margin-bottom:14px;}
+    footer .fnav a{margin:0 !important;padding:6px 10px;white-space:nowrap;}
+  }
+  @media(min-width:821px){.menu-abonnes{display:none !important;}}
+  .offres-titre{font-family:'Fraunces',serif;font-weight:600;font-size:26px;color:var(--sapin);margin-top:40px;}
+  .cta-sous{margin-top:14px;font-weight:600;color:var(--sapin);}
+  .offres-titre + .cta{margin-top:14px;}
 </style>
+<script>if('scrollRestoration' in history){history.scrollRestoration='manual';}addEventListener('pageshow',function(){if(!location.hash){scrollTo(0,0);}});</script>
 </head>
 <body>
 
@@ -136,10 +189,12 @@
       <a href="#" class="actif">La démarche</a>
       <a href="equipe.html">L'équipe</a>
     <a href="soutenir.html">Soutenir</a>
+      <a href="connexion.html" class="menu-abonnes">Espace abonnés</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
       <a href="contact.html" class="btn-contact">Me contacter</a>
+      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -148,7 +203,7 @@
     <div class="hero">
       <span class="surtitre">D'où viennent ces histoires</span>
       <h1>La démarche</h1>
-      <p class="chapeau">Quinze ans auprès des enfants, vingt ans d'écriture. Clémi Raconte est né au croisement des deux et tout ce que vous trouverez ici en découle.</p>
+      <p class="chapeau">Quinze ans auprès des enfants, vingt ans d'écriture, une vallée des Hautes-Alpes. Clémi Raconte est né au croisement des trois et tout ce que vous trouverez ici en découle.</p>
     </div>
 
     <section>
@@ -158,31 +213,36 @@
     </section>
 
     <section>
-      <h2>Pas de méchant, pas de morale imposée</h2>
-      <p>Une morale, ce n'est pas un gros mot. Une belle histoire porte forcément un sens et c'est tant mieux. Ce que je refuse, c'est la morale imposée, celle qui tombe d'en haut et dit à l'enfant quoi penser à sa place.</p>
-      <p>Mon idée tient en une phrase : des histoires d'aujourd'hui, pour la jeunesse de demain. Le monde a changé, les enfants aussi. Les récits qu'on leur donne doivent parler de leur vie, maintenant.</p>
-      <p>Mes histoires sont construites en quatre actes, sans antagoniste violent. La résolution ne vient jamais d'un combat : elle naît d'une surprise, d'un retournement, d'un regard qui change. Cette manière de faire, je la tiens de mon métier. Au centre de loisirs, tout part de la résolution originale des conflits. Et pas un temps mort : chaque moment est à animer. J'écris donc mes histoires comme j'anime mes journées, en cherchant à les rendre aussi vivantes que je le suis sur le terrain.</p>
-      <p>Mes histoires se dénouent vraiment, elles ne laissent pas l'enfant en plan. Mais elles se gardent de conclure à sa place : la fin résout l'intrigue et laisse la vraie conversation commencer. C'est là qu'intervient la fiche d'accompagnement, pour aider l'adulte à prolonger l'histoire avec l'enfant, à sa façon.</p>
-    </section>
-
-    <section>
-      <h2>Des thématiques qui ne sortent pas de nulle part</h2>
-      <p>Je veux accompagner les générations qui viennent, les parents, les professionnels comme les jeunes, à travers les questions qui les concernent ou qui les concerneront un jour. Ces sujets, je ne les invente pas : je les ramasse sur le terrain. Le consentement, les stéréotypes, le harcèlement, la différence, les émotions, les écrans, les nouvelles familles, c'est le quotidien des enfants que j'accompagne.</p>
-      <p>Et puis il y a cette vieille envie qui ne m'a jamais quitté : au fond, j'ai toujours eu une âme d'enseignant. C'est sans doute pour ça que je connais bien l'EMC, ses grandes thématiques et ce qu'on attend d'une classe. Mes histoires tombent alors naturellement sur ces sujets, qui sont aussi les repères de l'École : la formation de la personne et du citoyen, la prévention du harcèlement, l'égalité filles-garçons.</p>
-      <p>Je sais aussi qu'être enseignant aujourd'hui, ce n'est pas simple tous les jours : toujours plus de dispositifs, toujours plus de choses à faire tenir dans une semaine. Alors c'est avec plaisir que je leur tends un outil clé en main, pour souffler un peu.</p>
-      <p>C'est cette double racine, le vécu des enfants d'un côté, les repères de l'École de l'autre, qui fait la séance clé en main. Elle est clé en main parce que je sais ce que c'est, de préparer une journée pour trente enfants. Et elle est souple parce qu'aucun outil ne remplace le regard du professionnel qui l'utilise : l'histoire propose, l'enseignant dispose.</p>
-    </section>
-
-    <section>
       <h2>Écrites dans les Alpes</h2>
       <p>J'écris dans le Champsaur, une vallée des Hautes-Alpes que j'aime comme on aime un être vivant. Le matin, la lumière descend des sommets bien avant de toucher les prés. L'hiver, le silence de la neige a une épaisseur qu'on n'oublie pas. L'été sent le foin coupé et l'orage qui rôde au loin. Tout cela finit par passer dans les pages.</p>
       <p>Une partie de mes histoires sont enracinées ici, dans cette montagne, ses bêtes, ses saisons, ses gens. Les autres se passent partout où il y a des enfants. Mais toutes prennent vie au même endroit : ma forêt conteuse. Un décor de bois flotté et de lumières douces que j'ai bâti de mes mains, pour donner aux histoires une vraie maison.</p>
     </section>
 
+    <section>
+      <h2>Pas de méchant, pas de morale imposée</h2>
+      <p>Une morale, ce n'est pas un gros mot. Une belle histoire porte forcément un sens et c'est tant mieux. Ce que je refuse, c'est la morale imposée, celle qui tombe d'en haut et dit à l'enfant quoi penser à sa place.</p>
+      <p>Mon idée tient en une phrase : des histoires pour les jeunes d'aujourd'hui et les adultes de demain. Le monde a changé, les enfants aussi. Les récits qu'on leur donne doivent parler de leur vie, maintenant.</p>
+      <p>Mes histoires sont construites en quatre actes, sans méchant à vaincre. La résolution ne vient jamais d'un combat : elle naît d'une surprise, d'un retournement, d'un regard qui change. Cette manière de faire, je la tiens de mon métier. Au centre de loisirs, on cherche toujours une sortie de conflit inattendue. Et pas un temps mort : chaque moment est à animer. J'écris donc mes histoires comme j'anime mes journées, en cherchant à les rendre aussi vivantes que je le suis sur le terrain.</p>
+      <p>Mes histoires se dénouent vraiment, elles ne laissent pas l'enfant en plan. Mais elles se gardent de conclure à sa place : la fin résout l'intrigue et laisse la vraie conversation commencer. C'est là qu'intervient la fiche papote, pour aider l'adulte à prolonger l'histoire avec l'enfant, à sa façon.</p>
+    </section>
+
+    <section>
+      <h2>Des thématiques qui ne sortent pas de nulle part</h2>
+      <p>Je veux accompagner les générations qui viennent, les parents, les professionnels comme les jeunes, à travers les questions qui les concernent ou qui les concerneront un jour. Ces sujets, je ne les invente pas : je les ramasse sur le terrain. Le consentement, les stéréotypes, le harcèlement, la différence, les émotions, les écrans, les nouvelles familles, c'est le quotidien des enfants que j'accompagne.</p>
+      <p>Ces sujets croisent souvent ceux que l'École travaille de son côté : la formation de la personne et du citoyen, la prévention du harcèlement, l'égalité filles-garçons. Je ne prétends pas faire le métier des enseignants. Je leur propose un support qui se glisse dans ce qu'ils font déjà.</p>
+      <p>Je vois ce que les enseignants portent aujourd'hui : des classes chargées, des programmes qui s'empilent, des semaines qui ne suffisent jamais. Mon rôle n'est pas de leur dire comment faire. Il est de leur faire gagner du temps, avec une séance prête à vivre qu'ils adaptent comme ils l'entendent.</p>
+      <p>C'est cette double racine, le vécu des enfants d'un côté, les repères de l'École de l'autre, qui fait la séance clé en main. Elle est clé en main parce que je sais ce que c'est, de préparer une journée pour trente enfants. Et elle est souple parce qu'aucun outil ne remplace le regard du professionnel qui l'utilise : l'histoire propose, l'enseignant dispose.</p>
+    </section>
+
+
+    <div class="offres-titre">Voir les offres</div>
     <div class="cta">
-      <a href="histoires.html" class="plein">Découvrir les histoires</a>
-      <a href="enseignants.html" class="contour">Voir l'offre enseignants</a>
+      <a href="familles.html" class="plein">Familles</a>
+      <a href="enseignants.html" class="plein">Enseignants</a>
+      <a href="travailleurs-sociaux.html" class="plein">Travailleurs sociaux</a>
+      <a href="cse.html" class="plein">CSE</a>
     </div>
+    <p class="cta-sous"><a href="histoires.html">Ou découvrir d'abord les histoires <span aria-hidden="true">→</span></a></p>
 
   </main>
 
@@ -194,5 +254,10 @@
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>
   </footer>
 
+<script>
+(function(){var n=document.querySelector('nav'),b=n&&n.querySelector('.burger');if(!b)return;
+b.addEventListener('click',function(){var o=n.classList.toggle('ouvert');b.setAttribute('aria-expanded',o);});
+n.querySelectorAll('.liens a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('ouvert');b.setAttribute('aria-expanded','false');});});})();
+</script>
 </body>
 </html>

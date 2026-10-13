@@ -3,10 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSE · Clémi Raconte (rendu approximatif)</title>
+<title>CSE · Clémi Raconte</title>
+<meta name="description" content="Offrez aux enfants de vos salariés une histoire chaque semaine, toute l&#x27;année. Un cadeau culturel clé en main, sans aucune logistique.">
+<link rel="canonical" href="https://clemiraconte.fr/cse.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clémi Raconte">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Clémi Raconte pour les CSE">
+<meta property="og:description" content="Offrez aux enfants de vos salariés une histoire chaque semaine, toute l&#x27;année. Un cadeau culturel clé en main, sans aucune logistique.">
+<meta property="og:url" content="https://clemiraconte.fr/cse.html">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&family=Nunito+Sans:opsz,wght@6..12,700&display=swap" rel="stylesheet">
 <style>
   :root{
     --sapin:#2D6A4F;--sapin-clair:#3f8266;--soleil:#F4C430;--soleil-doux:#f7d873;
@@ -35,11 +44,11 @@
   .sous{font-size:19px;color:var(--gris);margin-bottom:16px;max-width:520px;}
   .pastille{display:inline-block;background:#e7f0ea;color:var(--sapin);font-weight:600;font-size:14px;padding:6px 14px;border-radius:20px;margin-bottom:12px;}
   .pastille::before{content:"\2713  ";}
-  .cle{font-family:'Caveat',cursive;font-size:26px;color:var(--sapin);margin-bottom:22px;display:block;}
+  .cle{font-family:'Nunito Sans',system-ui,sans-serif;font-size:16px;color:var(--sapin);margin-bottom:22px;display:block;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .btn{padding:13px 26px;border-radius:28px;font-weight:600;font-size:16px;display:inline-block;}
   .btn.plein{background:var(--sapin);color:#fff;}
   .btn.plein:hover{background:var(--sapin-clair);}
-  .hero-visuel{background:#e7f0ea;border-radius:20px;height:270px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--sapin);font-family:'Caveat',cursive;font-size:24px;padding:20px;border:1px solid var(--ligne);}
+  .hero-visuel{background:#e7f0ea;border-radius:20px;height:270px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--sapin);font-family:'Nunito Sans',system-ui,sans-serif;font-size:14px;padding:20px;border:1px solid var(--ligne);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
 
   section.bloc{padding:42px 0;border-top:1px solid var(--ligne);}
   .h2{font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:var(--sapin);margin-bottom:8px;line-height:1.15;}
@@ -50,7 +59,7 @@
 
   .atouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
   .atout{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:16px;padding:22px;}
-  .atout .tag{font-family:'Caveat',cursive;font-size:22px;color:var(--sapin);font-weight:700;margin-bottom:4px;}
+  .atout .tag{font-family:'Nunito Sans',system-ui,sans-serif;font-size:13px;color:var(--sapin);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .atout h4{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--encre);margin-bottom:6px;}
   .atout p{font-size:15px;color:var(--gris);}
 
@@ -94,7 +103,7 @@
   .sch-etape p{font-size:13px;color:var(--gris);line-height:1.5;}
   .sch-plus{display:flex;align-items:center;justify-content:center;padding:0 2px;}
   .sch-plus span{font-family:'Fraunces',serif;font-weight:600;font-size:26px;color:var(--soleil);}
-  .sch-pied{text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--ligne);font-family:'Caveat',cursive;font-size:23px;color:var(--sapin);}
+  .sch-pied{text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--ligne);font-family:'Nunito Sans',system-ui,sans-serif;font-size:14px;color:var(--sapin);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   @media(max-width:560px){.sch-flux{flex-direction:column;align-items:center;}.sch-etape{max-width:300px;}}
 
   .nav-droite{display:flex;gap:10px;align-items:center;}
@@ -108,11 +117,96 @@
   .palier-note{font-size:14px;color:#5b6b63;margin-top:12px;}
   .adapt-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
   .adapt{background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:18px 20px;}
-  .adapt .age{font-family:'Caveat',cursive;font-size:24px;color:#a9781a;font-weight:600;line-height:1.2;}
+  .adapt .age{font-family:'Nunito Sans',system-ui,sans-serif;font-size:14px;color:#a9781a;line-height:1.2;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .adapt p{font-size:15px;color:#5b6b63;margin-top:4px;}
   @media(max-width:700px){.adapt-duo{grid-template-columns:1fr;}}
   .hero{grid-template-columns:1fr;max-width:760px;}
+  /* ===== MOBILE (telephone) : n'agit qu'en dessous de 820px, l'ordinateur ne change pas ===== */
+  .burger{display:none;}
+  @media(max-width:820px){
+    html{-webkit-text-size-adjust:100%;}
+    body{font-size:17px;}
+    .bandeau{font-size:13.5px;padding:7px 16px;line-height:1.45;}
+    nav{position:sticky;top:0;z-index:50;padding:10px 16px !important;flex-wrap:nowrap;gap:8px;}
+    nav .logo{font-size:19px;margin-right:auto;white-space:nowrap;line-height:1.1;}
+    nav .nav-droite{gap:6px;}
+    nav .btn-abonnes{padding:7px 10px;font-size:13px;border-width:1.5px;}
+    nav .btn-nav{padding:8.5px 12px;font-size:13px;white-space:nowrap;}
+    nav .btn-abonnes{padding:7px 12px;}
+    nav .btn-abonnes,nav .btn-nav{font-size:0 !important;}
+    nav .btn-abonnes::after{content:"Abonnés";font-size:13.5px;}
+    nav .btn-nav::after{content:"Contact";font-size:13.5px;}
+    .burger{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:0 10px;
+      background:transparent;border:1.5px solid var(--sapin,#2D6A4F);border-radius:12px;cursor:pointer;flex-shrink:0;}
+    .burger span{display:block;height:2px;background:var(--sapin,#2D6A4F);border-radius:2px;transition:transform .2s,opacity .2s;}
+    nav.ouvert .burger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    nav.ouvert .burger span:nth-child(2){opacity:0;}
+    nav.ouvert .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    nav .liens{display:none !important;}
+    nav.ouvert .liens{display:flex !important;flex-direction:column;align-items:stretch;gap:0;
+      position:absolute;left:0;right:0;top:100%;background:var(--creme,#FBF3E3);
+      border-bottom:1px solid var(--ligne,#e7ddc8);box-shadow:0 14px 24px rgba(36,59,50,.12);
+      padding:6px 16px 16px;max-height:calc(100vh - 70px);overflow-y:auto;}
+    nav.ouvert .liens a{font-size:17px;padding:13px 4px;border-bottom:1px solid var(--ligne,#e7ddc8);}
+    nav.ouvert .liens a.actif{color:var(--sapin,#2D6A4F);font-weight:600;}
+    nav.ouvert .liens a.menu-abonnes{display:none;border:2px solid var(--sapin,#2D6A4F);border-radius:24px;text-align:center;
+      margin-top:14px;color:var(--sapin,#2D6A4F);font-weight:600;padding:11px;}
+    .menu-abonnes{display:none;}
+    .wrap{padding-left:18px;padding-right:18px;}
+    h1{font-size:33px !important;line-height:1.12;}
+    .btn,.btn-final,.cta-row a{min-height:46px;display:inline-flex;align-items:center;justify-content:center;}
+    .cta-row .btn{width:100%;}
+    footer{padding:26px 18px;}
+    footer .fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 6px;margin-bottom:14px;}
+    footer .fnav a{margin:0 !important;padding:6px 10px;white-space:nowrap;}
+  }
+  @media(min-width:821px){.menu-abonnes{display:none !important;}}
+
+  .qr-box2{display:flex;align-items:center;gap:12px;background:#f6f1e4;border:1px dashed #cbb98a;border-radius:10px;padding:12px 16px;margin-top:16px;max-width:300px;}
+  .qr-vignette2{width:42px;height:42px;border-radius:6px;background:repeating-linear-gradient(90deg,#c7b48a 0 4px, transparent 4px 8px),repeating-linear-gradient(0deg,#c7b48a 0 4px, transparent 4px 8px);background-color:#fff;flex-shrink:0;}
+  .qr-lab{font-size:14px;color:#5b6b63;} .qr-lab b{color:#243b32;}
+  .formats-plus{margin-top:14px;font-size:16px;color:#5b6b63;}
+
+  .paquet{background:var(--creme-carte);border:1px solid var(--ligne);border-radius:18px;padding:0 0 24px;overflow:hidden;max-width:640px;position:relative;}
+  .ruban{height:14px;background:var(--soleil);}
+  .ruban-v{position:absolute;top:0;bottom:0;left:50%;width:14px;background:var(--soleil);opacity:.35;}
+  .paquet-in{position:relative;padding:24px 26px 0;}
+  .cadeaux{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .cad{background:var(--creme);border:1px solid var(--ligne);border-radius:14px;padding:16px;text-align:center;}
+  .cad .ico{width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:#e7f0ea;display:flex;align-items:center;justify-content:center;}
+  .cad b{display:block;font-family:'Fraunces',serif;font-size:17px;color:var(--encre);}
+  .cad span{font-size:14px;color:var(--gris);}
+  @media(max-width:820px){.cadeaux{grid-template-columns:1fr;} .ruban-v{display:none;}}
+
+
+  .formules{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px;}
+  .formule{background:#fffdf7;border:1px solid #e7ddc8;border-radius:16px;padding:20px 18px;}
+  .formule.vedette{border:2px solid #2D6A4F;}
+  .formule .nom{font-weight:600;color:#243b32;font-size:16px;}
+  .formule .montant{font-family:'Fraunces',serif;font-weight:600;font-size:34px;color:#2D6A4F;line-height:1.1;margin:6px 0 4px;}
+  .formule .montant span{font-family:'Source Sans 3',sans-serif;font-size:15px;color:#5b6b63;font-weight:400;}
+  .formule p{font-size:14.5px;color:#5b6b63;margin:6px 0 0;line-height:1.5;}
+  .lecture{background:#fffdf7;border:1px solid #e7ddc8;border-left:4px solid #F4C430;border-radius:12px;padding:16px 20px;margin-top:22px;}
+  .lecture b{color:#243b32;}
+  .lecture ul{margin:8px 0 0;padding-left:20px;color:#243b32;font-size:15.5px;line-height:1.55;}
+  .lecture li{margin-bottom:6px;}
+  .reserver{display:block;margin-top:auto;padding-top:0;text-align:center;font:600 15px 'Source Sans 3',sans-serif;background:#2D6A4F;color:#fff !important;border:none;border-radius:24px;padding:10px 14px;cursor:pointer;}
+  .formule p{margin-bottom:14px !important;}
+  .formule .montant + .reserver{margin-top:10px;}
+  .formule.vedette .reserver{background:#F4C430;color:#4a3800 !important;}
+  .reserver:hover{filter:brightness(1.08);}
+  .reserver.large{display:inline-block;padding:12px 26px;font-size:16px;}
+  .foyers{margin-top:18px;background:#fffdf7;border:1px solid #e7ddc8;border-radius:14px;padding:4px 18px;}
+  .foyers summary{cursor:pointer;font-weight:600;color:#2D6A4F;padding:12px 0;list-style-position:inside;}
+  .foyers[open] summary{border-bottom:1px solid #e7ddc8;margin-bottom:12px;}
+  .foyers > p{font-size:15px;color:#5b6b63;}
+  .foyers .formules{margin-bottom:16px;}
+  .surplace{margin-top:22px;font-size:15.5px;color:#5b6b63;}
+  .surplace b{color:#243b32;}
+
+  [hidden]{display:none !important;}
 </style>
+<script>if('scrollRestoration' in history){history.scrollRestoration='manual';}addEventListener('pageshow',function(){if(!location.hash){scrollTo(0,0);}});</script>
 </head>
 <body>
 
@@ -128,10 +222,12 @@
       <a href="demarche.html">La démarche</a>
       <a href="equipe.html">L'équipe</a>
     <a href="soutenir.html">Soutenir</a>
+      <a href="connexion.html" class="menu-abonnes">Espace abonnés</a>
     </div>
     <div class="nav-droite">
       <a href="connexion.html" class="btn-abonnes">Espace abonnés</a>
       <a href="contact.html" class="btn-nav">Me contacter</a>
+      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -143,15 +239,15 @@
         <h1>Un cadeau qui compte, pour <span class="surlig">les enfants du personnel.</span></h1>
         <p class="sous">Offrez aux enfants de vos salariés une histoire nouvelle chaque samedi, toute l'année. Un cadeau culturel qui dure bien plus longtemps qu'un jouet.</p>
         <span class="pastille">Zéro logistique de votre côté</span>
-        <span class="cle">Vous offrez, on s'occupe de tout.</span>
-        <a href="contact.html" class="btn plein">Demander une offre CSE</a>
+        <span class="cle">Vous offrez, je m'occupe de tout.</span>
+        <a href="contact.html?profil=cse" class="btn plein">Demander une offre CSE</a>
       </div>
     </div>
 
     <section class="bloc">
       <div class="h2">Vous cherchez une idée qui fasse vraiment plaisir, sans vous ajouter du travail.</div>
-      <p class="corps">C'est exactement là qu'on intervient. Plutôt qu'un objet vite oublié, vous offrez aux familles un abonnement d'histoires pour les 4-9 ans. Une nouvelle chaque semaine, à lire, à écouter ou à regarder, à la maison.</p>
-      <p class="corps"><b>Et pour vous, rien à gérer.</b> Pas de stock, pas de distribution, pas de casse-tête. On prépare les accès, les familles reçoivent leurs histoires.</p>
+      <p class="corps">C'est exactement là que j'interviens. Plutôt qu'un objet vite oublié, vous offrez aux familles un abonnement d'histoires pour les 4-9 ans. Une nouvelle chaque semaine, à lire, à écouter ou à regarder, à la maison.</p>
+      <p class="corps"><b>Et pour vous, rien à gérer.</b> Pas de stock, pas de distribution, pas de casse-tête. Je prépare les accès, les familles reçoivent leurs histoires.</p>
     </section>
 
     <section class="bloc">
@@ -164,12 +260,12 @@
         </div>
         <div class="atout">
           <div class="tag">au choix</div>
-          <h4>Le papier et la voix d'abord</h4>
-          <p>Un cahier à imprimer et une voix, plutôt qu'un écran de plus. Le podcast et la vidéo restent là pour les familles qui en veulent.</p>
+          <h4>La voix d'abord</h4>
+          <p>Une histoire lue à voix haute par l'adulte et des activités à imprimer, plutôt qu'un écran de plus. Le podcast et la vidéo restent là pour les familles qui en veulent.</p>
         </div>
         <div class="atout">
           <div class="tag">pour tous</div>
-          <h4>De 4 à 10 ans</h4>
+          <h4>De 4 à 9 ans</h4>
           <p>Chaque enfant y trouve sa place. Le même cadeau, juste pour tous, quel que soit son âge.</p>
         </div>
         <div class="atout">
@@ -185,13 +281,13 @@
       <div class="etapes">
         <div class="etape">
           <div class="num">1</div>
-          <h4>Vous nous dites combien</h4>
-          <p>Le nombre d'enfants ou de familles concernés par votre geste.</p>
+          <h4>Vous me dites combien</h4>
+          <p>Le nombre de familles concernées par votre geste.</p>
         </div>
         <div class="etape">
           <div class="num">2</div>
-          <h4>On prépare tout</h4>
-          <p>On établit une offre de groupe et on met les accès en place à votre place.</p>
+          <h4>Je prépare tout</h4>
+          <p>J'applique le barème, je vous envoie le devis et je mets les accès en place à votre place.</p>
         </div>
         <div class="etape">
           <div class="num">3</div>
@@ -202,7 +298,7 @@
     </section>
 
     <section class="bloc">
-      <div class="h2">Ce que reçoit chaque enfant</div>
+      <div class="h2">Ce que reçoit chaque famille</div>
       <div class="sch">
         <div class="sch-flux">
           <div class="sch-etape">
@@ -216,44 +312,86 @@
             <div class="sch-rond"><span class="sch-num">1</span>
               <svg viewBox="0 0 48 48" fill="none" stroke="#2D6A4F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h22a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H18l-6 5v-5H9a3 3 0 0 1-3-3V15a3 3 0 0 1 3-3z"/><path d="M31 22h6a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-2v4l-5-4"/></svg>
             </div>
-            <h4>La fiche</h4><p>Pour en discuter avec l'enfant, sans faire la leçon.</p>
+            <h4>La fiche papote</h4><p>Pour en discuter avec l'enfant, sans faire la leçon.</p>
           </div>
           <div class="sch-plus"><span>+</span></div>
           <div class="sch-etape">
             <div class="sch-rond"><span class="sch-num">12</span>
               <svg viewBox="0 0 48 48" fill="none" stroke="#2D6A4F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="9" height="9" rx="2"/><rect x="20" y="9" width="9" height="9" rx="2"/><rect x="31" y="9" width="9" height="9" rx="2"/><rect x="9" y="20" width="9" height="9" rx="2"/><rect x="20" y="20" width="9" height="9" rx="2"/><rect x="31" y="20" width="9" height="9" rx="2"/><rect x="14" y="31" width="9" height="9" rx="2"/><rect x="25" y="31" width="9" height="9" rx="2"/></svg>
             </div>
-            <h4>Les activités</h4><p>Douze au choix, toutes en lien avec l'histoire.</p>
+            <h4>Les activités</h4><p>Douze à explorer, toutes en lien avec l'histoire.</p>
           </div>
         </div>
         <div class="sch-pied">Une histoire et tout ce qui va avec.</div>
       </div>
     </section>
 
-<section class="bloc"><div class="h2">Deux adaptations pour chaque histoire</div><p class="sous-sec">Chaque enfant reçoit la version qui correspond à son âge. Une fratrie de 5 et de 8 ans, c'est la même histoire, racontée à chacun à sa hauteur.</p><div class="adapt-duo"><div class="adapt"><div class="age">4-6 ans</div><p>Le texte adapté aux plus jeunes, sa fiche pour en discuter et ses 12 activités au choix.</p></div><div class="adapt"><div class="age">7-9 ans</div><p>Le même récit porté plus loin, avec sa fiche et ses 12 activités au choix.</p></div></div></section>
+    <section class="bloc">
+      <div class="h2">Trois formats, dans le même paquet</div>
+      <p class="sous-sec">Une histoire par semaine, dans les trois formats, sans rien à gérer de votre côté.</p>
+      <div class="paquet">
+        <div class="ruban"></div>
+        <div class="ruban-v"></div>
+        <div class="paquet-in">
+          <div class="cadeaux">
+            <div class="cad"><div class="ico"><svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="#2D6A4F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12c-4-3-9-3-13-2v24c4-1 9-1 13 2 4-3 9-3 13-2V10c-4-1-9-1-13 2z"/></svg></div><b>À lire</b><span>l'histoire à lire à voix haute</span></div>
+            <div class="cad"><div class="ico"><svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="#2D6A4F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 28v-4a14 14 0 0 1 28 0v4"/><rect x="6" y="28" width="8" height="12" rx="3"/><rect x="34" y="28" width="8" height="12" rx="3"/></svg></div><b>À écouter</b><span>le podcast</span></div>
+            <div class="cad"><div class="ico"><svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="#2D6A4F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="11" width="34" height="26" rx="4"/><path d="M21 20l8 4-8 4z"/></svg></div><b>À regarder</b><span>la vidéo</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="formats-plus">Et avec chaque histoire&nbsp;: sa fiche papote pour en discuter et ses 12 activités à explorer.</p>
+      <div class="qr-box2"><span class="qr-vignette2"></span><span class="qr-lab"><b>QR code</b> · bientôt actif</span></div>
+    </section>
+
+<section class="bloc"><div class="h2">Deux adaptations pour chaque histoire</div><p class="sous-sec">Chaque enfant reçoit la version qui correspond à son âge. Une fratrie de 5 et de 8 ans, c'est la même histoire, racontée à chacun à sa hauteur.</p><div class="adapt-duo"><div class="adapt"><div class="age">4-6 ans</div><p>Le texte adapté aux plus jeunes, sa fiche papote pour en discuter et ses 12 activités à explorer.</p></div><div class="adapt"><div class="age">7-9 ans</div><p>Le même récit porté plus loin, avec sa fiche papote et ses 12 activités à explorer.</p></div></div></section>
 
     <section class="bloc">
       <div class="h2">Une offre à votre taille</div>
       <div class="devis">
         <div>
-          <div class="gros">Un tarif de groupe, sur devis</div>
-          <p>On s'adapte au nombre d'enfants concernés. Pas de prix caché, un devis clair et un interlocuteur unique : moi.</p>
+          <div class="gros">Un barème clair, affiché d'avance</div>
+          <p>Le prix par famille dépend du nombre de familles. Pas de prix caché, pas de négociation et un interlocuteur unique : moi.</p>
         </div>
         <ul>
-          <li>Devis clair, sans engagement</li>
+          <li>Devis sur simple demande, sans engagement</li>
           <li>Mise en place des accès incluse</li>
           <li>Idéal pour un cadeau de fin d'année</li>
+          <li>Distribution par code d'invitation</li>
           <li>Les premières histoires arrivent courant novembre</li>
         </ul>
       </div>
-      <p class="corps" style="margin-top:26px">Le repère de départ, c'est 60 € par famille et par an. À partir de là, plus il y a de familles concernées, moins c'est cher. Le barème est le même pour tout le monde, affiché d'avance, sans négociation.</p>
-      <div class="paliers"><div class="palier"><b>60 €</b><span>1 famille</span></div><div class="palier"><b>55 €</b><span>à partir de 2 familles</span></div><div class="palier"><b>50 €</b><span>à partir de 5 familles</span></div><div class="palier"><b>45 €</b><span>à partir de 10 familles</span></div><div class="palier"><b>40 €</b><span>à partir de 20 familles</span></div><div class="palier"><b>35 €</b><span>à partir de 50 familles</span></div><div class="palier"><b>30 €</b><span>à partir de 100 familles</span></div></div><p class="palier-note">Prix par famille et par an, prix de lancement. Le tarif baisse pour tout le monde, y compris pour celles et ceux qui se sont abonnés en premier.</p>
+      <p class="corps" style="margin-top:26px">Chaque famille reçoit la formule complète : les deux adaptations, pour toute la fratrie. Le barème ci-dessous est le même pour tous les CSE. Le devis n'est que le document administratif qui l'accompagne.</p>
+      <div class="formules">
+        <div class="formule"><div class="nom">2 à 9 familles</div><div class="montant">55 € <span>/ famille</span></div></div>
+        <div class="formule"><div class="nom">10 à 49 familles</div><div class="montant">50 € <span>/ famille</span></div></div>
+        <div class="formule"><div class="nom">50 à 99 familles</div><div class="montant">45 € <span>/ famille</span></div></div>
+        <div class="formule"><div class="nom">100 familles et plus</div><div class="montant">40 € <span>/ famille</span></div></div>
+      </div>
+      <p class="palier-note">Prix par famille et par an, prix de lancement.</p>
+      <p style="margin-top:16px"><a class="reserver large" href="abonnement.html?formule=cse#reserver">Je réserve pour mon CSE</a></p>
+      <div class="lecture">
+        <b>À partir de 50 familles, vos enfants écrivent avec moi</b>
+        <ul>
+          <li>Le CSE et les enfants du personnel choisissent les personnages, le lieu et le thème d'une histoire.</li>
+          <li>Je l'écris avec mes surprises. Elle paraît pour tous les abonnés dans le calendrier 2028, avec la mention de votre CSE au début.</li>
+          <li>Cinq CSE au maximum par an.</li>
+        </ul>
+      </div>
+      <div class="lecture">
+        <b>Une fois abonné(e), comment ça se passe&nbsp;?</b>
+        <ul>
+          <li>L'histoire et sa fiche papote se lisent en ligne, dans une visionneuse, depuis votre espace abonné. Elles ne se téléchargent pas.</li>
+          <li>Les 12 activités se téléchargent et s'impriment.</li>
+          <li>Le podcast et la vidéo vous attendent aussi dans votre espace abonné.</li>
+        </ul>
+      </div>
     </section>
 
     <div class="final">
       <h3>Parlons de votre CSE</h3>
-      <p>Écrivez-moi le nombre d'enfants concernés, je vous réponds moi-même et on cale ensemble une offre à votre taille.</p>
-      <a href="contact.html" class="btn-final">Demander une offre CSE</a>
+      <p>Écrivez-moi le nombre de familles concernées, je vous réponds moi-même avec le devis.</p>
+      <a href="contact.html?profil=cse" class="btn-final">Demander une offre CSE</a>
     </div>
 
   </div>
@@ -266,5 +404,10 @@
     <a href="mailto:contact@clemiraconte.fr">contact@clemiraconte.fr</a> · <a href="mentions-legales.html">Mentions légales</a>
   </footer>
 
+<script>
+(function(){var n=document.querySelector('nav'),b=n&&n.querySelector('.burger');if(!b)return;
+b.addEventListener('click',function(){var o=n.classList.toggle('ouvert');b.setAttribute('aria-expanded',o);});
+n.querySelectorAll('.liens a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('ouvert');b.setAttribute('aria-expanded','false');});});})();
+</script>
 </body>
 </html>
