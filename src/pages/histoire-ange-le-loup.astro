@@ -1,0 +1,280 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Bulles from '../components/Bulles.astro';
+import CouvertureAnge from '../components/CouvertureAnge.astro';
+import Icone from '../components/Icone.astro';
+import Visionneuse from '../components/Visionneuse.astro';
+import texte46 from '../data/textes/ange-4-6.json';
+import texte79 from '../data/textes/ange-7-9.json';
+const textes: Record<string, unknown> = { '4-6': texte46, '7-9': texte79 };
+import { adaptations, videoAnge } from '../data/ange';
+import { photo } from '../lib/photos';
+import { u } from '../lib/url';
+---
+<Base
+  visionneuse
+  titre="Ange le loup : histoire sur la différence · Clémi Raconte"
+  description="Ange, le loup qui chantait avec le vent : une histoire sur la différence pour les 4-9 ans, offerte avec sa fiche papote et ses 12 activités à imprimer."
+>
+  <!-- En-tête : la nuit dans la forêt de Daillon -->
+  <section class="bandeau-section ange-tete">
+    <Image class="ange-fond" src={photo('loup')} alt="" widths={[800, 1400, 1800]} sizes="100vw" loading="eager" />
+    <Bulles nombre={12} ton="creme" graine={21} />
+    <div class="conteneur at-grille">
+      <div class="at-texte">
+        <p class="surtitre-main">Séance offerte · 4-6 et 7-9 ans</p>
+        <h1>Ange, le loup qui chantait avec le vent</h1>
+        <p class="at-themes"><span>Appartenance</span><span>Différence</span><span>Courage d’être soi</span></p>
+        <p class="at-intro">
+          Au cœur de la forêt de Daillon vit Ange, un loup si discret qu’il marche sur la pointe des pattes,
+          persuadé que s’il se montre, tout le monde fuira. Jusqu’au soir de la Daillon Party, où une tempête se lève…
+          et où la forêt va avoir besoin, précisément, de sa voix
+        </p>
+        <p class="at-installez main">Installez-vous, ça commence ici</p>
+        <div class="at-actions">
+          <a class="btn btn-soleil" href="#video">Regarder l’histoire</a>
+          <a class="btn btn-contour" href="#activites">Les 12 activités</a>
+        </div>
+      </div>
+      <div class="at-couv"><CouvertureAnge /></div>
+    </div>
+  </section>
+
+  <!-- La vidéo -->
+  <Bandeau fond="beige" crete={1} id="video">
+    <Tete surtitre="À regarder" titre="Racontée dans la forêt conteuse" intro="La version à écouter arrive bientôt" />
+    <div class="video" data-video>
+      <button class="video-facade" type="button" data-src={`${videoAnge}?autoplay=1`} aria-label="Lancer la vidéo d’Ange, le loup qui chantait avec le vent">
+        <Image src={photo('regarder')} alt="" widths={[600, 1000, 1400]} sizes="(min-width: 1160px) 1000px, 92vw" loading="lazy" />
+        <span class="video-jouer" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+        <span class="video-legende main">Ange, l’histoire en vidéo</span>
+      </button>
+    </div>
+    <p class="video-note">La vidéo est hébergée sur YouTube, en mode sans cookie. Elle ne se charge que si vous cliquez</p>
+  </Bandeau>
+
+  <!-- Le début de l'histoire, comme un livre ouvert -->
+  <Bandeau fond="creme" crete={2} bulles={8}>
+    <Tete surtitre="À lire" titre="Le début de l’histoire" centre />
+    <div class="livre">
+      <div class="page page-g">
+        <p class="lettrine">Tu connais le secret le mieux gardé de la forêt de Daillon ? Approche, installe-toi bien, je vais te raconter l’histoire du loup Ange. Un loup pas comme les autres…</p>
+        <p>Au cœur de la forêt de Daillon, là où les arbres sont si hauts qu’ils chatouillent les nuages, vit Ange. Chaque matin, quand la brume se lève entre les branches, il sort de sa tanière tapissée de mousse. Mais lui, il marche sur la pointe des pattes. <em>Chhht, chhht, chhht.</em> Silencieux comme une ombre.</p>
+      </div>
+      <div class="page page-d">
+        <p>Pourquoi tant de précautions ? Parce qu’Ange adore par-dessus tout écouter la musique de la forêt. Le cric-crac des branches sous les pattes des lapins. Le frou-frou du vent dans les feuilles. Le glouglou joyeux du Riou Maffren, le petit ruisseau qui file entre les rochers. C’est sa musique préférée, son trésor de chaque jour.</p>
+        <p>Mais il y a un problème. Un gros problème.</p>
+        <p class="replique">« Si on me voit, tout le monde va fuir… » soupire Ange en regardant son reflet dans l’eau claire du ruisseau.</p>
+        <p class="suite main">La suite ? Elle se lit juste en dessous, ou elle se regarde juste au-dessus</p>
+      </div>
+    </div>
+  </Bandeau>
+
+  <!-- La séance complète -->
+  <Bandeau fond="beige" crete={3} id="activites">
+    <Tete
+      surtitre="La séance complète, en deux adaptations"
+      titre="Tout ce que contient une histoire, pour juger sur pièce"
+      intro="C’est la séance vitrine de Clémi Raconte, pour juger sur pièce. Choisissez l’âge de votre enfant ou de votre groupe : l’histoire s’ouvre dans la visionneuse avec sa fiche papote et ses activités"
+    />
+    <div class="ages" role="tablist" aria-label="Choisir l’adaptation">
+      {adaptations.map((a, i) => (
+        <button type="button" role="tab" id={`onglet-${a.age}`} aria-controls={`age-${a.age}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-age>
+          {a.age} ans
+        </button>
+      ))}
+    </div>
+    {adaptations.map((a, i) => (
+      <div class="age-panneau" role="tabpanel" id={`age-${a.age}`} aria-labelledby={`onglet-${a.age}`} hidden={i !== 0}>
+        <Visionneuse
+          docs={[
+            { titre: 'L’histoire', src: a.histoire, texte: { id: `texte-ange-${a.age}`, contenu: textes[a.age] } },
+            { titre: 'La fiche papote', src: a.papote },
+          ]}
+          pied="La même visionneuse vous attend dans votre espace abonné"
+        />
+        <div class="garder">
+          <p><span class="main">Ange est offert à tous.</span> Vous pouvez aussi garder l’histoire et sa fiche papote :</p>
+          <div class="garder-liens">
+            <a class="btn btn-plein" href={u(a.histoire)}><Icone nom="livre" taille={20} /> L’histoire (PDF)</a>
+            <a class="btn btn-contour" href={u(a.papote)}><Icone nom="bulle" taille={20} /> La fiche papote (PDF)</a>
+          </div>
+        </div>
+        <h3 class="sous-titre">Les 12 activités à explorer</h3>
+        <ol class="activites">
+          {a.activites.map((act, n) => (
+            <li class="activite">
+              <span class="act-num">{String(n + 1).padStart(2, '0')}</span>
+              <span class="act-type main">{act.type}</span>
+              <h4>{act.titre}</h4>
+              <ul class="act-infos">
+                <li>{act.duree}</li>
+                <li>{act.qui}</li>
+                <li>{act.materiel}</li>
+              </ul>
+              <a class="act-pdf" href={u(act.pdf)}>Imprimer (PDF)</a>
+            </li>
+          ))}
+        </ol>
+        <h3 class="sous-titre">Les activités bonus <span class="main">{a.bonusIntro}</span></h3>
+        <ol class="activites bonus">
+          {a.bonus.map((act) => (
+            <li class="activite">
+              <span class="act-type main">{act.type}</span>
+              <h4>{act.titre}</h4>
+              <ul class="act-infos">
+                <li>{act.duree}</li>
+                <li>{act.qui}</li>
+                <li>{act.materiel}</li>
+              </ul>
+              <a class="act-pdf" href={u(act.pdf)}>Imprimer (PDF)</a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))}
+  </Bandeau>
+
+  <!-- La porte ouverte -->
+  <Bandeau fond="sapin" crete={1} bulles={8}>
+    <div class="porte">
+      <p class="porte-question">« Et toi, tu te serais caché, ou tu serais allé jouer ? »</p>
+      <p>Comme toutes mes histoires, celle-ci se termine par une porte ouverte. La fiche papote guide l’échange sans jamais l’imposer. Les activités font vivre le thème par le jeu : en classe, en centre de loisirs ou à la maison</p>
+      <div class="fresque">
+        <p class="main">Pour aller plus loin : « La fresque de Daillon »</p>
+        <p>Un grand projet coopératif sur plusieurs séances : une grande forêt collective où chaque enfant ajoute son animal, avec sa particularité bien assumée : trop grand, trop bruyant, trop rêveur… La fresque s’affiche dans le couloir : la forêt de Daillon, c’est nous. Bientôt en fiche dédiée</p>
+      </div>
+      <div class="porte-liens">
+        <a class="btn btn-soleil" href={u('/enseignants')}>Découvrir l’offre enseignants</a>
+        <a class="btn btn-contour" href={u('/histoires-sur-la-difference')}>Les histoires sur la différence</a>
+        <a class="lien-retour" href={u('/histoires')}>← Toutes les histoires</a>
+      </div>
+    </div>
+  </Bandeau>
+</Base>
+
+<script>
+  // Vidéo : l'iframe YouTube ne se charge qu'au clic
+  document.querySelectorAll<HTMLButtonElement>('.video-facade').forEach((b) => {
+    b.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = b.dataset.src || '';
+      f.title = 'Ange, le loup qui chantait avec le vent, l’histoire en vidéo';
+      f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
+      f.allowFullscreen = true;
+      b.replaceWith(f);
+    });
+  });
+  // Onglets d'âge (4-6 / 7-9)
+  const onglets = [...document.querySelectorAll<HTMLButtonElement>('[data-age]')];
+  const choisir = (o: HTMLButtonElement) => onglets.forEach((x) => {
+    const actif = x === o;
+    x.setAttribute('aria-selected', String(actif));
+    x.tabIndex = actif ? 0 : -1;
+    const p = document.getElementById(x.getAttribute('aria-controls') || '');
+    if (p) p.hidden = !actif;
+  });
+  onglets.forEach((o, i) => {
+    o.addEventListener('click', () => choisir(o));
+    o.addEventListener('keydown', (e) => {
+      const pas = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!pas) return;
+      const s = onglets[(i + pas + onglets.length) % onglets.length];
+      choisir(s); s.focus();
+    });
+  });
+  if (location.hash === '#age-7-9') choisir(onglets[1]);
+</script>
+
+<style>
+  /* En-tête nuit */
+  .ange-tete { background: #1c3a2d; color: var(--creme); padding-block: clamp(48px, 7vw, 96px) clamp(96px, 11vw, 140px); }
+  .ange-tete :global(.ange-fond) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 22%; z-index: -1; }
+  .ange-tete::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(28, 58, 45, 0.97) 0%, rgba(28, 58, 45, 0.86) 55%, rgba(28, 58, 45, 0.45) 100%); }
+  .at-grille { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .at-texte { display: grid; gap: 18px; justify-items: start; }
+  .at-texte h1 { color: #fff; font-size: clamp(2.2rem, 4.8vw, 3.6rem); text-wrap: balance; }
+  .at-texte .surtitre-main { color: var(--soleil); }
+  .at-themes { display: flex; flex-wrap: wrap; gap: 10px; }
+  .at-themes span { font: 700 0.85rem var(--f-label); padding: 4px 12px; border: 2px solid var(--soleil-doux); color: var(--soleil-doux); transform: rotate(-1deg); }
+  .at-intro { color: var(--menthe); font-size: 1.12rem; max-width: 36em; }
+  .at-installez { font-size: 1.9rem; color: var(--soleil); transform: rotate(-2deg); }
+  .at-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .at-actions .btn-contour { color: #fff; }
+  .at-couv { max-width: 320px; justify-self: center; transform: rotate(4deg); filter: drop-shadow(10px 10px 0 rgba(0, 0, 0, 0.35)); }
+
+  /* Vidéo */
+  .video { max-width: 1000px; margin-inline: auto; border: 3px solid var(--encre); box-shadow: 10px 10px 0 var(--sapin); background: #000; aspect-ratio: 16 / 9; transform: rotate(-0.6deg); }
+  .video :global(iframe), .video-facade { display: block; width: 100%; height: 100%; border: 0; }
+  .video-facade { position: relative; padding: 0; cursor: pointer; background: #000; }
+  .video-facade :global(img) { width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: opacity 0.2s; }
+  .video-facade:hover :global(img) { opacity: 0.9; }
+  .video-jouer { position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; transform: translate(-50%, -50%) rotate(-4deg); display: grid; place-items: center; background: var(--soleil); border: 3px solid var(--encre); border-radius: var(--trait); box-shadow: 4px 4px 0 var(--encre); transition: transform 0.2s; }
+  .video-facade:hover .video-jouer { transform: translate(-50%, -50%) rotate(3deg) scale(1.08); }
+  .video-jouer svg { width: 44px; fill: var(--encre); margin-left: 4px; }
+  .video-legende { position: absolute; left: 20px; bottom: 16px; color: #fff; font-size: 1.8rem; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); }
+  .video-note { text-align: center; color: var(--gris); font-size: 0.92rem; margin-top: 22px; }
+
+  /* Livre ouvert */
+  .livre { display: grid; grid-template-columns: 1fr 1fr; max-width: 1040px; margin-inline: auto; filter: drop-shadow(8px 10px 0 rgba(36, 59, 50, 0.25)); }
+  .page { background: #fffdf5; border: 2px solid var(--encre); padding: clamp(28px, 4vw, 52px); display: grid; gap: 16px; align-content: start; font-family: var(--f-titre); font-size: 1.12rem; line-height: 1.75; color: var(--encre); }
+  .page-g { border-right-width: 1px; transform: rotate(-1deg); transform-origin: right center; background-image: linear-gradient(90deg, transparent 92%, rgba(36, 59, 50, 0.07)); }
+  .page-d { border-left-width: 1px; transform: rotate(1deg); transform-origin: left center; background-image: linear-gradient(90deg, rgba(36, 59, 50, 0.07), transparent 8%); }
+  .lettrine::first-letter { float: left; font-size: 3.6em; line-height: 0.85; padding: 6px 10px 0 0; color: var(--sapin); font-weight: 700; }
+  .replique { font-style: italic; color: var(--sapin); }
+  .suite { font-family: var(--f-main); font-size: 1.6rem; color: var(--sapin); }
+
+  /* Onglets d'âge */
+  .ages { display: flex; gap: 14px; margin-bottom: 28px; }
+  .ages button {
+    font: 700 1.6rem var(--f-titre); color: var(--encre); cursor: pointer;
+    background: var(--creme-carte); border: 3px solid var(--encre); border-radius: var(--trait);
+    padding: 10px 26px; box-shadow: 4px 4px 0 var(--encre); transform: rotate(-1.5deg);
+  }
+  .ages button + button { transform: rotate(1.5deg); }
+  .ages button[aria-selected='true'] { background: var(--sapin); color: #fff; transform: rotate(0) translate(2px, 2px); box-shadow: 2px 2px 0 var(--encre); }
+  .age-panneau { display: grid; gap: 28px; animation: apparaitre 0.3s ease; }
+  .age-panneau[hidden] { display: none; }
+  .garder { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; background: var(--creme-carte); border: 2px dashed var(--sapin); padding: 20px 24px; }
+  .garder .main { font-size: 1.6rem; margin-right: 6px; }
+  .garder-liens { display: flex; flex-wrap: wrap; gap: 12px; }
+  .sous-titre { font-size: 1.6rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .sous-titre .main { font-size: 1.5rem; }
+  .activites { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .activite { position: relative; background: #fff; border: 2px solid var(--encre); padding: 18px 18px 16px; display: grid; gap: 6px; grid-template-rows: auto auto 1fr auto; box-shadow: 4px 4px 0 var(--sapin); transform: rotate(var(--r, -0.6deg)); transition: transform 0.2s; }
+  .activite:nth-child(even) { --r: 0.7deg; }
+  .activite:nth-child(3n) { background: #fffbea; box-shadow: 4px 4px 0 var(--soleil); }
+  .activite:hover { transform: rotate(0) translateY(-3px); }
+  .act-num { position: absolute; top: -14px; right: 12px; font: 700 1rem var(--f-label); background: var(--encre); color: var(--soleil); padding: 2px 8px; transform: rotate(4deg); }
+  .act-type { font-size: 1.3rem; }
+  .activite h4 { font: 600 1.12rem / 1.3 var(--f-titre); margin: 0; }
+  .act-infos { list-style: none; margin: 0; padding: 0; color: var(--gris); font-size: 0.9rem; line-height: 1.45; }
+  .act-infos li::before { content: '· '; color: var(--sapin); font-weight: 800; }
+  .act-pdf { font: 800 0.88rem var(--f-label); color: var(--sapin); margin-top: 6px; }
+  .bonus .activite { background: var(--menthe); }
+  @keyframes apparaitre { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* Porte ouverte */
+  .porte { display: grid; gap: 20px; max-width: 820px; margin-inline: auto; text-align: center; justify-items: center; }
+  .porte-question { font: 600 clamp(1.8rem, 4vw, 2.8rem) / 1.2 var(--f-titre); color: #fff; font-style: italic; }
+  .porte > p:not(.porte-question) { color: var(--menthe); font-size: 1.1rem; }
+  .fresque { background: var(--creme-carte); color: var(--encre); border: 3px solid var(--encre); padding: 24px 26px; box-shadow: 7px 7px 0 var(--soleil); transform: rotate(-1deg); text-align: left; display: grid; gap: 8px; }
+  .fresque .main { color: var(--sapin); font-size: 1.7rem; }
+  .fresque p:not(.main) { color: var(--gris); }
+  .porte-liens { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 18px; margin-top: 8px; }
+  .porte-liens .btn-contour { color: #fff; }
+  .lien-retour { color: var(--soleil-doux); font-weight: 700; }
+
+  @media (max-width: 1000px) { .activites { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 860px) {
+    .at-grille, .livre { grid-template-columns: 1fr; }
+    .at-couv { max-width: 220px; }
+    .ange-tete::before { background: rgba(28, 58, 45, 0.88); }
+    .page-g, .page-d { transform: none; border-width: 2px; }
+    .page-d { border-top: 0; }
+  }
+  @media (max-width: 520px) { .activites { grid-template-columns: 1fr; } }
+</style>

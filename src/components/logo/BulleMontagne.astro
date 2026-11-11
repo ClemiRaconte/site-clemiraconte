@@ -1,0 +1,11 @@
+---
+/** Piste 3 : la bulle-montagne. */
+interface Props { taille?: number; class?: string }
+const { taille = 56, class: cls } = Astro.props;
+---
+<svg class={cls} width={taille} height={taille} viewBox="0 0 64 64" role="img" aria-label="Bulle de parole et montagnes">
+  <path d="M10 8h44a6 6 0 0 1 6 6v28a6 6 0 0 1-6 6H28l-11 10v-10h-7a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6z" fill="var(--lv, #2D6A4F)" />
+  <path d="M8 42l13-17 7 8 9-14 19 23z" fill="var(--lv2, #3f8266)" />
+  <path d="M21 25l-4 5.2 3.2-1.2 2.2 2.2 2.2-2.6zM37 19l-5 7.7 3.4-1.4 2 2 2.6-2.4z" fill="var(--lc, #fffdf7)" />
+  <circle cx="48" cy="17" r="4.5" fill="#F4C430" />
+</svg>

@@ -1,0 +1,187 @@
+---
+import Base from '../layouts/Base.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Bulles from '../components/Bulles.astro';
+import CouvertureAnge from '../components/CouvertureAnge.astro';
+import Visionneuse from '../components/Visionneuse.astro';
+import { adaptations, videoAnge } from '../data/ange';
+import texte46 from '../data/textes/ange-4-6.json';
+import texte79 from '../data/textes/ange-7-9.json';
+import { u } from '../lib/url';
+const textes: Record<string, unknown> = { '4-6': texte46, '7-9': texte79 };
+---
+<Base visionneuse titre="Visite de l’espace abonné · Clémi Raconte" description="Visitez l’espace abonné de Clémi Raconte tel qu’il sera : bibliothèque, visionneuse et activités à imprimer, avec Ange.">
+  <section class="bandeau-section fond-creme es-tete">
+    <Bulles nombre={10} graine={9} />
+    <div class="conteneur">
+      <p class="es-visite main">C’est une visite : l’espace ouvre courant novembre</p>
+      <p class="surtitre-main">Mon espace</p>
+      <h1>Bonjour Camille</h1>
+      <div class="es-onglets" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-vue="biblio">Ma bibliothèque</button>
+        <button type="button" role="tab" aria-selected="false" data-vue="compte">Mon compte</button>
+      </div>
+    </div>
+  </section>
+
+  <Bandeau fond="beige" crete={1}>
+    <!-- Ma bibliothèque -->
+    <div class="vue" data-vue="biblio">
+      <h2>Ma bibliothèque</h2>
+      <p class="es-intro">Une nouvelle histoire arrive chaque samedi à 9h. Tout ce que vous recevez reste dans votre bibliothèque</p>
+      <ul class="etagere">
+        <li>
+          <button type="button" class="livre dispo" data-ouvrir>
+            <span class="livre-couv"><CouvertureAnge /></span>
+            <span class="livre-etat">Disponible</span>
+            <strong>Ange, le loup qui chantait avec le vent</strong>
+            <span class="livre-theme">Appartenance, différence, courage d’être soi</span>
+            <span class="livre-lien">Ouvrir →</span>
+          </button>
+        </li>
+        <li>
+          <div class="livre">
+            <span class="livre-couv vide"><span class="main">bientôt</span></span>
+            <strong>La prochaine histoire</strong>
+            <span class="livre-theme">Son titre et son thème s’affichent un mois avant sa sortie</span>
+          </div>
+        </li>
+        <li>
+          <div class="livre">
+            <span class="livre-couv vide"><span class="main">bientôt</span></span>
+            <strong>Et la suivante</strong>
+            <span class="livre-theme">La bibliothèque se remplit un peu plus chaque mois</span>
+          </div>
+        </li>
+      </ul>
+
+      <article class="histoire" id="histoire-ange" hidden>
+        <p class="surtitre-main">Histoire</p>
+        <h2>Ange, le loup qui chantait avec le vent</h2>
+        <div class="adapt-choix">
+          {adaptations.map((a, i) => (
+            <button type="button" aria-pressed={i === 0 ? 'true' : 'false'} data-cible={a.age}>{a.age} ans</button>
+          ))}
+        </div>
+        <ol class="trois-temps">
+          <li><strong>1</strong> L’histoire, à lire à voix haute</li>
+          <li><strong>2</strong> La fiche papote, pour en discuter</li>
+          <li><strong>3</strong> Les 12 activités, à explorer</li>
+        </ol>
+        {adaptations.map((a, i) => (
+          <div class="adapt-panneau" data-age={a.age} hidden={i !== 0}>
+            <Visionneuse
+              docs={[
+                { titre: 'L’histoire', src: a.histoire, texte: { id: `es-texte-ange-${a.age}`, contenu: textes[a.age] } },
+                { titre: 'La fiche papote', src: a.papote },
+              ]}
+              pied="Lecture en ligne. L’histoire et sa fiche papote restent dans votre espace"
+            />
+            <h3>Les 12 activités à explorer</h3>
+            <p class="es-intro">Elles se téléchargent et s’impriment, une par une</p>
+            <ul class="act-liste">
+              {a.activites.map((act) => <li><a href={u(act.pdf)}>{act.titre}</a> <span>({act.type})</span></li>)}
+            </ul>
+            <h3>Les activités bonus</h3>
+            <ul class="act-liste">
+              {a.bonus.map((act) => <li><a href={u(act.pdf)}>{act.titre}</a> <span>({act.type})</span></li>)}
+            </ul>
+          </div>
+        ))}
+        <h3>À regarder</h3>
+        <div class="es-video">
+          <iframe loading="lazy" src={videoAnge} title="Ange, le loup qui chantait avec le vent, l’histoire en vidéo" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="es-intro">La version à écouter arrive bientôt</p>
+        <button type="button" class="lien-bouton" id="retour-biblio">← Retour à ma bibliothèque</button>
+      </article>
+    </div>
+
+    <!-- Mon compte -->
+    <div class="vue" data-vue="compte" hidden>
+      <h2>Mon compte</h2>
+      <div class="compte">
+        <section class="bloc">
+          <h3>Ma formule</h3>
+          <p>Les deux adaptations, 60 € par an, un accès</p>
+          <p class="discret">Accès jusqu’au 30 novembre 2027. Pas de reconduction automatique : je vous écris avant la fin</p>
+          <a class="lien-fleche" href={u('/abonnement')}>Changer de formule →</a>
+        </section>
+        <section class="bloc">
+          <h3>Mes identifiants</h3>
+          <p>camille@exemple.fr</p>
+          <button type="button" class="lien-bouton demo-inactif">Changer mon mot de passe</button>
+        </section>
+        <section class="bloc">
+          <h3>Mes factures</h3>
+          <p class="discret">Vos factures s’afficheront ici, prêtes à télécharger</p>
+        </section>
+        <section class="bloc">
+          <h3>Abonnement au mois</h3>
+          <p class="discret">Avec la formule à 8 € par mois, vous arrêtez quand vous voulez, en un clic, ici même. Les histoires reçues pendant vos mois payés restent dans votre bibliothèque</p>
+        </section>
+      </div>
+      <p class="partage"><span class="main">Un accès, c’est une famille.</span> Votre accès est personnel : merci de ne pas partager vos identifiants. C’est ce qui permet aux histoires de continuer d’exister</p>
+      <button type="button" class="btn btn-contour demo-inactif">Me déconnecter</button>
+    </div>
+    <p class="demo-message" role="status" hidden>C’est une visite : cette action sera active à l’ouverture de l’espace, courant novembre</p>
+  </Bandeau>
+</Base>
+
+<script>
+  const vue = (v: string) => {
+    document.querySelectorAll<HTMLButtonElement>('.es-onglets button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.vue === v)));
+    document.querySelectorAll<HTMLElement>('.vue').forEach((s) => (s.hidden = s.dataset.vue !== v));
+  };
+  document.querySelectorAll<HTMLButtonElement>('.es-onglets button').forEach((b) => b.addEventListener('click', () => vue(b.dataset.vue!)));
+  const ho = document.getElementById('histoire-ange')!;
+  document.querySelector('[data-ouvrir]')!.addEventListener('click', () => { ho.hidden = false; ho.scrollIntoView({ behavior: 'smooth' }); });
+  document.getElementById('retour-biblio')!.addEventListener('click', () => { ho.hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  document.querySelectorAll<HTMLButtonElement>('.adapt-choix button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll<HTMLButtonElement>('.adapt-choix button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll<HTMLElement>('.adapt-panneau').forEach((p) => (p.hidden = p.dataset.age !== b.dataset.cible));
+  }));
+  const msg = document.querySelector<HTMLElement>('.demo-message')!;
+  document.querySelectorAll('.demo-inactif').forEach((b) => b.addEventListener('click', () => { msg.hidden = false; msg.scrollIntoView({ behavior: 'smooth', block: 'center' }); }));
+</script>
+
+<style>
+  .es-tete { padding-block: clamp(40px, 6vw, 72px) clamp(80px, 9vw, 110px); }
+  .es-tete .conteneur { display: grid; gap: 12px; justify-items: start; }
+  .es-visite { background: var(--soleil-doux); padding: 4px 14px; font-size: 1.4rem; transform: rotate(-1.5deg); }
+  .es-onglets { display: flex; gap: 12px; margin-top: 10px; }
+  .es-onglets button { font: 800 1rem var(--f-label); cursor: pointer; background: var(--creme-carte); border: 2px solid var(--encre); border-radius: var(--trait); padding: 10px 18px; box-shadow: 3px 3px 0 var(--encre); }
+  .es-onglets button[aria-selected='true'] { background: var(--sapin); color: #fff; }
+  .vue { display: grid; gap: 18px; }
+  .vue[hidden], .adapt-panneau[hidden], .histoire[hidden] { display: none; }
+  .es-intro, .discret { color: var(--gris); }
+  .etagere { list-style: none; margin: 10px 0 0; padding: 0 0 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 260px)); gap: 28px; border-bottom: 12px solid #c7b48a; box-shadow: 0 8px 0 rgba(36, 59, 50, 0.12); }
+  .livre { display: grid; gap: 6px; text-align: left; background: none; border: 0; padding: 0; font: inherit; color: inherit; }
+  button.livre { cursor: pointer; }
+  .livre-couv { display: block; border: 3px solid var(--encre); box-shadow: 5px 5px 0 var(--sapin); transform: rotate(-1.5deg); transition: transform 0.2s; }
+  .dispo:hover .livre-couv { transform: rotate(0) translateY(-6px); }
+  .livre-couv.vide { aspect-ratio: 4 / 5; display: grid; place-items: center; background: repeating-linear-gradient(-45deg, var(--beige) 0 14px, var(--creme-carte) 14px 28px); box-shadow: 5px 5px 0 var(--ligne); }
+  .livre-couv.vide .main { font-size: 1.8rem; }
+  .livre-etat { font: 800 0.8rem var(--f-label); background: var(--soleil); padding: 2px 8px; justify-self: start; margin-top: 8px; }
+  .livre strong { font: 600 1.12rem var(--f-titre); }
+  .livre-theme { color: var(--gris); font-size: 0.92rem; }
+  .livre-lien { font: 800 0.9rem var(--f-label); color: var(--sapin); }
+  .histoire { margin-top: 40px; display: grid; gap: 18px; background: var(--creme-carte); border: 3px solid var(--encre); padding: clamp(20px, 4vw, 40px); box-shadow: 8px 8px 0 var(--sapin); }
+  .adapt-choix { display: flex; gap: 10px; }
+  .adapt-choix button { font: 700 1.3rem var(--f-titre); cursor: pointer; background: #fff; border: 2px solid var(--encre); border-radius: var(--trait); padding: 6px 18px; }
+  .adapt-choix button[aria-pressed='true'] { background: var(--sapin); color: #fff; }
+  .trois-temps { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-weight: 600; }
+  .trois-temps strong { background: var(--soleil); padding: 0 8px; margin-right: 6px; }
+  .adapt-panneau { display: grid; gap: 14px; }
+  .act-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px 20px; }
+  .act-liste a { color: var(--sapin); font-weight: 700; }
+  .act-liste span { color: var(--gris); font-size: 0.92rem; }
+  .es-video { aspect-ratio: 16 / 9; border: 2px solid var(--encre); background: #000; }
+  .es-video iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .compte { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .bloc { background: var(--creme-carte); border: 2px solid var(--encre); padding: 22px; display: grid; gap: 8px; justify-items: start; box-shadow: 4px 4px 0 var(--sapin); }
+  .bloc h3 { font-size: 1.25rem; }
+  .partage .main { font-size: 1.5rem; margin-right: 6px; }
+  .demo-message { background: var(--soleil-doux); padding: 12px 16px; font-weight: 600; margin-top: 20px; border: 2px solid var(--encre); }
+  @media (max-width: 760px) { .etagere { grid-template-columns: 1fr 1fr; } .compte { grid-template-columns: 1fr; } }
+</style>

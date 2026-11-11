@@ -1,0 +1,74 @@
+---
+import Logo from './logo/Logo.astro';
+import { site } from '../data/site';
+import { u } from '../lib/url';
+const annee = new Date().getFullYear();
+---
+<footer class="pied">
+  <svg class="pied-crete" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 60V40l120-22 110 18 150-34 140 30 120-20 160 26 130-24 150 22 140-30 120 26 100-12v40z" fill="#2D6A4F" />
+  </svg>
+  <div class="pied-fond">
+    <div class="conteneur pied-grille">
+      <div class="pied-marque">
+        <Logo inverse taille={52} />
+        <p>Des histoires d’aujourd’hui pour les 4-9 ans, écrites dans les Hautes-Alpes.</p>
+        <p class="conteur">Par Clément, conteur dans le Champsaur. <a href={u('/demarche')}>Découvrir la démarche →</a></p>
+      </div>
+      <div>
+        <h2 class="pied-titre">Les histoires</h2>
+        <ul>
+          <li><a href={u('/histoires')}>Le catalogue</a></li>
+          <li><a href={u('/histoire-ange-le-loup')}>Lire Ange gratuitement</a></li>
+          <li><a href={u('/abonnement')}>Les formules</a></li>
+          <li><a href={u('/faq')}>Questions fréquentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="pied-titre">Pour qui ?</h2>
+        <ul>
+          <li><a href={u('/familles')}>Familles</a></li>
+          <li><a href={u('/enseignants')}>Enseignants</a></li>
+          <li><a href={u('/travailleurs-sociaux')}>Travailleurs sociaux</a></li>
+          <li><a href={u('/cse')}>CSE</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="pied-titre">Clémi Raconte</h2>
+        <ul>
+          <li><a href={u('/demarche')}>La démarche</a></li>
+          <li><a href={u('/equipe')}>L’équipe</a></li>
+          <li><a href={u('/soutenir')}>Soutenir le projet</a></li>
+          <li><a href={u('/contact')}>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="conteneur pied-bas">
+      <span>© {annee} {site.nom} · {site.conteur} · {site.lieu}</span>
+      <span><a href={`mailto:${site.email}`}>{site.email}</a> · <a href={u('/mentions-legales')}>Mentions légales</a></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pied { margin-top: 0; }
+  /* Pas de crête au-dessus du pied quand la page finit déjà sur un bandeau vert */
+  :global(main:has(> .fond-sapin:last-child)) + .pied .pied-crete { display: none; }
+  .pied-crete { display: block; width: 100%; height: 48px; }
+  .pied-fond { background: var(--sapin); color: var(--menthe); padding-block: 48px 28px; }
+  .pied a { color: inherit; text-decoration: none; }
+  .pied a:hover { color: var(--soleil-doux); text-decoration: underline; text-underline-offset: 3px; }
+  .pied-grille { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
+  .pied-marque { display: grid; gap: 14px; align-content: start; max-width: 340px; }
+  .pied-marque p { font-size: 0.98rem; opacity: 0.9; }
+  .conteur a { color: var(--soleil-doux); font-weight: 600; }
+  .pied-titre { font: 800 0.8rem var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--soleil-doux); margin-bottom: 12px; }
+  .pied ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 0.98rem; }
+  .pied-bas {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+    margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(231, 240, 234, 0.2);
+    font-size: 0.88rem; opacity: 0.85;
+  }
+  @media (max-width: 860px) { .pied-grille { grid-template-columns: 1fr 1fr; } .pied-marque { grid-column: 1 / -1; } }
+  @media (max-width: 480px) { .pied-grille { grid-template-columns: 1fr; } }
+</style>

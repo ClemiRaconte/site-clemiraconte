@@ -1,0 +1,48 @@
+/* Visionneuse de Clémi Raconte (reprise du site actuel) : lecture des PDF page par page, liseuse sur téléphone */
+/* ===== VISIONNEUSE (lecture en ligne, sans téléchargement) ===== */
+  .vz{background:#fffdf7;border:1px solid #e7ddc8;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(36,59,50,.08);}
+  .vz-barre{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;justify-content:space-between;padding:10px 14px;background:#2D6A4F;color:#eaf4ee;}
+  .vz-docs{display:flex;gap:6px;flex-wrap:wrap;}
+  .vz-docs button{font:600 14px 'Source Sans 3',sans-serif;background:transparent;color:#eaf4ee;border:1.5px solid rgba(234,244,238,.45);border-radius:20px;padding:5px 14px;cursor:pointer;}
+  .vz-docs button[aria-pressed="true"]{background:#F4C430;border-color:#F4C430;color:#4a3800;}
+  .vz-cmd{display:flex;align-items:center;gap:6px;font:600 14px 'Source Sans 3',sans-serif;}
+  .vz-cmd button{width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.14);color:#fff;font-size:17px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
+  .vz-cmd button:hover{background:rgba(255,255,255,.26);}
+  .vz-cmd button:disabled{opacity:.35;cursor:default;}
+  .vz-cmd .vz-num{min-width:62px;text-align:center;}
+  .vz-scene{position:relative;background:#efe7d4;height:min(78vh,820px);overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:18px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+  .vz-scene canvas{display:block;box-shadow:0 4px 18px rgba(36,59,50,.18);background:#fff;max-width:none;}
+  .vz-attente{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#5b6b63;font-size:15px;text-align:center;padding:20px;}
+  .vz-pied{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;padding:9px 16px;font-size:13px;color:#5b6b63;border-top:1px solid #e7ddc8;}
+  .vz-pied b{font-family:'Nunito Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:11.5px;color:#2D6A4F;}
+  .vz.vz-plein{position:fixed;inset:0;z-index:999;border-radius:0;display:flex;flex-direction:column;}
+  .vz.vz-plein .vz-scene,.vz:fullscreen .vz-scene{height:auto;flex:1;}
+  .vz:fullscreen{display:flex;flex-direction:column;border-radius:0;}
+  @media print{.vz{display:none !important;}}
+  .vz-scene canvas{transition:filter .15s;}
+  .vz-scene.vz-flou canvas{filter:blur(14px);}
+  /* ----- liseuse (le texte en grand, page par page, sur téléphone) ----- */
+  .vz-lis{display:none;overflow:hidden;position:relative;margin:0 auto;cursor:default;}
+  .vz-lis-texte{font-family:'Fraunces',Georgia,serif;font-weight:400;line-height:1.6;color:#243b32;column-fill:auto;orphans:2;widows:2;transition:transform .28s ease;will-change:transform;}
+  .vz-lis-texte p{margin:0 0 .75em;hyphens:auto;-webkit-hyphens:auto;}
+  .vz-lis-titre{break-after:column;-webkit-column-break-after:always;height:100%;display:flex;flex-direction:column;justify-content:center;text-align:center;}
+  .vz-lis-titre h3{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.45em;line-height:1.2;color:#2D6A4F;margin:.4em 0;}
+  .vz-lis-marque,.vz-lis-age{font-family:'Nunito Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.62em !important;color:#5b6b63;}
+  .vz-lis-age{color:#b8860b;}
+  .vz-lis-orn{text-align:center;color:#F4C430;letter-spacing:.3em;margin:.9em 0 !important;}
+  .vz-lis-morale{font-style:italic;font-weight:600;color:#2D6A4F;text-align:center;margin:0 0 .3em !important;}
+  .vz-lis-morale.prem{margin-top:1.2em !important;}
+  .vz-lis-bout{break-inside:avoid;-webkit-column-break-inside:avoid;}
+  .vz-lis-fin{text-align:center;font-family:'Nunito Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:.6em !important;color:#5b6b63;margin-top:1.6em !important;}
+  .vz.vz-en-liseuse .vz-scene{background:#fffdf7;align-items:center;padding:22px 22px 18px;overflow:hidden;}
+  .vz.vz-en-liseuse canvas{display:none;}
+  .vz.vz-en-liseuse .vz-lis{display:block;}
+  .vz-scene.vz-flou .vz-lis{filter:blur(10px);}
+  .vz-mode{font:600 13.5px 'Source Sans 3',sans-serif;color:#2D6A4F;background:#e7f0ea;border:none;border-radius:16px;padding:5px 13px;cursor:pointer;}
+  .vz-mode[hidden]{display:none;}
+  .vz-pied{align-items:center;}
+  @media(max-width:820px){
+    .vz-barre{padding:9px 10px;}
+    .vz-scene{height:72vh;padding:10px;}
+    .vz-cmd{gap:4px;} .vz-cmd button{width:32px;height:32px;}
+  }

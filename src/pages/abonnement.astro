@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Formules from '../components/blocs/Formules.astro';
+import Liste from '../components/blocs/Liste.astro';
+import { publicsFormules, dansChaqueAbonnement, formules, famillesElargies } from '../data/formules';
+import { u } from '../lib/url';
+
+const groupes = [
+  { label: 'Familles', options: [...formules.filter((f) => f.public === 'familles').map((f) => ({ id: f.id, texte: `${f.nom} · ${f.prix} ${f.periode}` })), ...famillesElargies.map((f) => ({ id: f.id, texte: `Famille élargie, ${f.nom} · ${f.prix} / an` }))] },
+  { label: 'Enseignants', options: formules.filter((f) => f.public === 'enseignants').map((f) => ({ id: f.id, texte: `${f.nom} · ${f.prix} ${f.periode}` })) },
+  { label: 'Travailleurs sociaux', options: formules.filter((f) => f.public === 'sociaux').map((f) => ({ id: f.id, texte: `${f.nom} · ${f.prix} ${f.periode}` })) },
+  { label: 'CSE', options: [{ id: 'cse', texte: 'Offre CSE · barème par famille' }] },
+];
+---
+<Base
+  titre="Abonnement histoires enfants : formules · Clémi Raconte"
+  description="Les formules Clémi Raconte pour les familles, les enseignants, les travailleurs sociaux et les CSE. Réservez au prix de lancement, rien à payer aujourd’hui."
+>
+  <PageTete
+    surtitre="S’abonner"
+    titre="Choisissez votre formule"
+    intro="Les abonnements ouvrent avec les premières histoires, courant novembre. Réservez dès maintenant la formule qui vous va : vous serez prévenu(e) en premier et rien n’est à payer aujourd’hui"
+  >
+    <a class="btn btn-plein" href="#reserver">Réserver ma formule</a>
+  </PageTete>
+
+  <Bandeau fond="beige" crete={1}>
+    <div class="publics" role="tablist" aria-label="Choisir votre public">
+      {publicsFormules.map((p, i) => (
+        <button type="button" role="tab" id={`onglet-${p.id}`} aria-controls={`offre-${p.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-public={p.id}>
+          {p.nom}
+        </button>
+      ))}
+    </div>
+    {publicsFormules.map((p, i) => (
+      <div class="offre" role="tabpanel" id={`offre-${p.id}`} aria-labelledby={`onglet-${p.id}`} data-offre={p.id} hidden={i !== 0}>
+        <p class="offre-accroche main">{p.accroche}</p>
+        <Formules public={p.id} elargie={p.id === 'familles'} />
+      </div>
+    ))}
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2} bulles={8}>
+    <div class="inclus">
+      <Liste titre="Dans chaque abonnement" items={dansChaqueAbonnement} />
+      <a class="lien-fleche" href={u('/histoire-ange-le-loup#activites')}>Voir la séance complète avec Ange →</a>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="sapin" crete={3} id="reserver">
+    <div class="reserver">
+      <div class="reserver-texte">
+        <p class="surtitre-main">Réserver ma formule</p>
+        <h2>Aucun paiement aujourd’hui</h2>
+        <p>Au lancement, je vous écris avec le lien pour finaliser votre abonnement au prix de lancement</p>
+      </div>
+      <form class="formulaire" name="reservation" method="POST" data-netlify="true" netlify-honeypot="champ-piege" action={u('/merci#reservation')}>
+        <input type="hidden" name="form-name" value="reservation" />
+        <p hidden><label>Ne pas remplir : <input name="champ-piege" /></label></p>
+
+        <label for="formule">Votre formule</label>
+        <select id="formule" name="formule" required>
+          <option value="">Choisir</option>
+          {groupes.map((g) => (
+            <optgroup label={g.label}>
+              {g.options.map((o) => <option value={o.id}>{o.texte}</option>)}
+            </optgroup>
+          ))}
+        </select>
+
+        <div class="si" data-pour="famille-1-adaptation" hidden>
+          <label for="adaptation">L’adaptation</label>
+          <select id="adaptation" name="adaptation"><option>4-6 ans</option><option>7-9 ans</option></select>
+        </div>
+
+        <label for="prenom">Votre prénom et votre nom</label>
+        <input id="prenom" name="nom" type="text" required autocomplete="name" />
+        <label for="email-r">Votre adresse email</label>
+        <input id="email-r" name="email" type="email" required autocomplete="email" />
+
+        <div class="si" data-pour="ecole" hidden>
+          <label for="ecole-nom">L’école et sa commune</label>
+          <input id="ecole-nom" name="ecole" type="text" />
+          <label for="ecole-classes">Nombre de classes</label>
+          <input id="ecole-classes" name="nombre-classes" type="number" min="1" inputmode="numeric" />
+        </div>
+        <div class="si" data-pour="association" hidden>
+          <label for="asso-nom">L’association</label>
+          <input id="asso-nom" name="association" type="text" />
+        </div>
+        <div class="si" data-pour="cse" hidden>
+          <label for="cse-nom">L’entreprise</label>
+          <input id="cse-nom" name="entreprise" type="text" />
+          <label for="cse-familles">Nombre de familles concernées (environ)</label>
+          <input id="cse-familles" name="nombre-familles" type="number" min="2" inputmode="numeric" />
+        </div>
+
+        <p class="formulaire-note">Votre adresse ne sert qu’à vous prévenir du lancement et à finaliser votre abonnement. Elle n’est ni partagée, ni revendue</p>
+        <button class="btn btn-soleil" type="submit">Réserver ma formule</button>
+      </form>
+    </div>
+  </Bandeau>
+</Base>
+
+<script>
+  const sel = document.getElementById('formule') as HTMLSelectElement;
+  const onglets = [...document.querySelectorAll<HTMLButtonElement>('[data-public]')];
+  const publicDe = (f: string) => (/^famille/.test(f) ? 'familles' : f === 'enseignant' || f === 'ecole' ? 'enseignants' : f === 'professionnel' || f === 'association' ? 'sociaux' : f === 'cse' ? 'cse' : null);
+  const montrer = (pub: string) => {
+    onglets.forEach((b) => {
+      const actif = b.dataset.public === pub;
+      b.setAttribute('aria-selected', String(actif));
+      b.tabIndex = actif ? 0 : -1;
+    });
+    document.querySelectorAll<HTMLElement>('[data-offre]').forEach((o) => (o.hidden = o.dataset.offre !== pub));
+  };
+  const champs = () => {
+    document.querySelectorAll<HTMLElement>('.si').forEach((d) => {
+      const on = d.dataset.pour === sel.value;
+      d.hidden = !on;
+      d.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input,select').forEach((i) => (i.disabled = !on));
+    });
+  };
+  onglets.forEach((b, i) => {
+    b.addEventListener('click', () => montrer(b.dataset.public!));
+    b.addEventListener('keydown', (e) => {
+      const pas = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!pas) return;
+      const s = onglets[(i + pas + onglets.length) % onglets.length];
+      montrer(s.dataset.public!); s.focus();
+    });
+  });
+  sel.addEventListener('change', champs);
+  champs();
+  const q = new URLSearchParams(location.search);
+  const f = q.get('formule');
+  let p = q.get('public') || location.hash.replace('#', '');
+  if (p === 'travailleurs-sociaux') p = 'sociaux';
+  if (f && sel.querySelector(`option[value="${f}"]`)) {
+    sel.value = f;
+    champs();
+    const pub = publicDe(f);
+    if (pub) montrer(pub);
+  } else if (['familles', 'enseignants', 'sociaux', 'cse'].includes(p)) {
+    montrer(p);
+  }
+</script>
+
+<style>
+  .publics { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 36px; }
+  .publics button {
+    font: 800 1.05rem var(--f-label); color: var(--encre); cursor: pointer;
+    background: var(--creme-carte); border: 3px solid var(--encre); border-radius: var(--trait);
+    padding: 12px 22px; box-shadow: 4px 4px 0 var(--encre); transform: rotate(var(--r, -1.5deg));
+  }
+  .publics button:nth-child(even) { --r: 1.5deg; }
+  .publics button[aria-selected='true'] { background: var(--sapin); color: #fff; transform: rotate(0) translate(2px, 2px); box-shadow: 2px 2px 0 var(--encre); }
+  .offre { display: grid; gap: 40px; animation: apparaitre 0.3s ease; }
+  .offre[hidden] { display: none; }
+  .offre-accroche { text-align: center; font-size: 2rem; transform: rotate(-1.5deg); }
+  .inclus { max-width: 760px; margin-inline: auto; display: grid; gap: 20px; justify-items: start; }
+  .reserver { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  .reserver-texte { display: grid; gap: 12px; }
+  .reserver-texte p:not(.surtitre-main) { color: var(--menthe); font-size: 1.1rem; }
+  @keyframes apparaitre { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 860px) { .reserver { grid-template-columns: 1fr; } }
+</style>

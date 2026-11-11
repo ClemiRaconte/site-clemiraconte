@@ -1,0 +1,250 @@
+---
+import { Image } from 'astro:assets';
+import Logo from './logo/Logo.astro';
+import { site, publics } from '../data/site';
+import { photo } from '../lib/photos';
+import { u, cheminCourant } from '../lib/url';
+
+const chemin = cheminCourant(Astro.url);
+const actif = (href: string) => chemin === href;
+const liens = [
+  { label: 'Histoires', href: '/histoires' },
+  { label: 'Formules', href: '/abonnement' },
+  { label: 'La démarche', href: '/demarche' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+{site.prelancement && (
+  <p class="annonce">
+    Les premières histoires arrivent {site.lancement}&nbsp;·{' '}
+    <a href={u('/#lancement')}>Être prévenu(e)</a>
+  </p>
+)}
+
+<header class="entete" data-entete>
+  <div class="conteneur barre">
+    <a href={u('/')} class="barre-logo" aria-label="Clémi Raconte, accueil"><Logo taille={46} /></a>
+
+    <nav class="nav-bureau" aria-label="Navigation principale">
+      <ul>
+        <li><a class="lien" href={u('/histoires')} aria-current={actif('/histoires') ? 'page' : undefined}>Histoires</a></li>
+        <li>
+          <button class="lien declencheur" type="button" aria-expanded="false" aria-controls="panneau-publics" data-declencheur>
+            Pour qui ?
+            <svg class="chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+          </button>
+        </li>
+        {liens.slice(1).map((l) => (
+          <li><a class="lien" href={u(l.href)} aria-current={actif(l.href) ? 'page' : undefined}>{l.label}</a></li>
+        ))}
+      </ul>
+      <a class="abonnes" href={u('/connexion')}>Espace abonnés</a>
+      <a class="btn btn-plein" href={u('/abonnement')}>Choisir ma formule</a>
+    </nav>
+
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu-mobile" data-burger>
+      <span class="visuellement-cache" data-burger-texte>Ouvrir le menu</span>
+      <span class="burger-traits" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+
+  <!-- Panneau « Pour qui ? » qui glisse sous la barre (ordinateur) -->
+  <div class="panneau" id="panneau-publics" data-panneau inert>
+    <div class="conteneur panneau-in">
+      <p class="panneau-titre"><span class="surtitre-main">Pour qui ?</span><span>La même histoire, pensée pour votre quotidien.</span></p>
+      <ul class="panneau-liste">
+        {publics.map((p, i) => (
+          <li style={`--i:${i}`}>
+            <a class="panneau-carte" href={u(`/${p.slug}`)}>
+              <Image src={photo(p.photo)} alt="" widths={[320, 480]} sizes="280px" loading="lazy" />
+              <span class="panneau-texte">
+                <strong>{p.titre}</strong>
+                <span>{p.accroche}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <div class="voile" data-voile></div>
+</header>
+
+<!-- Menu plein écran qui coulisse depuis la droite (mobile) -->
+<div class="menu-mobile" id="menu-mobile" data-menu-mobile inert>
+  <nav class="conteneur" aria-label="Navigation mobile">
+    <ul class="mm-liens">
+      <li style="--i:0"><a href={u('/histoires')}>Histoires</a></li>
+      <li style="--i:1" class="mm-groupe">
+        <span class="mm-groupe-titre">Pour qui ?</span>
+        <ul>
+          {publics.map((p) => <li><a href={u(`/${p.slug}`)}>{p.titre}</a></li>)}
+        </ul>
+      </li>
+      {liens.slice(1).map((l, i) => <li style={`--i:${i + 2}`}><a href={u(l.href)}>{l.label}</a></li>)}
+    </ul>
+    <div class="mm-actions">
+      <a class="btn btn-soleil" href={u('/abonnement')}>Choisir ma formule</a>
+      <a class="mm-abonnes" href={u('/connexion')}>Espace abonnés</a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  const entete = document.querySelector<HTMLElement>('[data-entete]')!;
+  const declencheur = document.querySelector<HTMLButtonElement>('[data-declencheur]');
+  const panneau = document.querySelector<HTMLElement>('[data-panneau]');
+  const voile = document.querySelector<HTMLElement>('[data-voile]');
+  const burger = document.querySelector<HTMLButtonElement>('[data-burger]');
+  const burgerTexte = document.querySelector<HTMLElement>('[data-burger-texte]');
+  const menu = document.querySelector<HTMLElement>('[data-menu-mobile]');
+
+  // Barre qui se cache en descendant et revient en remontant
+  let dernier = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const ouvert = entete.classList.contains('panneau-ouvert') || document.body.classList.contains('menu-ouvert');
+    entete.classList.toggle('cache', !ouvert && y > dernier && y > 160);
+    entete.classList.toggle('defile', y > 8);
+    dernier = y;
+  }, { passive: true });
+
+  // Panneau « Pour qui ? »
+  const basculerPanneau = (ouvrir: boolean) => {
+    declencheur?.setAttribute('aria-expanded', String(ouvrir));
+    entete.classList.toggle('panneau-ouvert', ouvrir);
+    if (panneau) panneau.inert = !ouvrir;
+  };
+  declencheur?.addEventListener('click', () => basculerPanneau(declencheur.getAttribute('aria-expanded') !== 'true'));
+  voile?.addEventListener('click', () => basculerPanneau(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    basculerPanneau(false);
+    basculerMenu(false);
+  });
+
+  // Menu mobile
+  const basculerMenu = (ouvrir: boolean) => {
+    burger?.setAttribute('aria-expanded', String(ouvrir));
+    if (burgerTexte) burgerTexte.textContent = ouvrir ? 'Fermer le menu' : 'Ouvrir le menu';
+    document.body.classList.toggle('menu-ouvert', ouvrir);
+    if (menu) menu.inert = !ouvrir;
+  };
+  burger?.addEventListener('click', () => basculerMenu(burger.getAttribute('aria-expanded') !== 'true'));
+</script>
+
+<style>
+  .annonce {
+    background: var(--sapin-fonce);
+    color: var(--menthe);
+    text-align: center;
+    font: 700 0.85rem var(--f-label);
+    padding: 9px 16px;
+  }
+  .annonce a { color: var(--soleil-doux); }
+
+  .entete {
+    position: sticky; top: 0; z-index: 50;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .entete.cache { transform: translateY(-100%); }
+  .barre {
+    position: relative; z-index: 3;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding-block: 12px;
+  }
+  .barre::before {
+    content: ''; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1;
+    background: var(--creme);
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .defile .barre::before, .panneau-ouvert .barre::before { border-bottom-color: var(--encre); }
+  .barre-logo { text-decoration: none; }
+
+  .nav-bureau { display: flex; align-items: center; gap: 22px; }
+  .nav-bureau ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .lien {
+    position: relative;
+    font: 700 1rem var(--f-label); color: var(--encre); text-decoration: none;
+    background: none; border: 0; cursor: pointer;
+    padding: 8px 12px; display: inline-flex; align-items: center; gap: 6px;
+  }
+  /* Soulignement « coup de feutre » */
+  .lien::after {
+    content: ''; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 6px;
+    background: var(--soleil); border-radius: 2px 6px 3px 5px; opacity: 0.8;
+    transform: scaleX(0) rotate(-1deg); transform-origin: left; transition: transform 0.25s ease;
+    z-index: -1;
+  }
+  .lien:hover::after, .lien[aria-current='page']::after, .declencheur[aria-expanded='true']::after { transform: scaleX(1) rotate(-1deg); }
+  .chevron { width: 12px; transition: transform 0.25s; }
+  .declencheur[aria-expanded='true'] .chevron { transform: rotate(180deg); }
+  .abonnes { font: 700 0.92rem var(--f-label); color: var(--sapin); white-space: nowrap; }
+  .nav-bureau .btn { padding: 10px 20px; font-size: 0.95rem; white-space: nowrap; }
+
+  /* Panneau coulissant */
+  .panneau {
+    position: absolute; left: 0; right: 0; top: 100%; z-index: 2;
+    background: var(--creme);
+    border-bottom: 2px solid var(--encre);
+    transform: translateY(-110%);
+    visibility: hidden;
+    transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 0.45s;
+  }
+  .panneau-ouvert .panneau { transform: none; visibility: visible; transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .panneau-in { padding-block: 28px 36px; display: grid; gap: 20px; }
+  .panneau-titre { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; color: var(--gris); }
+  .panneau-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .panneau-liste li { opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; }
+  .panneau-ouvert .panneau-liste li { opacity: 1; transform: none; transition-delay: calc(0.12s + var(--i) * 0.06s); }
+  .panneau-carte { display: grid; text-decoration: none; color: var(--encre); gap: 10px; }
+  .panneau-carte img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 2px solid var(--encre); transition: transform 0.25s; }
+  .panneau-liste li:nth-child(odd) .panneau-carte img { transform: rotate(-1.5deg); }
+  .panneau-liste li:nth-child(even) .panneau-carte img { transform: rotate(1.2deg); }
+  .panneau-carte:hover img { transform: rotate(0) scale(1.03); }
+  .panneau-texte { display: grid; }
+  .panneau-texte strong { font: 600 1.25rem var(--f-titre); }
+  .panneau-texte span { color: var(--gris); font-size: 0.95rem; }
+  .voile {
+    position: fixed; inset: 0; z-index: 1; background: rgba(36, 59, 50, 0.35);
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .panneau-ouvert .voile { opacity: 1; pointer-events: auto; }
+
+  /* Burger + menu mobile */
+  .burger { display: none; }
+  .menu-mobile { display: none; }
+  @media (max-width: 1080px) {
+    .nav-bureau, .panneau, .voile { display: none; }
+    .burger {
+      display: grid; place-items: center; width: 50px; height: 50px; cursor: pointer;
+      background: var(--soleil); border: 2px solid var(--encre); border-radius: var(--trait);
+      position: relative; z-index: 60;
+    }
+    .burger-traits { display: grid; gap: 5px; }
+    .burger-traits span { display: block; width: 22px; height: 2.5px; background: var(--encre); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    :global(body.menu-ouvert) .burger-traits span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    :global(body.menu-ouvert) .burger-traits span:nth-child(2) { opacity: 0; }
+    :global(body.menu-ouvert) .burger-traits span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+    .menu-mobile {
+      display: block; position: fixed; inset: 0; z-index: 45;
+      background: var(--sapin); color: var(--creme);
+      padding-top: 110px; overflow: auto;
+      transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    :global(body.menu-ouvert) { overflow: hidden; }
+    :global(body.menu-ouvert) .menu-mobile { transform: none; }
+    :global(body.menu-ouvert) .barre::before { background: transparent; border-color: transparent; }
+    :global(body.menu-ouvert) .barre-logo { visibility: hidden; }
+    .mm-liens { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+    .mm-liens > li { opacity: 0; transform: translateX(30px); transition: opacity 0.3s, transform 0.4s; }
+    :global(body.menu-ouvert) .mm-liens > li { opacity: 1; transform: none; transition-delay: calc(0.15s + var(--i) * 0.05s); }
+    .mm-liens a { color: #fff; text-decoration: none; font: 600 2rem var(--f-titre); }
+    .mm-groupe-titre { font: 700 1.8rem var(--f-main); color: var(--soleil); }
+    .mm-groupe ul { list-style: none; padding: 0 0 8px 16px; margin: 0; display: grid; gap: 2px; }
+    .mm-groupe ul a { font: 600 1.25rem var(--f-texte); color: var(--menthe); }
+    .mm-actions { display: grid; gap: 16px; justify-items: start; margin-block: 32px 48px; }
+    .mm-abonnes { color: var(--soleil-doux); font-weight: 700; }
+  }
+</style>

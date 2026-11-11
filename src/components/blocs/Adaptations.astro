@@ -1,0 +1,33 @@
+---
+/** Les deux adaptations d'âge (4-6 / 7-9 ans). */
+interface Props { intro: string }
+const { intro } = Astro.props;
+---
+<div class="adapt">
+  <div class="adapt-texte">
+    <p class="surtitre-main">Deux adaptations pour chaque histoire</p>
+    <p>{intro}</p>
+  </div>
+  <div class="adapt-cartes">
+    <div class="adapt-carte">
+      <strong>4-6 ans</strong>
+      <p>Le texte adapté aux plus jeunes, sa fiche papote pour en discuter et ses 12 activités à explorer</p>
+    </div>
+    <div class="adapt-carte">
+      <strong>7-9 ans</strong>
+      <p>Le même récit porté plus loin, avec sa fiche papote et ses 12 activités à explorer</p>
+    </div>
+  </div>
+</div>
+<style>
+  .adapt { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .adapt-texte { display: grid; gap: 12px; }
+  .adapt-texte p:not(.surtitre-main) { color: var(--gris); font-size: 1.1rem; }
+  .adapt-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .adapt-carte { background: var(--creme-carte); border: 2px solid var(--encre); padding: 22px; display: grid; gap: 8px; box-shadow: 5px 5px 0 var(--soleil); transform: rotate(-1deg); }
+  .adapt-carte + .adapt-carte { transform: rotate(1.2deg); box-shadow: 5px 5px 0 var(--sapin); }
+  .adapt-carte strong { font: 700 2rem var(--f-titre); color: var(--sapin); }
+  .adapt-carte p { color: var(--gris); line-height: 1.5; }
+  @media (max-width: 860px) { .adapt { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .adapt-cartes { grid-template-columns: 1fr; } }
+</style>

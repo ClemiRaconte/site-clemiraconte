@@ -1,0 +1,20 @@
+---
+/** Liste à coches dessinées. */
+interface Props { items: string[]; titre?: string }
+const { items, titre } = Astro.props;
+---
+<div class="liste">
+  {titre && <h3>{titre}</h3>}
+  <ul>
+    {items.map((t) => <li>{t}</li>)}
+  </ul>
+</div>
+<style>
+  .liste { display: grid; gap: 14px; }
+  .liste h3 { font-size: 1.4rem; }
+  .liste ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .liste li { position: relative; padding-left: 36px; line-height: 1.55; }
+  .liste li::before { content: ''; position: absolute; left: 2px; top: 0.3em; width: 20px; height: 12px; border-left: 3px solid var(--sapin); border-bottom: 3px solid var(--sapin); transform: rotate(-48deg); }
+  :global(.fond-sapin) .liste li { color: var(--menthe); }
+  :global(.fond-sapin) .liste li::before { border-color: var(--soleil); }
+</style>

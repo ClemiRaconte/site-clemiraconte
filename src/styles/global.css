@@ -1,0 +1,206 @@
+@import '@fontsource-variable/fraunces';
+@import '@fontsource/source-sans-3/400.css';
+@import '@fontsource/source-sans-3/600.css';
+@import '@fontsource/nunito-sans/700.css';
+@import '@fontsource/nunito-sans/800.css';
+@import '@fontsource/caveat/600.css';
+@import '@fontsource/caveat/700.css';
+
+/* ---------- Charte Clémi Raconte ---------- */
+:root {
+  --sapin: #2d6a4f;
+  --sapin-clair: #3f8266;
+  --sapin-fonce: #1f4d39;
+  --soleil: #f4c430;
+  --soleil-doux: #f7d873;
+  --encre: #243b32;
+  --gris: #5b6b63;
+  --creme: #fbf3e3;
+  --creme-carte: #fffdf7;
+  --beige: #efe4cc;
+  --ligne: #e7ddc8;
+  --menthe: #e7f0ea;
+
+  --f-titre: 'Fraunces Variable', Georgia, serif;
+  --f-texte: 'Source Sans 3', system-ui, sans-serif;
+  --f-label: 'Nunito Sans', system-ui, sans-serif;
+  --f-main: 'Caveat', 'Comic Sans MS', cursive;
+  /* Contours « dessinés à la main » : remplacent les pastilles et les cartes arrondies */
+  --trait: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  --trait-2: 18px 225px 18px 255px / 255px 18px 225px 18px;
+
+  --r-s: 12px;
+  --r-m: 20px;
+  --r-l: 32px;
+  --largeur: 1160px;
+  --ombre: 0 1px 0 rgba(36, 59, 50, 0.04), 0 12px 32px -16px rgba(36, 59, 50, 0.18);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--f-texte);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--encre);
+  background: var(--creme);
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+
+h1, h2, h3 {
+  font-family: var(--f-titre);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--encre);
+}
+h1 { font-size: clamp(2.3rem, 5.4vw, 4rem); }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
+h3 { font-size: 1.35rem; }
+p { margin: 0; }
+
+.conteneur { width: min(100% - 32px, var(--largeur)); margin-inline: auto; }
+
+.surtitre {
+  font-family: var(--f-label);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sapin);
+}
+
+.section { padding-block: clamp(64px, 9vw, 112px); }
+.section-tete { max-width: 640px; margin-bottom: 40px; display: grid; gap: 12px; }
+.section-tete p { color: var(--gris); }
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: var(--trait);
+  font-family: var(--f-label);
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px) rotate(-1deg); border-radius: var(--trait-2); }
+.btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 3px solid var(--soleil);
+  outline-offset: 3px;
+}
+.btn-plein { background: var(--sapin); color: #fff; box-shadow: 4px 4px 0 var(--encre); }
+.btn-plein:active { box-shadow: 1px 1px 0 var(--encre); transform: translate(3px, 3px); }
+.btn-plein:hover { background: var(--sapin-fonce); }
+.btn-contour { border-color: currentColor; color: var(--sapin); background: transparent; }
+.btn-contour:hover { background: var(--menthe); }
+.btn-soleil { background: var(--soleil); color: var(--encre); box-shadow: 4px 4px 0 var(--encre); }
+.btn-soleil:hover { background: var(--soleil-doux); }
+
+.lien-fleche {
+  font-family: var(--f-label);
+  font-weight: 800;
+  color: var(--sapin);
+  text-decoration: none;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+.lien-fleche:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.badge {
+  display: inline-block;
+  font-family: var(--f-label);
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 3px 12px;
+  border-radius: 3px;
+  transform: rotate(-1.5deg);
+  background: var(--menthe);
+  color: var(--sapin-fonce);
+}
+.badge-soleil { background: var(--soleil-doux); color: var(--encre); }
+
+.visuellement-cache {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Annotation manuscrite (ex. « zéro écran ! ») */
+.main {
+  font-family: var(--f-main);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--sapin);
+}
+
+/* Bandeaux pleine largeur */
+.bandeau-section { position: relative; isolation: isolate; }
+.bandeau-section > .conteneur { position: relative; z-index: 1; }
+.fond-creme { background: var(--creme); }
+.fond-beige { background: var(--beige); }
+.fond-sapin { background: var(--sapin); color: var(--creme); }
+.fond-sapin h2, .fond-sapin h3 { color: #fff; }
+.fond-sapin .surtitre { color: var(--soleil-doux); }
+.fond-sapin .main { color: var(--soleil); }
+
+/* Surtitre manuscrit souligné d'un trait */
+.surtitre-main {
+  font-family: var(--f-main);
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: var(--sapin);
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+}
+.fond-sapin .surtitre-main { color: var(--soleil); }
+.section-tete .surtitre-main { color: var(--sapin); }
+.fond-sapin .section-tete .surtitre-main { color: var(--soleil); }
+
+/* ---------- Formulaires ---------- */
+.formulaire {
+  display: grid; gap: 8px;
+  background: var(--creme-carte); color: var(--encre);
+  border: 3px solid var(--encre); box-shadow: 8px 8px 0 var(--soleil);
+  padding: clamp(24px, 4vw, 40px); transform: rotate(-0.5deg);
+}
+.formulaire label { font: 800 0.95rem var(--f-label); margin-top: 10px; }
+.formulaire input:not([type='checkbox']), .formulaire select, .formulaire textarea {
+  width: 100%; font: inherit; color: var(--encre);
+  background: #fff; border: 2px solid var(--encre); border-radius: 4px 10px 6px 12px / 10px 4px 12px 6px;
+  padding: 12px 14px;
+}
+.formulaire textarea { resize: vertical; min-height: 120px; }
+.formulaire input:focus, .formulaire select:focus, .formulaire textarea:focus { outline: 3px solid var(--soleil); outline-offset: 1px; }
+.formulaire .si, .formulaire .bloc-f { display: grid; gap: 8px; }
+.formulaire .si[hidden], .formulaire .bloc-f[hidden] { display: none; }
+.formulaire .case { display: flex; align-items: center; gap: 10px; font: 600 1rem var(--f-texte); }
+.formulaire .case input { width: 20px; height: 20px; accent-color: var(--sapin); }
+.formulaire-note { color: var(--gris); font-size: 0.9rem; margin-top: 10px; }
+.formulaire button[type='submit'] { justify-self: start; margin-top: 14px; }
+.formulaire .deux-champs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.formulaire .deux-champs > div { display: grid; gap: 8px; }
+.lien-bouton { background: none; border: 0; padding: 0; font: 800 0.95rem var(--f-label); color: var(--sapin); text-decoration: underline; cursor: pointer; justify-self: start; margin-top: 6px; }

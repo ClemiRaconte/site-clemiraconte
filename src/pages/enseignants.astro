@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Tuiles from '../components/blocs/Tuiles.astro';
+import Etapes from '../components/blocs/Etapes.astro';
+import Etiquettes from '../components/blocs/Etiquettes.astro';
+import Liste from '../components/blocs/Liste.astro';
+import Formules from '../components/blocs/Formules.astro';
+import CommentCaMarche from '../components/blocs/CommentCaMarche.astro';
+import CarteAnge from '../components/blocs/CarteAnge.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import { u } from '../lib/url';
+
+const activites = ['Jeu signature', 'Mots mêlés', 'Labyrinthe', 'Coloriage', 'Théâtre d’ombres', 'Cherche-et-trouve', 'Jeu des différences', 'Vignettes des émotions', 'Baromètre', 'Affirmation de soi', 'Jeu signature 2', 'Diplôme'];
+const reperes = ['EMC', 'pHARe', 'Égalité filles-garçons', 'Stéréotypes de genre', 'Parcours citoyen'];
+---
+<Base
+  titre="Histoires pour la classe, fiches pédagogiques · Clémi Raconte"
+  description="Une séance d’EMC clé en main de la grande section au CM1 : une histoire, sa fiche papote pour lancer l’échange et 12 activités à explorer."
+>
+  <PageTete
+    surtitre="Pour les enseignant(e)s · de la grande section au CM1"
+    titre="La vie en collectivité racontée, prête à vivre en classe"
+    intro="L’EMC clé en main : 45 minutes prêtes à vivre, rien à préparer"
+    photo="enseignants"
+    alt="Une enseignante lit une histoire à un groupe d’enfants"
+    legende="45 minutes, clé en main"
+  >
+    <a class="btn btn-plein" href={u('/histoire-ange-le-loup')}>Découvrir Ange, la séance complète</a>
+    <a class="btn btn-contour" href="#formules">Voir les formules</a>
+  </PageTete>
+
+  <Bandeau fond="sapin" crete={1}>
+    <div class="emc">
+      <div class="emc-texte">
+        <p class="surtitre-main">L’EMC est au programme</p>
+        <h2>Je vous le rends facile</h2>
+        <p>L’enseignement moral et civique est au programme du CP au CM2, environ une heure par semaine. Bonne nouvelle : il se fait surtout à l’oral, à partir de situations concrètes, pas de longs cours théoriques. Il s’agit avant tout de faire parler les enfants. En grande section, avant l’EMC, les mêmes histoires ouvrent déjà au vivre ensemble</p>
+        <p>Au fond, l’EMC parle de choses simples et humaines : le respect des autres, la place de chacun, le vivre-ensemble. Mes histoires les abordent à hauteur d’enfant, par l’émotion et le concret, jamais par le discours. Harcèlement, égalité filles-garçons, différence, émotions : les sujets qui comptent vraiment pour eux sont déjà là</p>
+      </div>
+      <div class="emc-fiche">
+        <p class="main">C’est exactement ce que fait une histoire Clémi</p>
+        <Liste
+          items={[
+            'Le cas concret : l’histoire, qui pose la situation sans faire la leçon',
+            'Le temps d’oral : la fiche papote, avec des questions graduées par âge',
+            'Le prolongement : douze activités à explorer, des jeux aux ateliers d’expression',
+          ]}
+        />
+      </div>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2} bulles={10}>
+    <Tete surtitre="Une séance type" titre="45 minutes, en trois temps" />
+    <Etapes
+      items={[
+        { repere: '15 min', titre: 'L’histoire', texte: 'On lit, on écoute ou on regarde. La situation est posée, sans méchant ni morale imposée' },
+        { repere: '15 min', titre: 'L’échange', texte: 'La fiche papote propose des questions graduées, adaptées à l’âge de vos élèves. La parole circule' },
+        { repere: '15 min', titre: 'Les activités', texte: 'Douze activités à explorer, sur des thèmes et des formes différentes. Vous commencez par celle qui colle à votre classe, les autres vous attendent pour les semaines suivantes' },
+      ]}
+    />
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={3}>
+    <Tete surtitre="Trois formats, clé en main" titre="Chaque histoire existe en trois formats" />
+    <Tuiles
+      items={[
+        { photo: 'lire', icone: 'livre', note: 'visionneuse', titre: 'À lire', texte: 'L’histoire, lue à voix haute ou projetée en classe depuis la visionneuse' },
+        { photo: 'ecouter', icone: 'casque', note: 'audio', titre: 'À écouter', texte: 'Le podcast, au coin regroupement' },
+        { photo: 'regarder', icone: 'lecture', note: 'vidéo', titre: 'À regarder', texte: 'Racontée dans la forêt conteuse' },
+      ]}
+      pied="sa fiche papote pour en discuter et ses 12 activités à explorer"
+    />
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={1}>
+    <div class="deux-col">
+      <div>
+        <Tete surtitre="Douze activités par histoire" titre="De quoi faire vivre l’histoire bien au-delà d’une séance" intro="Chaque histoire arrive avec sa fiche papote et douze activités à explorer : jeux qui font bouger, ateliers d’expression, fiches en autonomie" />
+        <Etiquettes items={activites} />
+      </div>
+      <div>
+        <Tete surtitre="Des repères que vous connaissez" titre="La vie en groupe, en classe comme dans la cour" intro="Les histoires parlent de la vie en groupe, celle que je vois chaque jour au centre de loisirs et que vos élèves vivent en classe comme dans la cour. Les thèmes arrivent au fil des parutions, une histoire chaque samedi à 9h, et viennent nourrir ces repères tout au long de l’année" />
+        <Etiquettes items={reperes} />
+      </div>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={2} id="formules">
+    <Tete surtitre="Simple et vraiment clé en main" titre="Les formules enseignants" intro="Prix de lancement, à l’année. Une nouvelle histoire chaque semaine, dans les trois formats, avec sa fiche papote et ses 12 activités. Aucune installation" centre />
+    <Formules public="enseignants" />
+    <CommentCaMarche extra={['Avec l’offre école, l’histoire et la fiche papote s’impriment aussi, pour l’usage en classe']} />
+  </Bandeau>
+
+  <CarteAnge
+    surtitre="Essayez sans engagement"
+    texte="Ange est en accès libre, de bout en bout : l’histoire, sa fiche papote et ses activités. Essayez-la avec votre classe et voyez par vous-même"
+    href={u('/histoire-ange-le-loup')}
+  />
+
+  <AppelFinal titre="Une question, un devis pour votre école ?" texte="Écrivez-moi, je réponds moi-même, sous quelques jours">
+    <a class="btn btn-soleil" href={u('/contact?profil=enseignant')}>Demander un devis école</a>
+    <a class="btn btn-contour" href={u('/abonnement?public=enseignants')}>Choisir ma formule</a>
+  </AppelFinal>
+</Base>
+
+<style>
+  .emc { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(28px, 6vw, 72px); align-items: center; }
+  .emc-texte { display: grid; gap: 14px; }
+  .emc-texte p:not(.surtitre-main) { color: var(--menthe); font-size: 1.08rem; }
+  .emc-fiche { background: var(--creme-carte); color: var(--encre); border: 3px solid var(--encre); padding: 28px; display: grid; gap: 16px; box-shadow: 8px 8px 0 var(--soleil); transform: rotate(1.5deg); }
+  .emc-fiche .main { font-size: 1.7rem; color: var(--sapin); }
+  .emc-fiche :global(li) { color: var(--encre) !important; }
+  .emc-fiche :global(li::before) { border-color: var(--sapin) !important; }
+  .deux-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); }
+  @media (max-width: 860px) { .emc, .deux-col { grid-template-columns: 1fr; } }
+</style>

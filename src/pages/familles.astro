@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Tuiles from '../components/blocs/Tuiles.astro';
+import Notes from '../components/blocs/Notes.astro';
+import Etiquettes from '../components/blocs/Etiquettes.astro';
+import Adaptations from '../components/blocs/Adaptations.astro';
+import Formules from '../components/blocs/Formules.astro';
+import CommentCaMarche from '../components/blocs/CommentCaMarche.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import MomentFamille from '../components/MomentFamille.astro';
+import { u } from '../lib/url';
+
+const themes = ['La différence', 'Apprendre autrement', 'Le handicap, visible et invisible', 'Trouver sa place dans le groupe', 'Les émotions', 'La séparation des parents', 'Les nouvelles familles', 'Le harcèlement', 'Le consentement', 'Les écrans', 'Grandir, à son rythme'];
+---
+<Base
+  titre="Histoires du soir pour enfants de 4 à 9 ans · Clémi Raconte"
+  description="Des histoires à lire, écouter ou regarder le soir, quand un sujet du quotidien a besoin de mots : émotions, différence, nouvelles familles."
+>
+  <PageTete
+    surtitre="Pour les familles"
+    titre="Le soir venu, une histoire à partager"
+    intro="Des histoires à raconter le soir, dans la voiture, ou quand un sujet du quotidien a besoin d’un coup de pouce pour trouver ses mots. Pour les 4-9 ans, écrites dans les Hautes-Alpes. Rien à préparer : l’histoire est prête, il n’y a qu’à la raconter"
+    photo="familles"
+    alt="Une maman lit une histoire à ses deux enfants sur le lit"
+    legende="avec ou sans écran"
+  >
+    <a class="btn btn-plein" href={u('/histoire-ange-le-loup')}>Découvrir Ange, en accès libre</a>
+    <a class="btn btn-contour" href="#formules">Voir les formules</a>
+  </PageTete>
+
+  <Bandeau fond="beige" crete={1}>
+    <MomentFamille />
+  </Bandeau>
+
+  <Bandeau fond="sapin" crete={2}>
+    <div class="ecran">
+      <div class="ecran-chiffre"><strong>0</strong><span class="main">écran obligatoire</span></div>
+      <div class="ecran-texte">
+        <p class="surtitre-main">Avec ou sans écran</p>
+        <h2>Le cœur de chaque histoire, c’est la voix</h2>
+        <p>Vous lisez l’histoire à voix haute depuis votre espace abonné, l’enfant écoute et imagine. Puis il prolonge avec les activités imprimées, qu’il colorie et qu’il garde</p>
+        <p>Et si l’écran vous arrange, le podcast et la vidéo sont là pour ça. Dans la voiture, un soir de fatigue, quand ça dépanne. Chacun fait comme il le sent</p>
+      </div>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={3} bulles={10}>
+    <Tete surtitre="Trois formats" titre="Chaque histoire existe en trois formats" intro="Vous prenez celui qui va avec votre moment. Les trois arrivent en même temps, chaque samedi à 9h" />
+    <Tuiles
+      items={[
+        { photo: 'lire', icone: 'livre', note: 'le soir venu', titre: 'À lire', texte: 'L’histoire lue à voix haute par l’adulte, au bord du lit. L’enfant écoute, imagine, pose ses questions' },
+        { photo: 'ecouter', icone: 'casque', note: 'sur la route', titre: 'À écouter', texte: 'Le podcast, dans la voiture ou au calme, les yeux ailleurs. Pour les trajets d’école et les longs voyages' },
+        { photo: 'regarder', icone: 'lecture', note: 'un temps libre', titre: 'À regarder', texte: 'La vidéo, racontée dans la forêt conteuse, quand on a envie de se poser tous ensemble' },
+      ]}
+      pied="sa fiche papote pour en discuter et ses 12 activités à explorer"
+    />
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={1}>
+    <Tete surtitre="Les familles ont changé, les histoires aussi" titre="Les thèmes qui arrivent au fil de l’année" intro="Des histoires d’aujourd’hui, qui parlent de ce que vivent vraiment les enfants, à leur hauteur et sans faire la leçon" />
+    <Etiquettes items={themes} />
+    <div class="espace"></div>
+    <Adaptations intro="Le même récit, écrit deux fois, pour que chaque enfant de la fratrie ait sa version. Vous choisissez celle qui lui va" />
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2}>
+    <Tete surtitre="Ce que vous recevez" titre="Une bibliothèque qui grandit chaque samedi" />
+    <Notes
+      items={[
+        { etiquette: 'chaque semaine', titre: 'Une nouvelle histoire', texte: 'Une parution chaque samedi à 9h, toute l’année. La bibliothèque de la maison grandit au fil des mois' },
+        { etiquette: 'trois formats', titre: 'À lire, écouter, regarder', texte: 'L’histoire à lire à voix haute, le podcast pour la route, la vidéo racontée dans la forêt conteuse' },
+        { etiquette: 'l’esprit maison', titre: 'Sans méchant, sans morale imposée', texte: 'Des fins ouvertes qui laissent la conversation à l’enfant, pas des leçons toutes faites' },
+      ]}
+    />
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={3} id="formules">
+    <Tete surtitre="Prix de lancement, à l’année" titre="Les formules familles" intro="Toutes les histoires de l’année, leurs fiches papote et leurs 12 activités, à garder" centre />
+    <Formules public="familles" elargie />
+    <CommentCaMarche
+      extra={[
+        'Pour l’enfant, zéro écran : l’adulte lit à voix haute, l’enfant écoute, joue et colorie',
+        'Avec une formule à l’année, ce que vous avez reçu reste accessible tant que le service existe',
+      ]}
+    />
+  </Bandeau>
+
+  <AppelFinal cri="Bientôt !" titre="Les premières histoires arrivent courant novembre" texte="Écrivez-moi pour être prévenu(e) du lancement. Ensuite, une nouvelle histoire chaque samedi à 9h">
+    <a class="btn btn-soleil" href={u('/contact?profil=parent')}>Être prévenu(e) du lancement</a>
+    <a class="btn btn-contour" href={u('/abonnement')}>Choisir ma formule</a>
+  </AppelFinal>
+</Base>
+
+<style>
+  .ecran { display: grid; grid-template-columns: 0.6fr 1.4fr; gap: clamp(28px, 6vw, 80px); align-items: center; }
+  .ecran-chiffre { display: grid; justify-items: center; transform: rotate(-4deg); }
+  .ecran-chiffre strong { font: 700 clamp(7rem, 16vw, 11rem) / 0.9 var(--f-titre); color: var(--soleil); }
+  .ecran-chiffre .main { font-size: 2rem; color: #fff; }
+  .ecran-texte { display: grid; gap: 14px; }
+  .ecran-texte p:not(.surtitre-main) { color: var(--menthe); font-size: 1.1rem; }
+  .espace { height: clamp(48px, 7vw, 88px); }
+  @media (max-width: 760px) { .ecran { grid-template-columns: 1fr; } }
+</style>

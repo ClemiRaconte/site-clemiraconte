@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Notes from '../components/blocs/Notes.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import { u } from '../lib/url';
+---
+<Base
+  titre="Soutenir des histoires jeunesse indépendantes · Clémi Raconte"
+  description="Soutenir Clémi Raconte avec la campagne Ulule ou le Tipeee, ou simplement en partageant, pour que les histoires continuent de sortir chaque samedi."
+>
+  <PageTete
+    surtitre="Soutenir"
+    titre="Pour que les histoires continuent"
+    intro="Clémi Raconte, c’est un projet artisanal, écrit ici, dans le Champsaur. Chaque soutien paie du temps d’écriture, du matériel, des illustrations et des heures de montage. Voici deux façons de donner un coup de main"
+    photo="montagnes-brume"
+    alt="Montagnes et forêt de sapins dans la brume"
+    legende="écrit ici, dans le Champsaur"
+  />
+
+  <Bandeau fond="sapin" crete={1}>
+    <div class="dons">
+      <article class="don vedette">
+        <span class="don-etiquette main">la campagne en cours</span>
+        <h2>Le financement participatif Ulule</h2>
+        <p>Une campagne, une durée limitée, un objectif clair : lancer la collection et offrir aux premières histoires de vraies illustrations, de vraies voix, de vraies vidéos. Il y a des contreparties, des histoires imprimées et quelques surprises</p>
+        <p class="don-cle main">C’est le coup de pouce qui compte le plus en ce moment</p>
+        <a class="btn btn-soleil" href="https://fr.ulule.com/les-histoires-d-aujourd-hui-pour-les-adultes-de-demain-/">Découvrir la campagne Ulule</a>
+      </article>
+      <article class="don">
+        <span class="don-etiquette main">pour la route</span>
+        <h2>Le Tipeee</h2>
+        <p>Le Tipeee, c’est le soutien qui dure. Un petit montant chaque mois, libre, arrêtable quand vous voulez, qui me permet de tenir le rythme d’une histoire chaque samedi sans courir après le temps</p>
+        <p class="don-cle main">Même un euro par mois, à plusieurs, ça change tout</p>
+        <a class="btn btn-plein" href="https://fr.tipeee.com/clemi-raconte/">Voir le Tipeee</a>
+      </article>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2} bulles={8}>
+    <Tete surtitre="Et si vous ne pouvez pas donner" titre="Le soutien n’est pas qu’une histoire d’argent" intro="Ces trois gestes aident autant" />
+    <Notes
+      items={[
+        { etiquette: 'geste 1', titre: 'En parler', texte: 'À un enseignant, à un parent, au CSE de votre entreprise, à la médiathèque du coin. Le bouche-à-oreille fait tout, dans un projet comme celui-ci' },
+        { etiquette: 'geste 2', titre: 'Partager une histoire', texte: 'Ange est en accès libre, de bout en bout. Partagez-la, testez-la, dites-moi ce qu’en pensent les enfants', lien: { href: u('/histoire-ange-le-loup'), texte: 'Lire Ange' } },
+        { etiquette: 'geste 3', titre: 'S’abonner', texte: 'Un abonnement, c’est le soutien le plus direct : vous recevez les histoires et vous permettez aux suivantes d’exister', lien: { href: u('/abonnement'), texte: 'Choisir ma formule' } },
+      ]}
+    />
+  </Bandeau>
+
+  <AppelFinal cri="Merci !" titre="Chaque soutien fait vivre une histoire de plus">
+    <a class="btn btn-soleil" href={u('/abonnement')}>Choisir ma formule</a>
+    <a class="btn btn-contour" href={u('/histoires')}>Découvrir les histoires</a>
+  </AppelFinal>
+</Base>
+
+<style>
+  .dons { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 5vw, 56px); align-items: center; }
+  .don { position: relative; background: var(--creme-carte); color: var(--encre); border: 3px solid var(--encre); padding: 40px 30px 30px; display: grid; gap: 14px; justify-items: start; box-shadow: 8px 8px 0 var(--sapin-fonce); transform: rotate(1deg); }
+  .don.vedette { box-shadow: 8px 8px 0 var(--soleil); transform: rotate(-1.2deg); }
+  .don h2 { color: var(--encre) !important; font-size: clamp(1.6rem, 3vw, 2.1rem); }
+  .don p { color: var(--gris); line-height: 1.6; }
+  .don-cle { font-size: 1.6rem; color: var(--sapin) !important; }
+  .don-etiquette { position: absolute; top: -20px; left: 20px; background: var(--soleil); padding: 4px 14px 2px; font-size: 1.4rem; transform: rotate(-3deg); box-shadow: 2px 2px 0 var(--encre); }
+  @media (max-width: 860px) { .dons { grid-template-columns: 1fr; } }
+</style>

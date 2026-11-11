@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import { u } from '../lib/url';
+---
+<Base titre="Merci · Clémi Raconte" description="Merci pour votre message.">
+  <PageTete
+    surtitre="Bien reçu !"
+    titre="Merci pour votre message"
+    intro="Je le lis moi-même et je vous réponds sous quelques jours, à l’adresse que vous avez indiquée"
+  >
+    <a class="btn btn-plein" href={u('/histoire-ange-le-loup')}>En attendant, découvrir Ange</a>
+    <a class="btn btn-contour" href={u('/')}>Retour à l’accueil</a>
+  </PageTete>
+</Base>

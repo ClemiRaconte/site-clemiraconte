@@ -1,0 +1,22 @@
+---
+/** Bandeau d'appel à l'action en fin de page. */
+import Bandeau from './Bandeau.astro';
+interface Props { cri?: string; titre: string; texte?: string }
+const { cri = 'À vous de jouer !', titre, texte } = Astro.props;
+---
+<Bandeau fond="sapin" crete={2} bulles={10} class="appel">
+  <div class="appel-in">
+    <p class="appel-cri main">{cri}</p>
+    <h2>{titre}</h2>
+    {texte && <p class="appel-texte">{texte}</p>}
+    <div class="appel-actions"><slot /></div>
+  </div>
+</Bandeau>
+<style>
+  .appel-in { display: grid; gap: 14px; justify-items: center; text-align: center; max-width: 760px; margin-inline: auto; }
+  .appel-cri { font-size: clamp(2.4rem, 6vw, 3.8rem); transform: rotate(-4deg); }
+  .appel-texte { color: var(--menthe); font-size: 1.1rem; }
+  .appel-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 8px; }
+  .appel-actions :global(.btn-contour) { color: #fff; }
+  .appel-actions :global(.btn-contour:hover) { background: var(--sapin-fonce); }
+</style>

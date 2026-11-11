@@ -1,0 +1,18 @@
+---
+/** En-tête de section : surtitre manuscrit, titre, introduction. */
+interface Props { surtitre?: string; titre: string; intro?: string; centre?: boolean; niveau?: 1 | 2 }
+const { surtitre, titre, intro, centre = false, niveau = 2 } = Astro.props;
+const H = niveau === 1 ? 'h1' : 'h2';
+---
+<div class:list={['tete', { centre }]}>
+  {surtitre && <p class="surtitre-main">{surtitre}</p>}
+  <H>{titre}</H>
+  {intro && <p class="tete-intro">{intro}</p>}
+  <slot />
+</div>
+<style>
+  .tete { display: grid; gap: 12px; max-width: 720px; margin-bottom: clamp(32px, 4vw, 48px); }
+  .tete.centre { margin-inline: auto; text-align: center; justify-items: center; }
+  .tete-intro { color: var(--gris); font-size: 1.12rem; }
+  :global(.fond-sapin) .tete-intro, :global(.fond-nuit) .tete-intro { color: var(--menthe); }
+</style>

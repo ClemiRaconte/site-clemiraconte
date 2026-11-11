@@ -1,0 +1,27 @@
+---
+/** Bandeau pleine largeur, séparé du précédent par une ligne de crêtes. */
+import Crete from '../Crete.astro';
+import Bulles from '../Bulles.astro';
+interface Props {
+  fond?: 'creme' | 'beige' | 'sapin' | 'nuit';
+  crete?: 1 | 2 | 3 | false;
+  bulles?: number;
+  id?: string;
+  class?: string;
+  serre?: boolean;
+}
+const { fond = 'creme', crete = 1, bulles = 0, id, class: cls, serre = false } = Astro.props;
+const couleurs = { creme: 'var(--creme)', beige: 'var(--beige)', sapin: 'var(--sapin)', nuit: '#1c3a2d' };
+---
+<section id={id} class:list={['bandeau-section', `fond-${fond}`, 'bandeau', { serre }, cls]}>
+  {crete && <Crete couleur={couleurs[fond]} forme={crete} />}
+  {bulles > 0 && <Bulles nombre={bulles} ton={fond === 'sapin' || fond === 'nuit' ? 'creme' : 'sapin'} graine={bulles + 3} />}
+  <div class="conteneur"><slot /></div>
+</section>
+<style>
+  .bandeau { padding-block: clamp(72px, 9vw, 120px); }
+  .bandeau.serre { padding-block: clamp(56px, 7vw, 88px); }
+  .fond-nuit { background: #1c3a2d; color: var(--creme); }
+  .fond-nuit :global(h2), .fond-nuit :global(h3) { color: #fff; }
+  .fond-nuit :global(.surtitre-main) { color: var(--soleil); }
+</style>
