@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Notes from '../components/blocs/Notes.astro';
+import { u } from '../lib/url';
+---
+<Base titre="Espace abonnés · Clémi Raconte" description="L’espace abonnés de Clémi Raconte : vos histoires, leurs fiches papote et leurs activités, une nouvelle chaque samedi à 9h.">
+  <PageTete
+    surtitre="Espace abonnés"
+    titre="Votre espace ouvre courant novembre"
+    intro="C’est ici que vous retrouverez vos histoires, une nouvelle chaque samedi à 9h. Chacune existe en deux adaptations, 4-6 ans et 7-9 ans, avec sa fiche papote pour en discuter et ses 12 activités à explorer"
+  />
+
+  <Bandeau fond="beige" crete={1}>
+    <div class="co">
+      <form class="formulaire" id="co-form" novalidate>
+        <h2>Me connecter</h2>
+        <label for="co-email">Adresse email</label>
+        <input id="co-email" type="email" autocomplete="email" />
+        <label for="co-mdp">Mot de passe</label>
+        <input id="co-mdp" type="password" autocomplete="current-password" />
+        <button class="btn btn-plein" type="submit">Me connecter</button>
+        <a href="#" id="co-oubli" class="lien-bouton">Mot de passe oublié ?</a>
+        <p id="co-message" class="co-message" hidden role="status">L’espace ouvre avec les premières histoires, courant novembre. Vos identifiants vous arriveront par email au lancement</p>
+      </form>
+      <Notes
+        colonnes={2}
+        items={[
+          { etiquette: 'pas encore abonné(e) ?', titre: 'Réservez votre formule', texte: 'Réservez dès maintenant la formule qui vous va. Rien n’est à payer aujourd’hui', lien: { href: u('/abonnement'), texte: 'Choisir ma formule' } },
+          { etiquette: 'envie de voir l’intérieur ?', titre: 'Visitez l’espace', texte: 'Bibliothèque, visionneuse, activités à imprimer : visitez l’espace tel qu’il sera, avec Ange', lien: { href: u('/espace-abonne'), texte: 'Visiter l’espace' } },
+        ]}
+      />
+    </div>
+  </Bandeau>
+</Base>
+
+<script>
+  const f = document.getElementById('co-form')!;
+  const m = document.getElementById('co-message')!;
+  f.addEventListener('submit', (e) => { e.preventDefault(); m.hidden = false; });
+  document.getElementById('co-oubli')!.addEventListener('click', (e) => { e.preventDefault(); m.hidden = false; });
+</script>
+
+<style>
+  .co { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  .co h2 { font-size: 1.6rem; }
+  .co-message { background: var(--soleil-doux); padding: 12px 14px; font-weight: 600; margin-top: 8px; }
+  @media (max-width: 860px) { .co { grid-template-columns: 1fr; } }
+</style>

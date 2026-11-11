@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Notes from '../components/blocs/Notes.astro';
+import CarteAnge from '../components/blocs/CarteAnge.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import { u } from '../lib/url';
+---
+<Base
+  titre="Histoire sur la différence pour enfants · Clémi Raconte"
+  description="Des histoires sur la différence pour les 4-9 ans, sans méchant ni morale imposée, avec leur fiche papote et des pistes concrètes pour en parler."
+>
+  <PageTete
+    surtitre="Les histoires par thème"
+    titre="Des histoires sur la différence pour les enfants de 4 à 9 ans"
+    intro="Pour parler de la différence sans faire la leçon. Un enfant qui se sent « pas comme les autres », un copain qu’on regarde de travers, une question posée sans filtre à voix haute : la différence arrive tôt dans la vie des enfants. Je rassemble ici mes histoires sur la différence, chacune avec sa fiche papote et ses 12 activités à explorer, pour en parler à la maison, en classe ou en groupe"
+    photo="papote"
+    alt="Une maman parle avec son petit garçon"
+    legende="en parler sans faire la leçon"
+  >
+    <a class="btn btn-plein" href={u('/histoire-ange-le-loup')}>Découvrir l’histoire d’Ange</a>
+  </PageTete>
+
+  <Bandeau fond="beige" crete={1}>
+    <div class="deux">
+      <article class="texte">
+        <p class="surtitre-main">Pourquoi c’est difficile d’en parler</p>
+        <h2>Les enfants voient tout</h2>
+        <p>Cela fait quinze ans que je travaille avec des enfants. Je le constate chaque jour au centre de loisirs : les enfants voient tout. La taille, l’accent, la timidité, la famille qui ne ressemble pas aux autres. Ils le remarquent bien avant que les adultes osent en parler.</p>
+        <p>Notre réflexe d’adulte, c’est souvent d’expliquer : « tout le monde est différent », « il faut accepter les autres ». C’est vrai. Mais dit comme ça, ça glisse. L’enfant hoche la tête et rien ne bouge vraiment.</p>
+        <p>Il y a aussi l’autre côté, celui qu’on oublie : l’enfant qui se sent lui-même différent. Celui qui se fait tout petit pour ne pas déranger et préfère se cacher plutôt que risquer d’être mis de côté. Lui aussi a besoin de mots</p>
+      </article>
+      <article class="texte carte">
+        <p class="surtitre-main">Ce qu’une histoire permet</p>
+        <h2>Un pas de côté</h2>
+        <p>Une histoire fait un pas de côté. On ne parle plus de Léo ou d’Inès, mais d’un loup, d’une forêt, d’une fête. L’enfant peut s’y reconnaître sans se sentir visé. Il dit ce qu’il pense du personnage et, à travers lui, de ce qu’il vit.</p>
+        <p>C’est pour ça que mes histoires sont sans méchant ni morale imposée. Personne n’est désigné coupable, personne ne reçoit la leçon. Chaque enfant repart avec sa propre réponse. La fiche papote aide l’adulte à ouvrir l’échange avec des questions simples, sans jamais forcer</p>
+      </article>
+    </div>
+  </Bandeau>
+
+  <CarteAnge
+    surtitre="L’histoire sur la différence · offerte à tous"
+    texte="Ange est un loup si discret qu’il marche sur la pointe des pattes. Il est persuadé que s’il se montre, toute la forêt de Daillon prendra la fuite. Une histoire pour les enfants qui se cachent et pour ceux qui ne voient pas toujours les enfants qui se cachent. Offerte en entier : l’histoire, sa fiche papote et ses 12 activités"
+    bouton="Découvrir l’histoire"
+    href={u('/histoire-ange-le-loup')}
+  />
+
+  <Bandeau fond="creme" crete={2} bulles={8}>
+    <div class="ages">
+      <Tete surtitre="Pour quel âge ?" titre="Une version à sa mesure" intro="Chaque histoire existe en deux adaptations, avec un vocabulaire et une longueur pensés pour chaque âge. Que votre enfant ait 4, 6 ou 8 ans, il trouve une version à sa mesure. Pour une fratrie, chaque enfant peut avoir la sienne" />
+      <div class="ages-cartes">
+        <div class="age"><strong>4-6 ans</strong><p>Le récit reste simple et proche des sensations : c’est l’âge où l’on découvre que l’autre ne voit pas le monde comme soi</p></div>
+        <div class="age"><strong>7-9 ans</strong><p>Les questions vont plus loin : le regard des copains, l’envie d’appartenir au groupe, le courage d’être soi devant les autres</p></div>
+      </div>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={3}>
+    <Tete surtitre="Quelques pistes pour en parler" titre="Avec ou sans histoire" />
+    <Notes
+      items={[
+        { etiquette: 'piste 1', titre: 'Partir de ce que l’enfant a remarqué', texte: 'Une question comme « qu’est-ce qui t’a étonné chez lui ? » ouvre plus de portes qu’une explication' },
+        { etiquette: 'piste 2', titre: 'Accueillir les mots maladroits', texte: 'Un enfant qui dit « il est bizarre » cherche souvent à comprendre, pas à blesser. C’est le point de départ de la discussion, pas sa fin' },
+        { etiquette: 'piste 3', titre: 'Parler de ses propres différences', texte: 'Chacun a la sienne, l’adulte aussi. En parler simplement montre que ce n’est pas un défaut à cacher' },
+        { etiquette: 'piste 4', titre: 'Ne pas chercher la bonne réponse', texte: 'Une discussion réussie, c’est une discussion où l’enfant a parlé, pas celle où il a retenu la morale' },
+        { etiquette: 'piste 5', titre: 'Passer par le jeu', texte: 'Dessiner, mimer, inventer un personnage : souvent, les mains disent ce que la bouche ne sait pas encore dire' },
+      ]}
+    />
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={1}>
+    <Tete surtitre="En classe ou en structure" titre="La différence, au cœur du vivre-ensemble" />
+    <Notes
+      colonnes={2}
+      items={[
+        { etiquette: 'enseignants', titre: 'L’EMC et le respect d’autrui', texte: 'Pour les enseignants, la différence rejoint directement l’EMC et le respect d’autrui. Ange se vit en une séance clé en main, de la grande section au CM1', lien: { href: u('/enseignants'), texte: 'Découvrir l’offre enseignants' } },
+        { etiquette: 'travailleurs sociaux', titre: 'Un support de médiation', texte: 'Pour les éducateurs et les travailleurs sociaux, l’histoire devient un support de médiation, en entretien ou en petit groupe, pour les enfants qui se sentent à part', lien: { href: u('/travailleurs-sociaux'), texte: 'Découvrir l’offre travailleurs sociaux' } },
+      ]}
+    />
+    <p class="signature">Clément Joubert, animateur depuis quinze ans et directeur d’un centre de loisirs dans le Champsaur, dans les Hautes-Alpes · <a href={u('/equipe')}>Qui je suis</a></p>
+  </Bandeau>
+
+  <AppelFinal cri="Bientôt !" titre="Une nouvelle histoire chaque semaine" texte="Les premières arrivent courant novembre, puis c’est chaque samedi à 9h. Écrivez-moi pour être prévenu(e) du lancement">
+    <a class="btn btn-soleil" href={u('/contact?objet=lancement')}>Être prévenu(e) du lancement</a>
+    <a class="btn btn-contour" href={u('/abonnement')}>Choisir ma formule</a>
+  </AppelFinal>
+</Base>
+
+<style>
+  .deux { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  .texte { display: grid; gap: 14px; }
+  .texte p:not(.surtitre-main) { color: var(--gris); font-size: 1.06rem; line-height: 1.7; }
+  .texte.carte { background: var(--creme-carte); border: 3px solid var(--encre); padding: clamp(24px, 3vw, 36px); box-shadow: 8px 8px 0 var(--sapin); transform: rotate(1deg); }
+  .ages-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .age { background: var(--creme-carte); border: 2px solid var(--encre); padding: 24px; display: grid; gap: 8px; box-shadow: 5px 5px 0 var(--soleil); transform: rotate(-1deg); }
+  .age + .age { transform: rotate(1deg); box-shadow: 5px 5px 0 var(--sapin); }
+  .age strong { font: 700 2rem var(--f-titre); color: var(--sapin); }
+  .age p { color: var(--gris); line-height: 1.55; }
+  .signature { margin-top: 40px; text-align: center; color: var(--gris); font-style: italic; }
+  .signature a { color: var(--sapin); font-weight: 700; font-style: normal; }
+  @media (max-width: 860px) { .deux, .ages-cartes { grid-template-columns: 1fr; } }
+</style>

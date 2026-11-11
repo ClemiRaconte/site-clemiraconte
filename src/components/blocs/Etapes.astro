@@ -1,0 +1,41 @@
+---
+/** Étapes numérotées reliées par une flèche dessinée : séance type, comment ça marche… */
+interface Etape { titre: string; texte: string; repere?: string }
+interface Props { items: Etape[] }
+const { items } = Astro.props;
+---
+<ol class="etapes" style={`--n:${items.length}`}>
+  {items.map((e, i) => (
+    <li class="etape">
+      <span class="etape-num" aria-hidden="true">{i + 1}</span>
+      {e.repere && <span class="etape-repere main">{e.repere}</span>}
+      <h3>{e.titre}</h3>
+      <p>{e.texte}</p>
+      {i < items.length - 1 && (
+        <svg class="etape-fleche" viewBox="0 0 80 40" aria-hidden="true"><path d="M4 26c18-16 42-20 64-6M58 10l11 10-14 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      )}
+    </li>
+  ))}
+</ol>
+<style>
+  .etapes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: clamp(28px, 5vw, 64px); }
+  .etape { position: relative; display: grid; gap: 8px; align-content: start; }
+  .etape-num {
+    width: 64px; height: 64px; display: grid; place-items: center;
+    font: 700 2rem var(--f-titre); color: var(--encre); background: var(--soleil);
+    border: 2.5px solid var(--encre); border-radius: var(--trait); transform: rotate(-4deg); box-shadow: 3px 3px 0 var(--encre);
+  }
+  .etape:nth-child(even) .etape-num { transform: rotate(5deg); background: var(--menthe); }
+  .etape-repere { font-size: 1.5rem; }
+  .etape h3 { font-size: 1.35rem; }
+  .etape p { color: var(--gris); line-height: 1.55; }
+  :global(.fond-sapin) .etape p { color: var(--menthe); }
+  .etape-fleche { position: absolute; top: 14px; right: calc(-1 * clamp(28px, 5vw, 64px) + 4px); width: clamp(24px, 4vw, 56px); color: var(--sapin); }
+  :global(.fond-sapin) .etape-fleche { color: var(--soleil); }
+  @media (max-width: 760px) {
+    .etapes { grid-template-columns: 1fr; }
+    .etape { grid-template-columns: 64px 1fr; column-gap: 18px; }
+    .etape-num { grid-row: span 3; }
+    .etape-fleche { display: none; }
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+/**
+ * Visionneuse de Clémi Raconte (code repris du site actuel) : l'histoire et sa fiche papote
+ * se lisent page par page, sans bouton de téléchargement. Sur téléphone, l'histoire s'ouvre
+ * en liseuse, avec le texte en grand.
+ */
+import '../styles/visionneuse.css';
+import { u } from '../lib/url';
+interface Doc { titre: string; src: string; texte?: { id: string; contenu: unknown } }
+interface Props { docs: Doc[]; pied?: string }
+const { docs, pied } = Astro.props;
+const donnees = JSON.stringify(docs.map((d) => ({ titre: d.titre, src: u(d.src), ...(d.texte ? { texte: d.texte.id } : {}) })));
+---
+<div class="vz" data-docs={donnees} data-pied={pied}></div>
+{docs.filter((d) => d.texte).map((d) => (
+  <script type="application/json" id={d.texte!.id} set:html={JSON.stringify(d.texte!.contenu)} />
+))}

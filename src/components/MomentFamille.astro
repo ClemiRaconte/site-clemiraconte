@@ -1,0 +1,153 @@
+---
+/**
+ * « Ce soir, on raconte quoi ? » : la famille choisit son moment,
+ * le site propose comment vivre l'histoire ensemble.
+ * Fonctionne sans JavaScript (le premier moment est affiché).
+ */
+import { Image } from 'astro:assets';
+import Icone from './Icone.astro';
+import { photo } from '../lib/photos';
+
+const moments = [
+  {
+    id: 'soir',
+    bouton: 'Au coucher',
+    titre: 'Le rituel du soir',
+    texte: 'Vous lisez l’histoire à voix haute, au bord du lit. L’enfant écoute, imagine, pose ses questions, et s’endort la tête pleine de belles images',
+    format: 'À lire',
+    icone: 'livre',
+    photo: 'lire',
+  },
+  {
+    id: 'route',
+    bouton: 'En voiture',
+    titre: 'Une histoire pour la route',
+    texte: 'Le podcast prend le relais sur les trajets d’école et les longs voyages, sans tablette ni écran. Toute la famille écoute ensemble',
+    format: 'À écouter',
+    icone: 'casque',
+    photo: 'ecouter',
+  },
+  {
+    id: 'emotion',
+    bouton: 'Après une grosse émotion',
+    titre: 'Quand ça déborde',
+    texte: 'Une colère, un chagrin, une dispute : l’histoire aide l’enfant à trouver ses mots. La fiche papote vous donne les questions pour en parler',
+    format: 'La fiche papote',
+    icone: 'bulle',
+    photo: 'papote',
+  },
+  {
+    id: 'sujet',
+    bouton: 'Quand c’est dur à dire',
+    titre: 'Ouvrir la porte en douceur',
+    texte: 'La différence, une famille qui change, un chagrin : le récit met en scène, à bonne distance, ce qui pèse. Et la conversation commence',
+    format: 'L’histoire + la fiche papote',
+    icone: 'livre',
+    photo: 'familles',
+  },
+  {
+    id: 'mercredi',
+    bouton: 'Un mercredi pluvieux',
+    titre: 'On prolonge ensemble',
+    texte: 'Coloriage, labyrinthe, théâtre d’ombres : les 12 activités s’impriment et se partagent entre frères et sœurs. Et on les garde',
+    format: '12 activités',
+    icone: 'ciseaux',
+    photo: 'activites',
+  },
+];
+---
+<div class="moment" data-moment>
+  <div class="moment-tete">
+    <p class="surtitre-main">Ce soir, on raconte quoi ?</p>
+    <h3>Choisissez votre moment en famille</h3>
+  </div>
+  <div class="moment-choix" role="tablist" aria-label="Moments en famille">
+    {moments.map((m, i) => (
+      <button
+        type="button"
+        role="tab"
+        id={`onglet-${m.id}`}
+        aria-controls={`moment-${m.id}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        tabindex={i === 0 ? 0 : -1}
+        data-onglet
+      >
+        {m.bouton}
+      </button>
+    ))}
+  </div>
+  {moments.map((m, i) => (
+    <div class="moment-carte" role="tabpanel" id={`moment-${m.id}`} aria-labelledby={`onglet-${m.id}`} hidden={i !== 0}>
+      <div class="moment-photo">
+        <Image src={photo(m.photo)} alt="" widths={[400, 700]} sizes="(min-width: 860px) 420px, 90vw" loading="lazy" />
+      </div>
+      <div class="moment-texte">
+        <h4>{m.titre}</h4>
+        <p>{m.texte}</p>
+        <p class="moment-format"><Icone nom={m.icone} taille={22} /> <span>On choisit : <strong>{m.format}</strong></span></p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-moment]').forEach((bloc) => {
+    const onglets = [...bloc.querySelectorAll<HTMLButtonElement>('[data-onglet]')];
+    const choisir = (cible: HTMLButtonElement) => {
+      onglets.forEach((o) => {
+        const actif = o === cible;
+        o.setAttribute('aria-selected', String(actif));
+        o.tabIndex = actif ? 0 : -1;
+        const panneau = bloc.querySelector<HTMLElement>(`#${o.getAttribute('aria-controls')}`);
+        if (panneau) panneau.hidden = !actif;
+      });
+    };
+    onglets.forEach((o, i) => {
+      o.addEventListener('click', () => choisir(o));
+      o.addEventListener('keydown', (e) => {
+        const pas = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!pas) return;
+        const suivant = onglets[(i + pas + onglets.length) % onglets.length];
+        choisir(suivant);
+        suivant.focus();
+      });
+    });
+  });
+</script>
+
+<style>
+  .moment { margin-top: clamp(56px, 8vw, 96px); display: grid; gap: 24px; }
+  .moment:first-child { margin-top: 0; }
+  .moment-tete { display: grid; gap: 8px; }
+  .moment-tete h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .moment-choix { display: flex; flex-wrap: wrap; gap: 12px; }
+  .moment-choix button {
+    font: 800 1rem var(--f-label); color: var(--encre); cursor: pointer;
+    background: var(--creme-carte); border: 2px solid var(--encre); border-radius: var(--trait);
+    padding: 10px 18px; box-shadow: 3px 3px 0 var(--encre);
+    transition: transform 0.15s, background-color 0.15s, box-shadow 0.15s;
+  }
+  .moment-choix button:nth-child(odd) { transform: rotate(-1.5deg); }
+  .moment-choix button:nth-child(even) { transform: rotate(1.2deg); }
+  .moment-choix button:hover { background: var(--soleil-doux); }
+  .moment-choix button[aria-selected='true'] { background: var(--sapin); color: #fff; transform: rotate(0) translate(2px, 2px); box-shadow: 1px 1px 0 var(--encre); }
+  .moment-carte {
+    display: grid; grid-template-columns: 0.9fr 1.1fr; align-items: stretch;
+    background: var(--creme-carte); border: 3px solid var(--encre); box-shadow: 8px 8px 0 var(--soleil);
+    animation: apparaitre 0.35s ease;
+  }
+  .moment-carte[hidden] { display: none; }
+  .moment-photo { min-height: 260px; position: relative; border-right: 3px solid var(--encre); }
+  .moment-photo :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .moment-texte { padding: clamp(24px, 4vw, 40px); display: grid; gap: 14px; align-content: center; }
+  .moment-texte h4 { font: 600 1.6rem var(--f-titre); margin: 0; }
+  .moment-texte p { color: var(--gris); font-size: 1.08rem; }
+  .moment-format { display: flex; align-items: center; gap: 10px; color: var(--sapin) !important; font-weight: 600; }
+  .moment-format strong { background: var(--soleil-doux); color: var(--encre); padding: 0 6px; }
+  @keyframes apparaitre { from { opacity: 0; transform: translateY(8px) rotate(-0.5deg); } to { opacity: 1; transform: none; } }
+  @media (max-width: 760px) {
+    .moment-carte { grid-template-columns: 1fr; }
+    .moment-carte[hidden] { display: none; }
+  .moment-photo { min-height: 200px; border-right: 0; border-bottom: 3px solid var(--encre); }
+  }
+</style>

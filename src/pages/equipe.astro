@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Notes from '../components/blocs/Notes.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import { u } from '../lib/url';
+---
+<Base
+  titre="Clément Joubert, conteur du Champsaur · Clémi Raconte"
+  description="Clément Joubert, animateur depuis quinze ans et conteur dans le Champsaur. Avec celles qui l’accompagnent, il écrit et fait vivre Clémi Raconte."
+>
+  <PageTete
+    surtitre="L’équipe"
+    titre="Qui fait vivre Clémi Raconte"
+    intro="Aujourd’hui, une voix. Demain, une équipe. Clémi Raconte commence petit. Cette page grandira au rythme des compagnons de route qui rejoindront l’aventure"
+    photo="regarder"
+    alt="Guirlande lumineuse dans les arbres de la forêt, la nuit"
+    legende="la forêt conteuse"
+  />
+
+  <Bandeau fond="sapin" crete={1}>
+    <div class="conteur">
+      <div class="conteur-carte">
+        <p class="main">le conteur</p>
+        <h2>Clément Joubert</h2>
+        <p class="conteur-lieu">Saint-Bonnet-en-Champsaur, Hautes-Alpes</p>
+        <p class="conteur-note">Photo de Clément à venir</p>
+      </div>
+      <div class="conteur-texte">
+        <p>Je travaille dans l’animation depuis quinze ans et je dirige le centre de loisirs de mon village du Champsaur depuis deux ans. J’écris depuis l’âge de douze ans : le slam d’abord, puis le rap, aujourd’hui les histoires pour enfants. Clémi Raconte est né au croisement de ces deux vies, celle qui observe les enfants au quotidien et celle qui écrit.</p>
+        <p>J’écris les histoires, je conçois les fiches papote et les activités, je raconte depuis la forêt conteuse. C’est un projet artisanal, fait à la main, une histoire après l’autre</p>
+        <a class="lien-clair" href={u('/demarche')}>Lire toute la démarche →</a>
+      </div>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2} bulles={8}>
+    <Tete surtitre="Celles qui sont là depuis le début" titre="Rien de tout ça ne s’est fait seul" intro="Clémi Raconte n’aurait pas la même tête sans elles" />
+    <Notes
+      colonnes={2}
+      items={[
+        { etiquette: 'ma compagne', titre: 'Coline', texte: 'Elle relit les histoires, teste les fiches papote et les activités, repère ce qui coince avant tout le monde. Elle est là depuis le premier texte, elle y croit souvent avant moi et elle me dit quand ça ne va pas' },
+        { etiquette: 'ma maman', titre: 'Annette', texte: 'Elle m’aide à construire les supports pédagogiques et ouvre grand son carnet d’adresses pour faire connaître le projet. Beaucoup de portes se sont ouvertes grâce à elle' },
+      ]}
+    />
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={3}>
+    <Tete surtitre="L’aventure ne fait que commencer" titre="Les prochains compagnons de route" />
+    <Notes
+      items={[
+        { etiquette: 'en cours', titre: 'Une jeune illustratrice d’ici', texte: 'Elle a déjà commencé à dessiner Ange et les habitants de la forêt de Daillon. Les premières images arrivent bientôt' },
+        { etiquette: 'bientôt', titre: 'Des voix, des musiques', texte: 'Je raconte déjà les histoires en vidéo, depuis la forêt conteuse. Des voix et des musiques viendront les enrichir, avec la version à écouter' },
+        { etiquette: 'et peut-être vous ?', titre: 'Votre place est ici', texte: 'Clémi Raconte grandira avec des compagnons de route qui partagent la même conviction : les histoires ouvrent des portes', lien: { href: u('/contact'), texte: 'Écrire un message' } },
+      ]}
+    />
+  </Bandeau>
+
+  <AppelFinal cri="La porte est ouverte" titre="Envie de faire un bout de chemin ensemble ?" texte="Que vous soyez illustrateur, conteur, musicien, ou simplement convaincu par la démarche">
+    <a class="btn btn-soleil" href={u('/contact')}>Me contacter</a>
+  </AppelFinal>
+</Base>
+
+<style>
+  .conteur { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .conteur-carte { background: var(--creme-carte); color: var(--encre); border: 3px solid var(--encre); padding: 32px 28px; box-shadow: 8px 8px 0 var(--soleil); transform: rotate(-2deg); display: grid; gap: 6px; }
+  .conteur-carte .main { font-size: 1.7rem; color: var(--sapin); }
+  .conteur-carte h2 { color: var(--encre) !important; }
+  .conteur-lieu { color: var(--gris); }
+  .conteur-note { margin-top: 14px; padding: 36px 16px; text-align: center; border: 2px dashed var(--ligne); color: var(--gris); font-size: 0.95rem; background: repeating-linear-gradient(-45deg, var(--creme) 0 12px, var(--creme-carte) 12px 24px); }
+  .conteur-texte { display: grid; gap: 14px; justify-items: start; }
+  .conteur-texte p { color: var(--menthe); font-size: 1.08rem; line-height: 1.7; }
+  .lien-clair { color: var(--soleil-doux); font: 800 1rem var(--f-label); text-decoration: none; border-bottom: 2px dashed currentColor; }
+  @media (max-width: 860px) { .conteur { grid-template-columns: 1fr; } }
+</style>

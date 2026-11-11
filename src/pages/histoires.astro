@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import CouvertureAnge from '../components/CouvertureAnge.astro';
+import { u } from '../lib/url';
+
+const themes = [
+  { nom: 'La différence', href: '/histoires-sur-la-difference', dispo: true },
+  { nom: 'Les émotions' },
+  { nom: 'Trouver sa place dans le groupe' },
+  { nom: 'Les nouvelles familles' },
+  { nom: 'La séparation des parents' },
+  { nom: 'Le harcèlement' },
+  { nom: 'Le consentement' },
+  { nom: 'Les écrans' },
+  { nom: 'Apprendre autrement' },
+  { nom: 'Le handicap, visible et invisible' },
+  { nom: 'Grandir, à son rythme' },
+];
+---
+<Base
+  titre="Histoires pour enfants de 4 à 9 ans · Clémi Raconte"
+  description="Une nouvelle histoire chaque samedi pour les 4-9 ans, en deux adaptations 4-6 ans et 7-9 ans, avec sa fiche papote et ses 12 activités à explorer."
+>
+  <PageTete
+    surtitre="Le catalogue"
+    titre="Les histoires"
+    intro="52 histoires par an, une nouvelle chaque samedi à 9h. Ici commence l’univers Clémi : des récits pour les 4-9 ans, ancrés dans ce que vivent vraiment les enfants et inspirés par la nature des Hautes-Alpes. La bibliothèque se remplit un peu plus chaque mois, comme une étagère de chambre d’enfant"
+    photo="activites"
+    alt="Une enfant dessine avec des crayons de couleur"
+    legende="une étagère qui grandit"
+  >
+    <a class="btn btn-plein" href={u('/histoire-ange-le-loup')}>Lire Ange gratuitement</a>
+  </PageTete>
+
+  <Bandeau fond="sapin" crete={1} serre>
+    <div class="formule">
+      <div class="f-bloc"><strong>1</strong><span>histoire</span><small>à lire, à écouter ou à regarder</small></div>
+      <span class="f-plus main">+</span>
+      <div class="f-bloc"><strong>1</strong><span>fiche papote</span><small>pour en discuter, sans faire la leçon</small></div>
+      <span class="f-plus main">+</span>
+      <div class="f-bloc"><strong>12</strong><span>activités</span><small>toutes en lien avec l’histoire</small></div>
+    </div>
+    <p class="formule-fin main">Une histoire et tout ce qui va avec</p>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2} bulles={10}>
+    <Tete surtitre="À découvrir maintenant" titre="Les histoires déjà en ligne" intro="Prêtes à lire, à regarder et à vivre. Les titres et les thèmes des prochaines histoires s’afficheront ici un mois avant leur sortie" />
+    <div class="rangee" tabindex="0" aria-label="Histoires disponibles et à paraître">
+      <a class="carte-histoire dispo" href={u('/histoire-ange-le-loup')}>
+        <span class="ch-couv"><CouvertureAnge /></span>
+        <span class="ch-badges"><span>4-6 ans</span><span>7-9 ans</span><span class="offert">offerte</span></span>
+        <strong>Ange, le loup qui chantait avec le vent</strong>
+        <span class="ch-theme">Appartenance, différence, courage d’être soi</span>
+        <span class="ch-lien">Découvrir la séance complète →</span>
+      </a>
+      {[1, 2, 3, 4].map((n) => (
+        <div class="carte-histoire bientot" aria-hidden={n > 1 ? 'true' : undefined}>
+          <span class="ch-couv vide"><span class="main">samedi {n === 1 ? 'prochain' : `n°${n}`}</span></span>
+          <strong>Les aventures de Clémi arrivent ici, une par une</strong>
+          <span class="ch-theme">Titre et thème dévoilés un mois avant</span>
+        </div>
+      ))}
+    </div>
+    <p class="rangee-aide main">← faites défiler →</p>
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={3}>
+    <Tete surtitre="Par thème" titre="Les histoires par thème" intro="Un thème après l’autre, au fil de l’année" />
+    <ul class="themes">
+      {themes.map((t) => (
+        <li>
+          {t.dispo ? (
+            <a class="theme dispo" href={u(t.href!)}>{t.nom}<span class="main">à lire →</span></a>
+          ) : (
+            <span class="theme">{t.nom}<span class="main">bientôt</span></span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </Bandeau>
+
+  <AppelFinal cri="Bientôt !" titre="Une nouvelle histoire chaque semaine" texte="Les premières arrivent courant novembre, puis c’est chaque samedi à 9h. Écrivez-moi pour être prévenu(e) du lancement">
+    <a class="btn btn-soleil" href={u('/contact?objet=lancement')}>Être prévenu(e) du lancement</a>
+    <a class="btn btn-contour" href={u('/abonnement')}>Choisir ma formule</a>
+  </AppelFinal>
+</Base>
+
+<style>
+  .formule { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 28px; }
+  .f-bloc { display: grid; justify-items: center; text-align: center; gap: 2px; max-width: 220px; }
+  .f-bloc strong { font: 700 clamp(3.4rem, 7vw, 5rem) / 1 var(--f-titre); color: var(--soleil); }
+  .f-bloc span { font: 800 1.1rem var(--f-label); color: #fff; }
+  .f-bloc small { color: var(--menthe); font-size: 0.95rem; }
+  .f-plus { font-size: 3rem; color: var(--soleil-doux); }
+  .formule-fin { text-align: center; font-size: 1.9rem; color: var(--soleil); margin-top: 18px; transform: rotate(-1.5deg); }
+
+  .rangee { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 280px); gap: 26px; overflow-x: auto; padding: 18px 6px 28px; scroll-snap-type: x mandatory; scrollbar-color: var(--sapin) transparent; }
+  .carte-histoire { scroll-snap-align: start; display: grid; gap: 8px; align-content: start; text-decoration: none; color: var(--encre); }
+  .ch-couv { display: block; border: 3px solid var(--encre); box-shadow: 6px 6px 0 var(--sapin); transform: rotate(-1.5deg); transition: transform 0.25s; overflow: hidden; }
+  .carte-histoire:nth-child(even) .ch-couv { transform: rotate(1.5deg); }
+  .dispo:hover .ch-couv { transform: rotate(0) translateY(-6px) scale(1.02); }
+  .ch-couv.vide { aspect-ratio: 4 / 5; display: grid; place-items: center; background: repeating-linear-gradient(-45deg, var(--beige) 0 14px, var(--creme-carte) 14px 28px); box-shadow: 6px 6px 0 var(--ligne); }
+  .ch-couv.vide .main { font-size: 1.8rem; background: var(--soleil-doux); padding: 4px 14px; transform: rotate(-4deg); }
+  .ch-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .ch-badges span { font: 800 0.75rem var(--f-label); padding: 2px 8px; background: var(--menthe); color: var(--sapin-fonce); }
+  .ch-badges .offert { background: var(--soleil); color: var(--encre); }
+  .carte-histoire strong { font: 600 1.15rem / 1.3 var(--f-titre); }
+  .ch-theme { color: var(--gris); font-size: 0.92rem; }
+  .ch-lien { font: 800 0.9rem var(--f-label); color: var(--sapin); }
+  .bientot { opacity: 0.85; }
+  .rangee-aide { text-align: center; font-size: 1.3rem; color: var(--gris); }
+
+  .themes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+  .theme { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 18px 20px; background: var(--creme-carte); border: 2px solid var(--encre); font: 600 1.1rem var(--f-titre); color: var(--encre); text-decoration: none; transform: rotate(var(--r, -0.8deg)); }
+  .themes li:nth-child(even) .theme { --r: 0.8deg; }
+  .theme .main { font-size: 1.3rem; color: var(--gris); white-space: nowrap; }
+  .theme.dispo { background: var(--sapin); color: #fff; box-shadow: 5px 5px 0 var(--soleil); }
+  .theme.dispo .main { color: var(--soleil); }
+  .theme.dispo:hover { transform: rotate(0) translateY(-3px); }
+</style>

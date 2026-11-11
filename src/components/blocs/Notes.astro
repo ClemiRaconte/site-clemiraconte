@@ -1,0 +1,29 @@
+---
+/** Cartes « post-it » : étiquette manuscrite, titre, texte. Pour les bénéfices, usages, équipe… */
+interface Note { etiquette?: string; titre: string; texte: string; lien?: { href: string; texte: string } }
+interface Props { items: Note[]; colonnes?: 2 | 3 | 4 }
+const { items, colonnes = 3 } = Astro.props;
+---
+<ul class="notes" style={`--cols:${colonnes}`}>
+  {items.map((n) => (
+    <li class="note">
+      {n.etiquette && <span class="note-etiquette main">{n.etiquette}</span>}
+      <h3>{n.titre}</h3>
+      <p>{n.texte}</p>
+      {n.lien && <a class="lien-fleche" href={n.lien.href}>{n.lien.texte} →</a>}
+    </li>
+  ))}
+</ul>
+<style>
+  .notes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 28px; }
+  .note { position: relative; background: var(--creme-carte); border: 2px solid var(--encre); padding: 30px 24px 26px; display: grid; gap: 8px; align-content: start; box-shadow: 5px 5px 0 var(--sapin); }
+  .note:nth-child(3n + 1) { transform: rotate(-1deg); }
+  .note:nth-child(3n + 2) { transform: rotate(0.8deg); background: #fffbea; }
+  .note:nth-child(3n) { transform: rotate(-0.4deg); }
+  .note h3 { font-size: 1.3rem; }
+  .note p { color: var(--gris); line-height: 1.55; }
+  .note-etiquette { position: absolute; top: -18px; left: 18px; background: var(--soleil); color: var(--encre); font-size: 1.35rem; padding: 4px 12px 2px; transform: rotate(-3deg); box-shadow: 2px 2px 0 var(--encre); }
+  :global(.fond-sapin) .note, :global(.fond-nuit) .note { box-shadow: 5px 5px 0 var(--encre); }
+  @media (max-width: 900px) { .notes { grid-template-columns: repeat(min(var(--cols), 2), 1fr); } }
+  @media (max-width: 600px) { .notes { grid-template-columns: 1fr; } }
+</style>

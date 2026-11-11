@@ -1,0 +1,56 @@
+---
+import Luciole from './Luciole.astro';
+import LivreSapin from './LivreSapin.astro';
+import BulleMontagne from './BulleMontagne.astro';
+import { site } from '../../data/site';
+
+interface Props {
+  piste?: 'luciole' | 'livre' | 'bulle';
+  taille?: number;
+  inverse?: boolean;
+  grand?: boolean;
+}
+const { piste = site.logo, taille = 48, inverse = false, grand = false } = Astro.props;
+const Symbole = piste === 'livre' ? LivreSapin : piste === 'bulle' ? BulleMontagne : Luciole;
+---
+<span class:list={['logo', { inverse, grand }]}>
+  <Symbole taille={taille} class="logo-symbole" />
+  <span class="logo-mots">
+    <span class="logo-clemi">Clémi</span>
+    <span class="logo-raconte">raconte</span>
+  </span>
+</span>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 10px; color: var(--sapin); line-height: 1; }
+  .logo-mots { display: grid; gap: 2px; }
+  .logo-clemi {
+    font-family: var(--f-titre);
+    font-weight: 700;
+    font-size: 1.65rem;
+    letter-spacing: -0.02em;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+  }
+  .logo-raconte {
+    font-family: var(--f-label);
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--encre);
+    padding-left: 2px;
+  }
+  .grand .logo-clemi { font-size: 3.2rem; }
+  .grand .logo-raconte { font-size: 1.1rem; }
+  .grand { gap: 16px; }
+  .inverse { color: var(--creme); --lv: #fffdf7; --lc: #2D6A4F; --lv2: #cfe0d4; }
+  .inverse .logo-raconte { color: var(--soleil-doux); }
+  .logo :global(.halo) { transform-origin: 42px 45px; animation: briller 3.2s ease-in-out infinite; }
+  .logo :global(.halo-2) { animation-delay: 0.4s; }
+  .logo :global(.etoile-logo) { transform-origin: 32px 13px; transition: transform 0.6s ease; }
+  a:hover .logo :global(.etoile-logo), .logo:hover :global(.etoile-logo) { transform: rotate(72deg) scale(1.25); }
+  @keyframes briller {
+    0%, 100% { opacity: 0.15; transform: scale(0.92); }
+    50% { opacity: 0.45; transform: scale(1.06); }
+  }
+</style>

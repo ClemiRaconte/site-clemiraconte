@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Tuiles from '../components/blocs/Tuiles.astro';
+import Notes from '../components/blocs/Notes.astro';
+import Etapes from '../components/blocs/Etapes.astro';
+import Liste from '../components/blocs/Liste.astro';
+import Adaptations from '../components/blocs/Adaptations.astro';
+import Formules from '../components/blocs/Formules.astro';
+import CommentCaMarche from '../components/blocs/CommentCaMarche.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import { u } from '../lib/url';
+---
+<Base
+  titre="Cadeau culturel enfants pour les CSE · Clémi Raconte"
+  description="Offrez aux enfants de vos salariés une histoire chaque samedi, toute l’année. Un cadeau culturel clé en main pour les CSE, sans logistique."
+>
+  <PageTete
+    surtitre="Pour les comités sociaux et économiques"
+    titre="Un cadeau qui compte, pour les enfants du personnel"
+    intro="Offrez aux enfants de vos salariés une histoire nouvelle chaque samedi, toute l’année. Un cadeau culturel qui dure bien plus longtemps qu’un jouet. Zéro logistique de votre côté : vous offrez, je m’occupe de tout"
+    photo="cse"
+    alt="Un cadeau emballé dans du papier kraft avec un ruban vert et des branches de sapin"
+    legende="un cadeau qui dure"
+  >
+    <a class="btn btn-plein" href={u('/contact?profil=cse')}>Demander une offre CSE</a>
+    <a class="btn btn-contour" href="#bareme">Voir le barème</a>
+  </PageTete>
+
+  <Bandeau fond="sapin" crete={1}>
+    <div class="idee">
+      <p class="surtitre-main">Une idée qui fait vraiment plaisir</p>
+      <h2>Sans vous ajouter du travail</h2>
+      <p>Plutôt qu’un objet vite oublié, vous offrez aux familles un abonnement d’histoires pour les 4-9 ans. Une nouvelle chaque semaine, à lire, à écouter ou à regarder, à la maison.</p>
+      <p class="idee-cle main">Et pour vous, rien à gérer</p>
+      <p>Pas de stock, pas de distribution, pas de casse-tête. Je prépare les accès, les familles reçoivent leurs histoires</p>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2} bulles={10}>
+    <Tete surtitre="Pourquoi ça plaît aux familles" titre="Un cadeau porteur de sens" />
+    <Notes
+      colonnes={4}
+      items={[
+        { etiquette: 'du sens', titre: 'Un cadeau qui dure', texte: 'Pas un gadget de plus. Une histoire par semaine, toute l’année, qui grandit avec l’enfant' },
+        { etiquette: 'au choix', titre: 'La voix d’abord', texte: 'Une histoire lue à voix haute par l’adulte et des activités à imprimer, plutôt qu’un écran de plus. Le podcast et la vidéo restent là pour les familles qui en veulent' },
+        { etiquette: 'pour tous', titre: 'De 4 à 9 ans', texte: 'Chaque enfant y trouve sa place. Le même cadeau, juste pour tous, quel que soit son âge' },
+        { etiquette: 'local', titre: 'Écrites dans les Alpes', texte: 'Des histoires sans méchant, sans morale imposée, écrites ici. Un cadeau porteur de valeurs' },
+      ]}
+    />
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={3}>
+    <Tete surtitre="Comment ça marche" titre="Trois étapes, et c’est tout" />
+    <Etapes
+      items={[
+        { titre: 'Vous me dites combien', texte: 'Le nombre de familles concernées par votre geste' },
+        { titre: 'Je prépare tout', texte: 'J’applique le barème, je vous envoie le devis et je mets les accès en place à votre place' },
+        { titre: 'Les familles reçoivent', texte: 'Chaque famille reçoit ses histoires, une nouvelle chaque semaine. Vous n’avez rien à distribuer' },
+      ]}
+    />
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={1}>
+    <Tete surtitre="Ce que reçoit chaque famille" titre="Une histoire par semaine, dans les trois formats" intro="L’histoire, sa fiche papote et ses 12 activités, sans rien à gérer de votre côté" />
+    <Tuiles
+      items={[
+        { photo: 'lire', icone: 'livre', titre: 'À lire', texte: 'L’histoire à lire à voix haute' },
+        { photo: 'ecouter', icone: 'casque', titre: 'À écouter', texte: 'Le podcast' },
+        { photo: 'regarder', icone: 'lecture', titre: 'À regarder', texte: 'La vidéo' },
+      ]}
+      pied="sa fiche papote pour en discuter et ses 12 activités à explorer"
+    />
+    <div class="espace"></div>
+    <Adaptations intro="Chaque enfant reçoit la version qui correspond à son âge. Une fratrie de 5 et de 8 ans, c’est la même histoire, racontée à chacun à sa hauteur" />
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={2} id="bareme">
+    <Tete surtitre="Une offre à votre taille" titre="Un barème clair, affiché d’avance" intro="Le prix par famille dépend du nombre de familles. Pas de prix caché, pas de négociation et un interlocuteur unique : moi. Le barème est le même pour tous les CSE, le devis n’est que le document administratif qui l’accompagne" centre />
+    <Formules public="cse" />
+    <div class="cse-plus">
+      <Liste
+        items={[
+          'Devis sur simple demande, sans engagement',
+          'Mise en place des accès incluse',
+          'Idéal pour un cadeau de fin d’année',
+          'Distribution par code d’invitation',
+          'Les premières histoires arrivent courant novembre',
+        ]}
+      />
+      <div class="ecrire">
+        <p class="main">À partir de 50 familles</p>
+        <h3>Vos enfants écrivent avec moi</h3>
+        <Liste
+          items={[
+            'Le CSE et les enfants du personnel choisissent les personnages, le lieu et le thème d’une histoire',
+            'Je l’écris avec mes surprises. Elle paraît pour tous les abonnés dans le calendrier 2028, avec la mention de votre CSE au début',
+            'Cinq CSE au maximum par an',
+          ]}
+        />
+      </div>
+    </div>
+    <CommentCaMarche />
+  </Bandeau>
+
+  <AppelFinal cri="Parlons-en" titre="Parlons de votre CSE" texte="Écrivez-moi le nombre de familles concernées, je vous réponds moi-même avec le devis">
+    <a class="btn btn-soleil" href={u('/contact?profil=cse')}>Demander une offre CSE</a>
+  </AppelFinal>
+</Base>
+
+<style>
+  .idee { display: grid; gap: 14px; max-width: 760px; margin-inline: auto; text-align: center; justify-items: center; }
+  .idee > p:not(.surtitre-main):not(.main) { color: var(--menthe); font-size: 1.1rem; }
+  .idee-cle { font-size: clamp(1.8rem, 3.6vw, 2.4rem); color: var(--soleil) !important; transform: rotate(-1.5deg); }
+  .espace { height: clamp(48px, 7vw, 88px); }
+  .cse-plus { margin-top: clamp(40px, 6vw, 64px); display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+  .ecrire { background: var(--sapin); color: var(--creme); padding: 28px; border: 3px solid var(--encre); box-shadow: 7px 7px 0 var(--soleil); transform: rotate(-1deg); display: grid; gap: 10px; }
+  .ecrire .main { color: var(--soleil); font-size: 1.7rem; }
+  .ecrire h3 { color: #fff; font-size: 1.5rem; }
+  .ecrire :global(li) { color: var(--menthe); }
+  .ecrire :global(li::before) { border-color: var(--soleil); }
+  @media (max-width: 860px) { .cse-plus { grid-template-columns: 1fr; } }
+</style>

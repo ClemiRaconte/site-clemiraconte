@@ -1,0 +1,22 @@
+---
+/** « Une fois abonné(e), comment ça se passe ? » sur une fiche quadrillée. */
+import Liste from './Liste.astro';
+import { commentCaSePasse } from '../../data/formules';
+interface Props { extra?: string[] }
+const { extra = [] } = Astro.props;
+---
+<div class="fiche">
+  <span class="fiche-trombone" aria-hidden="true"></span>
+  <Liste titre="Une fois abonné(e), comment ça se passe ?" items={[...commentCaSePasse, ...extra]} />
+</div>
+<style>
+  .fiche {
+    position: relative; max-width: 820px; margin: clamp(48px, 6vw, 72px) auto 0; padding: 36px clamp(22px, 4vw, 44px);
+    background-color: #fff;
+    background-image: linear-gradient(rgba(45, 106, 79, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(45, 106, 79, 0.08) 1px, transparent 1px);
+    background-size: 22px 22px;
+    border: 2px solid var(--encre); box-shadow: 6px 6px 0 var(--encre); transform: rotate(-0.5deg);
+  }
+  .fiche-trombone { position: absolute; top: -18px; right: 40px; width: 22px; height: 52px; border: 3px solid var(--gris); border-radius: 12px; transform: rotate(12deg); }
+  .fiche :global(li) { color: var(--encre) !important; }
+</style>

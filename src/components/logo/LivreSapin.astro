@@ -1,0 +1,13 @@
+---
+/** Piste 2 : le livre-sapin. */
+interface Props { taille?: number; class?: string }
+const { taille = 56, class: cls } = Astro.props;
+---
+<svg class={cls} width={taille} height={taille} viewBox="0 0 64 64" role="img" aria-label="Livre ouvert en forme de sapin">
+  <path class="etoile-logo" d="M32 6l2.2 4.6 5 .6-3.7 3.4 1 5-4.5-2.5-4.5 2.5 1-5-3.7-3.4 5-.6z" fill="#F4C430" />
+  <path d="M32 18l-11 12h6l-9 10h28l-9-10h6z" fill="var(--lv, #2D6A4F)" />
+  <path d="M32 18l-6 12M32 18l6 12" stroke="var(--lv2, #3f8266)" stroke-width="1.4" />
+  <path d="M6 46c9-4 18-4 26 1 8-5 17-5 26-1v10c-9-4-18-4-26 1-8-5-17-5-26-1z" fill="var(--lc, #fffdf7)" stroke="var(--lv, #2D6A4F)" stroke-width="2.2" stroke-linejoin="round" />
+  <path d="M32 47v10" stroke="var(--lv, #2D6A4F)" stroke-width="2.2" />
+  <path d="M12 50c5-1.6 10-1.4 15 .6M37 50.6c5-2 10-2.2 15-.6" stroke="#e7ddc8" stroke-width="1.6" fill="none" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import { u } from '../lib/url';
+
+// Réponses reprises des pages du site actuel
+const questions = [
+  { q: 'Quand sortent les histoires ?', r: 'Une nouvelle histoire chaque samedi à 9h, toute l’année : 52 par an. Les premières arrivent courant novembre' },
+  { q: 'Pour quels âges ?', r: 'Pour les 4-9 ans. Chaque histoire est écrite en deux adaptations, 4-6 ans et 7-9 ans : chaque enfant de la fratrie peut avoir sa version' },
+  { q: 'Comment se lit une histoire ?', r: 'L’histoire et sa fiche papote se lisent en ligne, dans une visionneuse, depuis votre espace abonné. Elles ne se téléchargent pas. Sur téléphone, l’histoire s’ouvre en liseuse, avec le texte en grand' },
+  { q: 'Et les activités ?', r: 'Les 12 activités de chaque histoire se téléchargent et s’impriment : jeux, coloriages, labyrinthes, théâtre d’ombres, ateliers d’expression…' },
+  { q: 'Mon enfant doit-il passer par un écran ?', r: 'Non. Le cœur de chaque histoire, c’est la voix : l’adulte lit à voix haute, l’enfant écoute, joue et colorie. Le podcast et la vidéo sont là si cela vous arrange' },
+  { q: 'Puis-je essayer avant de m’abonner ?', r: 'Oui : Ange, le loup qui chantait avec le vent, est offert en entier, avec sa fiche papote et ses activités', lien: { href: '/histoire-ange-le-loup', texte: 'Lire Ange' } },
+  { q: 'Dois-je payer aujourd’hui ?', r: 'Non. Vous réservez votre formule au prix de lancement. Au lancement, je vous écris avec le lien pour finaliser votre abonnement', lien: { href: '/abonnement', texte: 'Réserver ma formule' } },
+  { q: 'Puis-je arrêter quand je veux ?', r: 'Avec la formule à 8 € par mois, vous arrêtez quand vous voulez, sans engagement. Les histoires reçues pendant vos mois payés restent dans votre bibliothèque. Les formules à l’année n’ont pas de reconduction automatique : je vous écris avant la fin' },
+  { q: 'Ce que j’ai reçu reste-t-il accessible ?', r: 'Avec une formule à l’année, ce que vous avez reçu reste accessible tant que le service existe' },
+  { q: 'Plusieurs foyers peuvent-ils en profiter ?', r: 'Oui, avec la famille élargie : 2, 3 ou 5 accès, pour que les grands-parents, la nounou ou l’autre maison aient aussi le leur. Les deux adaptations sont comprises', lien: { href: '/familles#formules', texte: 'Voir les formules familles' } },
+  { q: 'Puis-je partager mon accès ?', r: 'Un accès, c’est une famille. Votre accès est personnel : merci de ne pas partager vos identifiants. C’est ce qui permet aux histoires de continuer d’exister' },
+  { q: 'Pour l’école, peut-on imprimer et avoir une facture ?', r: 'Avec l’offre école, l’histoire et la fiche papote s’impriment aussi, pour toutes les classes, avec une charte d’usage à signer. La facture est au nom de l’école ou de la mairie', lien: { href: '/enseignants', texte: 'Voir l’offre enseignants' } },
+  { q: 'Pour un CSE, comment les familles reçoivent-elles les histoires ?', r: 'Vous me dites combien de familles sont concernées, j’envoie le devis et je mets les accès en place. Les familles reçoivent un code d’invitation : vous n’avez rien à distribuer', lien: { href: '/cse', texte: 'Voir l’offre CSE' } },
+];
+---
+<Base titre="Questions fréquentes · Clémi Raconte" description="Toutes les réponses sur Clémi Raconte : sortie des histoires, âges, visionneuse, activités, écrans, formules, résiliation, offre école et CSE.">
+  <PageTete surtitre="Questions fréquentes" titre="Tout ce que vous vous demandez" intro="Et si votre question n’est pas là, écrivez-moi : je réponds moi-même">
+    <a class="btn btn-contour" href={u('/contact')}>Poser une question</a>
+  </PageTete>
+  <Bandeau fond="beige" crete={1}>
+    <div class="faq">
+      {questions.map((x, i) => (
+        <details open={i === 0}>
+          <summary>{x.q}</summary>
+          <div class="rep">
+            <p>{x.r}</p>
+            {x.lien && <a class="lien-fleche" href={u(x.lien.href)}>{x.lien.texte} →</a>}
+          </div>
+        </details>
+      ))}
+    </div>
+  </Bandeau>
+  <AppelFinal cri="Une autre question ?" titre="Écrivez-moi, je réponds moi-même">
+    <a class="btn btn-soleil" href={u('/contact')}>Me contacter</a>
+  </AppelFinal>
+</Base>
+<style>
+  .faq { max-width: 860px; margin-inline: auto; display: grid; gap: 16px; }
+  details { background: var(--creme-carte); border: 2px solid var(--encre); box-shadow: 4px 4px 0 var(--sapin); transform: rotate(var(--r, -0.4deg)); }
+  details:nth-child(even) { --r: 0.4deg; }
+  details[open] { box-shadow: 6px 6px 0 var(--soleil); }
+  summary { cursor: pointer; list-style: none; padding: 18px 56px 18px 22px; font: 600 1.15rem var(--f-titre); position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font: 700 1.8rem var(--f-main); color: var(--sapin); transition: transform 0.2s; }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .rep { padding: 0 22px 20px; display: grid; gap: 10px; justify-items: start; }
+  .rep p { color: var(--gris); line-height: 1.65; }
+</style>

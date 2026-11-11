@@ -1,0 +1,48 @@
+---
+/** Tuiles photo (formats, usages…) : photo en fond, texte en bas, étiquette manuscrite. */
+import { Image } from 'astro:assets';
+import Icone from '../Icone.astro';
+import { photo } from '../../lib/photos';
+interface Tuile { photo: string; titre: string; texte: string; note?: string; icone?: string }
+interface Props { items: Tuile[]; pied?: string }
+const { items, pied } = Astro.props;
+const cols = items.length === 4 ? 'quatre' : items.length === 2 ? 'deux' : 'trois';
+---
+<ul class:list={['tuiles', cols]}>
+  {items.map((t) => (
+    <li class="tuile">
+      <Image src={photo(t.photo)} alt="" widths={[400, 700]} sizes="(min-width: 900px) 380px, 90vw" loading="lazy" />
+      {t.note && <span class="tuile-note main">{t.note}</span>}
+      <div class="tuile-texte">
+        {t.icone && <span class="tuile-icone"><Icone nom={t.icone} taille={24} /></span>}
+        <h3>{t.titre}</h3>
+        <p>{t.texte}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+{pied && <p class="tuiles-pied"><span class="main">Et avec chaque histoire :</span> {pied}</p>}
+<style>
+  .tuiles { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px 24px; }
+  .trois { grid-template-columns: repeat(3, 1fr); }
+  .quatre { grid-template-columns: repeat(4, 1fr); }
+  .deux { grid-template-columns: repeat(2, 1fr); }
+  .tuile { position: relative; min-height: 320px; display: flex; align-items: flex-end; color: #fff; border: 3px solid var(--encre); box-shadow: 7px 7px 0 var(--encre); transition: transform 0.25s ease; }
+  .tuile:nth-child(odd) { transform: rotate(-1deg); }
+  .tuile:nth-child(even) { transform: rotate(1.2deg); }
+  .tuile:hover { transform: rotate(0) translateY(-4px); }
+  .tuile :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .tuile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31, 77, 57, 0) 28%, rgba(31, 77, 57, 0.78) 60%, rgba(31, 77, 57, 0.97) 100%); }
+  .tuile-texte { position: relative; z-index: 2; padding: 22px; display: grid; gap: 6px; }
+  .tuile h3 { color: #fff; font-size: 1.45rem; }
+  .tuile p { color: var(--menthe); line-height: 1.45; }
+  .tuile-icone { color: var(--soleil); }
+  .tuile-note { position: absolute; z-index: 3; top: -16px; right: 14px; background: var(--soleil); color: var(--encre); padding: 6px 14px 4px; font-size: 1.4rem; transform: rotate(4deg); box-shadow: 2px 2px 0 var(--encre); }
+  .tuile:nth-child(even) .tuile-note { transform: rotate(-5deg); left: 14px; right: auto; }
+  .tuiles-pied { margin-top: 36px; font-size: 1.1rem; }
+  .tuiles-pied .main { margin-right: 6px; }
+  :global(.fond-sapin) .tuiles-pied, :global(.fond-nuit) .tuiles-pied { color: var(--menthe); }
+  @media (max-width: 1000px) { .quatre { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 760px) { .trois, .deux { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .quatre { grid-template-columns: 1fr; } .tuile { min-height: 280px; } }
+</style>

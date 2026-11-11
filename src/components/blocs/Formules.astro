@@ -1,0 +1,81 @@
+---
+/** Cartes de formules d'un public, avec lien direct vers la réservation. */
+import { formules, famillesElargies, baremeCse, type Formule } from '../../data/formules';
+import { u } from '../../lib/url';
+interface Props { public: Formule['public']; elargie?: boolean; boutonsEnLigne?: boolean }
+const { public: pub, elargie = false } = Astro.props;
+const liste = formules.filter((f) => f.public === pub);
+const reserver = (id: string) => u(`/abonnement?formule=${id}#reserver`);
+---
+{pub === 'cse' ? (
+  <div class="bareme">
+    <ul class="bareme-liste">
+      {baremeCse.map((b) => (
+        <li><span class="bareme-tranche">{b.tranche}</span><strong>{b.prix}</strong><span class="bareme-unite">/ famille</span></li>
+      ))}
+    </ul>
+    <p class="bareme-note">Prix par famille et par an, prix de lancement. Chaque famille reçoit la formule complète : les deux adaptations, pour toute la fratrie</p>
+    <a class="btn btn-plein" href={reserver('cse')}>Je réserve pour mon CSE</a>
+  </div>
+) : (
+  <ul class="formules" style={`--n:${liste.length}`}>
+    {liste.map((f) => (
+      <li class:list={['formule', { vedette: f.vedette }]}>
+        {f.vedette && <span class="formule-vedette main">le plus choisi</span>}
+        <h3>{f.nom}</h3>
+        <p class="formule-prix"><strong>{f.prix}</strong> <span>{f.periode}</span></p>
+        <p class="formule-texte">{f.texte}</p>
+        <a class:list={['btn', f.vedette ? 'btn-soleil' : 'btn-plein']} href={reserver(f.id)}>Je réserve cette formule</a>
+      </li>
+    ))}
+  </ul>
+)}
+{elargie && (
+  <div class="elargie">
+    <div>
+      <h3>Plusieurs foyers ? La famille élargie</h3>
+      <p>Pour que les grands-parents, la nounou ou l’autre maison aient aussi leur accès. Un accès, c’est un identifiant. Les deux adaptations sont comprises</p>
+    </div>
+    <ul>
+      {famillesElargies.map((f) => (
+        <li><span>{f.nom}</span><strong>{f.prix} <small>/ an</small></strong><a href={reserver(f.id)}>Je réserve →</a></li>
+      ))}
+    </ul>
+  </div>
+)}
+<style>
+  .formules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 360px)); justify-content: center; gap: 28px; }
+  .formule { position: relative; background: var(--creme-carte); border: 3px solid var(--encre); padding: 30px 26px; display: grid; gap: 12px; align-content: start; box-shadow: 7px 7px 0 var(--sapin); }
+  .formule:nth-child(odd) { transform: rotate(-0.8deg); }
+  .formule:nth-child(even) { transform: rotate(0.8deg); }
+  .formule.vedette { background: #fffbea; box-shadow: 7px 7px 0 var(--soleil); }
+  .formule-vedette { position: absolute; top: -20px; right: 16px; background: var(--sapin); color: #fff; font-size: 1.35rem; padding: 4px 14px 2px; transform: rotate(4deg); }
+  .formule h3 { font-size: 1.35rem; }
+  .formule-prix strong { font: 700 2.8rem / 1 var(--f-titre); color: var(--sapin); }
+  .formule-prix span { color: var(--gris); font-weight: 600; }
+  .formule-texte { color: var(--gris); line-height: 1.5; min-height: 3em; }
+  .formule .btn { justify-content: center; margin-top: 6px; }
+  .elargie { margin-top: 48px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: center; border: 2px dashed var(--sapin); padding: 26px; background: var(--creme-carte); }
+  .elargie h3 { font-size: 1.3rem; margin-bottom: 6px; }
+  .elargie p { color: var(--gris); }
+  .elargie ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .elargie li { display: grid; gap: 4px; text-align: center; padding: 14px 10px; border: 2px solid var(--encre); background: #fff; }
+  .elargie li strong { font: 700 1.6rem var(--f-titre); color: var(--sapin); }
+  .elargie li small { font: 600 0.85rem var(--f-texte); color: var(--gris); }
+  .elargie li a { font: 800 0.9rem var(--f-label); color: var(--sapin); }
+  .bareme { display: grid; gap: 22px; justify-items: center; text-align: center; }
+  .bareme-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; }
+  .bareme-liste li { background: var(--creme-carte); border: 3px solid var(--encre); padding: 22px 12px; display: grid; gap: 4px; box-shadow: 5px 5px 0 var(--sapin); transform: rotate(var(--r, -1deg)); }
+  .bareme-liste li:nth-child(even) { --r: 1deg; }
+  .bareme-liste li:last-child { background: #fffbea; box-shadow: 5px 5px 0 var(--soleil); }
+  .bareme-tranche { font: 800 0.95rem var(--f-label); }
+  .bareme-liste strong { font: 700 2.6rem / 1.1 var(--f-titre); color: var(--sapin); }
+  .bareme-unite { color: var(--gris); font-weight: 600; }
+  .bareme-note { color: var(--gris); max-width: 46em; }
+  @media (max-width: 900px) {
+    .formules { grid-template-columns: minmax(0, 420px); }
+    .elargie { grid-template-columns: 1fr; }
+    .bareme-liste { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) { .elargie ul { grid-template-columns: 1fr; } }
+</style>

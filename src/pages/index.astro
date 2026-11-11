@@ -1,0 +1,370 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Bulles from '../components/Bulles.astro';
+import Crete from '../components/Crete.astro';
+import CouvertureAnge from '../components/CouvertureAnge.astro';
+import Icone from '../components/Icone.astro';
+import MomentFamille from '../components/MomentFamille.astro';
+import { site, formats, publics, chiffres } from '../data/site';
+import { photo } from '../lib/photos';
+import { u } from '../lib/url';
+
+const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le groupe', 'Les nouvelles familles', 'La séparation des parents', 'Le handicap, visible et invisible', 'Apprendre autrement', 'Le harcèlement', 'Le consentement', 'Les écrans', 'Grandir, à son rythme'];
+---
+<Base
+  titre="Clémi Raconte · Une histoire chaque samedi pour les 4-9 ans"
+  description="Des histoires d’aujourd’hui pour les 4-9 ans, sans méchant ni morale imposée, écrites dans les Hautes-Alpes. À lire, à écouter ou à regarder, avec une fiche papote et 12 activités."
+>
+  <!-- 1. L'objectif de la plateforme -->
+  <section class="bandeau-section fond-creme objectif">
+    <Bulles nombre={18} graine={3} />
+    <div class="conteneur objectif-grille">
+      <div class="objectif-texte">
+        <p class="surtitre-main">Bienvenue dans la forêt conteuse</p>
+        <h1>Des histoires d’aujourd’hui pour aider les 4-9 ans à <span class="feutre">grandir</span></h1>
+        <p class="objectif-sous">
+          Clémi Raconte, ce sont des histoires qui parlent de ce que vivent vraiment les enfants : la différence,
+          les émotions, la famille, la vie en groupe. Une nouvelle <strong>chaque samedi</strong>, à lire, à écouter
+          ou à regarder, avec tout ce qu’il faut pour en parler ensuite, en famille
+        </p>
+        <div class="objectif-actions">
+          <a class="btn btn-plein" href={u('/abonnement')}>Choisir ma formule <Icone nom="fleche" taille={20} /></a>
+          <a class="btn btn-contour" href={u('/histoire-ange-le-loup')}>Lire Ange gratuitement</a>
+        </div>
+      </div>
+      <div class="objectif-visuel">
+        <figure class="cadre cadre-grand">
+          <Image src={photo('montagnes-brume')} alt="Forêt de sapins dans la brume, au pied des montagnes" widths={[600, 900, 1200]} sizes="(min-width: 900px) 520px, 90vw" loading="eager" />
+          <span class="scotch scotch-g" aria-hidden="true"></span>
+        </figure>
+        <figure class="cadre cadre-petit polaroid">
+          <Image src={photo('lire')} alt="Un papa lit une histoire à son enfant au moment du coucher" widths={[300, 500]} sizes="220px" loading="eager" />
+          <figcaption class="main">le soir venu…</figcaption>
+        </figure>
+        <p class="note-fleche main" aria-hidden="true">
+          chaque samedi à 9h
+          <svg viewBox="0 0 80 50"><path d="M4 6c20 2 44 10 58 34M50 38l13 4 2-14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Qui suis-je ? -->
+  <section class="bandeau-section fond-sapin qui">
+    <Crete couleur="var(--sapin)" forme={1} />
+    <div class="conteneur qui-grille">
+      <figure class="cadre polaroid qui-photo">
+        <Image src={photo('vallee')} alt="Vallée de montagne et forêt de sapins dans les Hautes-Alpes" widths={[400, 700]} sizes="(min-width: 900px) 420px, 80vw" loading="lazy" />
+        <figcaption class="main">Le Champsaur, ma vallée</figcaption>
+        <span class="scotch scotch-d" aria-hidden="true"></span>
+      </figure>
+      <div class="qui-texte">
+        <p class="surtitre-main">Qui suis-je ?</p>
+        <h2>Je m’appelle Clément. Je raconte ce que vivent vraiment les enfants</h2>
+        <p>
+          Mes histoires naissent au centre de loisirs que je dirige et dans la nature des Hautes-Alpes qui l’entoure.
+          Ce que je raconte, je l’ai d’abord vu vivre : une dispute qui déborde, un copain différent, une famille qui change
+        </p>
+        <ul class="qui-faits">
+          <li><strong>15 ans</strong> d’animation auprès des enfants</li>
+          <li><strong>Directeur</strong> du centre de loisirs de mon village du Champsaur</li>
+          <li><strong>20 ans</strong> d’écriture : le slam, le rap, puis les histoires</li>
+        </ul>
+        <a class="lien-clair" href={u('/demarche')}>Découvrir ma démarche →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Une histoire, c'est… -->
+  <section class="bandeau-section fond-creme histoire">
+    <Crete couleur="var(--creme)" forme={2} />
+    <Bulles nombre={14} graine={11} />
+    <div class="conteneur">
+      <div class="section-tete">
+        <p class="surtitre-main">Une histoire, c’est…</p>
+        <h2>Trois façons de la vivre, et tout ce qu’il faut pour la prolonger</h2>
+      </div>
+      <ul class="tuiles">
+        {formats.map((f, i) => (
+          <li class:list={['tuile', `tuile-${i + 1}`]}>
+            <Image src={photo(f.photo)} alt="" widths={[400, 700]} sizes="(min-width: 900px) 380px, 90vw" loading="lazy" />
+            <span class="tuile-note main">{f.note}</span>
+            <div class="tuile-texte">
+              <span class="tuile-icone"><Icone nom={f.icone} taille={24} /></span>
+              <h3>{f.titre}</h3>
+              <p>{f.texte}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="adaptations">
+        <span class="main">Et pour chaque histoire :</span>
+        deux adaptations, <strong>4-6 ans</strong> et <strong>7-9 ans</strong>. Chaque enfant de la fratrie a sa version
+      </p>
+      <MomentFamille />
+    </div>
+  </section>
+
+  <!-- 4. Ange, l'histoire gratuite -->
+  <section class="bandeau-section ange">
+    <Crete couleur="#1c3a2d" forme={3} />
+    <Image class="ange-fond" src={photo('loup')} alt="" widths={[800, 1400, 1800]} sizes="100vw" loading="lazy" />
+    <div class="conteneur ange-grille">
+      <div class="ange-texte">
+        <p class="surtitre-main">Offerte, de bout en bout</p>
+        <h2>Ange, le loup qui chantait avec le vent</h2>
+        <p>
+          Au cœur de la forêt de Daillon vit Ange, un loup si discret qu’il marche sur la pointe des pattes,
+          persuadé que s’il se montre, tout le monde fuira. Jusqu’au soir où une tempête se lève… et où la forêt
+          a besoin, précisément, de sa voix
+        </p>
+        <p class="ange-themes">
+          <span class="etiquette">Appartenance</span><span class="etiquette">Différence</span><span class="etiquette">Courage d’être soi</span>
+        </p>
+        <p class="ange-inclus">L’histoire, sa fiche papote et ses 12 activités : la séance complète, sans abonnement</p>
+        <a class="btn btn-soleil" href={u('/histoire-ange-le-loup')}>Lire Ange gratuitement <Icone nom="fleche" taille={20} /></a>
+      </div>
+      <div class="ange-couverture"><CouvertureAnge /></div>
+    </div>
+  </section>
+
+  <!-- 5. Vous êtes… -->
+  <section class="bandeau-section fond-beige publics">
+    <Crete couleur="var(--beige)" forme={1} />
+    <div class="conteneur">
+      <div class="section-tete">
+        <p class="surtitre-main">Vous êtes…</p>
+        <h2>La même histoire, pensée pour votre quotidien</h2>
+      </div>
+      <ul class="publics-liste">
+        {publics.map((p) => (
+          <li>
+            <a class="public" href={u(`/${p.slug}`)}>
+              <Image src={photo(p.photo)} alt="" widths={[400, 700]} sizes="(min-width: 1080px) 280px, (min-width: 600px) 45vw, 90vw" loading="lazy" />
+              <span class="public-prix">{p.prix}</span>
+              <span class="public-texte">
+                <strong>{p.titre}</strong>
+                <span class="public-accroche">{p.accroche}</span>
+                <span class="public-detail">{p.texte}</span>
+                <span class="public-lien">Découvrir →</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. Lancement -->
+  <section class="bandeau-section fond-sapin lancement" id="lancement">
+    <Crete couleur="var(--sapin)" forme={2} />
+    <Bulles nombre={12} ton="creme" graine={5} />
+    <div class="conteneur lancement-in">
+      <p class="lancement-cri main">Bientôt !</p>
+      <h2>Les premières histoires arrivent {site.lancement}</h2>
+      <p>
+        Écrivez-moi : vous serez prévenu(e) en premier.
+        Ensuite, une nouvelle histoire chaque samedi à 9h. Aucun paiement aujourd’hui
+      </p>
+      <div class="lancement-form">
+        <a class="btn btn-soleil" href={u('/contact?objet=lancement')}>Être prévenu(e) du lancement</a>
+        <a class="btn btn-contour lancement-formule" href={u('/abonnement')}>Choisir ma formule</a>
+      </div>
+      <div class="themes">
+        <p class="main">Au programme de l’année</p>
+        <ul>
+          {themes.map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Les chiffres, expliqués -->
+  <section class="bandeau-section fond-creme chiffres">
+    <Crete couleur="var(--creme)" forme={3} />
+    <div class="conteneur">
+      <div class="section-tete">
+        <p class="surtitre-main">En chiffres</p>
+        <h2>Ce que contient un abonnement Clémi Raconte</h2>
+      </div>
+      <dl class="chiffres-grille">
+        {chiffres.map((c) => (
+          <div class="chiffre">
+            <dt>
+              <span class="chiffre-valeur">{c.valeur}</span>
+              <span class="chiffre-unite">{c.unite}</span>
+            </dt>
+            <dd>{c.texte}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bandeau-section { padding-block: clamp(72px, 10vw, 128px); }
+
+  /* 1. Objectif */
+  .objectif { padding-block: clamp(48px, 7vw, 96px) clamp(96px, 12vw, 150px); }
+  .objectif-grille { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .objectif-texte { display: grid; gap: 22px; justify-items: start; }
+  .objectif h1 { font-size: clamp(2.3rem, 5vw, 3.9rem); }
+  .feutre { position: relative; color: var(--sapin); font-style: italic; white-space: nowrap; }
+  .feutre::after {
+    content: ''; position: absolute; left: -4px; right: -6px; bottom: 0.02em; height: 0.3em; z-index: -1;
+    background: var(--soleil); opacity: 0.75; border-radius: 3px 10px 4px 12px; transform: rotate(-1.5deg);
+  }
+  .objectif-sous { font-size: 1.15rem; color: var(--gris); max-width: 34em; }
+  .objectif-sous strong { color: var(--encre); }
+  .objectif-actions { display: flex; flex-wrap: wrap; gap: 16px 20px; margin-top: 6px; }
+
+  .objectif-visuel { position: relative; padding: 0 8% 18% 0; }
+  .cadre { margin: 0; position: relative; }
+  .cadre :global(img) { display: block; width: 100%; height: auto; object-fit: cover; }
+  .cadre-grand { transform: rotate(2deg); border: 3px solid var(--encre); box-shadow: 10px 10px 0 var(--sapin); }
+  .cadre-grand :global(img) { aspect-ratio: 4 / 3; }
+  .polaroid { background: #fff; padding: 10px 10px 0; border: 2px solid var(--encre); box-shadow: 6px 6px 0 rgba(36, 59, 50, 0.25); }
+  .polaroid figcaption { text-align: center; padding: 8px 4px 10px; font-size: 1.45rem; color: var(--encre); }
+  .cadre-petit { position: absolute; width: 46%; right: 0; bottom: 0; transform: rotate(-5deg); }
+  .cadre-petit :global(img) { aspect-ratio: 1; }
+  .scotch { position: absolute; width: 96px; height: 28px; background: rgba(247, 216, 115, 0.85); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+  .scotch-g { top: -14px; left: 18px; transform: rotate(-8deg); }
+  .scotch-d { top: -14px; right: 22px; transform: rotate(7deg); }
+  .note-fleche { position: absolute; left: -2%; bottom: 2%; display: flex; align-items: flex-start; gap: 4px; transform: rotate(-4deg); font-size: 1.7rem; }
+  .note-fleche svg { width: 70px; margin-top: 10px; }
+
+  /* 2. Qui suis-je */
+  .qui-grille { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(36px, 7vw, 96px); align-items: center; }
+  .qui-photo { transform: rotate(-3deg); max-width: 440px; }
+  .qui-photo :global(img) { aspect-ratio: 4 / 3; }
+  .qui-texte { display: grid; gap: 18px; justify-items: start; }
+  .qui-texte > p:not(.surtitre-main) { color: var(--menthe); font-size: 1.08rem; }
+  .qui-faits { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 10px; }
+  .qui-faits li { position: relative; padding-left: 34px; color: var(--menthe); }
+  .qui-faits li::before {
+    content: ''; position: absolute; left: 0; top: 0.35em; width: 20px; height: 14px;
+    border-left: 3px solid var(--soleil); border-bottom: 3px solid var(--soleil); transform: rotate(-48deg);
+  }
+  .qui-faits strong { color: #fff; }
+  .lien-clair { color: var(--soleil-doux); font: 800 1rem var(--f-label); text-decoration: none; border-bottom: 2px dashed currentColor; padding-bottom: 2px; }
+  .lien-clair:hover { color: #fff; }
+
+  /* 3. Une histoire, c'est… */
+  .tuiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 28px 24px; }
+  .tuile { position: relative; grid-column: span 2; min-height: 340px; display: flex; align-items: flex-end; color: #fff; border: 3px solid var(--encre); box-shadow: 7px 7px 0 var(--encre); overflow: visible; transition: transform 0.25s ease; }
+  .tuile-4, .tuile-5 { grid-column: span 3; min-height: 300px; }
+  .tuile:nth-child(odd) { transform: rotate(-1deg); }
+  .tuile:nth-child(even) { transform: rotate(1.2deg); }
+  .tuile:hover { transform: rotate(0) translateY(-4px); }
+  .tuile :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .tuile::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(31, 77, 57, 0) 30%, rgba(31, 77, 57, 0.75) 62%, rgba(31, 77, 57, 0.96) 100%); }
+  .tuile-texte { position: relative; z-index: 2; padding: 22px; display: grid; gap: 6px; }
+  .tuile h3 { color: #fff; font-size: 1.5rem; }
+  .tuile p { color: var(--menthe); line-height: 1.45; }
+  .tuile-icone { color: var(--soleil); }
+  .tuile-note { position: absolute; z-index: 3; top: -16px; right: 14px; background: var(--soleil); color: var(--encre); padding: 6px 14px 4px; font-size: 1.45rem; transform: rotate(4deg); box-shadow: 2px 2px 0 var(--encre); }
+  .tuile:nth-child(even) .tuile-note { transform: rotate(-5deg); left: 14px; right: auto; }
+  .adaptations { margin-top: 40px; font-size: 1.1rem; }
+  .adaptations .main { margin-right: 8px; }
+
+  /* 4. Ange */
+  .ange { background: #1c3a2d; color: var(--creme); overflow: visible; }
+  .ange :global(.ange-fond) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 22%; z-index: -1; }
+  .ange::before { content: ''; position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(28, 58, 45, 0.97) 0%, rgba(28, 58, 45, 0.88) 45%, rgba(28, 58, 45, 0.35) 100%); }
+  .ange-grille { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+  .ange-texte { display: grid; gap: 18px; justify-items: start; }
+  .ange h2 { color: #fff; }
+  .ange .surtitre-main { color: var(--soleil); }
+  .ange-texte > p:not(.surtitre-main) { color: var(--menthe); max-width: 36em; }
+  .ange-themes { display: flex; flex-wrap: wrap; gap: 10px; }
+  .etiquette { font: 700 0.85rem var(--f-label); padding: 4px 12px; border: 2px solid var(--soleil-doux); color: var(--soleil-doux); transform: rotate(-1deg); }
+  .etiquette:nth-child(2) { transform: rotate(1.5deg); }
+  .ange-inclus { font-weight: 600; color: #fff !important; }
+  .ange-couverture { max-width: 340px; justify-self: center; transform: rotate(4deg); filter: drop-shadow(10px 10px 0 rgba(0, 0, 0, 0.35)); }
+
+  /* 5. Publics */
+  .publics-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .public { position: relative; display: flex; align-items: flex-end; min-height: 420px; text-decoration: none; color: #fff; border: 3px solid var(--encre); overflow: hidden; transition: transform 0.25s ease; }
+  .publics-liste li:nth-child(odd) .public { transform: rotate(-0.8deg); }
+  .publics-liste li:nth-child(even) .public { transform: rotate(0.8deg); }
+  .public:hover { transform: rotate(0) translateY(-6px); }
+  .public :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .public:hover :global(img) { transform: scale(1.06); }
+  .public::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31, 77, 57, 0.05) 20%, rgba(31, 77, 57, 0.85) 58%, rgba(31, 77, 57, 0.97) 100%); }
+  .public-texte { position: relative; z-index: 1; padding: 22px; display: grid; gap: 6px; }
+  .public strong { font: 600 1.55rem var(--f-titre); }
+  .public-accroche { color: var(--soleil-doux); font-weight: 600; line-height: 1.35; }
+  .public-detail { color: var(--menthe); font-size: 0.95rem; line-height: 1.45; }
+  .public-lien { font: 800 0.95rem var(--f-label); margin-top: 6px; }
+  .public-prix { position: absolute; z-index: 2; top: 16px; left: 14px; background: var(--soleil); color: var(--encre); font: 800 0.85rem var(--f-label); padding: 5px 12px; transform: rotate(-3deg); box-shadow: 2px 2px 0 var(--encre); }
+
+  /* 6. Lancement */
+  .lancement-in { display: grid; gap: 16px; justify-items: center; text-align: center; max-width: 760px; }
+  .lancement-cri { font-size: clamp(3rem, 8vw, 5rem); transform: rotate(-4deg); }
+  .lancement-in > p:not(.main) { color: var(--menthe); font-size: 1.1rem; }
+  .lancement-form { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; align-items: center; margin-top: 10px; }
+  .lancement-form input[type='email'] { flex: 1 1 240px; padding: 14px 20px; border: 2px solid var(--encre); border-radius: var(--trait-2); font: inherit; }
+  .lancement-formule { color: #fff; }
+
+  .themes { margin-top: 36px; display: grid; gap: 14px; justify-items: center; }
+  .themes .main { font-size: 1.8rem; }
+  .themes ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .themes li {
+    background: var(--creme); color: var(--encre); font: 800 0.92rem var(--f-label);
+    padding: 7px 14px; box-shadow: 3px 3px 0 var(--sapin-fonce); transform: rotate(var(--r, -2deg));
+    transition: transform 0.2s;
+  }
+  .themes li:nth-child(3n) { --r: 2.5deg; background: var(--soleil-doux); }
+  .themes li:nth-child(3n + 1) { --r: -1.5deg; }
+  .themes li:nth-child(4n) { --r: 1deg; background: var(--menthe); }
+  .themes li:hover { animation: gigoter 0.4s ease; }
+
+  /* Petites animations ludiques au survol */
+  .tuile:hover .tuile-note, .public:hover .public-prix { animation: gigoter 0.45s ease; }
+  @keyframes gigoter {
+    0%, 100% { transform: rotate(var(--r, 3deg)); }
+    25% { transform: rotate(-6deg) scale(1.06); }
+    60% { transform: rotate(5deg) scale(1.04); }
+  }
+
+  /* 7. Chiffres */
+  .chiffres-grille { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; }
+  .chiffre { padding: 28px 28px 32px; display: grid; gap: 10px; align-content: start; border-top: 2px dashed var(--ligne); }
+  .chiffre:nth-child(3n + 2), .chiffre:nth-child(3n + 3) { border-left: 2px dashed var(--ligne); }
+  .chiffre dt { display: grid; gap: 2px; }
+  .chiffre-valeur {
+    font: 700 clamp(3rem, 6vw, 4.4rem) / 1 var(--f-titre); color: var(--sapin);
+    width: fit-content; position: relative;
+  }
+  .chiffre-valeur::after { content: ''; position: absolute; left: -4px; right: -8px; bottom: 4px; height: 12px; z-index: -1; background: var(--soleil); opacity: 0.6; border-radius: 3px 10px 4px 12px; transform: rotate(-2deg); }
+  .chiffre-unite { font: 800 1.05rem var(--f-label); color: var(--encre); }
+  .chiffre dd { margin: 0; color: var(--gris); line-height: 1.5; }
+
+  @media (max-width: 1080px) {
+    .publics-liste { grid-template-columns: repeat(2, 1fr); }
+    .tuiles { grid-template-columns: repeat(2, 1fr); }
+    .tuile, .tuile-4, .tuile-5 { grid-column: span 1; }
+    .tuile-5 { grid-column: span 2; }
+  }
+  @media (max-width: 860px) {
+    .objectif-grille, .qui-grille, .ange-grille { grid-template-columns: 1fr; }
+    .objectif-visuel { max-width: 560px; }
+    .qui-photo { max-width: 360px; justify-self: center; }
+    .ange-couverture { max-width: 240px; }
+    .ange::before { background: rgba(28, 58, 45, 0.9); }
+    .chiffres-grille { grid-template-columns: 1fr 1fr; }
+    .chiffre:nth-child(n) { border-left: 0; }
+    .chiffre:nth-child(even) { border-left: 2px dashed var(--ligne); }
+  }
+  @media (max-width: 560px) {
+    .tuiles, .publics-liste, .chiffres-grille { grid-template-columns: 1fr; }
+    .tuile, .tuile-4, .tuile-5 { grid-column: span 1; min-height: 300px; }
+    .public { min-height: 360px; }
+    .chiffre:nth-child(even) { border-left: 0; }
+    .chiffre { padding-inline: 4px; }
+    .feutre { white-space: normal; }
+    .note-fleche { font-size: 1.35rem; }
+  }
+</style>

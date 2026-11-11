@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Tuiles from '../components/blocs/Tuiles.astro';
+import Notes from '../components/blocs/Notes.astro';
+import Etapes from '../components/blocs/Etapes.astro';
+import Etiquettes from '../components/blocs/Etiquettes.astro';
+import Adaptations from '../components/blocs/Adaptations.astro';
+import Formules from '../components/blocs/Formules.astro';
+import CommentCaMarche from '../components/blocs/CommentCaMarche.astro';
+import CarteAnge from '../components/blocs/CarteAnge.astro';
+import AppelFinal from '../components/blocs/AppelFinal.astro';
+import { u } from '../lib/url';
+
+const thematiques = ['Estime de soi & image de soi', 'Émotions', 'Différence & exclusion', 'Lien & place dans le groupe', 'Confiance & droit à l’erreur', 'Le corps, l’intime, le consentement'];
+---
+<Base
+  titre="Médiation par le conte pour enfants · Clémi Raconte"
+  description="Un support de médiation clé en main pour les travailleurs sociaux : une histoire, sa fiche papote et douze activités, pour l’entretien ou le petit groupe."
+>
+  <PageTete
+    surtitre="Pour les travailleurs sociaux"
+    titre="Quand l’histoire ouvre la parole là où les mots manquent"
+    intro="Un support de médiation clé en main : l’histoire, sa fiche papote et douze activités, prêts pour l’entretien ou le petit groupe"
+    photo="travailleurs-sociaux"
+    alt="Un adulte accompagne une enfant qui lit"
+    legende="le récit comme détour"
+  >
+    <a class="btn btn-plein" href={u('/contact?profil=social')}>Demander un échange ou un devis</a>
+    <a class="btn btn-contour" href="#formules">Voir les formules</a>
+  </PageTete>
+
+  <Bandeau fond="sapin" crete={1}>
+    <div class="detour">
+      <p class="surtitre-main">Le récit comme détour</p>
+      <h2>Il y a des choses qu’un enfant n’arrive pas à dire de face</h2>
+      <p>Une histoire, elle, passe par le côté : elle met en scène, à bonne distance, ce qui pèse.</p>
+      <p class="detour-cle main">Et soudain, l’enfant trouve ses mots. Pas les vôtres, pas ceux d’une leçon : les siens</p>
+      <p>Vous n’avez rien à préparer. L’histoire ouvre le sujet, la fiche papote vous donne des appuis pour accompagner l’échange et les activités prolongent le travail à votre rythme</p>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2} bulles={10}>
+    <Tete surtitre="Trois façons de l’utiliser" titre="En entretien, en groupe ou à la maison" />
+    <Notes
+      items={[
+        { etiquette: 'en individuel', titre: 'Un support pour l’entretien', texte: 'L’histoire ouvre un sujet sans la frontalité d’une question directe' },
+        { etiquette: 'en petit groupe', titre: 'La parole se partage', texte: 'Chacun réagit à l’histoire et se reconnaît dans un détour commun' },
+        { etiquette: 'en relais famille', titre: 'Le récit continue de travailler', texte: 'Une activité imprimée repart avec l’enfant, comme la carte de sa force cachée. Le récit continue de travailler après l’entretien' },
+      ]}
+    />
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={3}>
+    <Tete surtitre="Trois formats" titre="Trois entrées pour trois contextes d’accompagnement" />
+    <Tuiles
+      items={[
+        { photo: 'lire', icone: 'livre', note: 'lecture', titre: 'À lire', texte: 'Vous lisez l’histoire depuis la visionneuse, l’enfant écoute. Les activités, elles, s’impriment et se posent sur la table' },
+        { photo: 'ecouter', icone: 'casque', note: 'audio', titre: 'À écouter', texte: 'Pour les enfants que la lecture bloque, ou pour écouter ensemble sans se regarder en face' },
+        { photo: 'regarder', icone: 'lecture', note: 'vidéo', titre: 'À regarder', texte: 'Pour ouvrir un temps collectif, en petit groupe ou en relais avec la famille' },
+      ]}
+      pied="sa fiche papote pour en discuter et ses 12 activités à explorer"
+    />
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={1}>
+    <Tete surtitre="Les thématiques" titre="Des sujets choisis pour le travail de médiation, à hauteur d’enfant" />
+    <Etiquettes items={thematiques} />
+    <div class="espace"></div>
+    <Adaptations intro="Chaque histoire est écrite deux fois, pour coller à l’âge de l’enfant que vous accompagnez. Vous prenez la version qui lui parle" />
+  </Bandeau>
+
+  <Bandeau fond="sapin" crete={2}>
+    <Tete surtitre="Trois temps par histoire" titre="Ouvrir, accompagner, prolonger" />
+    <Etapes
+      items={[
+        { titre: 'L’histoire', texte: 'Pour ouvrir le sujet, en douceur et par le détour' },
+        { titre: 'La fiche papote', texte: 'Pour accompagner l’échange, avec des appuis adaptés à l’âge' },
+        { titre: 'Douze activités à explorer', texte: 'Pour prolonger le travail selon l’enfant et le moment' },
+      ]}
+    />
+  </Bandeau>
+
+  <CarteAnge
+    texte="Un loup qui a peur d’être vu et qui apprend que sa différence peut devenir sa voix. Un support parlant pour aborder l’estime de soi et la place dans le groupe"
+    href={u('/histoire-ange-le-loup')}
+  />
+
+  <Bandeau fond="beige" crete={1} id="formules">
+    <Tete surtitre="Un accès simple" titre="Les formules travailleurs sociaux" intro="Prix de lancement, à l’année. Toutes les histoires, leurs deux adaptations, leurs fiches papote et leurs 12 activités" centre />
+    <Formules public="sociaux" />
+    <CommentCaMarche />
+  </Bandeau>
+
+  <AppelFinal cri="Parlons-en" titre="Parlons de votre besoin" texte="Un échange, un devis pour votre structure, ou une histoire à essayer : écrivez-moi, je réponds moi-même">
+    <a class="btn btn-soleil" href={u('/contact?profil=social')}>Demander un échange ou un devis</a>
+  </AppelFinal>
+</Base>
+
+<style>
+  .detour { display: grid; gap: 16px; max-width: 760px; margin-inline: auto; text-align: center; justify-items: center; }
+  .detour > p:not(.surtitre-main):not(.main) { color: var(--menthe); font-size: 1.1rem; }
+  .detour-cle { font-size: clamp(1.8rem, 3.6vw, 2.4rem); color: var(--soleil) !important; transform: rotate(-1.5deg); margin-block: 10px; }
+  .espace { height: clamp(48px, 7vw, 88px); }
+</style>

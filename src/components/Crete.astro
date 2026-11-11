@@ -1,0 +1,28 @@
+---
+/**
+ * Séparateur de bandeaux : une ligne de crêtes du Champsaur, dessinée dans la couleur
+ * du bandeau suivant. À placer en haut d'une section (variante « haut ») ou en bas (« bas »).
+ */
+interface Props { couleur: string; position?: 'haut' | 'bas'; forme?: 1 | 2 | 3 }
+const { couleur, position = 'haut', forme = 1 } = Astro.props;
+const chemins = {
+  1: 'M0 60V38l90-20 70 16 110-30 90 26 80-14 120 24 100-22 110 18 140-32 120 28 90-12 110 20 100-14 110 18v-4 46z',
+  2: 'M0 60V30L60 38 180 12 260 34 400 16 470 36 600 6 690 30 810 20 910 38 1040 12 1150 34 1250 28 1370 40 1440 26V60z',
+  3: 'M0 60V44C60 30 120 30 180 38S300 50 360 36 480 14 560 22 700 46 780 38 920 16 1000 22 1140 44 1220 36 1360 20 1440 30V60z',
+};
+---
+<svg
+  class:list={['crete', `crete-${position}`]}
+  viewBox="0 0 1440 60"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  style={`--c:${couleur}`}
+>
+  <path d={chemins[forme]} />
+</svg>
+
+<style>
+  .crete { display: block; width: 100%; height: clamp(28px, 4vw, 56px); fill: var(--c); position: absolute; left: 0; z-index: 2; pointer-events: none; }
+  .crete-haut { top: 2px; transform: translateY(-100%); }
+  .crete-bas { bottom: 2px; transform: translateY(100%) scaleY(-1); }
+</style>

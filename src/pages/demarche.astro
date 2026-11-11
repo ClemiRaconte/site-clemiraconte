@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import Tete from '../components/blocs/Tete.astro';
+import Etiquettes from '../components/blocs/Etiquettes.astro';
+import { photo } from '../lib/photos';
+import { u } from '../lib/url';
+---
+<Base
+  titre="La démarche : des histoires sans méchant · Clémi Raconte"
+  description="Quinze ans d’animation, vingt ans d’écriture, une vallée des Hautes-Alpes : d’où viennent les histoires de Clémi Raconte, sans méchant ni morale imposée."
+>
+  <PageTete
+    surtitre="D’où viennent ces histoires"
+    titre="La démarche"
+    intro="Quinze ans auprès des enfants, vingt ans d’écriture, une vallée des Hautes-Alpes. Clémi Raconte est né au croisement des trois et tout ce que vous trouverez ici en découle"
+    photo="vallee"
+    alt="Vallée de montagne et forêt de sapins dans les Hautes-Alpes"
+    legende="le Champsaur, ma vallée"
+  />
+
+  <Bandeau fond="sapin" crete={1}>
+    <div class="parcours">
+      <div class="trois">
+        <div><strong>15</strong><span>ans d’animation</span></div>
+        <div><strong>20</strong><span>ans d’écriture</span></div>
+        <div><strong>1</strong><span>vallée des Hautes-Alpes</span></div>
+      </div>
+      <div class="parcours-texte">
+        <p class="surtitre-main">Le parcours</p>
+        <h2>Le slam, le rap, puis les enfants</h2>
+        <p>J’écris depuis l’âge de douze ans. Le slam d’abord, puis le rap, deux écoles de la phrase qui percute et du mot juste. Et puis la vie m’a mis au milieu des enfants. Cela fait quinze ans que je travaille dans l’animation. Cinq ans dans le centre de loisirs de mon village, dans le Champsaur, que je dirige depuis deux ans.</p>
+        <p>C’est là que mes deux vies se sont rejointes. Au quotidien, je voyais des enfants traverser des choses immenses : une dispute qui déborde, un copain différent, une famille qui change, un mot qui blesse. Et je voyais qu’une histoire bien choisie, au bon moment, faisait souvent plus qu’un long discours. Alors j’ai commencé à écrire les histoires qui manquaient</p>
+      </div>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={2} bulles={8}>
+    <div class="alpes">
+      <figure class="alpes-photo">
+        <Image src={photo('montagnes-brume')} alt="Montagnes et forêt de sapins dans la brume du matin" widths={[500, 900]} sizes="(min-width: 860px) 460px, 90vw" loading="lazy" />
+        <figcaption class="main">la lumière descend des sommets</figcaption>
+      </figure>
+      <div class="texte">
+        <p class="surtitre-main">Écrites dans les Alpes</p>
+        <h2>Une vallée qu’on aime comme un être vivant</h2>
+        <p>J’écris dans le Champsaur, une vallée des Hautes-Alpes que j’aime comme on aime un être vivant. Le matin, la lumière descend des sommets bien avant de toucher les prés. L’hiver, le silence de la neige a une épaisseur qu’on n’oublie pas. L’été sent le foin coupé et l’orage qui rôde au loin. Tout cela finit par passer dans les pages.</p>
+        <p>Une partie de mes histoires sont enracinées ici, dans cette montagne, ses bêtes, ses saisons, ses gens. Les autres se passent partout où il y a des enfants. Mais toutes prennent vie au même endroit : <strong>ma forêt conteuse</strong>. Un décor de bois flotté et de lumières douces que j’ai bâti de mes mains, pour donner aux histoires une vraie maison</p>
+      </div>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="beige" crete={3}>
+    <Tete surtitre="Pas de méchant, pas de morale imposée" titre="Des histoires pour les jeunes d’aujourd’hui et les adultes de demain" />
+    <div class="colonnes">
+      <p>Une morale, ce n’est pas un gros mot. Une belle histoire porte forcément un sens et c’est tant mieux. Ce que je refuse, c’est la morale imposée, celle qui tombe d’en haut et dit à l’enfant quoi penser à sa place. Le monde a changé, les enfants aussi. Les récits qu’on leur donne doivent parler de leur vie, maintenant.</p>
+      <p>Mes histoires sont construites en quatre actes, sans méchant à vaincre. La résolution ne vient jamais d’un combat : elle naît d’une surprise, d’un retournement, d’un regard qui change. Cette manière de faire, je la tiens de mon métier. Au centre de loisirs, on cherche toujours une sortie de conflit inattendue. Et pas un temps mort : chaque moment est à animer. J’écris donc mes histoires comme j’anime mes journées, en cherchant à les rendre aussi vivantes que je le suis sur le terrain.</p>
+      <p>Mes histoires se dénouent vraiment, elles ne laissent pas l’enfant en plan. Mais elles se gardent de conclure à sa place : la fin résout l’intrigue et laisse la vraie conversation commencer. C’est là qu’intervient la fiche papote, pour aider l’adulte à prolonger l’histoire avec l’enfant, à sa façon</p>
+    </div>
+  </Bandeau>
+
+  <Bandeau fond="creme" crete={1}>
+    <Tete surtitre="Des thématiques qui ne sortent pas de nulle part" titre="Je ramasse ces sujets sur le terrain" />
+    <div class="colonnes">
+      <p>Je veux accompagner les générations qui viennent, les parents, les professionnels comme les jeunes, à travers les questions qui les concernent ou qui les concerneront un jour. Ces sujets, je ne les invente pas : je les ramasse sur le terrain. C’est le quotidien des enfants que j’accompagne.</p>
+      <p>Ces sujets croisent souvent ceux que l’École travaille de son côté : la formation de la personne et du citoyen, la prévention du harcèlement, l’égalité filles-garçons. Je ne prétends pas faire le métier des enseignants. Je leur propose un support qui se glisse dans ce qu’ils font déjà. Je vois ce que les enseignants portent aujourd’hui : des classes chargées, des programmes qui s’empilent, des semaines qui ne suffisent jamais. Mon rôle n’est pas de leur dire comment faire. Il est de leur faire gagner du temps, avec une séance prête à vivre qu’ils adaptent comme ils l’entendent.</p>
+      <p>C’est cette double racine, le vécu des enfants d’un côté, les repères de l’École de l’autre, qui fait la séance clé en main. Elle est clé en main parce que je sais ce que c’est, de préparer une journée pour trente enfants. Et elle est souple parce qu’aucun outil ne remplace le regard du professionnel qui l’utilise : l’histoire propose, l’enseignant dispose</p>
+    </div>
+    <Etiquettes items={['Le consentement', 'Les stéréotypes', 'Le harcèlement', 'La différence', 'Les émotions', 'Les écrans', 'Les nouvelles familles']} />
+  </Bandeau>
+
+  <Bandeau fond="sapin" crete={2} bulles={8}>
+    <div class="offres">
+      <p class="offres-cri main">Voir les offres</p>
+      <ul>
+        <li><a class="btn btn-soleil" href={u('/familles')}>Familles</a></li>
+        <li><a class="btn btn-soleil" href={u('/enseignants')}>Enseignants</a></li>
+        <li><a class="btn btn-soleil" href={u('/travailleurs-sociaux')}>Travailleurs sociaux</a></li>
+        <li><a class="btn btn-soleil" href={u('/cse')}>CSE</a></li>
+      </ul>
+      <a class="offres-lien" href={u('/histoires')}>Ou découvrir d’abord les histoires →</a>
+      <a class="offres-lien" href={u('/equipe')}>Qui fait vivre Clémi Raconte →</a>
+    </div>
+  </Bandeau>
+</Base>
+
+<style>
+  .parcours { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .trois { display: grid; gap: 22px; }
+  .trois div { display: flex; align-items: baseline; gap: 14px; transform: rotate(-2deg); }
+  .trois div:nth-child(2) { transform: rotate(1.5deg); padding-left: 32px; }
+  .trois strong { font: 700 clamp(3.2rem, 6vw, 4.6rem) / 1 var(--f-titre); color: var(--soleil); }
+  .trois span { font: 700 1.6rem var(--f-main); color: #fff; }
+  .parcours-texte { display: grid; gap: 14px; }
+  .parcours-texte p:not(.surtitre-main) { color: var(--menthe); font-size: 1.06rem; line-height: 1.7; }
+  .alpes { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .alpes-photo { margin: 0; background: #fff; padding: 12px 12px 0; border: 3px solid var(--encre); box-shadow: 8px 8px 0 var(--sapin); transform: rotate(-2deg); }
+  .alpes-photo :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .alpes-photo figcaption { text-align: center; padding: 8px 4px 12px; font-size: 1.45rem; }
+  .texte { display: grid; gap: 14px; }
+  .texte p:not(.surtitre-main) { color: var(--gris); font-size: 1.06rem; line-height: 1.7; }
+  .colonnes { columns: 3 280px; column-gap: clamp(28px, 4vw, 48px); margin-bottom: 36px; }
+  .colonnes p { color: var(--gris); line-height: 1.7; margin-bottom: 16px; break-inside: avoid; }
+  .offres { display: grid; justify-items: center; gap: 22px; text-align: center; }
+  .offres-cri { font-size: clamp(2.4rem, 6vw, 3.6rem); transform: rotate(-3deg); }
+  .offres ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .offres-lien { color: var(--soleil-doux); font-weight: 700; }
+  @media (max-width: 860px) { .parcours, .alpes { grid-template-columns: 1fr; } }
+</style>

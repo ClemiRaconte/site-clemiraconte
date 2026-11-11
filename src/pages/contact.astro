@@ -1,0 +1,169 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import { site } from '../data/site';
+import { u } from '../lib/url';
+---
+<Base
+  titre="Contact et devis : écoles, communes, CSE · Clémi Raconte"
+  description="Un devis pour votre école, votre médiathèque, votre structure ou votre CSE ? Une question sur les histoires ? Écrivez à Clémi Raconte, je réponds moi-même."
+>
+  <PageTete
+    surtitre="Contact"
+    titre="Parlons-en simplement"
+    intro="Un devis pour votre école, votre médiathèque, votre structure ou votre CSE ? Une question sur les histoires ? Le formulaire ci-dessous, ou directement par email. Je réponds moi-même, sous quelques jours"
+  >
+    <a class="btn btn-contour" href={`mailto:${site.email}`}>{site.email}</a>
+  </PageTete>
+
+  <Bandeau fond="beige" crete={1}>
+    <div class="contact">
+      <div class="contact-aide">
+        <p class="main">Indiquez d’abord qui vous êtes</p>
+        <p>Le formulaire ne vous demande que ce qui vous concerne</p>
+        <svg viewBox="0 0 80 60" aria-hidden="true"><path d="M6 8c26 0 52 12 62 40M54 40l14 10 4-16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </div>
+      <form class="formulaire" name="contact" method="POST" data-netlify="true" netlify-honeypot="champ-piege" action={u('/merci')}>
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden><label>Ne pas remplir : <input name="champ-piege" /></label></p>
+
+        <label for="profil">Vous êtes…</label>
+        <select id="profil" name="profil" required>
+          <option value="">Choisir</option>
+          <option data-groupe="parent">Parent ou proche</option>
+          <option data-groupe="ecole">Enseignant(e) / directeur(rice) d’école</option>
+          <option data-groupe="ecole">Inspecteur(rice) de l’éducation nationale / conseiller(ère) pédagogique</option>
+          <option data-groupe="social">Travailleur(se) social(e) / structure sociale ou médico-sociale</option>
+          <option data-groupe="structure">Médiathèque / bibliothèque</option>
+          <option data-groupe="structure">Mairie / collectivité</option>
+          <option data-groupe="structure">Association de parents d’élèves</option>
+          <option data-groupe="structure">Autre association</option>
+          <option data-groupe="cse">Comité social et économique (CSE)</option>
+          <option data-groupe="autre">Autre</option>
+        </select>
+
+        <label for="nom">Votre nom</label>
+        <input id="nom" name="nom" type="text" required autocomplete="name" />
+        <label for="email">Votre adresse email</label>
+        <input id="email" name="email" type="email" required autocomplete="email" />
+
+        <div class="bloc-f" data-pour="parent" hidden>
+          <label class="case"><input type="checkbox" name="lancement" value="oui" checked /> Prévenez-moi du lancement</label>
+          <button type="button" class="lien-bouton ajout-msg">Ajouter un message (facultatif)</button>
+        </div>
+
+        <div class="bloc-f" data-pour="ecole social structure cse autre" hidden>
+          <label for="objet">Votre demande</label>
+          <select id="objet" name="objet" required>
+            <option value="">Choisir</option>
+            <option data-pour="ecole">Demander un devis école</option>
+            <option data-pour="structure">Demander un devis médiathèque</option>
+            <option data-pour="structure">Demander un devis commune</option>
+            <option data-pour="social structure">Demander un devis structure sociale ou association</option>
+            <option data-pour="cse">Demander un devis CSE</option>
+            <option>Être prévenu(e) du lancement</option>
+            <option>Autre question</option>
+          </select>
+        </div>
+
+        <div class="bloc-f" data-pour="ecole" hidden>
+          <label for="ecole">Votre école et sa commune</label>
+          <input id="ecole" name="ecole" type="text" />
+          <div class="deux-champs">
+            <div><label for="classes">Nombre de classes</label><input id="classes" name="nombre-classes" type="number" min="1" inputmode="numeric" /></div>
+            <div><label for="eleves">Nombre d’élèves</label><input id="eleves" name="nombre-eleves" type="number" min="1" inputmode="numeric" /></div>
+          </div>
+          <label for="niveaux">Niveaux concernés</label>
+          <input id="niveaux" name="niveaux" type="text" placeholder="Par exemple : GS, CP, CE1" />
+        </div>
+
+        <div class="bloc-f" data-pour="social" hidden>
+          <label for="structure-s">Votre structure</label>
+          <input id="structure-s" name="structure" type="text" />
+          <label for="enfants">Nombre d’enfants accompagnés (environ)</label>
+          <input id="enfants" name="nombre-enfants" type="number" min="1" inputmode="numeric" />
+        </div>
+
+        <div class="bloc-f" data-pour="structure autre" hidden>
+          <label for="structure-a">Votre structure et sa commune</label>
+          <input id="structure-a" name="structure" type="text" />
+        </div>
+
+        <div class="bloc-f" data-pour="cse" hidden>
+          <label for="entreprise">Votre entreprise</label>
+          <input id="entreprise" name="entreprise" type="text" />
+          <label for="familles">Nombre de familles concernées (environ)</label>
+          <input id="familles" name="nombre-familles" type="number" min="1" inputmode="numeric" />
+        </div>
+
+        <div class="bloc-f bloc-msg" data-pour="ecole social structure cse autre" hidden>
+          <label for="message">Votre message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Vos questions, vos besoins, ce que vous aimeriez savoir…"></textarea>
+        </div>
+
+        <p class="formulaire-note">Vos coordonnées ne servent qu’à vous répondre. Elles ne sont ni partagées, ni revendues, ni ajoutées à une liste sans votre accord</p>
+        <button class="btn btn-plein" type="submit">Envoyer</button>
+      </form>
+    </div>
+  </Bandeau>
+</Base>
+
+<script>
+  // Repris du site actuel : le formulaire n'affiche que les champs utiles au profil choisi
+  const f = document.querySelector<HTMLFormElement>('form[name="contact"]')!;
+  const profil = f.querySelector<HTMLSelectElement>('#profil')!;
+  const objet = f.querySelector<HTMLSelectElement>('#objet')!;
+  const msg = f.querySelector<HTMLElement>('.bloc-msg')!;
+  const LANCEMENT = 'Être prévenu(e) du lancement';
+  let msgLibre = false;
+  const groupe = () => profil.options[profil.selectedIndex]?.getAttribute('data-groupe') ?? null;
+  const maj = () => {
+    const g = groupe();
+    f.querySelectorAll<HTMLElement>('.bloc-f').forEach((b) => {
+      let on = !!g && (b.dataset.pour || '').split(' ').includes(g);
+      if (b === msg && g === 'parent' && msgLibre) on = true;
+      b.hidden = !on;
+      b.querySelectorAll<HTMLInputElement>('input,select,textarea').forEach((i) => (i.disabled = !on));
+    });
+    objet.querySelectorAll<HTMLOptionElement>('option[data-pour]').forEach((o) => (o.hidden = !g || !(o.dataset.pour || '').split(' ').includes(g)));
+    if (objet.selectedOptions[0]?.hidden) objet.value = '';
+    // Un parent n'a pas de menu « demande » : on note simplement qu'il veut être prévenu
+    if (g === 'parent') {
+      objet.disabled = false;
+      objet.value = LANCEMENT;
+      (objet.closest('.bloc-f') as HTMLElement).hidden = true;
+    }
+  };
+  profil.addEventListener('change', maj);
+  f.querySelector<HTMLButtonElement>('.ajout-msg')!.addEventListener('click', function () {
+    msgLibre = true;
+    this.hidden = true;
+    maj();
+    f.querySelector<HTMLTextAreaElement>('#message')!.focus();
+  });
+  const q = new URLSearchParams(location.search);
+  const p = q.get('profil');
+  const ob = q.get('objet');
+  const carte: Record<string, string> = {
+    parent: 'Parent ou proche',
+    enseignant: 'Enseignant(e) / directeur(rice) d’école',
+    social: 'Travailleur(se) social(e) / structure sociale ou médico-sociale',
+    cse: 'Comité social et économique (CSE)',
+    mediatheque: 'Médiathèque / bibliothèque',
+  };
+  if (p && carte[p]) profil.value = carte[p];
+  maj();
+  if (ob === 'lancement' && groupe() !== 'parent') objet.value = LANCEMENT;
+  if (p === 'cse' && !ob) objet.value = 'Demander un devis CSE';
+  if (p === 'enseignant' && !ob) objet.value = 'Demander un devis école';
+</script>
+
+<style>
+  .contact { display: grid; grid-template-columns: 0.6fr 1.4fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+  .contact-aide { display: grid; gap: 8px; color: var(--sapin); padding-top: 20px; transform: rotate(-2deg); }
+  .contact-aide .main { font-size: 2rem; }
+  .contact-aide p:not(.main) { color: var(--gris); }
+  .contact-aide svg { width: 90px; justify-self: end; }
+  @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } .contact-aide svg { display: none; } }
+</style>
