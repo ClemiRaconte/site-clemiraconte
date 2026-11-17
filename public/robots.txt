@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /mon-espace
 Sitemap: https://clemiraconte.fr/sitemap.xml
