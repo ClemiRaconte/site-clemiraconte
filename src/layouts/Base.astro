@@ -4,8 +4,8 @@ import Entete from '../components/Entete.astro';
 import PiedDePage from '../components/PiedDePage.astro';
 import { u } from '../lib/url';
 
-interface Props { titre: string; description: string; visionneuse?: boolean }
-const { titre, description, visionneuse = false } = Astro.props;
+interface Props { titre: string; description: string; visionneuse?: boolean; nu?: boolean }
+const { titre, description, visionneuse = false, nu = false } = Astro.props;
 const canonique = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
@@ -15,6 +15,7 @@ const canonique = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titre}</title>
     <meta name="description" content={description} />
+    {nu && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonique} />
     <link rel="icon" type="image/svg+xml" href={u('/favicon.svg')} />
     <meta name="theme-color" content="#2D6A4F" />
@@ -27,9 +28,9 @@ const canonique = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
-    <Entete />
+    {!nu && <Entete />}
     <main id="contenu"><slot /></main>
-    <PiedDePage />
+    {!nu && <PiedDePage />}
     {visionneuse && (
       <>
         <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
