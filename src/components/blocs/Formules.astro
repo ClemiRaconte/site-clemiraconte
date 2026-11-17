@@ -21,7 +21,6 @@ const reserver = (id: string) => u(`/abonnement?formule=${id}#reserver`);
   <ul class="formules" style={`--n:${liste.length}`}>
     {liste.map((f) => (
       <li class:list={['formule', { vedette: f.vedette }]}>
-        {f.vedette && <span class="formule-vedette main">le plus choisi</span>}
         <h3>{f.nom}</h3>
         <p class="formule-prix"><strong>{f.prix}</strong> <span>{f.periode}</span></p>
         <p class="formule-texte">{f.texte}</p>

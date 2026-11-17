@@ -199,7 +199,7 @@ const liens = [
   .panneau-liste li { opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; }
   .panneau-ouvert .panneau-liste li { opacity: 1; transform: none; transition-delay: calc(0.12s + var(--i) * 0.06s); }
   .panneau-carte { display: grid; text-decoration: none; color: var(--encre); gap: 10px; }
-  .panneau-carte img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 2px solid var(--encre); transition: transform 0.25s; }
+  .panneau-carte img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 2px solid var(--encre); transition: transform 0.25s; }
   .panneau-liste li:nth-child(odd) .panneau-carte img { transform: rotate(-1.5deg); }
   .panneau-liste li:nth-child(even) .panneau-carte img { transform: rotate(1.2deg); }
   .panneau-carte:hover img { transform: rotate(0) scale(1.03); }

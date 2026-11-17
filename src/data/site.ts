@@ -8,7 +8,7 @@ export const site = {
   lieu: 'Saint-Bonnet-en-Champsaur (05)',
   conteur: 'Clément Joubert',
   prelancement: true,
-  lancement: 'courant novembre',
+  lancement: 'le samedi 12 décembre',
   /** Logo retenu : le livre-sapin */
   logo: 'livre' as 'luciole' | 'livre' | 'bulle',
 };
