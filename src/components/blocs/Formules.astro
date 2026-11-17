@@ -2,10 +2,12 @@
 /** Cartes de formules d'un public, avec lien direct vers la réservation. */
 import { formules, famillesElargies, baremeCse, type Formule } from '../../data/formules';
 import { u } from '../../lib/url';
+import { lienFormule, mentionTva } from '../../data/paiement';
 interface Props { public: Formule['public']; elargie?: boolean; boutonsEnLigne?: boolean }
 const { public: pub, elargie = false } = Astro.props;
 const liste = formules.filter((f) => f.public === pub);
 const reserver = (id: string) => u(`/abonnement?formule=${id}#reserver`);
+const payer = (id: string) => lienFormule(id, reserver(id));
 ---
 {pub === 'cse' ? (
   <div class="bareme">
@@ -24,10 +26,11 @@ const reserver = (id: string) => u(`/abonnement?formule=${id}#reserver`);
         <h3>{f.nom}</h3>
         <p class="formule-prix"><strong>{f.prix}</strong> <span>{f.periode}</span></p>
         <p class="formule-texte">{f.texte}</p>
-        <a class:list={['btn', f.vedette ? 'btn-soleil' : 'btn-plein']} href={reserver(f.id)}>Je réserve cette formule</a>
+        <a class:list={['btn', f.vedette ? 'btn-soleil' : 'btn-plein']} href={payer(f.id)}>Je réserve cette formule</a>
       </li>
     ))}
   </ul>
+  <p class="formules-tva">{mentionTva}</p>
 )}
 {elargie && (
   <div class="elargie">
@@ -37,12 +40,13 @@ const reserver = (id: string) => u(`/abonnement?formule=${id}#reserver`);
     </div>
     <ul>
       {famillesElargies.map((f) => (
-        <li><span>{f.nom}</span><strong>{f.prix} <small>/ an</small></strong><a href={reserver(f.id)}>Je réserve →</a></li>
+        <li><span>{f.nom}</span><strong>{f.prix} <small>/ an</small></strong><a href={payer(f.id)}>Je réserve →</a></li>
       ))}
     </ul>
   </div>
 )}
 <style>
+  .formules-tva { font-size: 0.9rem; color: var(--gris, #5b6b63); margin-top: 12px; text-align: center; }
   .formules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 360px)); justify-content: center; gap: 28px; }
   .formule { position: relative; background: var(--creme-carte); border: 3px solid var(--encre); padding: 30px 26px; display: grid; gap: 12px; align-content: start; box-shadow: 7px 7px 0 var(--sapin); }
   .formule:nth-child(odd) { transform: rotate(-0.8deg); }

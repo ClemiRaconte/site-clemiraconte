@@ -1,0 +1,16 @@
+---
+/** Retour après un paiement Stripe réussi. Stripe envoie lui-même le reçu par email. */
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import { u } from '../lib/url';
+---
+<Base titre="Bienvenue · Clémi Raconte" description="Votre abonnement Clémi Raconte est confirmé.">
+  <PageTete
+    surtitre="Bienvenue !"
+    titre="Votre abonnement est confirmé"
+    intro="Merci de votre confiance. Votre reçu arrive par email. Pour entrer dans votre espace, il suffit de vous connecter avec l’adresse utilisée pour le paiement : je vous envoie un lien, sans mot de passe à retenir"
+  >
+    <a class="btn btn-plein" href={u('/connexion')}>Entrer dans mon espace</a>
+    <a class="btn btn-contour" href={u('/')}>Retour à l’accueil</a>
+  </PageTete>
+</Base>
