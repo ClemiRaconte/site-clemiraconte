@@ -6,25 +6,43 @@
  * La visite de démonstration reste sur /espace-abonne.
  */
 import Base from '../layouts/Base.astro';
-import Bandeau from '../components/blocs/Bandeau.astro';
+import DecorsAbonne from '../components/abonne/DecorsAbonne.astro';
+import Logo from '../components/logo/Logo.astro';
 import '../styles/visionneuse.css';
 import { u } from '../lib/url';
 const portail = import.meta.env.PUBLIC_STRIPE_PORTAIL ?? '';
+const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}, {id: 'cabane', nom: 'La cabane'}, {id: 'foret', nom: 'La forêt de Daillon'}, {id: 'feu', nom: 'Le feu de camp'}, {id: 'refuge', nom: 'Le refuge'}, {id: 'mer', nom: 'La mer'}, {id: 'jardin', nom: 'Le jardin'}];
 ---
-<Base visionneuse titre="Mon espace · Clémi Raconte" description="Votre bibliothèque Clémi Raconte : vos histoires, leurs fiches papote et leurs activités.">
-  <section class="bandeau-section fond-creme">
-    <div class="conteneur me-tete">
-      <p class="surtitre-main">Mon espace</p>
-      <h1 id="me-bonjour">Bonjour</h1>
-      <div class="me-onglets" role="tablist" hidden>
-        <button type="button" role="tab" aria-selected="true" data-vue="biblio">Ma bibliothèque</button>
-        <button type="button" role="tab" aria-selected="false" data-vue="compte">Mon compte</button>
-      </div>
-    </div>
-  </section>
+<Base visionneuse nu titre="Mon espace · Clémi Raconte" description="Votre bibliothèque Clémi Raconte : vos histoires, leurs fiches papote et leurs activités.">
+  <script is:inline>try{var d=localStorage.getItem('clemi-decor');if(d)document.documentElement.classList.add('decor-'+d)}catch(e){}</script>
+  <DecorsAbonne />
+  <header class="me-barre">
+    <a class="me-logo" href={u('/')} aria-label="Clémi Raconte, revenir au site"><Logo taille={36} /></a>
+    <nav class="me-onglets" role="tablist" aria-label="Mon espace" hidden>
+      <button type="button" role="tab" aria-selected="true" data-vue="biblio">Ma bibliothèque</button>
+      <button type="button" role="tab" aria-selected="false" data-vue="decors">Changer de décor</button>
+      <button type="button" role="tab" aria-selected="false" data-vue="compte">Mon compte</button>
+    </nav>
+    <a class="me-retour-site" href={u('/')}>Revenir au site</a>
+  </header>
 
-  <Bandeau fond="beige" crete={1}>
+  <div class="me-scene">
+    <div class="me-tete">
+      <p class="me-sur">Mon espace</p>
+      <h1 id="me-bonjour">Bonjour</h1>
+      <p class="me-samedi"><b>Samedi 9h</b> Une nouvelle histoire t’attend</p>
+    </div>
     <p id="me-etat" class="me-etat" role="status">Ouverture de votre espace…</p>
+
+    <div class="vue" data-vue="decors" hidden>
+      <h2>Où veux-tu écouter tes histoires aujourd’hui ?</h2>
+      <p class="me-intro">Choisis ton décor. Tu pourras en changer quand tu veux</p>
+      <ul class="me-portes">
+        {decors.map((d, i) => (
+          <li style={`--i:${i}`}><button type="button" class={`me-porte porte-${d.id}`} data-decor={d.id}><span class="me-porte-vue"></span><b>{d.nom}</b></button></li>
+        ))}
+      </ul>
+    </div>
 
     <div class="vue" data-vue="biblio" hidden>
       <h2>Ma bibliothèque</h2>
@@ -71,7 +89,7 @@ const portail = import.meta.env.PUBLIC_STRIPE_PORTAIL ?? '';
       <p class="me-note"><strong>Un accès, c’est une famille.</strong> Votre accès est personnel : merci de ne pas le partager. C’est ce qui permet aux histoires de continuer d’exister</p>
       <button type="button" class="btn btn-contour" id="me-deconnexion">Me déconnecter</button>
     </div>
-  </Bandeau>
+  </div>
 </Base>
 
 <script>
@@ -160,29 +178,79 @@ const portail = import.meta.env.PUBLIC_STRIPE_PORTAIL ?? '';
     $('me-etagere').innerHTML = d.bibliotheque.map((h, i) =>
       `<li><button type="button" class="me-livre" data-i="${i}"><strong>${texte(h.titre)}</strong>${h.theme ? `<span>${texte(h.theme)}</span>` : ''}<span class="me-lien">Ouvrir →</span></button></li>`).join('');
     $('me-etagere').querySelectorAll<HTMLButtonElement>('.me-livre').forEach((b) => (b.onclick = () => ouvrirHistoire(d.bibliotheque[Number(b.dataset.i)])));
-    montrer('biblio');
+    let dec: string | null = null;
+    try { dec = localStorage.getItem('clemi-decor'); } catch {}
+    montrer(dec ? 'biblio' : 'decors');
   }
 
   document.querySelectorAll<HTMLButtonElement>('.me-onglets button').forEach((b) => (b.onclick = () => montrer(b.dataset.vue!)));
   document.querySelector<HTMLButtonElement>('[data-retour]')!.onclick = () => { $('me-histoire').hidden = true; $('me-etagere').hidden = false; };
   $('me-deconnexion').onclick = async () => { await sb?.auth.signOut(); location.replace(connexion); };
+  document.querySelectorAll<HTMLButtonElement>('[data-decor]').forEach((b) => (b.onclick = () => {
+    const d = b.dataset.decor!;
+    document.documentElement.className = document.documentElement.className.replace(/\bdecor-\S+/g, '').trim();
+    document.documentElement.classList.add(`decor-${d}`);
+    try { localStorage.setItem('clemi-decor', d); } catch {}
+    montrer('biblio');
+  }));
   demarrer();
 </script>
 
 <style>
-  /* Mise en forme minimale, à habiller. :global car ces blocs sont créés en JavaScript. */
-  .me-tete { padding-bottom: 72px; }
-  .me-onglets { display: flex; gap: 8px; margin-top: 16px; }
-  .me-onglets button, :global(.me-ages button) { border: 2px solid var(--encre); background: transparent; padding: 6px 14px; font: inherit; cursor: pointer; }
-  .me-onglets button[aria-selected='true'], :global(.me-ages button[aria-pressed='true']) { background: var(--sapin); color: #fff; }
+  :global(body) { background: transparent; min-height: 100vh; }
+  .me-barre { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 20px; background: rgba(251, 243, 227, 0.82); backdrop-filter: blur(8px); }
+  .me-logo { text-decoration: none; }
+  .me-onglets { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 auto; }
+  .me-onglets button, :global(.me-ages button) { font: 800 0.92rem var(--f-label); border: 0; border-radius: 24px; padding: 9px 16px; background: #fff; color: var(--encre); box-shadow: 0 4px 0 var(--beige); cursor: pointer; transition: transform 0.12s; }
+  .me-onglets button:hover, :global(.me-ages button:hover) { transform: translateY(-3px); }
+  .me-onglets button[aria-selected='true'], :global(.me-ages button[aria-pressed='true']) { background: var(--sapin); color: #fff; box-shadow: 0 4px 0 var(--soleil); }
+  .me-retour-site { font-weight: 800; color: var(--encre); }
+  .me-scene { max-width: 1080px; margin: 0 auto; padding: 24px 16px 160px; }
+  .me-tete { text-align: center; padding: 20px 0 10px; }
+  .me-sur { font: 800 0.8rem var(--f-label); letter-spacing: 0.22em; text-transform: uppercase; color: var(--sapin); margin: 0; }
+  .me-tete h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); margin: 0.1em 0; text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6); }
+  .me-samedi { display: inline-flex; align-items: center; gap: 12px; background: #fff; border-radius: 999px; padding: 6px 18px 6px 6px; font-weight: 700; box-shadow: 0 5px 0 var(--beige); animation: me-flotte 5s ease-in-out infinite; }
+  .me-samedi b { background: var(--sapin); color: #fff; border-radius: 999px; padding: 8px 16px; font-family: var(--f-titre); }
+  .vue, .me-etat { background: rgba(251, 243, 227, 0.72); backdrop-filter: blur(3px); border-radius: 28px; padding: 26px; margin-top: 26px; box-shadow: 0 10px 30px rgba(36, 59, 50, 0.12); }
+  .vue h2 { margin-top: 0; }
+  .me-note { background: var(--soleil-doux); padding: 12px 16px; font-weight: 600; border-radius: 16px; }
+  /* Portes des décors */
+  .me-portes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+  .me-portes li { animation: me-entre 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) both calc(var(--i) * 0.07s); }
+  @keyframes me-entre { from { opacity: 0; transform: translateY(40px) scale(0.9); } }
+  .me-porte { all: unset; cursor: pointer; display: block; width: 100%; border-radius: 26px; overflow: hidden; background: #fff; box-shadow: 0 8px 0 var(--beige); transition: transform 0.18s, box-shadow 0.18s; }
+  .me-porte:hover, .me-porte:focus-visible { transform: translateY(-8px) rotate(-1deg); box-shadow: 0 16px 0 var(--beige); }
+  .me-porte b { display: block; padding: 12px 14px; font: 700 1.1rem var(--f-titre); color: var(--encre); }
+  .me-porte-vue { display: block; height: 130px; background: var(--v); }
+  .porte-chambre { --v: radial-gradient(circle at 50% 70%, #fff3c4 0 18px, transparent 19px), linear-gradient(#f6e7c9 65%, #c9a06e 65%); }
+  .porte-ciel { --v: radial-gradient(circle at 78% 30%, #F4C430 0 22px, transparent 23px), radial-gradient(ellipse at 35% 60%, #fff 0 40px, transparent 41px), linear-gradient(#bfe3dc, #fbf3e3); }
+  .porte-cabane { --v: radial-gradient(circle at 50% 35%, #c9452b 0 50px, transparent 51px), linear-gradient(90deg, transparent 45%, #7a5030 45% 55%, transparent 55%), linear-gradient(#f6d9a8, #fbefd8); }
+  .porte-foret { --v: radial-gradient(circle at 25% 45%, #e0782f 0 30px, transparent 31px), radial-gradient(circle at 70% 40%, #c9452b 0 36px, transparent 37px), linear-gradient(#f6d9a8, #b5651d); }
+  .porte-feu { --v: radial-gradient(ellipse at 50% 75%, #F4C430 0 14px, #e67e3a 15px 22px, transparent 40px), linear-gradient(#0f2238, #2c4a63); }
+  .porte-refuge { --v: radial-gradient(circle at 25% 65%, #ffe27a 0 14px, #3a3a3a 15px 30px, transparent 31px), repeating-linear-gradient(#b98f5d 0 18px, #8a6239 18px 20px); }
+  .porte-mer { --v: radial-gradient(ellipse at 50% 50%, #F4C430 0 26px, transparent 27px), linear-gradient(#8fd3e0, #1d6478); }
+  .porte-jardin { --v: radial-gradient(circle at 50% 40%, #243b32 0 8px, #d63a2a 9px 22px, transparent 23px), linear-gradient(90deg, transparent 49%, #3f8266 49% 51%, transparent 51%), linear-gradient(#bfe3f0 70%, #8a5d36 70%); }
+  /* Les histoires, qui prennent la forme du décor */
+  .me-etagere { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 26px; }
+  :global(.me-livre) { position: relative; width: 100%; min-height: 220px; text-align: left; border: 0; border-radius: 4px 14px 14px 4px; padding: 20px 18px; display: grid; align-content: end; gap: 6px; font: inherit; color: #fff; cursor: pointer; background: linear-gradient(160deg, #3f8266, #2D6A4F); box-shadow: inset 12px 0 0 rgba(0, 0, 0, 0.2), 0 12px 22px rgba(36, 59, 50, 0.25); transition: transform 0.18s; }
+  :global(.me-etagere li:nth-child(4n + 2) .me-livre) { background: linear-gradient(160deg, #f7d873, #e0ae1c); color: var(--encre); }
+  :global(.me-etagere li:nth-child(4n + 3) .me-livre) { background: linear-gradient(160deg, #f3b98f, #d9784a); color: var(--encre); }
+  :global(.me-etagere li:nth-child(4n) .me-livre) { background: linear-gradient(160deg, #a9d0bd, #6fa58a); color: var(--encre); }
+  :global(.me-livre:hover) { transform: translateY(-10px) rotate(-2deg); }
+  :global(.me-livre strong) { font-family: var(--f-titre); font-size: 1.2rem; line-height: 1.2; }
+  :global(.me-lien) { font-weight: 800; }
+  :global(html.decor-ciel .me-livre), :global(html.decor-jardin .me-livre) { border-radius: 999px; aspect-ratio: 1; min-height: 0; text-align: center; align-content: center; padding: 30px; }
+  :global(html.decor-mer .me-livre) { border-radius: 50%; box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.4); animation: me-flotte 5s ease-in-out infinite; }
+  :global(html.decor-feu .me-livre) { box-shadow: 0 0 40px 8px #f4c43066, 0 12px 22px rgba(0, 0, 0, 0.4); }
+  :global(html.decor-feu .vue), :global(html.decor-mer .vue) { background: rgba(251, 243, 227, 0.94); }
+  :global(html.decor-foret .me-livre), :global(html.decor-cabane .me-livre), :global(html.decor-refuge .me-livre) { outline: 7px solid #8a5d36; }
   .me-ages { display: flex; gap: 8px; margin: 12px 0 20px; }
-  .me-etat, .me-note { background: var(--soleil-doux); padding: 12px 16px; font-weight: 600; }
-  .me-etagere { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-  :global(.me-livre) { width: 100%; text-align: left; border: 3px solid var(--encre); background: #fff; padding: 18px; display: grid; gap: 8px; font: inherit; color: var(--encre); cursor: pointer; box-shadow: 5px 5px 0 var(--sapin); }
-  :global(.me-livre strong) { font-family: 'Fraunces Variable', serif; font-size: 1.25rem; line-height: 1.2; }
-  :global(.me-lien) { color: var(--sapin); font-weight: 700; }
   .me-liste { padding-left: 1.2em; }
-  .me-bloc { margin-bottom: 24px; }
+  :global(#me-h-activites), :global(#me-h-bonus) { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+  :global(#me-h-activites li), :global(#me-h-bonus li) { background: #fff; border-radius: 20px; padding: 14px 16px; box-shadow: 0 4px 0 var(--beige); font-weight: 700; }
+  .me-bloc { margin-bottom: 24px; background: #fff; border-radius: 20px; padding: 16px 18px; }
   .me-video { position: relative; aspect-ratio: 16 / 9; max-width: 720px; }
-  .me-video :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .me-video :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 16px; }
+  @keyframes me-flotte { 50% { translate: 0 -6px; } }
+  @media (prefers-reduced-motion: reduce) { .me-scene *, :global(.me-livre) { animation: none !important; } }
 </style>
