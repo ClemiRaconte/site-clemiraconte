@@ -174,7 +174,7 @@ main{max-width:1100px;margin:auto;padding:24px 16px 80px}h1,h3{font-family:Fraun
 @media (max-width:760px){.scene{height:760px}.placard{left:6%;right:6%}.fauteuil,.chat,.horloge{display:none}.fen3{left:auto;right:4%;width:150px}.maison{top:180px}.fleur{width:110px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 .placard .it{z-index:1}.panneau .lbl{width:130px}
-</style></head><body><main>
+</style></head><body><a href="./" style="position:fixed;right:14px;bottom:14px;z-index:99;background:#2D6A4F;color:#fff;font:800 .9rem sans-serif;border-radius:99px;padding:10px 16px;text-decoration:none;box-shadow:0 4px 0 #F4C430">Changer de décor</a><main>
 <h1>Les décors de l'espace abonné, version 2</h1>
 <p>Contenu inventé, rien n'est branché. Clique sur les histoires, sur les objets (placard, coffre, arrosoir…), et essaie les boutons <b>automne / hiver</b> et <b>jour / nuit</b>. La chambre et le ciel restent sur <a href="chambre-ciel.html">leur page</a>.</p>
 <div class="choix"><button class="btn" aria-pressed="true" data-s="cabane">La cabane</button><button class="btn" aria-pressed="false" data-s="foret">La forêt de Daillon</button><button class="btn" aria-pressed="false" data-s="feu">Le feu de camp</button><button class="btn" aria-pressed="false" data-s="refuge">Le refuge</button><button class="btn" aria-pressed="false" data-s="mer">La mer</button><button class="btn" aria-pressed="false" data-s="jardin">Le jardin</button><span class="sep"></span><button class="btn saison" data-saison>Passer en hiver</button><button class="btn" data-nuit>Passer en nuit</button></div>
@@ -259,4 +259,5 @@ $$('.placard .porte').forEach(p=>p.onclick=()=>p.closest('.placard').classList.t
 const cb=document.querySelector('.coffre-btn');cb.onclick=()=>cb.closest('.scene').classList.toggle('coffre-ouvert');
 const ar=document.querySelector('.arrosoir2');ar.onclick=()=>{const s=ar.closest('.scene');s.classList.remove('arrose');void s.offsetWidth;s.classList.add('arrose')};
 document.querySelector('.ecureuil').onclick=e=>{e.target.classList.remove('saute');void e.target.offsetWidth;e.target.classList.add('saute')};
+const h=location.hash.slice(1);if(h){const b=document.querySelector('.choix [data-s="'+h+'"]');if(b)b.click()}
 </script></body></html>

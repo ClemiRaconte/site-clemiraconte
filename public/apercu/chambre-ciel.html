@@ -88,7 +88,7 @@ main{max-width:1080px;margin:auto;padding:24px 16px 80px}h1,h2,h3{font-family:Fr
 .insp{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.insp div{background:#fff;border-radius:18px;padding:16px;box-shadow:0 4px 0 var(--beige)}.insp h3{margin:0 0 6px;font-size:1.05rem}.insp p{margin:0;color:var(--gris);font-size:.95rem}
 @media (max-width:760px){.fenetre{display:none}.ch .etagere{right:34px}.insp{grid-template-columns:1fr}.montgolfiere{left:70%}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
-</style></head><body><main>
+</style></head><body><a href="./" style="position:fixed;right:14px;bottom:14px;z-index:99;background:#2D6A4F;color:#fff;font:800 .9rem sans-serif;border-radius:99px;padding:10px 16px;text-decoration:none;box-shadow:0 4px 0 #F4C430">Changer de décor</a><main>
 <h1>La chambre ou le ciel</h1>
 <p>Deux ambiances poussées plus loin, pour t'aider à trancher. Contenu inventé, rien n'est branché. Clique sur un livre ou un nuage pour ouvrir l'histoire, et essaie le bouton jour/nuit.</p>
 <div class="choix"><button class="btn" aria-pressed="true" data-s="ch">La chambre</button><button class="btn" aria-pressed="false" data-s="ci">Le ciel</button></div>
@@ -127,4 +127,5 @@ main{max-width:1080px;margin:auto;padding:24px 16px 80px}h1,h2,h3{font-family:Fr
 document.querySelectorAll('.choix .btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.choix .btn').forEach(x=>x.setAttribute('aria-pressed',x===b));document.querySelectorAll('.scene').forEach(s=>s.hidden=s.dataset.s!==b.dataset.s)});
 document.querySelectorAll('[data-nuit]').forEach(b=>b.onclick=()=>{const s=b.closest('.scene');s.classList.toggle('nuit');const n=s.classList.contains('nuit');b.textContent=s.classList.contains('ch')?(n?'Mode journée':'Mode soirée'):(n?'Plein jour':'Coucher de soleil');s.querySelector('.hi').textContent=n?(s.classList.contains('ch')?'Bonsoir Camille':'Bonsoir Camille'):'Bonjour Camille'});
 document.querySelectorAll('.bk,.nc:not(.attente)').forEach(b=>b.onclick=()=>{const s=b.closest('.scene'),o=s.querySelector('.ouvert');s.querySelector('.ot').textContent=b.querySelector('b').textContent;o.classList.remove('on');void o.offsetWidth;o.classList.add('on')});
+const h=location.hash.slice(1);if(h){const b=document.querySelector('.choix [data-s="'+h+'"]');if(b)b.click()}
 </script></body></html>
