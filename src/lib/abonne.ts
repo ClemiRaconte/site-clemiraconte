@@ -13,8 +13,12 @@ export const sb: SupabaseClient | null = branche ? createClient(url!, cle!) : nu
 /** Envoie le lien de connexion. L'adresse de retour doit être autorisée dans Supabase (Redirect URLs). */
 export async function envoyerLien(email: string, retour: string) {
   if (!sb) return { erreur: 'pas-branche' };
-  const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: retour } });
-  return error ? { erreur: error.message } : {};
+  try {
+    const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: retour } });
+    return error ? { erreur: `${error.status ?? ''} ${error.message}`.trim() } : {};
+  } catch (e) {
+    return { erreur: e instanceof Error ? e.message : String(e) };
+  }
 }
 
 /** Bibliothèque de l'abonné connecté, calculée côté serveur (règle d'accès par dates). */

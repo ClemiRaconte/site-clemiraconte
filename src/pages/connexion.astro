@@ -49,8 +49,9 @@ import { u } from '../lib/url';
     if (!branche) return dire('L’espace ouvre avec les premières histoires. Vos accès vous arriveront par email au lancement');
     if (!champ.checkValidity()) return dire('Cette adresse email ne semble pas complète');
     const r = await envoyerLien(champ.value.trim(), espace);
+    if (r.erreur) console.warn('Connexion Supabase :', r.erreur);
     dire(r.erreur
-      ? 'Le lien n’a pas pu partir. Réessayez dans une minute, ou écrivez-moi depuis la page contact'
+      ? `Le lien n’a pas pu partir. Réessayez dans une minute, ou écrivez-moi depuis la page contact (détail : ${r.erreur})`
       : 'C’est parti ! Ouvrez l’email que je viens de vous envoyer et touchez le lien. Pensez à regarder dans les indésirables');
   });
 </script>
