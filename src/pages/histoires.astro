@@ -49,30 +49,50 @@ const themes = [
 
   <Bandeau fond="creme" crete={2} bulles={10}>
     <Tete surtitre="À découvrir maintenant" titre="Les histoires déjà en ligne" intro="Prêtes à lire, à regarder et à vivre. Les titres et les thèmes des prochaines histoires s’afficheront ici un mois avant leur sortie" />
-    <div class="rangee" tabindex="0" aria-label="Histoires disponibles et à paraître">
-      <a class="carte-histoire dispo" href={u('/histoire-ange-le-loup')}>
-        <span class="ch-couv"><CouvertureAnge /></span>
-        <span class="ch-badges"><span>4-6 ans</span><span>7-9 ans</span><span class="offert">offerte</span></span>
-        <strong>Ange, le loup qui chantait avec le vent</strong>
-        <span class="ch-theme">Appartenance, différence, courage d’être soi</span>
-        <span class="ch-lien">Découvrir la séance complète →</span>
+    <div class="ruban" aria-label="Histoires disponibles et à paraître">
+      <div class="piste">
+      <a class="livre dispo" href={u('/histoire-ange-le-loup')}>
+        <span class="lv-page">
+          <span class="lv-age">4-6 et 7-9 ans · offerte</span>
+          <span class="lv-texte">Au cœur de la forêt de Daillon, là où les arbres chatouillent les nuages, vit Ange. Un loup pas comme les autres…</span>
+          <span class="lv-lien">Découvrir la séance complète →</span>
+        </span>
+        <span class="lv-couv"><CouvertureAnge /></span>
+        <i class="lv-signet"></i>
       </a>
       {[1, 2, 3, 4].map((n) => (
-        <div class="carte-histoire bientot" aria-hidden={n > 1 ? 'true' : undefined}>
-          <span class="ch-couv vide"><span class="main">samedi {n === 1 ? 'prochain' : `n°${n}`}</span></span>
-          <strong>Les aventures de Clémi arrivent ici, une par une</strong>
-          <span class="ch-theme">Titre et thème dévoilés un mois avant</span>
+        <div class="livre bientot">
+          <span class="lv-page"><span class="lv-age">Bientôt</span><span class="lv-texte">Titre et thème dévoilés un mois avant</span></span>
+          <span class="lv-couv vide"><span class="main">samedi {n === 1 ? 'prochain' : `n°${n}`}</span></span>
         </div>
       ))}
+      </div>
+      <div class="piste" aria-hidden="true" inert>
+      <a class="livre dispo" href={u('/histoire-ange-le-loup')}>
+        <span class="lv-page">
+          <span class="lv-age">4-6 et 7-9 ans · offerte</span>
+          <span class="lv-texte">Au cœur de la forêt de Daillon, là où les arbres chatouillent les nuages, vit Ange. Un loup pas comme les autres…</span>
+          <span class="lv-lien">Découvrir la séance complète →</span>
+        </span>
+        <span class="lv-couv"><CouvertureAnge /></span>
+        <i class="lv-signet"></i>
+      </a>
+      {[1, 2, 3, 4].map((n) => (
+        <div class="livre bientot">
+          <span class="lv-page"><span class="lv-age">Bientôt</span><span class="lv-texte">Titre et thème dévoilés un mois avant</span></span>
+          <span class="lv-couv vide"><span class="main">samedi {n === 1 ? 'prochain' : `n°${n}`}</span></span>
+        </div>
+      ))}
+      </div>
     </div>
-    <p class="rangee-aide main">← faites défiler →</p>
+    <p class="rangee-aide main">survolez un livre pour l’ouvrir</p>
   </Bandeau>
 
   <Bandeau fond="beige" crete={3}>
     <Tete surtitre="Par thème" titre="Les histoires par thème" intro="Un thème après l’autre, au fil de l’année" />
     <ul class="themes">
-      {themes.map((t) => (
-        <li>
+      {themes.map((t, i) => (
+        <li style={`--i:${i}`}>
           {t.dispo ? (
             <a class="theme dispo" href={u(t.href!)}>{t.nom}<span class="main">à lire →</span></a>
           ) : (
@@ -98,27 +118,37 @@ const themes = [
   .f-plus { font-size: 3rem; color: var(--soleil-doux); }
   .formule-fin { text-align: center; font-size: 1.9rem; color: var(--soleil); margin-top: 18px; transform: rotate(-1.5deg); }
 
-  .rangee { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 280px); gap: 26px; overflow-x: auto; padding: 18px 6px 28px; scroll-snap-type: x mandatory; scrollbar-color: var(--sapin) transparent; }
-  .carte-histoire { scroll-snap-align: start; display: grid; gap: 8px; align-content: start; text-decoration: none; color: var(--encre); }
-  .ch-couv { display: block; border: 3px solid var(--encre); box-shadow: 6px 6px 0 var(--sapin); transform: rotate(-1.5deg); transition: transform 0.25s; overflow: hidden; }
-  .carte-histoire:nth-child(even) .ch-couv { transform: rotate(1.5deg); }
-  .dispo:hover .ch-couv { transform: rotate(0) translateY(-6px) scale(1.02); }
-  .ch-couv.vide { aspect-ratio: 4 / 5; display: grid; place-items: center; background: repeating-linear-gradient(-45deg, var(--beige) 0 14px, var(--creme-carte) 14px 28px); box-shadow: 6px 6px 0 var(--ligne); }
-  .ch-couv.vide .main { font-size: 1.8rem; background: var(--soleil-doux); padding: 4px 14px; transform: rotate(-4deg); }
-  .ch-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .ch-badges span { font: 800 0.75rem var(--f-label); padding: 2px 8px; background: var(--menthe); color: var(--sapin-fonce); }
-  .ch-badges .offert { background: var(--soleil); color: var(--encre); }
-  .carte-histoire strong { font: 600 1.15rem / 1.3 var(--f-titre); }
-  .ch-theme { color: var(--gris); font-size: 0.92rem; }
-  .ch-lien { font: 800 0.9rem var(--f-label); color: var(--sapin); }
+  .ruban { display: flex; overflow: hidden; padding: 30px 0 34px; margin: 0 calc(50% - 50vw); mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .piste { display: flex; flex: none; gap: 46px; padding-right: 46px; animation: defile 45s linear infinite; }
+  .ruban:hover .piste, .ruban:focus-within .piste { animation-play-state: paused; }
+  @keyframes defile { to { transform: translateX(-100%); } }
+  .livre { position: relative; flex: none; display: block; width: 190px; aspect-ratio: 4 / 5; perspective: 1200px; color: var(--encre); text-decoration: none; transition: transform 0.15s ease-out; }
+  .livre:nth-child(odd) { rotate: -2deg; } .livre:nth-child(even) { rotate: 2deg; translate: 0 8px; }
+  .livre::before { content: ''; position: absolute; inset: 3px -6px -5px 3px; border-radius: 3px 12px 12px 3px; background: repeating-linear-gradient(90deg, #fffaf0 0 2px, #e5d7b6 2px 3px); box-shadow: 0 14px 26px rgba(36, 59, 50, 0.25); }
+  .lv-page { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 8px; padding: 16px; background: var(--creme-carte); border-radius: 3px 12px 12px 3px; }
+  .lv-age { align-self: flex-start; font: 800 0.72rem var(--f-label); background: var(--soleil); padding: 2px 8px; border-radius: 99px; }
+  .lv-texte { flex: 1; font: 600 0.98rem / 1.4 var(--f-titre); }
+  .lv-lien { font: 800 0.85rem var(--f-label); color: var(--sapin); }
+  .lv-couv { position: absolute; inset: 0; overflow: hidden; border-radius: 3px 12px 12px 3px; transform-origin: left center; transition: transform 0.8s cubic-bezier(0.3, 0.1, 0.2, 1); box-shadow: inset 12px 0 0 rgba(0, 0, 0, 0.2); backface-visibility: hidden; }
+  .lv-couv :global(svg) { display: block; width: 100%; height: 100%; }
+  .lv-couv.vide { display: grid; place-items: center; background: repeating-linear-gradient(-45deg, var(--beige) 0 14px, var(--creme-carte) 14px 28px); }
+  .lv-couv.vide .main { font-size: 1.6rem; background: var(--soleil-doux); padding: 4px 14px; transform: rotate(-4deg); }
+  .lv-signet { position: absolute; top: -6px; right: 22px; width: 14px; height: 54px; background: var(--soleil); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); transition: height 0.3s; }
+  .livre:hover, .livre:focus-visible { transform: translateY(-8px) scale(1.04); z-index: 2; }
+  .livre:hover .lv-couv, .livre:focus-visible .lv-couv { transform: rotateY(-160deg); }
+  .livre:hover .lv-signet { height: 70px; }
   .bientot { opacity: 0.85; }
   .rangee-aide { text-align: center; font-size: 1.3rem; color: var(--gris); }
 
   .themes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
-  .theme { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 18px 20px; background: var(--creme-carte); border: 2px solid var(--encre); font: 600 1.1rem var(--f-titre); color: var(--encre); text-decoration: none; transform: rotate(var(--r, -0.8deg)); }
-  .themes li:nth-child(even) .theme { --r: 0.8deg; }
-  .theme .main { font-size: 1.3rem; color: var(--gris); white-space: nowrap; }
-  .theme.dispo { background: var(--sapin); color: #fff; box-shadow: 5px 5px 0 var(--soleil); }
+  .themes li { animation: arrive 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) both calc(var(--i) * 0.08s); }
+  @keyframes arrive { from { opacity: 0; transform: translateY(24px) scale(0.95); } }
+  .theme { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 18px 22px; border-radius: 26px; background: var(--creme-carte); box-shadow: 0 5px 0 var(--beige); font: 600 1.1rem var(--f-titre); color: var(--encre); text-decoration: none; transition: transform 0.15s ease-out, box-shadow 0.15s; animation: flotte 5s ease-in-out infinite calc(var(--i) * -0.8s); }
+  @keyframes flotte { 50% { translate: 0 -5px; } }
+  .theme:hover { transform: translateY(-6px) rotate(-1.5deg); box-shadow: 0 12px 0 var(--beige); }
+  .theme .main { font: 600 0.85rem var(--f-label); color: var(--gris); white-space: nowrap; }
+  .theme.dispo { background: var(--sapin); color: #fff; box-shadow: 0 5px 0 var(--soleil); }
+  .theme.dispo:hover { box-shadow: 0 12px 0 var(--soleil); }
   .theme.dispo .main { color: var(--soleil); }
-  .theme.dispo:hover { transform: rotate(0) translateY(-3px); }
+  @media (prefers-reduced-motion: reduce) { .piste, .theme, .themes li { animation: none; } .ruban { overflow-x: auto; } }
 </style>
