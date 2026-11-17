@@ -8,7 +8,7 @@
  * CSE et devis : pas de lien Stripe, facture Indy via le formulaire.
  */
 export const liensStripe: Record<string, string> = {
-  'famille-1-adaptation': '',   // 50 € / an (champ personnalisé « adaptation » : 4-6 ans ou 7-9 ans)
+  'famille-1-adaptation': 'https://buy.stripe.com/test_14A14nevT6i84BKeVB3oA00',   // 50 € / an (champ personnalisé « adaptation » : 4-6 ans ou 7-9 ans)
   'famille-2-adaptations': '',  // 60 € / an
   'famille-mois': '',           // 8 € / mois (abonnement)
   'famille-2-acces': '',        // 100 € / an
