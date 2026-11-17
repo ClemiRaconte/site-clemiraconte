@@ -1,0 +1,186 @@
+---
+/**
+ * Mon espace : la vraie bibliothèque de l'abonné connecté.
+ * Fond seulement (structure et fonctionnement) : la mise en forme fine reste à habiller.
+ * Les données arrivent de la fonction Netlify « mes-histoires », qui applique la règle d'accès.
+ * La visite de démonstration reste sur /espace-abonne.
+ */
+import Base from '../layouts/Base.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import '../styles/visionneuse.css';
+import { u } from '../lib/url';
+const portail = import.meta.env.PUBLIC_STRIPE_PORTAIL ?? '';
+---
+<Base visionneuse titre="Mon espace · Clémi Raconte" description="Votre bibliothèque Clémi Raconte : vos histoires, leurs fiches papote et leurs activités.">
+  <section class="bandeau-section fond-creme">
+    <div class="conteneur me-tete">
+      <p class="surtitre-main">Mon espace</p>
+      <h1 id="me-bonjour">Bonjour</h1>
+      <div class="me-onglets" role="tablist" hidden>
+        <button type="button" role="tab" aria-selected="true" data-vue="biblio">Ma bibliothèque</button>
+        <button type="button" role="tab" aria-selected="false" data-vue="compte">Mon compte</button>
+      </div>
+    </div>
+  </section>
+
+  <Bandeau fond="beige" crete={1}>
+    <p id="me-etat" class="me-etat" role="status">Ouverture de votre espace…</p>
+
+    <div class="vue" data-vue="biblio" hidden>
+      <h2>Ma bibliothèque</h2>
+      <p class="me-intro">Une nouvelle histoire arrive chaque samedi à 9h. Tout ce que vous recevez reste dans votre bibliothèque</p>
+      <p id="me-pas-abonne" class="me-note" hidden>Vous n’avez pas d’abonnement en cours avec cette adresse. Ange vous est offert, et les histoires reçues pendant vos abonnements passés restent ici. <a href={u('/abonnement')}>Choisir une formule</a></p>
+      <ul id="me-etagere" class="me-etagere"></ul>
+
+      <article id="me-histoire" class="me-histoire" hidden>
+        <button type="button" class="lien-bouton" data-retour>← Retour à ma bibliothèque</button>
+        <h2 id="me-h-titre"></h2>
+        <div id="me-h-ages" class="me-ages"></div>
+        <div id="me-h-lecture"></div>
+        <h3>Les 12 activités à explorer</h3>
+        <p class="me-intro">Elles se téléchargent et s’impriment, une par une</p>
+        <ul id="me-h-activites" class="me-liste"></ul>
+        <div id="me-h-bonus-bloc" hidden>
+          <h3>Les activités bonus</h3>
+          <ul id="me-h-bonus" class="me-liste"></ul>
+        </div>
+        <div id="me-h-video" hidden>
+          <h3>À regarder</h3>
+          <div class="me-video"></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="vue" data-vue="compte" hidden>
+      <h2>Mon compte</h2>
+      <section class="me-bloc">
+        <h3>Ma formule</h3>
+        <ul id="me-formules" class="me-liste"></ul>
+      </section>
+      <section class="me-bloc">
+        <h3>Mon adresse de connexion</h3>
+        <p id="me-email"></p>
+      </section>
+      <section class="me-bloc">
+        <h3>Mes factures et mon abonnement</h3>
+        <p>Vos factures, votre moyen de paiement et l’arrêt de la formule au mois se gèrent dans votre espace de paiement sécurisé</p>
+        {portail
+          ? <a class="btn btn-contour" href={portail} rel="noopener">Gérer mon abonnement</a>
+          : <p class="me-note">Ce lien s’ouvrira avec les premiers paiements</p>}
+      </section>
+      <p class="me-note"><strong>Un accès, c’est une famille.</strong> Votre accès est personnel : merci de ne pas le partager. C’est ce qui permet aux histoires de continuer d’exister</p>
+      <button type="button" class="btn btn-contour" id="me-deconnexion">Me déconnecter</button>
+    </div>
+  </Bandeau>
+</Base>
+
+<script>
+  import { branche, sb, maBibliotheque } from '../lib/abonne';
+  import { formules, famillesElargies } from '../data/formules';
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const etat = $('me-etat');
+  const connexion = new URL('connexion.html', location.href).href;
+  const nomFormule = (id: string) => {
+    const f = formules.find((x) => x.id === id);
+    if (f) return `${f.nom}, ${f.prix} ${f.periode}`;
+    const e = famillesElargies.find((x) => x.id === id);
+    return e ? `Famille élargie, ${e.nom}, ${e.prix} / an` : id;
+  };
+  const date = (d: string) => new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  const texte = (t: string) => { const s = document.createElement('span'); s.textContent = t; return s.innerHTML; };
+
+  type Act = { titre: string; type: string; pdf: string | null };
+  type Adapt = { texte: unknown; histoire: string | null; papote: string | null; activites: Act[]; bonus: Act[] };
+  type Histoire = { slug: string; titre: string; theme: string | null; date_sortie: string; video: string | null; adaptations: Record<string, Adapt> };
+
+  function montrer(vue: string) {
+    document.querySelectorAll<HTMLElement>('.vue').forEach((v) => (v.hidden = v.dataset.vue !== vue));
+    document.querySelectorAll<HTMLButtonElement>('.me-onglets button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.vue === vue)));
+  }
+
+  function ouvrirHistoire(h: Histoire, age?: string) {
+    const ages = Object.keys(h.adaptations).sort();
+    const a = age && h.adaptations[age] ? age : ages[0];
+    const ad = h.adaptations[a];
+    $('me-etagere').hidden = true;
+    $('me-histoire').hidden = false;
+    $('me-h-titre').textContent = h.titre;
+    $('me-h-ages').innerHTML = ages.length > 1
+      ? ages.map((x) => `<button type="button" aria-pressed="${x === a}" data-age="${x}">${x} ans</button>`).join('')
+      : `<p class="me-intro">Adaptation ${a} ans</p>`;
+    $('me-h-ages').querySelectorAll<HTMLButtonElement>('button').forEach((b) => (b.onclick = () => ouvrirHistoire(h, b.dataset.age)));
+
+    // Visionneuse : l'histoire (en liseuse sur téléphone) et la fiche papote, en lecture seule.
+    const lecture = $('me-h-lecture');
+    lecture.innerHTML = '';
+    const idTexte = `me-texte-${h.slug}-${a}`;
+    if (ad.texte) {
+      const s = document.createElement('script');
+      s.type = 'application/json'; s.id = idTexte; s.textContent = JSON.stringify(ad.texte);
+      lecture.appendChild(s);
+    }
+    const docs = [
+      ad.histoire && { titre: 'L’histoire', src: ad.histoire, ...(ad.texte ? { texte: idTexte } : {}) },
+      ad.papote && { titre: 'La fiche papote', src: ad.papote },
+    ].filter(Boolean);
+    const vz = document.createElement('div');
+    vz.className = 'vz';
+    vz.dataset.docs = JSON.stringify(docs);
+    vz.dataset.pied = 'Lecture en ligne. L’histoire et sa fiche papote restent dans votre espace';
+    lecture.appendChild(vz);
+    (window as any).vzMonter?.(vz);
+
+    const liste = (acts: Act[]) => acts.map((x) => `<li>${x.pdf ? `<a href="${x.pdf}" target="_blank" rel="noopener">${texte(x.titre)}</a>` : texte(x.titre)} <span>(${texte(x.type)})</span></li>`).join('');
+    $('me-h-activites').innerHTML = liste(ad.activites);
+    $('me-h-bonus').innerHTML = liste(ad.bonus);
+    $('me-h-bonus-bloc').hidden = !ad.bonus.length;
+    $('me-h-video').hidden = !h.video;
+    if (h.video) $('me-h-video').querySelector('.me-video')!.innerHTML = `<iframe loading="lazy" src="${h.video}" title="${texte(h.titre)}, en vidéo" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    $('me-histoire').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  async function demarrer() {
+    if (!branche || !sb) { etat.textContent = 'L’espace ouvre avec les premières histoires. Vos accès vous arriveront par email'; return; }
+    // Au retour du lien email, Supabase lit le jeton dans l'adresse : on lui laisse un instant.
+    await sb.auth.getSession();
+    const r = await maBibliotheque();
+    if (r.erreur === 'non-connecte') { location.replace(connexion); return; }
+    if (r.erreur) { etat.textContent = 'Votre espace ne répond pas pour le moment. Réessayez dans quelques minutes'; return; }
+    const d = r.donnees as { email: string; abonne: boolean; periodes: { formule: string; debut: string; fin: string | null }[]; bibliotheque: Histoire[] };
+
+    etat.hidden = true;
+    (document.querySelector('.me-onglets') as HTMLElement).hidden = false;
+    $('me-email').textContent = d.email;
+    $('me-pas-abonne').hidden = d.abonne;
+    $('me-formules').innerHTML = d.periodes.length
+      ? d.periodes.map((p) => `<li>${texte(nomFormule(p.formule))} : depuis le ${date(p.debut)}${p.fin ? (new Date(p.fin) > new Date() ? `, jusqu’au ${date(p.fin)}` : `, terminée le ${date(p.fin)}`) : ', sans engagement'}</li>`).join('')
+      : '<li>Aucune formule pour le moment</li>';
+
+    $('me-etagere').innerHTML = d.bibliotheque.map((h, i) =>
+      `<li><button type="button" class="me-livre" data-i="${i}"><strong>${texte(h.titre)}</strong>${h.theme ? `<span>${texte(h.theme)}</span>` : ''}<span class="me-lien">Ouvrir →</span></button></li>`).join('');
+    $('me-etagere').querySelectorAll<HTMLButtonElement>('.me-livre').forEach((b) => (b.onclick = () => ouvrirHistoire(d.bibliotheque[Number(b.dataset.i)])));
+    montrer('biblio');
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.me-onglets button').forEach((b) => (b.onclick = () => montrer(b.dataset.vue!)));
+  document.querySelector<HTMLButtonElement>('[data-retour]')!.onclick = () => { $('me-histoire').hidden = true; $('me-etagere').hidden = false; };
+  $('me-deconnexion').onclick = async () => { await sb?.auth.signOut(); location.replace(connexion); };
+  demarrer();
+</script>
+
+<style>
+  /* Mise en forme minimale, à habiller. */
+  .me-onglets { display: flex; gap: 8px; margin-top: 16px; }
+  .me-onglets button, .me-ages button { border: 2px solid var(--encre); background: transparent; padding: 6px 14px; font: inherit; cursor: pointer; }
+  .me-onglets button[aria-selected='true'], .me-ages button[aria-pressed='true'] { background: var(--sapin); color: #fff; }
+  .me-ages { display: flex; gap: 8px; margin: 12px 0 20px; }
+  .me-etat, .me-note { background: var(--soleil-doux); padding: 12px 16px; font-weight: 600; }
+  .me-etagere { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  .me-livre { width: 100%; text-align: left; border: 3px solid var(--encre); background: #fff; padding: 16px; display: grid; gap: 6px; font: inherit; cursor: pointer; }
+  .me-lien { color: var(--sapin); font-weight: 700; }
+  .me-liste { padding-left: 1.2em; }
+  .me-bloc { margin-bottom: 24px; }
+  .me-video { position: relative; aspect-ratio: 16 / 9; max-width: 720px; }
+  .me-video :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+</style>
