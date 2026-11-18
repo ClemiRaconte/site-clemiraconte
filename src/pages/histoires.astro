@@ -4,6 +4,7 @@ import PageTete from '../components/blocs/PageTete.astro';
 import Bandeau from '../components/blocs/Bandeau.astro';
 import Tete from '../components/blocs/Tete.astro';
 import AppelFinal from '../components/blocs/AppelFinal.astro';
+import Etiquettes from '../components/blocs/Etiquettes.astro';
 import CouvertureAnge from '../components/CouvertureAnge.astro';
 import { u } from '../lib/url';
 
@@ -90,17 +91,8 @@ const themes = [
 
   <Bandeau fond="beige" crete={3}>
     <Tete surtitre="Par thème" titre="Les histoires par thème" intro="Un thème après l’autre, au fil de l’année" />
-    <ul class="themes">
-      {themes.map((t, i) => (
-        <li style={`--i:${i}`}>
-          {t.dispo ? (
-            <a class="theme dispo" href={u(t.href!)}>{t.nom}<span class="main">à lire →</span></a>
-          ) : (
-            <span class="theme">{t.nom}<span class="main">bientôt</span></span>
-          )}
-        </li>
-      ))}
-    </ul>
+    <Etiquettes items={themes.map((t) => t.nom)} centre />
+    <p class="themes-lien"><a class="btn btn-soleil" href={u('/histoires-sur-la-difference')}>Commencer par la différence</a></p>
   </Bandeau>
 
   <AppelFinal cri="Bientôt !" titre="Une nouvelle histoire chaque semaine" texte="Les premières arrivent le samedi 12 décembre, puis c’est chaque samedi à 9h. Écrivez-moi pour être prévenu(e) du lancement">
@@ -140,6 +132,7 @@ const themes = [
   .bientot { opacity: 0.85; }
   .rangee-aide { text-align: center; font-size: 1.3rem; color: var(--gris); }
 
+.themes-lien { text-align: center; margin-top: 26px; }
   .themes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
   .themes li { animation: arrive 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) both calc(var(--i) * 0.08s); }
   @keyframes arrive { from { opacity: 0; transform: translateY(24px) scale(0.95); } }

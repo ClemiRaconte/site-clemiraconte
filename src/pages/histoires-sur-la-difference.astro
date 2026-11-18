@@ -93,10 +93,10 @@ import { u } from '../lib/url';
   .deux { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
   .texte { display: grid; gap: 14px; }
   .texte p:not(.surtitre-main) { color: var(--gris); font-size: 1.06rem; line-height: 1.7; }
-  .texte.carte { background: var(--creme-carte); border: 3px solid var(--encre); padding: clamp(24px, 3vw, 36px); box-shadow: 8px 8px 0 var(--sapin); transform: rotate(1deg); }
+  .texte.carte { background: var(--creme-carte); border: 2px solid transparent; border-radius: 22px; padding: clamp(24px, 3vw, 36px); box-shadow: 0 8px 0 var(--sapin); transform: rotate(1deg); }
   .ages-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .age { background: var(--creme-carte); border: 2px solid var(--encre); padding: 24px; display: grid; gap: 8px; box-shadow: 5px 5px 0 var(--soleil); transform: rotate(-1deg); }
-  .age + .age { transform: rotate(1deg); box-shadow: 5px 5px 0 var(--sapin); }
+  .age { background: var(--creme-carte); border: 2px solid transparent; border-radius: 22px; padding: 24px; display: grid; gap: 8px; box-shadow: 0 5px 0 var(--soleil); transform: rotate(-1deg); }
+  .age + .age { transform: rotate(1deg); box-shadow: 0 5px 0 var(--sapin); }
   .age strong { font: 700 2rem var(--f-titre); color: var(--sapin); }
   .age p { color: var(--gris); line-height: 1.55; }
   .signature { margin-top: 40px; text-align: center; color: var(--gris); font-style: italic; }

@@ -14,14 +14,14 @@ import { u } from '../lib/url';
 
   <Bandeau fond="beige" crete={1}>
     <div class="co">
-      <form class="formulaire" id="co-form" novalidate>
+      <div class="ciel-form"><i class="nuage-f nf1"></i><i class="nuage-f nf2"></i><i class="lune-f"></i><form class="formulaire" id="co-form" novalidate>
         <h2>Me connecter</h2>
         <p class="co-aide">Pas de mot de passe à retenir : entrez l’adresse email utilisée pour votre abonnement, je vous envoie un lien pour entrer dans votre espace</p>
         <label for="co-email">Adresse email</label>
         <input id="co-email" type="email" autocomplete="email" required />
         <button class="btn btn-plein" type="submit">Recevoir mon lien de connexion</button>
         <p id="co-message" class="co-message" hidden role="status"></p>
-      </form>
+      </form></div>
       <Notes
         colonnes={2}
         items={[

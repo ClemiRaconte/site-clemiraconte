@@ -107,12 +107,12 @@ p { margin: 0; }
   outline: 3px solid var(--soleil);
   outline-offset: 3px;
 }
-.btn-plein { background: var(--sapin); color: #fff; box-shadow: 4px 4px 0 var(--encre); }
-.btn-plein:active { box-shadow: 1px 1px 0 var(--encre); transform: translate(3px, 3px); }
+.btn-plein { background: var(--sapin); color: #fff; box-shadow: 0 5px 0 var(--beige); }
+.btn-plein:active { box-shadow: 0 2px 0 var(--beige); transform: translate(3px, 3px); }
 .btn-plein:hover { background: var(--sapin-fonce); }
 .btn-contour { border-color: currentColor; color: var(--sapin); background: transparent; }
 .btn-contour:hover { background: var(--menthe); }
-.btn-soleil { background: var(--soleil); color: var(--encre); box-shadow: 4px 4px 0 var(--encre); }
+.btn-soleil { background: var(--soleil); color: var(--encre); box-shadow: 0 5px 0 var(--beige); }
 .btn-soleil:hover { background: var(--soleil-doux); }
 
 .lien-fleche {
@@ -184,13 +184,13 @@ p { margin: 0; }
 .formulaire {
   display: grid; gap: 8px;
   background: var(--creme-carte); color: var(--encre);
-  border: 3px solid var(--encre); box-shadow: 8px 8px 0 var(--soleil);
+  border: 2px solid transparent; border-radius: 22px; box-shadow: 0 8px 0 var(--soleil);
   padding: clamp(24px, 4vw, 40px); transform: rotate(-0.5deg);
 }
 .formulaire label { font: 800 0.95rem var(--f-label); margin-top: 10px; }
 .formulaire input:not([type='checkbox']), .formulaire select, .formulaire textarea {
   width: 100%; font: inherit; color: var(--encre);
-  background: #fff; border: 2px solid var(--encre); border-radius: 4px 10px 6px 12px / 10px 4px 12px 6px;
+  background: #fff; border: 2px solid var(--beige); border-radius: 4px 14px 6px 16px / 14px 4px 16px 6px; transition: border-color 0.2s, transform 0.2s;
   padding: 12px 14px;
 }
 .formulaire textarea { resize: vertical; min-height: 120px; }
@@ -204,3 +204,20 @@ p { margin: 0; }
 .formulaire .deux-champs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .formulaire .deux-champs > div { display: grid; gap: 8px; }
 .lien-bouton { background: none; border: 0; padding: 0; font: 800 0.95rem var(--f-label); color: var(--sapin); text-decoration: underline; cursor: pointer; justify-self: start; margin-top: 6px; }
+
+.formulaire input:not([type='checkbox']):focus, .formulaire select:focus { border-color: var(--soleil); transform: translateY(-2px); }
+
+/* Formulaires abonnement / connexion : un petit bout de l'espace abonné (ciel de nuit, nuages, étoiles) */
+.ciel-form { position: relative; isolation: isolate; }
+.ciel-form::before { content: ''; position: absolute; inset: -40px -20px; z-index: -1; border-radius: 40px 12px 48px 16px / 16px 48px 12px 40px;
+  background: radial-gradient(circle at 20% 20%, rgba(244,196,48,.25) 0 2px, transparent 3px) 0 0/90px 90px, radial-gradient(circle at 70% 60%, rgba(251,243,227,.5) 0 1.5px, transparent 2.5px) 0 0/70px 70px, linear-gradient(165deg, #1d3b4f, #243b32 70%); }
+.ciel-form .nuage-f { position: absolute; z-index: -1; width: 140px; height: 46px; background: #fbf3e3; opacity: .9; border-radius: 40px; animation: nuage-f 14s ease-in-out infinite; }
+.ciel-form .nuage-f::before, .ciel-form .nuage-f::after { content: ''; position: absolute; background: inherit; border-radius: 50%; }
+.ciel-form .nuage-f::before { width: 60px; height: 60px; left: 22px; top: -30px; } .ciel-form .nuage-f::after { width: 44px; height: 44px; left: 70px; top: -20px; }
+.ciel-form .nf1 { top: -10px; left: -50px; } .ciel-form .nf2 { bottom: 10px; right: -60px; scale: .7; animation-delay: -6s; }
+.ciel-form .lune-f { position: absolute; z-index: -1; top: -18px; right: 8%; width: 54px; height: 54px; border-radius: 50%; box-shadow: -12px 6px 0 0 #F4C430; rotate: -20deg; animation: lune-f 5s ease-in-out infinite; }
+@keyframes nuage-f { 50% { translate: 30px 0; } } @keyframes lune-f { 50% { translate: 0 -6px; } }
+.ciel-form .formulaire { box-shadow: 0 10px 0 var(--soleil), 0 24px 50px rgba(0,0,0,.35); animation: form-arrive .7s cubic-bezier(.3,1.4,.5,1) both; }
+@keyframes form-arrive { from { opacity: 0; transform: translateY(30px) rotate(-3deg); } }
+.ciel-form .btn { transition: transform .15s; } .ciel-form .btn:hover { transform: translateY(-3px) rotate(-1deg); }
+@media (prefers-reduced-motion: reduce) { .ciel-form *, .ciel-form .formulaire { animation: none !important; } }

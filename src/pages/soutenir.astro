@@ -58,11 +58,11 @@ import { u } from '../lib/url';
 
 <style>
   .dons { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 5vw, 56px); align-items: center; }
-  .don { position: relative; background: var(--creme-carte); color: var(--encre); border: 3px solid var(--encre); padding: 40px 30px 30px; display: grid; gap: 14px; justify-items: start; box-shadow: 8px 8px 0 var(--sapin-fonce); transform: rotate(1deg); }
-  .don.vedette { box-shadow: 8px 8px 0 var(--soleil); transform: rotate(-1.2deg); }
+  .don { position: relative; background: var(--creme-carte); color: var(--encre); border: 2px solid transparent; border-radius: 22px; padding: 40px 30px 30px; display: grid; gap: 14px; justify-items: start; box-shadow: 0 8px 0 var(--sapin-fonce); transform: rotate(1deg); }
+  .don.vedette { box-shadow: 0 8px 0 var(--soleil); transform: rotate(-1.2deg); }
   .don h2 { color: var(--encre) !important; font-size: clamp(1.6rem, 3vw, 2.1rem); }
   .don p { color: var(--gris); line-height: 1.6; }
   .don-cle { font-size: 1.6rem; color: var(--sapin) !important; }
-  .don-etiquette { position: absolute; top: -20px; left: 20px; background: var(--soleil); padding: 4px 14px 2px; font-size: 1.4rem; transform: rotate(-3deg); box-shadow: 2px 2px 0 var(--encre); }
+  .don-etiquette { position: absolute; top: -20px; left: 20px; background: var(--soleil); padding: 4px 14px 2px; font-size: 1.4rem; transform: rotate(-3deg); box-shadow: 0 3px 0 var(--beige); }
   @media (max-width: 860px) { .dons { grid-template-columns: 1fr; } }
 </style>

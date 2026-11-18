@@ -57,7 +57,7 @@ const groupes = [
         <h2>Aucun paiement aujourd’hui</h2>
         <p>Au lancement, je vous écris avec le lien pour finaliser votre abonnement au prix de lancement</p>
       </div>
-      <form class="formulaire" name="reservation" method="POST" data-netlify="true" netlify-honeypot="champ-piege" action={u('/merci#reservation')}>
+      <div class="ciel-form"><i class="nuage-f nf1"></i><i class="nuage-f nf2"></i><i class="lune-f"></i><form class="formulaire" name="reservation" method="POST" data-netlify="true" netlify-honeypot="champ-piege" action={u('/merci#reservation')}>
         <input type="hidden" name="form-name" value="reservation" />
         <p hidden><label>Ne pas remplir : <input name="champ-piege" /></label></p>
 
@@ -95,7 +95,7 @@ const groupes = [
 
         <p class="formulaire-note">Votre adresse ne sert qu’à vous prévenir du lancement et à finaliser votre abonnement. Elle n’est ni partagée, ni revendue</p>
         <button class="btn btn-soleil" type="submit">Réserver ma formule</button>
-      </form>
+      </form></div>
     </div>
   </Bandeau>
 </Base>
@@ -148,11 +148,11 @@ const groupes = [
   .publics { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 36px; }
   .publics button {
     font: 800 1.05rem var(--f-label); color: var(--encre); cursor: pointer;
-    background: var(--creme-carte); border: 3px solid var(--encre); border-radius: var(--trait);
-    padding: 12px 22px; box-shadow: 4px 4px 0 var(--encre); transform: rotate(var(--r, -1.5deg));
+    background: var(--creme-carte); border: 2px solid transparent; border-radius: 22px; border-radius: var(--trait);
+    padding: 12px 22px; box-shadow: 0 5px 0 var(--beige); transform: rotate(var(--r, -1.5deg));
   }
   .publics button:nth-child(even) { --r: 1.5deg; }
-  .publics button[aria-selected='true'] { background: var(--sapin); color: #fff; transform: rotate(0) translate(2px, 2px); box-shadow: 2px 2px 0 var(--encre); }
+  .publics button[aria-selected='true'] { background: var(--sapin); color: #fff; transform: rotate(0) translate(2px, 2px); box-shadow: 0 3px 0 var(--beige); }
   .offre { display: grid; gap: 40px; animation: apparaitre 0.3s ease; }
   .offre[hidden] { display: none; }
   .offre-accroche { text-align: center; font-size: 2rem; transform: rotate(-1.5deg); }

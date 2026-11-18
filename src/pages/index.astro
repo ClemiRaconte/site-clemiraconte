@@ -222,9 +222,9 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   .objectif-visuel { position: relative; padding: 0 8% 18% 0; }
   .cadre { margin: 0; position: relative; }
   .cadre :global(img) { display: block; width: 100%; height: auto; object-fit: cover; }
-  .cadre-grand { transform: rotate(2deg); border: 3px solid var(--encre); box-shadow: 10px 10px 0 var(--sapin); }
+  .cadre-grand { transform: rotate(2deg); border: 2px solid transparent; border-radius: 22px; box-shadow: 0 10px 0 var(--sapin); }
   .cadre-grand :global(img) { aspect-ratio: 4 / 3; }
-  .polaroid { background: #fff; padding: 10px 10px 0; border: 2px solid var(--encre); box-shadow: 6px 6px 0 rgba(36, 59, 50, 0.25); }
+  .polaroid { background: #fff; padding: 10px 10px 0; border: 2px solid transparent; border-radius: 22px; box-shadow: 0 6px 0 rgba(36, 59, 50, 0.25); }
   .polaroid figcaption { text-align: center; padding: 8px 4px 10px; font-size: 1.45rem; color: var(--encre); }
   .cadre-petit { position: absolute; width: 46%; right: 0; bottom: 0; transform: rotate(-5deg); }
   .cadre-petit :global(img) { aspect-ratio: 1; }
@@ -252,7 +252,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
 
   /* 3. Une histoire, c'est… */
   .tuiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 28px 24px; }
-  .tuile { position: relative; grid-column: span 2; min-height: 340px; display: flex; align-items: flex-end; color: #fff; border: 3px solid var(--encre); box-shadow: 7px 7px 0 var(--encre); overflow: visible; transition: transform 0.25s ease; }
+  .tuile { position: relative; grid-column: span 2; min-height: 340px; display: flex; align-items: flex-end; color: #fff; border: 2px solid transparent; border-radius: 22px; box-shadow: 0 8px 0 var(--beige); overflow: visible; transition: transform 0.25s ease; }
   .tuile-4, .tuile-5 { grid-column: span 3; min-height: 300px; }
   .tuile:nth-child(odd) { transform: rotate(-1deg); }
   .tuile:nth-child(even) { transform: rotate(1.2deg); }
@@ -263,7 +263,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   .tuile h3 { color: #fff; font-size: 1.5rem; }
   .tuile p { color: var(--menthe); line-height: 1.45; }
   .tuile-icone { color: var(--soleil); }
-  .tuile-note { position: absolute; z-index: 3; top: -16px; right: 14px; background: var(--soleil); color: var(--encre); padding: 6px 14px 4px; font-size: 1.45rem; transform: rotate(4deg); box-shadow: 2px 2px 0 var(--encre); }
+  .tuile-note { position: absolute; z-index: 3; top: -16px; right: 14px; background: var(--soleil); color: var(--encre); padding: 6px 14px 4px; font-size: 1.45rem; transform: rotate(4deg); box-shadow: 0 3px 0 var(--beige); }
   .tuile:nth-child(even) .tuile-note { transform: rotate(-5deg); left: 14px; right: auto; }
   .adaptations { margin-top: 40px; font-size: 1.1rem; }
   .adaptations .main { margin-right: 8px; }
@@ -285,7 +285,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
 
   /* 5. Publics */
   .publics-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .public { position: relative; display: flex; align-items: flex-end; min-height: 420px; text-decoration: none; color: #fff; border: 3px solid var(--encre); overflow: hidden; transition: transform 0.25s ease; }
+  .public { position: relative; display: flex; align-items: flex-end; min-height: 420px; text-decoration: none; color: #fff; border: 2px solid transparent; border-radius: 22px; overflow: hidden; transition: transform 0.25s ease; }
   .publics-liste li:nth-child(odd) .public { transform: rotate(-0.8deg); }
   .publics-liste li:nth-child(even) .public { transform: rotate(0.8deg); }
   .public:hover { transform: rotate(0) translateY(-6px); }
@@ -297,14 +297,14 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   .public-accroche { color: var(--soleil-doux); font-weight: 600; line-height: 1.35; }
   .public-detail { color: var(--menthe); font-size: 0.95rem; line-height: 1.45; }
   .public-lien { font: 800 0.95rem var(--f-label); margin-top: 6px; }
-  .public-prix { position: absolute; z-index: 2; top: 16px; left: 14px; background: var(--soleil); color: var(--encre); font: 800 0.85rem var(--f-label); padding: 5px 12px; transform: rotate(-3deg); box-shadow: 2px 2px 0 var(--encre); }
+  .public-prix { position: absolute; z-index: 2; top: 16px; left: 14px; background: var(--soleil); color: var(--encre); font: 800 0.85rem var(--f-label); padding: 5px 12px; transform: rotate(-3deg); box-shadow: 0 3px 0 var(--beige); }
 
   /* 6. Lancement */
   .lancement-in { display: grid; gap: 16px; justify-items: center; text-align: center; max-width: 760px; }
   .lancement-cri { font-size: clamp(3rem, 8vw, 5rem); transform: rotate(-4deg); }
   .lancement-in > p:not(.main) { color: var(--menthe); font-size: 1.1rem; }
   .lancement-form { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; align-items: center; margin-top: 10px; }
-  .lancement-form input[type='email'] { flex: 1 1 240px; padding: 14px 20px; border: 2px solid var(--encre); border-radius: var(--trait-2); font: inherit; }
+  .lancement-form input[type='email'] { flex: 1 1 240px; padding: 14px 20px; border: 2px solid transparent; border-radius: 22px; border-radius: var(--trait-2); font: inherit; }
   .lancement-formule { color: #fff; }
 
   .themes { margin-top: 36px; display: grid; gap: 14px; justify-items: center; }
@@ -312,7 +312,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   .themes ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
   .themes li {
     background: var(--creme); color: var(--encre); font: 800 0.92rem var(--f-label);
-    padding: 7px 14px; box-shadow: 3px 3px 0 var(--sapin-fonce); transform: rotate(var(--r, -2deg));
+    padding: 7px 14px; box-shadow: 0 3px 0 var(--sapin-fonce); transform: rotate(var(--r, -2deg));
     transition: transform 0.2s;
   }
   .themes li:nth-child(3n) { --r: 2.5deg; background: var(--soleil-doux); }
