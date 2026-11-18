@@ -64,7 +64,7 @@ const themes = [
       {[1, 2, 3, 4].map((n) => (
         <div class="livre bientot">
           <span class="lv-page"><span class="lv-age">Bientôt</span><span class="lv-texte">Titre et thème dévoilés un mois avant</span></span>
-          <span class="lv-couv vide"><span class="main">samedi {n === 1 ? 'prochain' : `n°${n}`}</span></span>
+          <span class="lv-couv vide"><span class="main">{['samedi 12 décembre', 'samedi 19 décembre', 'samedi 26 décembre', 'samedi 2 janvier'][n - 1]}</span></span>
         </div>
       ))}
       </div>
@@ -81,7 +81,7 @@ const themes = [
       {[1, 2, 3, 4].map((n) => (
         <div class="livre bientot">
           <span class="lv-page"><span class="lv-age">Bientôt</span><span class="lv-texte">Titre et thème dévoilés un mois avant</span></span>
-          <span class="lv-couv vide"><span class="main">samedi {n === 1 ? 'prochain' : `n°${n}`}</span></span>
+          <span class="lv-couv vide"><span class="main">{['samedi 12 décembre', 'samedi 19 décembre', 'samedi 26 décembre', 'samedi 2 janvier'][n - 1]}</span></span>
         </div>
       ))}
       </div>
