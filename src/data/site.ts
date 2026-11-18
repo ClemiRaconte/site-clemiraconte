@@ -8,7 +8,7 @@ export const site = {
   lieu: 'Saint-Bonnet-en-Champsaur (05)',
   conteur: 'Clément Joubert',
   prelancement: true,
-  lancement: 'courant novembre',
+  lancement: 'le samedi 12 décembre',
   /** Logo retenu : le livre-sapin */
   logo: 'livre' as 'luciole' | 'livre' | 'bulle',
 };
@@ -76,7 +76,7 @@ export const publics = [
 export const chiffres = [
   { valeur: '52', unite: 'histoires par an', texte: 'Une nouvelle chaque samedi à 9h, toute l’année. La bibliothèque de la maison grandit semaine après semaine' },
   { valeur: '3', unite: 'formats par histoire', texte: 'À lire, à écouter, à regarder. Les trois arrivent en même temps : vous choisissez selon le moment' },
-  { valeur: '2', unite: 'adaptations', texte: 'Le même récit écrit pour les 4-6 ans et pour les 7-9 ans. Chaque enfant de la fratrie a sa version' },
+  { valeur: '2', unite: 'versions', texte: 'Le même récit écrit pour les 4-6 ans et pour les 7-9 ans. Chaque enfant de la fratrie a sa version' },
   { valeur: '12', unite: 'activités + 1 fiche papote', texte: 'Pour prolonger l’histoire après la lecture : jeux, coloriages, ateliers d’expression, questions graduées' },
   { valeur: '45', unite: 'minutes en classe', texte: 'Une séance d’EMC complète : 15 min d’histoire, 15 min d’échange, 15 min d’activité' },
   { valeur: '0', unite: 'méchant à vaincre', texte: 'La fin ne vient jamais d’un combat, mais d’une surprise ou d’un regard qui change. Et aucune morale imposée' },

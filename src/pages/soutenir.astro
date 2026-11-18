@@ -9,12 +9,12 @@ import { u } from '../lib/url';
 ---
 <Base
   titre="Soutenir des histoires jeunesse indépendantes · Clémi Raconte"
-  description="Soutenir Clémi Raconte avec la campagne Ulule ou le Tipeee, ou simplement en partageant, pour que les histoires continuent de sortir chaque samedi."
+  description="Soutenir Clémi Raconte en suivant le projet sur Instagram, en partageant les histoires ou en vous abonnant, pour que les histoires continuent de sortir chaque samedi."
 >
   <PageTete
     surtitre="Soutenir"
     titre="Pour que les histoires continuent"
-    intro="Clémi Raconte, c’est un projet artisanal, écrit ici, dans le Champsaur. Chaque soutien paie du temps d’écriture, du matériel, des illustrations et des heures de montage. Voici deux façons de donner un coup de main"
+    intro="Clémi Raconte, c’est un projet artisanal, écrit ici, dans le Champsaur. Chaque soutien paie du temps d’écriture, du matériel, des illustrations et des heures de montage. Voici comment donner un coup de main"
     photo="montagnes-brume"
     alt="Montagnes et forêt de sapins dans la brume"
     legende="écrit ici, dans le Champsaur"
@@ -23,18 +23,18 @@ import { u } from '../lib/url';
   <Bandeau fond="sapin" crete={1}>
     <div class="dons">
       <article class="don vedette">
-        <span class="don-etiquette main">la campagne en cours</span>
-        <h2>Le financement participatif Ulule</h2>
-        <p>Une campagne, une durée limitée, un objectif clair : lancer la collection et offrir aux premières histoires de vraies illustrations, de vraies voix, de vraies vidéos. Il y a des contreparties, des histoires imprimées et quelques surprises</p>
-        <p class="don-cle main">C’est le coup de pouce qui compte le plus en ce moment</p>
-        <a class="btn btn-soleil" href="https://fr.ulule.com/les-histoires-d-aujourd-hui-pour-les-adultes-de-demain-/">Découvrir la campagne Ulule</a>
+        <span class="don-etiquette main">pour suivre l’aventure</span>
+        <h2>Suivre Clémi Raconte sur Instagram</h2>
+        <p>Les coulisses de l’écriture, les nouvelles histoires du samedi, les balades dans le Champsaur qui les inspirent. S’abonner, aimer, partager : c’est gratuit et c’est ce qui fait connaître le projet</p>
+        <p class="don-cle main">Un partage, c’est peut-être une famille de plus</p>
+        <a class="btn btn-soleil" href="https://www.instagram.com/clemi_raconte/">Suivre sur Instagram</a>
       </article>
       <article class="don">
-        <span class="don-etiquette main">pour la route</span>
-        <h2>Le Tipeee</h2>
-        <p>Le Tipeee, c’est le soutien qui dure. Un petit montant chaque mois, libre, arrêtable quand vous voulez, qui me permet de tenir le rythme d’une histoire chaque samedi sans courir après le temps</p>
-        <p class="don-cle main">Même un euro par mois, à plusieurs, ça change tout</p>
-        <a class="btn btn-plein" href="https://fr.tipeee.com/clemi-raconte/">Voir le Tipeee</a>
+        <span class="don-etiquette main">bientôt</span>
+        <h2>Une cagnotte arrive</h2>
+        <p>Une campagne de financement participatif se prépare, pour aller plus loin avec les histoires. Elle n’est pas encore ouverte : laissez-moi votre adresse et je vous préviens le jour où elle démarre</p>
+        <p class="don-cle main">Vous serez les premiers au courant</p>
+        <a class="btn btn-plein" href={u('/contact')}>Être prévenu(e)</a>
       </article>
     </div>
   </Bandeau>
@@ -58,11 +58,11 @@ import { u } from '../lib/url';
 
 <style>
   .dons { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 5vw, 56px); align-items: center; }
-  .don { position: relative; background: var(--creme-carte); color: var(--encre); border: 3px solid var(--encre); padding: 40px 30px 30px; display: grid; gap: 14px; justify-items: start; box-shadow: 8px 8px 0 var(--sapin-fonce); transform: rotate(1deg); }
-  .don.vedette { box-shadow: 8px 8px 0 var(--soleil); transform: rotate(-1.2deg); }
+  .don { position: relative; background: var(--creme-carte); color: var(--encre); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: 40px 30px 30px; display: grid; gap: 14px; justify-items: start; box-shadow: 0 8px 0 var(--sapin-fonce); transform: rotate(1deg); }
+  .don.vedette { box-shadow: 0 8px 0 var(--soleil); transform: rotate(-1.2deg); }
   .don h2 { color: var(--encre) !important; font-size: clamp(1.6rem, 3vw, 2.1rem); }
   .don p { color: var(--gris); line-height: 1.6; }
   .don-cle { font-size: 1.6rem; color: var(--sapin) !important; }
-  .don-etiquette { position: absolute; top: -20px; left: 20px; background: var(--soleil); padding: 4px 14px 2px; font-size: 1.4rem; transform: rotate(-3deg); box-shadow: 2px 2px 0 var(--encre); }
+  .don-etiquette { position: absolute; top: -20px; left: 20px; background: var(--soleil); padding: 4px 14px 2px; font-size: 1.4rem; transform: rotate(-3deg); box-shadow: 0 3px 0 var(--beige); }
   @media (max-width: 860px) { .dons { grid-template-columns: 1fr; } }
 </style>

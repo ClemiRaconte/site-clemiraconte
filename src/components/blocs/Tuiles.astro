@@ -27,7 +27,7 @@ const cols = items.length === 4 ? 'quatre' : items.length === 2 ? 'deux' : 'troi
   .trois { grid-template-columns: repeat(3, 1fr); }
   .quatre { grid-template-columns: repeat(4, 1fr); }
   .deux { grid-template-columns: repeat(2, 1fr); }
-  .tuile { position: relative; min-height: 320px; display: flex; align-items: flex-end; color: #fff; border: 3px solid var(--encre); box-shadow: 7px 7px 0 var(--encre); transition: transform 0.25s ease; }
+  .tuile { position: relative; min-height: 320px; display: flex; align-items: flex-end; color: #fff; border: 0; border-radius: 3px 16px 16px 3px; box-shadow: 0 8px 0 var(--beige); transition: transform 0.25s ease; }
   .tuile:nth-child(odd) { transform: rotate(-1deg); }
   .tuile:nth-child(even) { transform: rotate(1.2deg); }
   .tuile:hover { transform: rotate(0) translateY(-4px); }
@@ -37,7 +37,7 @@ const cols = items.length === 4 ? 'quatre' : items.length === 2 ? 'deux' : 'troi
   .tuile h3 { color: #fff; font-size: 1.45rem; }
   .tuile p { color: var(--menthe); line-height: 1.45; }
   .tuile-icone { color: var(--soleil); }
-  .tuile-note { position: absolute; z-index: 3; top: -16px; right: 14px; background: var(--soleil); color: var(--encre); padding: 6px 14px 4px; font-size: 1.4rem; transform: rotate(4deg); box-shadow: 2px 2px 0 var(--encre); }
+  .tuile-note { position: absolute; z-index: 3; top: -16px; right: 14px; background: var(--soleil); color: var(--encre); padding: 6px 14px 4px; font-size: 1.4rem; transform: rotate(4deg); box-shadow: 0 3px 0 var(--beige); }
   .tuile:nth-child(even) .tuile-note { transform: rotate(-5deg); left: 14px; right: auto; }
   .tuiles-pied { margin-top: 36px; font-size: 1.1rem; }
   .tuiles-pied .main { margin-right: 6px; }

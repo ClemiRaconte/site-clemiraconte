@@ -10,28 +10,44 @@ import { u } from '../lib/url';
 ---
 <Base
   titre="La démarche : des histoires sans méchant · Clémi Raconte"
-  description="Quinze ans d’animation, vingt ans d’écriture, une vallée des Hautes-Alpes : d’où viennent les histoires de Clémi Raconte, sans méchant ni morale imposée."
+  description="Vingt ans d’écriture, quinze ans d’animation, près de 3 000 enfants accompagnés, une vallée des Hautes-Alpes : d’où viennent les histoires de Clémi Raconte, sans méchant ni morale imposée."
 >
   <PageTete
     surtitre="D’où viennent ces histoires"
     titre="La démarche"
-    intro="Quinze ans auprès des enfants, vingt ans d’écriture, une vallée des Hautes-Alpes. Clémi Raconte est né au croisement des trois et tout ce que vous trouverez ici en découle"
+    intro="Vingt ans d’écriture, quinze ans d’animation, près de 3 000 enfants accompagnés, une vallée des Hautes-Alpes. Clémi Raconte est né de tout cela et tout ce que vous trouverez ici en découle"
     photo="vallee"
     alt="Vallée de montagne et forêt de sapins dans les Hautes-Alpes"
     legende="le Champsaur, ma vallée"
   />
 
+  <Bandeau fond="beige" crete={2}>
+    <div class="equipe">
+      <figure class="equipe-photo">
+        <img src={u('/img/clement-foret.webp')} alt="Clément, le conteur, dans la forêt conteuse" width="1200" height="800" loading="lazy" />
+        <figcaption class="main">Clément, dans la forêt conteuse</figcaption>
+      </figure>
+      <div class="equipe-texte">
+        <p class="surtitre-main">L’équipe</p>
+        <h2>Une voix aujourd’hui, une équipe demain</h2>
+        <p>J’écris les histoires, je conçois les fiches papote et les activités, je raconte depuis la forêt conteuse. Coline, ma compagne, relit chaque texte et teste les activités avant tout le monde. Annette, ma maman, m’aide à construire les supports et fait connaître le projet. Une jeune illustratrice d’ici dessine déjà Ange et les habitants de la forêt de Daillon</p>
+        <a class="lien-bouton" href={u('/equipe')}>Découvrir toute l’équipe →</a>
+      </div>
+    </div>
+  </Bandeau>
+
   <Bandeau fond="sapin" crete={1}>
     <div class="parcours">
       <div class="trois">
-        <div><strong>15</strong><span>ans d’animation</span></div>
         <div><strong>20</strong><span>ans d’écriture</span></div>
+        <div><strong>15</strong><span>ans d’animation</span></div>
+        <div><strong>3 000</strong><span>enfants accompagnés</span></div>
         <div><strong>1</strong><span>vallée des Hautes-Alpes</span></div>
       </div>
       <div class="parcours-texte">
         <p class="surtitre-main">Le parcours</p>
         <h2>Le slam, le rap, puis les enfants</h2>
-        <p>J’écris depuis l’âge de douze ans. Le slam d’abord, puis le rap, deux écoles de la phrase qui percute et du mot juste. Et puis la vie m’a mis au milieu des enfants. Cela fait quinze ans que je travaille dans l’animation. Cinq ans dans le centre de loisirs de mon village, dans le Champsaur, que je dirige depuis deux ans.</p>
+        <p>J’écris depuis l’âge de douze ans. Le slam d’abord, puis le rap, deux écoles de la phrase qui percute et du mot juste. Et puis la vie m’a mis au milieu des enfants. Cela fait quinze ans que je travaille dans l’animation. Cinq ans dans le centre de loisirs de mon village, dans le Champsaur, que je dirige depuis deux ans. En quinze ans, j’ai accompagné près de 3 000 enfants.</p>
         <p>C’est là que mes deux vies se sont rejointes. Au quotidien, je voyais des enfants traverser des choses immenses : une dispute qui déborde, un copain différent, une famille qui change, un mot qui blesse. Et je voyais qu’une histoire bien choisie, au bon moment, faisait souvent plus qu’un long discours. Alors j’ai commencé à écrire les histoires qui manquaient</p>
       </div>
     </div>
@@ -96,7 +112,7 @@ import { u } from '../lib/url';
   .parcours-texte { display: grid; gap: 14px; }
   .parcours-texte p:not(.surtitre-main) { color: var(--menthe); font-size: 1.06rem; line-height: 1.7; }
   .alpes { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
-  .alpes-photo { margin: 0; background: #fff; padding: 12px 12px 0; border: 3px solid var(--encre); box-shadow: 8px 8px 0 var(--sapin); transform: rotate(-2deg); }
+  .alpes-photo { margin: 0; background: #fff; padding: 12px 12px 0; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); box-shadow: 0 8px 0 var(--sapin); transform: rotate(-2deg); }
   .alpes-photo :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
   .alpes-photo figcaption { text-align: center; padding: 8px 4px 12px; font-size: 1.45rem; }
   .texte { display: grid; gap: 14px; }
@@ -108,4 +124,12 @@ import { u } from '../lib/url';
   .offres ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
   .offres-lien { color: var(--soleil-doux); font-weight: 700; }
   @media (max-width: 860px) { .parcours, .alpes { grid-template-columns: 1fr; } }
+
+  .equipe { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(24px, 5vw, 56px); align-items: center; }
+  .equipe-photo { margin: 0; transform: rotate(-1.5deg); }
+  .equipe-photo img { width: 100%; height: auto; border: 2px solid var(--encre); box-shadow: 7px 7px 0 var(--soleil); display: block; }
+  .equipe-photo figcaption { margin-top: 10px; font-size: 1.3rem; color: var(--sapin); }
+  .equipe-texte h2 { margin: 6px 0 12px; }
+  .equipe-texte p { line-height: 1.65; }
+  @media (max-width: 760px) { .equipe { grid-template-columns: 1fr; } }
 </style>

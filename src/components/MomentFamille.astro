@@ -123,21 +123,21 @@ const moments = [
   .moment-choix { display: flex; flex-wrap: wrap; gap: 12px; }
   .moment-choix button {
     font: 800 1rem var(--f-label); color: var(--encre); cursor: pointer;
-    background: var(--creme-carte); border: 2px solid var(--encre); border-radius: var(--trait);
-    padding: 10px 18px; box-shadow: 3px 3px 0 var(--encre);
+    background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); border-radius: var(--trait);
+    padding: 10px 18px; box-shadow: 0 4px 0 var(--beige);
     transition: transform 0.15s, background-color 0.15s, box-shadow 0.15s;
   }
   .moment-choix button:nth-child(odd) { transform: rotate(-1.5deg); }
   .moment-choix button:nth-child(even) { transform: rotate(1.2deg); }
   .moment-choix button:hover { background: var(--soleil-doux); }
-  .moment-choix button[aria-selected='true'] { background: var(--sapin); color: #fff; transform: rotate(0) translate(2px, 2px); box-shadow: 1px 1px 0 var(--encre); }
+  .moment-choix button[aria-selected='true'] { background: var(--sapin); color: #fff; transform: rotate(0) translate(2px, 2px); box-shadow: 0 2px 0 var(--beige); }
   .moment-carte {
     display: grid; grid-template-columns: 0.9fr 1.1fr; align-items: stretch;
-    background: var(--creme-carte); border: 3px solid var(--encre); box-shadow: 8px 8px 0 var(--soleil);
+    background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); box-shadow: 0 8px 0 var(--soleil);
     animation: apparaitre 0.35s ease;
   }
   .moment-carte[hidden] { display: none; }
-  .moment-photo { min-height: 260px; position: relative; border-right: 3px solid var(--encre); }
+  .moment-photo { min-height: 260px; position: relative; border-right: 2px solid var(--ligne); }
   .moment-photo :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .moment-texte { padding: clamp(24px, 4vw, 40px); display: grid; gap: 14px; align-content: center; }
   .moment-texte h4 { font: 600 1.6rem var(--f-titre); margin: 0; }
@@ -148,6 +148,6 @@ const moments = [
   @media (max-width: 760px) {
     .moment-carte { grid-template-columns: 1fr; }
     .moment-carte[hidden] { display: none; }
-  .moment-photo { min-height: 200px; border-right: 0; border-bottom: 3px solid var(--encre); }
+  .moment-photo { min-height: 200px; border-right: 0; border-bottom: 2px solid var(--ligne); }
   }
 </style>

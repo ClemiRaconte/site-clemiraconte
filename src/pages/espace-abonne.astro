@@ -14,7 +14,7 @@ const textes: Record<string, unknown> = { '4-6': texte46, '7-9': texte79 };
   <section class="bandeau-section fond-creme es-tete">
     <Bulles nombre={10} graine={9} />
     <div class="conteneur">
-      <p class="es-visite main">C’est une visite : l’espace ouvre courant novembre</p>
+      <p class="es-visite main">C’est une visite : l’espace ouvre le samedi 12 décembre</p>
       <p class="surtitre-main">Mon espace</p>
       <h1>Bonjour Camille</h1>
       <div class="es-onglets" role="tablist">
@@ -103,8 +103,8 @@ const textes: Record<string, unknown> = { '4-6': texte46, '7-9': texte79 };
       <div class="compte">
         <section class="bloc">
           <h3>Ma formule</h3>
-          <p>Les deux adaptations, 60 € par an, un accès</p>
-          <p class="discret">Accès jusqu’au 30 novembre 2027. Pas de reconduction automatique : je vous écris avant la fin</p>
+          <p>L’année complète, 60 € par an, un accès</p>
+          <p class="discret">Accès jusqu’au 11 décembre 2027. Pas de reconduction automatique : je vous écris avant la fin</p>
           <a class="lien-fleche" href={u('/abonnement')}>Changer de formule →</a>
         </section>
         <section class="bloc">
@@ -124,7 +124,7 @@ const textes: Record<string, unknown> = { '4-6': texte46, '7-9': texte79 };
       <p class="partage"><span class="main">Un accès, c’est une famille.</span> Votre accès est personnel : merci de ne pas partager vos identifiants. C’est ce qui permet aux histoires de continuer d’exister</p>
       <button type="button" class="btn btn-contour demo-inactif">Me déconnecter</button>
     </div>
-    <p class="demo-message" role="status" hidden>C’est une visite : cette action sera active à l’ouverture de l’espace, courant novembre</p>
+    <p class="demo-message" role="status" hidden>C’est une visite : cette action sera active à l’ouverture de l’espace, le samedi 12 décembre</p>
   </Bandeau>
 </Base>
 
@@ -150,7 +150,7 @@ const textes: Record<string, unknown> = { '4-6': texte46, '7-9': texte79 };
   .es-tete .conteneur { display: grid; gap: 12px; justify-items: start; }
   .es-visite { background: var(--soleil-doux); padding: 4px 14px; font-size: 1.4rem; transform: rotate(-1.5deg); }
   .es-onglets { display: flex; gap: 12px; margin-top: 10px; }
-  .es-onglets button { font: 800 1rem var(--f-label); cursor: pointer; background: var(--creme-carte); border: 2px solid var(--encre); border-radius: var(--trait); padding: 10px 18px; box-shadow: 3px 3px 0 var(--encre); }
+  .es-onglets button { font: 800 1rem var(--f-label); cursor: pointer; background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); border-radius: var(--trait); padding: 10px 18px; box-shadow: 0 4px 0 var(--beige); }
   .es-onglets button[aria-selected='true'] { background: var(--sapin); color: #fff; }
   .vue { display: grid; gap: 18px; }
   .vue[hidden], .adapt-panneau[hidden], .histoire[hidden] { display: none; }
@@ -158,17 +158,17 @@ const textes: Record<string, unknown> = { '4-6': texte46, '7-9': texte79 };
   .etagere { list-style: none; margin: 10px 0 0; padding: 0 0 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 260px)); gap: 28px; border-bottom: 12px solid #c7b48a; box-shadow: 0 8px 0 rgba(36, 59, 50, 0.12); }
   .livre { display: grid; gap: 6px; text-align: left; background: none; border: 0; padding: 0; font: inherit; color: inherit; }
   button.livre { cursor: pointer; }
-  .livre-couv { display: block; border: 3px solid var(--encre); box-shadow: 5px 5px 0 var(--sapin); transform: rotate(-1.5deg); transition: transform 0.2s; }
+  .livre-couv { display: block; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); box-shadow: 0 5px 0 var(--sapin); transform: rotate(-1.5deg); transition: transform 0.2s; }
   .dispo:hover .livre-couv { transform: rotate(0) translateY(-6px); }
-  .livre-couv.vide { aspect-ratio: 4 / 5; display: grid; place-items: center; background: repeating-linear-gradient(-45deg, var(--beige) 0 14px, var(--creme-carte) 14px 28px); box-shadow: 5px 5px 0 var(--ligne); }
+  .livre-couv.vide { aspect-ratio: 4 / 5; display: grid; place-items: center; background: repeating-linear-gradient(-45deg, var(--beige) 0 14px, var(--creme-carte) 14px 28px); box-shadow: 0 5px 0 var(--ligne); }
   .livre-couv.vide .main { font-size: 1.8rem; }
   .livre-etat { font: 800 0.8rem var(--f-label); background: var(--soleil); padding: 2px 8px; justify-self: start; margin-top: 8px; }
   .livre strong { font: 600 1.12rem var(--f-titre); }
   .livre-theme { color: var(--gris); font-size: 0.92rem; }
   .livre-lien { font: 800 0.9rem var(--f-label); color: var(--sapin); }
-  .histoire { margin-top: 40px; display: grid; gap: 18px; background: var(--creme-carte); border: 3px solid var(--encre); padding: clamp(20px, 4vw, 40px); box-shadow: 8px 8px 0 var(--sapin); }
+  .histoire { margin-top: 40px; display: grid; gap: 18px; background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: clamp(20px, 4vw, 40px); box-shadow: 0 8px 0 var(--sapin); }
   .adapt-choix { display: flex; gap: 10px; }
-  .adapt-choix button { font: 700 1.3rem var(--f-titre); cursor: pointer; background: #fff; border: 2px solid var(--encre); border-radius: var(--trait); padding: 6px 18px; }
+  .adapt-choix button { font: 700 1.3rem var(--f-titre); cursor: pointer; background: #fff; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); border-radius: var(--trait); padding: 6px 18px; }
   .adapt-choix button[aria-pressed='true'] { background: var(--sapin); color: #fff; }
   .trois-temps { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-weight: 600; }
   .trois-temps strong { background: var(--soleil); padding: 0 8px; margin-right: 6px; }
@@ -176,12 +176,12 @@ const textes: Record<string, unknown> = { '4-6': texte46, '7-9': texte79 };
   .act-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px 20px; }
   .act-liste a { color: var(--sapin); font-weight: 700; }
   .act-liste span { color: var(--gris); font-size: 0.92rem; }
-  .es-video { aspect-ratio: 16 / 9; border: 2px solid var(--encre); background: #000; }
+  .es-video { aspect-ratio: 16 / 9; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); background: #000; }
   .es-video iframe { width: 100%; height: 100%; border: 0; display: block; }
   .compte { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .bloc { background: var(--creme-carte); border: 2px solid var(--encre); padding: 22px; display: grid; gap: 8px; justify-items: start; box-shadow: 4px 4px 0 var(--sapin); }
+  .bloc { background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: 22px; display: grid; gap: 8px; justify-items: start; box-shadow: 0 4px 0 var(--sapin); }
   .bloc h3 { font-size: 1.25rem; }
   .partage .main { font-size: 1.5rem; margin-right: 6px; }
-  .demo-message { background: var(--soleil-doux); padding: 12px 16px; font-weight: 600; margin-top: 20px; border: 2px solid var(--encre); }
+  .demo-message { background: var(--soleil-doux); padding: 12px 16px; font-weight: 600; margin-top: 20px; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); }
   @media (max-width: 760px) { .etagere { grid-template-columns: 1fr 1fr; } .compte { grid-template-columns: 1fr; } }
 </style>

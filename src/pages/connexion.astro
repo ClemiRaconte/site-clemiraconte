@@ -8,22 +8,20 @@ import { u } from '../lib/url';
 <Base titre="Espace abonnés · Clémi Raconte" description="L’espace abonnés de Clémi Raconte : vos histoires, leurs fiches papote et leurs activités, une nouvelle chaque samedi à 9h.">
   <PageTete
     surtitre="Espace abonnés"
-    titre="Votre espace ouvre courant novembre"
-    intro="C’est ici que vous retrouverez vos histoires, une nouvelle chaque samedi à 9h. Chacune existe en deux adaptations, 4-6 ans et 7-9 ans, avec sa fiche papote pour en discuter et ses 12 activités à explorer"
+    titre="Votre espace ouvre le samedi 12 décembre"
+    intro="C’est ici que vous retrouverez vos histoires, une nouvelle chaque samedi à 9h. Chacune existe en deux versions, 4-6 ans et 7-9 ans, avec sa fiche papote pour en discuter et ses 12 activités à explorer"
   />
 
   <Bandeau fond="beige" crete={1}>
     <div class="co">
-      <form class="formulaire" id="co-form" novalidate>
+      <div class="ciel-form"><i class="nuage-f nf1"></i><i class="nuage-f nf2"></i><i class="lune-f"></i><form class="formulaire" id="co-form" novalidate>
         <h2>Me connecter</h2>
+        <p class="co-aide">Pas de mot de passe à retenir : entrez l’adresse email utilisée pour votre abonnement, je vous envoie un lien pour entrer dans votre espace</p>
         <label for="co-email">Adresse email</label>
-        <input id="co-email" type="email" autocomplete="email" />
-        <label for="co-mdp">Mot de passe</label>
-        <input id="co-mdp" type="password" autocomplete="current-password" />
-        <button class="btn btn-plein" type="submit">Me connecter</button>
-        <a href="#" id="co-oubli" class="lien-bouton">Mot de passe oublié ?</a>
-        <p id="co-message" class="co-message" hidden role="status">L’espace ouvre avec les premières histoires, courant novembre. Vos identifiants vous arriveront par email au lancement</p>
-      </form>
+        <input id="co-email" type="email" autocomplete="email" required />
+        <button class="btn btn-plein" type="submit">Recevoir mon lien de connexion</button>
+        <p id="co-message" class="co-message" hidden role="status"></p>
+      </form></div>
       <Notes
         colonnes={2}
         items={[
@@ -36,15 +34,32 @@ import { u } from '../lib/url';
 </Base>
 
 <script>
-  const f = document.getElementById('co-form')!;
+  import { branche, sb, envoyerLien } from '../lib/abonne';
+  const f = document.getElementById('co-form') as HTMLFormElement;
   const m = document.getElementById('co-message')!;
-  f.addEventListener('submit', (e) => { e.preventDefault(); m.hidden = false; });
-  document.getElementById('co-oubli')!.addEventListener('click', (e) => { e.preventDefault(); m.hidden = false; });
+  const champ = document.getElementById('co-email') as HTMLInputElement;
+  const dire = (t: string) => { m.textContent = t; m.hidden = false; };
+  const espace = new URL('mon-espace.html', location.href).href;
+
+  // Déjà connecté(e) : direction l'espace.
+  sb?.auth.getSession().then(({ data }) => { if (data.session) location.replace(espace); });
+
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!branche) return dire('L’espace ouvre avec les premières histoires. Vos accès vous arriveront par email au lancement');
+    if (!champ.checkValidity()) return dire('Cette adresse email ne semble pas complète');
+    const r = await envoyerLien(champ.value.trim(), espace);
+    if (r.erreur) console.warn('Connexion Supabase :', r.erreur);
+    dire(r.erreur
+      ? `Le lien n’a pas pu partir. Réessayez dans une minute, ou écrivez-moi depuis la page contact (détail : ${r.erreur})`
+      : 'C’est parti ! Ouvrez l’email que je viens de vous envoyer et touchez le lien. Pensez à regarder dans les indésirables');
+  });
 </script>
 
 <style>
   .co { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
   .co h2 { font-size: 1.6rem; }
+  .co-aide { margin-bottom: 12px; }
   .co-message { background: var(--soleil-doux); padding: 12px 14px; font-weight: 600; margin-top: 8px; }
   @media (max-width: 860px) { .co { grid-template-columns: 1fr; } }
 </style>

@@ -50,7 +50,7 @@ import { u } from '../lib/url';
 
   <Bandeau fond="creme" crete={2} bulles={8}>
     <div class="ages">
-      <Tete surtitre="Pour quel âge ?" titre="Une version à sa mesure" intro="Chaque histoire existe en deux adaptations, avec un vocabulaire et une longueur pensés pour chaque âge. Que votre enfant ait 4, 6 ou 8 ans, il trouve une version à sa mesure. Pour une fratrie, chaque enfant peut avoir la sienne" />
+      <Tete surtitre="Pour quel âge ?" titre="Une version à sa mesure" intro="Chaque histoire existe en deux versions, avec un vocabulaire et une longueur pensés pour chaque âge. Que votre enfant ait 4, 6 ou 8 ans, il trouve une version à sa mesure. Pour une fratrie, chaque enfant peut avoir la sienne" />
       <div class="ages-cartes">
         <div class="age"><strong>4-6 ans</strong><p>Le récit reste simple et proche des sensations : c’est l’âge où l’on découvre que l’autre ne voit pas le monde comme soi</p></div>
         <div class="age"><strong>7-9 ans</strong><p>Les questions vont plus loin : le regard des copains, l’envie d’appartenir au groupe, le courage d’être soi devant les autres</p></div>
@@ -83,7 +83,7 @@ import { u } from '../lib/url';
     <p class="signature">Clément Joubert, animateur depuis quinze ans et directeur d’un centre de loisirs dans le Champsaur, dans les Hautes-Alpes · <a href={u('/equipe')}>Qui je suis</a></p>
   </Bandeau>
 
-  <AppelFinal cri="Bientôt !" titre="Une nouvelle histoire chaque semaine" texte="Les premières arrivent courant novembre, puis c’est chaque samedi à 9h. Écrivez-moi pour être prévenu(e) du lancement">
+  <AppelFinal cri="Bientôt !" titre="Une nouvelle histoire chaque semaine" texte="Les premières arrivent le samedi 12 décembre, puis c’est chaque samedi à 9h. Écrivez-moi pour être prévenu(e) du lancement">
     <a class="btn btn-soleil" href={u('/contact?objet=lancement')}>Être prévenu(e) du lancement</a>
     <a class="btn btn-contour" href={u('/abonnement')}>Choisir ma formule</a>
   </AppelFinal>
@@ -93,10 +93,10 @@ import { u } from '../lib/url';
   .deux { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
   .texte { display: grid; gap: 14px; }
   .texte p:not(.surtitre-main) { color: var(--gris); font-size: 1.06rem; line-height: 1.7; }
-  .texte.carte { background: var(--creme-carte); border: 3px solid var(--encre); padding: clamp(24px, 3vw, 36px); box-shadow: 8px 8px 0 var(--sapin); transform: rotate(1deg); }
+  .texte.carte { background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: clamp(24px, 3vw, 36px); box-shadow: 0 8px 0 var(--sapin); transform: rotate(1deg); }
   .ages-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .age { background: var(--creme-carte); border: 2px solid var(--encre); padding: 24px; display: grid; gap: 8px; box-shadow: 5px 5px 0 var(--soleil); transform: rotate(-1deg); }
-  .age + .age { transform: rotate(1deg); box-shadow: 5px 5px 0 var(--sapin); }
+  .age { background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: 24px; display: grid; gap: 8px; box-shadow: 0 5px 0 var(--soleil); transform: rotate(-1deg); }
+  .age + .age { transform: rotate(1deg); box-shadow: 0 5px 0 var(--sapin); }
   .age strong { font: 700 2rem var(--f-titre); color: var(--sapin); }
   .age p { color: var(--gris); line-height: 1.55; }
   .signature { margin-top: 40px; text-align: center; color: var(--gris); font-style: italic; }

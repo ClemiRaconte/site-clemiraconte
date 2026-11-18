@@ -5,3 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Fonctions de l'espace abonné (connexion, bibliothèque, paiements Stripe).
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

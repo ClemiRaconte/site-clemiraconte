@@ -13,8 +13,7 @@ export type Formule = {
 };
 
 export const formules: Formule[] = [
-  { id: 'famille-1-adaptation', public: 'familles', nom: 'Une adaptation', prix: '50 €', periode: '/ an', texte: 'Les histoires en 4-6 ans ou en 7-9 ans, au choix. Un accès' },
-  { id: 'famille-2-adaptations', public: 'familles', nom: 'Les deux adaptations', prix: '60 €', periode: '/ an', texte: '4-6 ans et 7-9 ans : chaque enfant de la fratrie a sa version. Un accès', vedette: true },
+  { id: 'famille-2-adaptations', public: 'familles', nom: 'L’année complète', prix: '60 €', periode: '/ an', texte: 'Toutes les histoires pour les 4-6 ans et pour les 7-9 ans : chaque enfant de la fratrie a sa version. Un accès', vedette: true },
   { id: 'famille-mois', public: 'familles', nom: 'Au mois', prix: '8 €', periode: '/ mois', texte: 'Un accès, sans engagement. Les histoires reçues pendant un mois payé restent à vous' },
   { id: 'enseignant', public: 'enseignants', nom: 'Un(e) enseignant(e)', prix: '60 €', periode: '/ an', texte: 'Un accès personnel. L’histoire se lit ou se projette depuis la visionneuse, les activités s’impriment' },
   { id: 'ecole', public: 'enseignants', nom: 'Toute l’école', prix: '100 €', periode: '/ an', texte: 'Toutes les classes de l’école. L’histoire et la fiche papote en PDF imprimables, avec une charte d’usage à signer. Facture au nom de l’école ou de la mairie', vedette: true },
