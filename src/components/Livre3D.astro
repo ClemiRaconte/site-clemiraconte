@@ -1,21 +1,30 @@
 ---
 /** Grand petit livre 3D (DA du 17/11) : la couverture s'entrouvre seule, puis s'ouvre au survol. */
 import CouvertureAnge from './CouvertureAnge.astro';
-interface Props { age?: string; texte: string; lien?: string }
-const { age, texte, lien } = Astro.props;
+interface Props { age?: string; texte?: string; paragraphes?: string[]; lien?: string; href?: string }
+const { age, texte, paragraphes, lien, href } = Astro.props;
 ---
-<div class="l3">
+<div class="l3" data-livre3d>
+  <button class="l3-ouvrir" type="button" aria-expanded="false" aria-label="Ouvrir le livre et lire le début de l’histoire"></button>
   <span class="l3-page">
     {age && <span class="l3-age">{age}</span>}
-    <span class="l3-texte">{texte}</span>
-    {lien && <span class="l3-lien">{lien}</span>}
+    {texte && <span class="l3-texte">{texte}</span>}
+    {paragraphes && <span class="l3-recit">{paragraphes.map((p) => <span class="l3-par">{p}</span>)}</span>}
+    {lien && (href ? <a class="l3-lien" href={href}>{lien}</a> : <span class="l3-lien">{lien}</span>)}
   </span>
   <span class="l3-couv"><CouvertureAnge /></span>
   <i class="l3-signet"></i>
   <i class="l3-etoile e1"></i><i class="l3-etoile e2"></i><i class="l3-etoile e3"></i>
+  <span class="l3-aide main">touchez le livre pour l’ouvrir</span>
 </div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-livre3d]').forEach((l) => {
+    const b = l.querySelector<HTMLButtonElement>('.l3-ouvrir')!;
+    b.addEventListener('click', () => { const o = l.classList.toggle('ouvert'); b.setAttribute('aria-expanded', String(o)); b.setAttribute('aria-label', o ? 'Refermer le livre' : 'Ouvrir le livre et lire le début de l’histoire'); });
+  });
+</script>
 <style>
-  .l3 { position: relative; width: min(300px, 70vw); aspect-ratio: 4 / 5; perspective: 1400px; color: var(--encre); rotate: 3deg; animation: l3-flotte 6s ease-in-out infinite; }
+  .l3 { position: relative; width: min(340px, 78vw); transition: rotate 0.6s; aspect-ratio: 4 / 5; perspective: 1400px; color: var(--encre); rotate: 3deg; animation: l3-flotte 6s ease-in-out infinite; }
   .l3::before { content: ''; position: absolute; inset: 4px -9px -7px 4px; border-radius: 3px 14px 14px 3px; background: repeating-linear-gradient(90deg, #fffaf0 0 2px, #e5d7b6 2px 3px); box-shadow: 0 22px 40px rgba(0, 0, 0, 0.35); }
   .l3-page { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--creme-carte); border-radius: 3px 14px 14px 3px; }
   .l3-age { align-self: flex-start; font: 800 0.78rem var(--f-label); background: var(--soleil); padding: 2px 10px; border-radius: 99px; }
@@ -23,7 +32,16 @@ const { age, texte, lien } = Astro.props;
   .l3-lien { font: 800 0.9rem var(--f-label); color: var(--sapin); }
   .l3-couv { position: absolute; inset: 0; overflow: hidden; border-radius: 3px 14px 14px 3px; transform-origin: left center; box-shadow: inset 14px 0 0 rgba(0, 0, 0, 0.2); backface-visibility: hidden; animation: l3-entrouvre 7s cubic-bezier(0.3, 0.1, 0.2, 1) infinite 1s; transition: transform 0.8s cubic-bezier(0.3, 0.1, 0.2, 1); }
   .l3-couv :global(svg) { display: block; width: 100%; height: 100%; }
-  .l3:hover .l3-couv { animation: none; transform: rotateY(-165deg); }
+  .l3-ouvrir { position: absolute; inset: 0; z-index: 3; background: none; border: 0; cursor: pointer; border-radius: 3px 14px 14px 3px; }
+  .l3.ouvert .l3-ouvrir { inset: auto auto 100% 0; width: 100%; height: 0; }
+  .l3:hover:not(.ouvert) .l3-couv { animation: none; transform: rotateY(-30deg); }
+  .l3.ouvert .l3-couv { animation: none; transform: rotateY(-170deg); }
+  .l3.ouvert { animation: none; rotate: 0deg; }
+  .l3-recit { flex: 1; overflow: auto; display: grid; gap: 10px; align-content: start; font: 500 1rem / 1.55 var(--f-titre); padding-right: 6px; }
+  .l3-par:first-child::first-letter { font-size: 2.6em; float: left; line-height: 0.9; margin: 4px 6px 0 0; color: var(--sapin); }
+  .l3-lien { position: relative; z-index: 4; text-decoration: none; }
+  .l3-aide { position: absolute; left: 0; right: 0; bottom: -40px; text-align: center; color: var(--soleil-doux); font-size: 1.2rem; transition: opacity 0.3s; }
+  .l3.ouvert .l3-aide { opacity: 0; }
   .l3-signet { position: absolute; top: -8px; right: 30px; width: 18px; height: 70px; background: var(--soleil); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); }
   .l3-etoile { position: absolute; width: 12px; height: 12px; background: var(--soleil-doux); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: l3-brille 2.4s ease-in-out infinite; }
   .e1 { top: -20px; left: -18px; } .e2 { top: 30%; right: -30px; animation-delay: 0.8s; width: 16px; height: 16px; } .e3 { bottom: -14px; left: 40%; animation-delay: 1.6s; }
