@@ -48,10 +48,10 @@ const payer = (id: string) => lienFormule(id, reserver(id));
 <style>
   .formules-tva { font-size: 0.9rem; color: var(--gris, #5b6b63); margin-top: 12px; text-align: center; }
   .formules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 360px)); justify-content: center; gap: 28px; }
-  .formule { position: relative; background: var(--creme-carte); border: 3px solid var(--encre); padding: 30px 26px; display: grid; gap: 12px; align-content: start; box-shadow: 7px 7px 0 var(--sapin); }
+  .formule { position: relative; background: var(--creme-carte); border: 2px solid transparent; border-radius: 22px; padding: 30px 26px; display: grid; gap: 12px; align-content: start; box-shadow: 0 7px 0 var(--sapin); }
   .formule:nth-child(odd) { transform: rotate(-0.8deg); }
   .formule:nth-child(even) { transform: rotate(0.8deg); }
-  .formule.vedette { background: #fffbea; box-shadow: 7px 7px 0 var(--soleil); }
+  .formule.vedette { background: #fffbea; box-shadow: 0 7px 0 var(--soleil); }
   .formule-vedette { position: absolute; top: -20px; right: 16px; background: var(--sapin); color: #fff; font-size: 1.35rem; padding: 4px 14px 2px; transform: rotate(4deg); }
   .formule h3 { font-size: 1.35rem; }
   .formule-prix strong { font: 700 2.8rem / 1 var(--f-titre); color: var(--sapin); }
@@ -62,15 +62,15 @@ const payer = (id: string) => lienFormule(id, reserver(id));
   .elargie h3 { font-size: 1.3rem; margin-bottom: 6px; }
   .elargie p { color: var(--gris); }
   .elargie ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .elargie li { display: grid; gap: 4px; text-align: center; padding: 14px 10px; border: 2px solid var(--encre); background: #fff; }
+  .elargie li { display: grid; gap: 4px; text-align: center; padding: 14px 10px; border: 2px solid transparent; border-radius: 22px; background: #fff; }
   .elargie li strong { font: 700 1.6rem var(--f-titre); color: var(--sapin); }
   .elargie li small { font: 600 0.85rem var(--f-texte); color: var(--gris); }
   .elargie li a { font: 800 0.9rem var(--f-label); color: var(--sapin); }
   .bareme { display: grid; gap: 22px; justify-items: center; text-align: center; }
   .bareme-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; }
-  .bareme-liste li { background: var(--creme-carte); border: 3px solid var(--encre); padding: 22px 12px; display: grid; gap: 4px; box-shadow: 5px 5px 0 var(--sapin); transform: rotate(var(--r, -1deg)); }
+  .bareme-liste li { background: var(--creme-carte); border: 2px solid transparent; border-radius: 22px; padding: 22px 12px; display: grid; gap: 4px; box-shadow: 0 5px 0 var(--sapin); transform: rotate(var(--r, -1deg)); }
   .bareme-liste li:nth-child(even) { --r: 1deg; }
-  .bareme-liste li:last-child { background: #fffbea; box-shadow: 5px 5px 0 var(--soleil); }
+  .bareme-liste li:last-child { background: #fffbea; box-shadow: 0 5px 0 var(--soleil); }
   .bareme-tranche { font: 800 0.95rem var(--f-label); }
   .bareme-liste strong { font: 700 2.6rem / 1.1 var(--f-titre); color: var(--sapin); }
   .bareme-unite { color: var(--gris); font-weight: 600; }
