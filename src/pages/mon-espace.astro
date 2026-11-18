@@ -126,7 +126,7 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
     $('me-h-titre').textContent = h.titre;
     $('me-h-ages').innerHTML = ages.length > 1
       ? ages.map((x) => `<button type="button" aria-pressed="${x === a}" data-age="${x}">${x} ans</button>`).join('')
-      : `<p class="me-intro">Adaptation ${a} ans</p>`;
+      : `<p class="me-intro">Version ${a} ans</p>`;
     $('me-h-ages').querySelectorAll<HTMLButtonElement>('button').forEach((b) => (b.onclick = () => ouvrirHistoire(h, b.dataset.age)));
 
     // Visionneuse : l'histoire (en liseuse sur téléphone) et la fiche papote, en lecture seule.

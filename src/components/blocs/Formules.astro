@@ -16,7 +16,7 @@ const payer = (id: string) => lienFormule(id, reserver(id));
         <li><span class="bareme-tranche">{b.tranche}</span><strong>{b.prix}</strong><span class="bareme-unite">/ famille</span></li>
       ))}
     </ul>
-    <p class="bareme-note">Prix par famille et par an, prix de lancement. Chaque famille reçoit la formule complète : les deux adaptations, pour toute la fratrie</p>
+    <p class="bareme-note">Prix par famille et par an, prix de lancement. Chaque famille reçoit la formule complète : les histoires pour les 4-6 ans et pour les 7-9 ans, pour toute la fratrie</p>
     <a class="btn btn-plein" href={reserver('cse')}>Je réserve pour mon CSE</a>
   </div>
 ) : (
@@ -36,7 +36,7 @@ const payer = (id: string) => lienFormule(id, reserver(id));
   <div class="elargie">
     <div>
       <h3>Plusieurs foyers ? La famille élargie</h3>
-      <p>Pour que les grands-parents, la nounou ou l’autre maison aient aussi leur accès. Un accès, c’est un identifiant. Les deux adaptations sont comprises</p>
+      <p>Pour que les grands-parents, la nounou ou l’autre maison aient aussi leur accès. Un accès, c’est un identifiant. Les versions 4-6 ans et 7-9 ans sont comprises</p>
     </div>
     <ul>
       {famillesElargies.map((f) => (

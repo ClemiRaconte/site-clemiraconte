@@ -76,11 +76,11 @@ import { u } from '../lib/url';
   <!-- La séance complète -->
   <Bandeau fond="beige" crete={3} id="activites">
     <Tete
-      surtitre="La séance complète, en deux adaptations"
+      surtitre="La séance complète, en deux versions"
       titre="Tout ce que contient une histoire, pour juger sur pièce"
       intro="C’est la séance vitrine de Clémi Raconte, pour juger sur pièce. Choisissez l’âge de votre enfant ou de votre groupe : l’histoire s’ouvre dans la visionneuse avec sa fiche papote et ses activités"
     />
-    <div class="ages" role="tablist" aria-label="Choisir l’adaptation">
+    <div class="ages" role="tablist" aria-label="Choisir la version">
       {adaptations.map((a, i) => (
         <button type="button" role="tab" id={`onglet-${a.age}`} aria-controls={`age-${a.age}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-age>
           {a.age} ans

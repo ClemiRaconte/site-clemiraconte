@@ -21,6 +21,21 @@ import { u } from '../lib/url';
     legende="le Champsaur, ma vallée"
   />
 
+  <Bandeau fond="beige" crete={2}>
+    <div class="equipe">
+      <figure class="equipe-photo">
+        <img src={u('/img/clement-foret.webp')} alt="Clément, le conteur, dans la forêt conteuse" width="1200" height="800" loading="lazy" />
+        <figcaption class="main">Clément, dans la forêt conteuse</figcaption>
+      </figure>
+      <div class="equipe-texte">
+        <p class="surtitre-main">L’équipe</p>
+        <h2>Une voix aujourd’hui, une équipe demain</h2>
+        <p>J’écris les histoires, je conçois les fiches papote et les activités, je raconte depuis la forêt conteuse. Coline, ma compagne, relit chaque texte et teste les activités avant tout le monde. Annette, ma maman, m’aide à construire les supports et fait connaître le projet. Une jeune illustratrice d’ici dessine déjà Ange et les habitants de la forêt de Daillon</p>
+        <a class="lien-bouton" href={u('/equipe')}>Découvrir toute l’équipe →</a>
+      </div>
+    </div>
+  </Bandeau>
+
   <Bandeau fond="sapin" crete={1}>
     <div class="parcours">
       <div class="trois">
@@ -109,4 +124,12 @@ import { u } from '../lib/url';
   .offres ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
   .offres-lien { color: var(--soleil-doux); font-weight: 700; }
   @media (max-width: 860px) { .parcours, .alpes { grid-template-columns: 1fr; } }
+
+  .equipe { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(24px, 5vw, 56px); align-items: center; }
+  .equipe-photo { margin: 0; transform: rotate(-1.5deg); }
+  .equipe-photo img { width: 100%; height: auto; border: 2px solid var(--encre); box-shadow: 7px 7px 0 var(--soleil); display: block; }
+  .equipe-photo figcaption { margin-top: 10px; font-size: 1.3rem; color: var(--sapin); }
+  .equipe-texte h2 { margin: 6px 0 12px; }
+  .equipe-texte p { line-height: 1.65; }
+  @media (max-width: 760px) { .equipe { grid-template-columns: 1fr; } }
 </style>
