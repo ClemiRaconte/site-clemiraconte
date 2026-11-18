@@ -1,0 +1,65 @@
+---
+/**
+ * Conditions générales de vente. BROUILLON à faire relire et valider par Clément avant mise en ligne.
+ * Reste à compléter : date de version, coordonnées du médiateur (adhésion CM2C début décembre).
+ */
+import Base from '../layouts/Base.astro';
+import PageTete from '../components/blocs/PageTete.astro';
+import Bandeau from '../components/blocs/Bandeau.astro';
+import { u } from '../lib/url';
+import { site } from '../data/site';
+---
+<Base titre="Conditions générales de vente · Clémi Raconte" description="Les conditions de vente des abonnements Clémi Raconte : formules, durée, paiement, rétractation, résiliation.">
+  <PageTete surtitre="Informations" titre="Conditions générales de vente" intro="Elles s’appliquent à tous les abonnements achetés sur clemiraconte.fr. Je les ai écrites le plus simplement possible : si une phrase vous semble floue, écrivez-moi" />
+  <Bandeau fond="beige" crete={1}>
+    <div class="ml">
+      <p><em>Version du [date de mise en ligne]</em></p>
+
+      <h2>1. Qui vend</h2>
+      <p>Clément Joubert, Clémi Raconte<br />Artiste-auteur, entrepreneur individuel<br />6 place du Chevreril, 05500 Saint-Bonnet-en-Champsaur<br />SIRET : 130 855 299 00017<br />Contact : <a href={`mailto:${site.email}`}>{site.email}</a></p>
+
+      <h2>2. Ce que contient un abonnement</h2>
+      <p>Un abonnement donne accès, depuis votre espace abonné, à une nouvelle histoire chaque samedi à 9h. Chaque histoire, c’est l’histoire à lire en ligne, sa fiche papote pour en discuter avec l’enfant et ses 12 activités au choix, à imprimer. L’histoire et la fiche papote se lisent dans votre espace, les activités se téléchargent. Le podcast et la vidéo restent gratuits pour tout le monde, sur Spotify et YouTube : ils ne font pas partie de l’abonnement</p>
+      <p>Votre espace s’ouvre dès que le paiement est validé. Vous vous y connectez avec l’adresse email utilisée pour le paiement : je vous envoie un lien de connexion, sans mot de passe. Un accès est personnel et ne se partage pas (article 7)</p>
+
+      <h2>3. Les formules et les prix</h2>
+      <p>Les formules et leurs prix sont présentés sur la page <a href={u('/abonnement')}>Formules</a>. Les prix sont en euros. Prix nets, TVA non applicable (franchise en base, article 293 B du CGI). Le prix payé est celui affiché au moment de la commande : si je change mes prix, cela ne concerne jamais un abonnement déjà payé</p>
+      <p>Pour les CSE, le prix suit le barème de la page CSE. Les CSE, écoles, mairies et associations qui le souhaitent reçoivent un devis puis une facture puis paient par virement</p>
+
+      <h2>4. La durée</h2>
+      <p>Les formules à l’année durent un an à partir du paiement. Elles ne se renouvellent pas toutes seules : avant la fin de l’année, je vous écris pour vous proposer de continuer. Rien n’est prélevé sans votre accord</p>
+      <p>La formule au mois est sans engagement. Elle se renouvelle chaque mois jusqu’à ce que vous l’arrêtiez. Vous l’arrêtez quand vous voulez depuis votre espace abonné, rubrique « Gérer mon abonnement ». L’arrêt prend effet à la fin du mois déjà payé</p>
+
+      <h2>5. Le paiement</h2>
+      <p>Le paiement se fait en ligne par carte bancaire. Il est traité par Stripe : je ne vois jamais vos coordonnées bancaires. Stripe vous envoie le reçu par email. Vos factures restent disponibles depuis « Gérer mon abonnement »</p>
+      <p>Pour les professionnels payant sur facture, en cas de retard de paiement, des pénalités au taux égal à trois fois le taux d’intérêt légal s’appliquent, ainsi qu’une indemnité forfaitaire de 40 € pour frais de recouvrement (articles L441-10 et D441-5 du Code de commerce)</p>
+
+      <h2>6. Ce que vous gardez</h2>
+      <p>Votre abonnement vous donne les histoires qui paraissent pendant qu’il est actif, à partir du jour où vous vous abonnez. Les histoires parues avant ne sont pas comprises, celles qui paraissent après l’arrêt non plus. Toutes les histoires parues pendant votre abonnement restent dans votre espace, même après l’arrêt. Ange, le loup qui chantait avec le vent, est offert à tous les abonnés</p>
+      <p>Cet accès est conservé tant que le service Clémi Raconte existe. Si je devais un jour l’arrêter, je vous préviendrais à l’avance</p>
+
+      <h2>7. Le partage d’un accès</h2>
+      <p>Chaque accès est personnel. Partager son accès, ou diffuser une histoire, une fiche papote ou une activité en dehors de son foyer, de sa classe ou de sa structure, est interdit. Je vous écris d’abord pour vous demander d’y mettre fin. Si le partage continue, l’accès est fermé, sans remboursement. Les écoles et les associations abonnées signent en plus une charte d’usage. Tous les contenus restent ma propriété (voir les <a href={u('/mentions-legales')}>mentions légales</a>)</p>
+
+      <h2>8. Le droit de rétractation</h2>
+      <p>Un particulier qui achète en ligne dispose normalement de 14 jours pour changer d’avis. Pour un contenu numérique auquel on accède tout de suite, la loi prévoit une exception (article L221-28, 13° du Code de la consommation). Au moment du paiement, une case à cocher vous demande de confirmer que vous voulez accéder tout de suite à votre espace et que vous renoncez ainsi à votre droit de rétractation. Sans cette case cochée, le paiement ne peut pas être finalisé. Cet accord figure dans votre reçu</p>
+      <p>Ce droit ne concerne pas les achats faits par une école, une mairie, une association ou un CSE</p>
+
+      <h2>9. Si quelque chose ne marche pas</h2>
+      <p>Si une histoire ne s’affiche pas, si un fichier est abîmé ou si votre accès ne fonctionne pas, écrivez-moi : je corrige ou je remplace. Vous bénéficiez de la garantie légale de conformité des contenus numériques (articles L224-25-12 et suivants du Code de la consommation). Le site peut être indisponible quelques heures, pour une mise à jour ou une panne de l’hébergeur</p>
+
+      <h2>10. Vos données</h2>
+      <p>Pour faire fonctionner votre abonnement, je garde votre adresse email, votre formule et les dates de votre abonnement. Le détail est sur la page <a href={u('/confidentialite')}>confidentialité</a></p>
+
+      <h2>11. En cas de désaccord</h2>
+      <p>Écrivez-moi d’abord : on trouvera presque toujours une solution. Sinon, vous pouvez saisir gratuitement le médiateur de la consommation : [nom, adresse et site du médiateur]</p>
+      <p>Je peux faire évoluer ces conditions. La version qui s’applique à votre commande est celle en vigueur le jour du paiement. Ces conditions sont soumises au droit français</p>
+    </div>
+  </Bandeau>
+</Base>
+<style>
+  .ml { display: grid; gap: 12px; max-width: 820px; background: var(--creme-carte); border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: clamp(24px, 4vw, 44px); box-shadow: 0 6px 0 var(--sapin); }
+  .ml h2 { font-size: 1.35rem; margin-top: 16px; }
+  .ml p { color: var(--gris); line-height: 1.65; }
+  .ml a { color: var(--sapin); font-weight: 600; }
+</style>
