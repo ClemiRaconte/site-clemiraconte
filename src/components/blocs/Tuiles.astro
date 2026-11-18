@@ -27,7 +27,7 @@ const cols = items.length === 4 ? 'quatre' : items.length === 2 ? 'deux' : 'troi
   .trois { grid-template-columns: repeat(3, 1fr); }
   .quatre { grid-template-columns: repeat(4, 1fr); }
   .deux { grid-template-columns: repeat(2, 1fr); }
-  .tuile { position: relative; min-height: 320px; display: flex; align-items: flex-end; color: #fff; border: 2px solid transparent; border-radius: 22px; box-shadow: 0 8px 0 var(--beige); transition: transform 0.25s ease; }
+  .tuile { position: relative; min-height: 320px; display: flex; align-items: flex-end; color: #fff; border: 0; border-radius: 3px 16px 16px 3px; box-shadow: 0 8px 0 var(--beige); transition: transform 0.25s ease; }
   .tuile:nth-child(odd) { transform: rotate(-1deg); }
   .tuile:nth-child(even) { transform: rotate(1.2deg); }
   .tuile:hover { transform: rotate(0) translateY(-4px); }

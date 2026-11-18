@@ -24,7 +24,7 @@ const { intro } = Astro.props;
   .adapt-texte { display: grid; gap: 12px; }
   .adapt-texte p:not(.surtitre-main) { color: var(--gris); font-size: 1.1rem; }
   .adapt-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .adapt-carte { background: var(--creme-carte); border: 2px solid transparent; border-radius: 22px; padding: 22px; display: grid; gap: 8px; box-shadow: 0 5px 0 var(--soleil); transform: rotate(-1deg); }
+  .adapt-carte { background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: 22px; display: grid; gap: 8px; box-shadow: 0 5px 0 var(--soleil); transform: rotate(-1deg); }
   .adapt-carte + .adapt-carte { transform: rotate(1.2deg); box-shadow: 0 5px 0 var(--sapin); }
   .adapt-carte strong { font: 700 2rem var(--f-titre); color: var(--sapin); }
   .adapt-carte p { color: var(--gris); line-height: 1.5; }

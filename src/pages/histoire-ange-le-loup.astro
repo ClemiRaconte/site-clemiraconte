@@ -40,7 +40,7 @@ import { u } from '../lib/url';
           <a class="btn btn-contour" href="#activites">Les 12 activités</a>
         </div>
       </div>
-      <div class="at-couv"><Livre3D age="4-6 et 7-9 ans" texte="Au cœur de la forêt de Daillon, là où les arbres chatouillent les nuages, vit Ange. Un loup pas comme les autres…" lien="Installez-vous →" /></div>
+      <div class="at-couv"><Livre3D age="Il était une fois…" paragraphes={texte46.paragraphes.slice(0, 3)} lien="La suite dans la liseuse ↓" href="#lire" /></div>
     </div>
   </section>
 
@@ -58,7 +58,7 @@ import { u } from '../lib/url';
   </Bandeau>
 
   <!-- Le début de l'histoire, comme un livre ouvert -->
-  <Bandeau fond="creme" crete={2} bulles={8}>
+  <Bandeau fond="creme" crete={2} bulles={8} id="lire">
     <Tete surtitre="À lire" titre="Le début de l’histoire" centre />
     <div class="livre">
       <div class="page page-g">
@@ -207,12 +207,12 @@ import { u } from '../lib/url';
   .at-couv { justify-self: center; padding: 20px; }
 
   /* Vidéo */
-  .video { max-width: 1000px; margin-inline: auto; border: 2px solid transparent; border-radius: 22px; box-shadow: 0 10px 0 var(--sapin); background: #000; aspect-ratio: 16 / 9; transform: rotate(-0.6deg); }
+  .video { max-width: 1000px; margin-inline: auto; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); box-shadow: 0 10px 0 var(--sapin); background: #000; aspect-ratio: 16 / 9; transform: rotate(-0.6deg); }
   .video :global(iframe), .video-facade { display: block; width: 100%; height: 100%; border: 0; }
   .video-facade { position: relative; padding: 0; cursor: pointer; background: #000; }
   .video-facade :global(img) { width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: opacity 0.2s; }
   .video-facade:hover :global(img) { opacity: 0.9; }
-  .video-jouer { position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; transform: translate(-50%, -50%) rotate(-4deg); display: grid; place-items: center; background: var(--soleil); border: 2px solid transparent; border-radius: 22px; border-radius: var(--trait); box-shadow: 0 5px 0 var(--beige); transition: transform 0.2s; }
+  .video-jouer { position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; transform: translate(-50%, -50%) rotate(-4deg); display: grid; place-items: center; background: var(--soleil); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); border-radius: var(--trait); box-shadow: 0 5px 0 var(--beige); transition: transform 0.2s; }
   .video-facade:hover .video-jouer { transform: translate(-50%, -50%) rotate(3deg) scale(1.08); }
   .video-jouer svg { width: 44px; fill: var(--encre); margin-left: 4px; }
   .video-legende { position: absolute; left: 20px; bottom: 16px; color: #fff; font-size: 1.8rem; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); }
@@ -220,7 +220,7 @@ import { u } from '../lib/url';
 
   /* Livre ouvert */
   .livre { display: grid; grid-template-columns: 1fr 1fr; max-width: 1040px; margin-inline: auto; filter: drop-shadow(8px 10px 0 rgba(36, 59, 50, 0.25)); }
-  .page { background: #fffdf5; border: 2px solid transparent; border-radius: 22px; padding: clamp(28px, 4vw, 52px); display: grid; gap: 16px; align-content: start; font-family: var(--f-titre); font-size: 1.12rem; line-height: 1.75; color: var(--encre); }
+  .page { background: #fffdf5; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: clamp(28px, 4vw, 52px); display: grid; gap: 16px; align-content: start; font-family: var(--f-titre); font-size: 1.12rem; line-height: 1.75; color: var(--encre); }
   .page-g { border-right-width: 1px; transform: rotate(-1deg); transform-origin: right center; background-image: linear-gradient(90deg, transparent 92%, rgba(36, 59, 50, 0.07)); }
   .page-d { border-left-width: 1px; transform: rotate(1deg); transform-origin: left center; background-image: linear-gradient(90deg, rgba(36, 59, 50, 0.07), transparent 8%); }
   .lettrine::first-letter { float: left; font-size: 3.6em; line-height: 0.85; padding: 6px 10px 0 0; color: var(--sapin); font-weight: 700; }
@@ -231,7 +231,7 @@ import { u } from '../lib/url';
   .ages { display: flex; gap: 14px; margin-bottom: 28px; }
   .ages button {
     font: 700 1.6rem var(--f-titre); color: var(--encre); cursor: pointer;
-    background: var(--creme-carte); border: 2px solid transparent; border-radius: 22px; border-radius: var(--trait);
+    background: var(--creme-carte); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); border-radius: var(--trait);
     padding: 10px 26px; box-shadow: 0 5px 0 var(--beige); transform: rotate(-1.5deg);
   }
   .ages button + button { transform: rotate(1.5deg); }
@@ -244,7 +244,7 @@ import { u } from '../lib/url';
   .sous-titre { font-size: 1.6rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
   .sous-titre .main { font-size: 1.5rem; }
   .activites { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-  .activite { position: relative; background: #fff; border: 2px solid transparent; border-radius: 22px; padding: 18px 18px 16px; display: grid; gap: 6px; grid-template-rows: auto auto 1fr auto; box-shadow: 0 4px 0 var(--sapin); transform: rotate(var(--r, -0.6deg)); transition: transform 0.2s; }
+  .activite { position: relative; background: #fff; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); padding: 18px 18px 16px; display: grid; gap: 6px; grid-template-rows: auto auto 1fr auto; box-shadow: 0 4px 0 var(--sapin); transform: rotate(var(--r, -0.6deg)); transition: transform 0.2s; }
   .activite:nth-child(even) { --r: 0.7deg; }
   .activite:nth-child(3n) { background: #fffbea; box-shadow: 0 4px 0 var(--soleil); }
   .activite:hover { transform: rotate(0) translateY(-3px); }
