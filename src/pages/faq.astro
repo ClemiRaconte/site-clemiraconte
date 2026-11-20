@@ -21,6 +21,12 @@ const questions = [
   { q: 'Pour l’école, peut-on imprimer et avoir une facture ?', r: 'Avec l’offre école, l’histoire et la fiche papote s’impriment aussi, pour toutes les classes, avec une charte d’usage à signer. La facture est au nom de l’école ou de la mairie', lien: { href: '/enseignants', texte: 'Voir l’offre enseignants' } },
   { q: 'Pour un CSE, comment les familles reçoivent-elles les histoires ?', r: 'Vous me dites combien de familles sont concernées, j’envoie le devis et je mets les accès en place. Les familles reçoivent un code d’invitation : vous n’avez rien à distribuer', lien: { href: '/cse', texte: 'Voir l’offre CSE' } },
 ];
+// Balisage FAQ pour les moteurs de recherche
+const faqJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: questions.map((x) => ({ '@type': 'Question', name: x.q, acceptedAnswer: { '@type': 'Answer', text: x.r } })),
+});
 ---
 <Base titre="Questions fréquentes · Clémi Raconte" description="Toutes les réponses sur Clémi Raconte : sortie des histoires, âges, visionneuse, activités, écrans, formules, résiliation, offre école et CSE.">
   <PageTete surtitre="Questions fréquentes" titre="Tout ce que vous vous demandez" intro="Et si votre question n’est pas là, écrivez-moi : je réponds moi-même">
@@ -42,6 +48,7 @@ const questions = [
   <AppelFinal cri="Une autre question ?" titre="Écrivez-moi, je réponds moi-même">
     <a class="btn btn-soleil" href={u('/contact')}>Me contacter</a>
   </AppelFinal>
+  <script type="application/ld+json" set:html={faqJson} />
 </Base>
 <style>
   .faq { max-width: 860px; margin-inline: auto; display: grid; gap: 16px; }

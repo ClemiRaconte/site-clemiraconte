@@ -14,12 +14,13 @@ const liens = [
   { label: 'Contact', href: '/contact' },
 ];
 ---
-{site.prelancement && (
-  <p class="annonce">
-    Les premières histoires arrivent {site.lancement}&nbsp;·{' '}
-    <a href={u('/#lancement')}>Être prévenu(e)</a>
-  </p>
-)}
+<p class="annonce" data-annonce data-lancement={u('/#lancement')} data-histoires={u('/histoires')} data-cse={u('/cse')} data-enseignants={u('/enseignants')}>
+  {site.prelancement ? (
+    <>Les premières histoires arrivent {site.lancement}&nbsp;·{' '}<a href={u('/#lancement')}>Être prévenu(e)</a></>
+  ) : (
+    <>Une nouvelle histoire chaque samedi à 9h&nbsp;·{' '}<a href={u('/histoires')}>Les découvrir</a></>
+  )}
+</p>
 
 <header class="entete" data-entete>
   <div class="conteneur barre">
@@ -68,6 +69,7 @@ const liens = [
     </div>
   </div>
   <div class="voile" data-voile></div>
+  <div class="guirlande-menu" aria-hidden="true"></div>
 </header>
 
 <!-- Menu plein écran qui coulisse depuis la droite (mobile) -->
@@ -91,6 +93,25 @@ const liens = [
 </div>
 
 <script>
+  // Bandeau du haut selon le jour : compte à rebours, samedi matin, Noël, rentrée
+  const annonce = document.querySelector<HTMLElement>('[data-annonce]');
+  const cs = (window as any).clemiSaison;
+  if (annonce && cs) {
+    const d = annonce.dataset;
+    const maintenant = cs.paris();
+    const lancement = new Date(cs.lancement);
+    const jours = Math.ceil((new Date(lancement.toDateString()).getTime() - new Date(maintenant.toDateString()).getTime()) / 864e5);
+    const lien = (href?: string, texte?: string) => `&nbsp;· <a href="${href}">${texte}</a>`;
+    let html = '';
+    if (cs.evt === 'samedi') html = 'Nouvelle histoire ce matin !' + lien(d.histoires, 'La découvrir');
+    else if (!cs.lance && jours > 1) html = `Plus que <strong>${jours} jours</strong> avant la première histoire, le samedi 12 décembre` + lien(d.lancement, 'Être prévenu(e)');
+    else if (!cs.lance && jours === 1) html = 'C’est demain ! La première histoire arrive samedi à 9h' + lien(d.lancement, 'Être prévenu(e)');
+    else if (!cs.lance) html = 'C’est aujourd’hui ! La première histoire arrive à 9h' + lien(d.histoires, 'Les histoires');
+    else if (cs.evt === 'noel') html = 'Pour Noël, un cadeau qui dure toute l’année' + lien(d.cse, 'L’offre CSE');
+    else if (cs.evt === 'rentree') html = 'C’est la rentrée : l’EMC clé en main' + lien(d.enseignants, 'L’offre enseignants');
+    if (html) annonce.innerHTML = html;
+  }
+
   const entete = document.querySelector<HTMLElement>('[data-entete]')!;
   const declencheur = document.querySelector<HTMLButtonElement>('[data-declencheur]');
   const panneau = document.querySelector<HTMLElement>('[data-panneau]');
@@ -134,6 +155,20 @@ const liens = [
 </script>
 
 <style>
+  /* Guirlande lumineuse sous le menu en décembre */
+  .guirlande-menu { display: none; position: absolute; left: 0; right: 0; bottom: -14px; height: 18px; pointer-events: none; z-index: 2;
+    background:
+      radial-gradient(circle at 50% 60%, #f4c430 0 4px, transparent 5px) 0 0 / 120px 18px repeat-x,
+      radial-gradient(circle at 50% 60%, #e2493b 0 4px, transparent 5px) 30px 0 / 120px 18px repeat-x,
+      radial-gradient(circle at 50% 60%, #5fb0e8 0 4px, transparent 5px) 60px 0 / 120px 18px repeat-x,
+      radial-gradient(circle at 50% 60%, #fffdf7 0 4px, transparent 5px) 90px 0 / 120px 18px repeat-x;
+    -webkit-mask: linear-gradient(#000, #000); }
+  .guirlande-menu::before { content: ''; position: absolute; left: 0; right: 0; top: 4px; height: 8px; border-bottom: 1.5px solid rgba(36, 59, 50, 0.45); border-radius: 0 0 50% 50% / 0 0 100% 100%; background: none; }
+  :global(html[data-evt='noel']) .guirlande-menu { display: block; animation: guirlande 1.6s steps(2) infinite; }
+  @keyframes guirlande { 50% { filter: brightness(1.35) saturate(1.2); opacity: 0.75; } }
+  @media (prefers-reduced-motion: reduce) { :global(html[data-evt='noel']) .guirlande-menu { animation: none; } }
+  .annonce :global(strong) { color: var(--soleil-doux); }
+
   .annonce {
     background: var(--sapin-fonce);
     color: var(--menthe);

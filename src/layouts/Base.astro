@@ -3,19 +3,22 @@ import '../styles/global.css';
 import Entete from '../components/Entete.astro';
 import PiedDePage from '../components/PiedDePage.astro';
 import { u } from '../lib/url';
+import { scriptSaison } from '../lib/saison';
 
-interface Props { titre: string; description: string; visionneuse?: boolean; nu?: boolean }
-const { titre, description, visionneuse = false, nu = false } = Astro.props;
+interface Props { titre: string; description: string; visionneuse?: boolean; nu?: boolean; noindex?: boolean; image?: string }
+const { titre, description, visionneuse = false, nu = false, noindex = false, image = '/img/partage.png' } = Astro.props;
 const canonique = new URL(Astro.url.pathname, Astro.site);
+const imagePartage = new URL(u(image), Astro.site);
 ---
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
+    <script is:inline set:html={scriptSaison} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titre}</title>
     <meta name="description" content={description} />
-    {nu && <meta name="robots" content="noindex" />}
+    {(nu || noindex) && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonique} />
     <link rel="icon" type="image/svg+xml" href={u('/favicon.svg')} />
     <meta name="theme-color" content="#2D6A4F" />
@@ -25,12 +28,22 @@ const canonique = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={titre} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonique} />
+    <meta property="og:image" content={imagePartage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Clémi Raconte : une histoire chaque samedi pour les 4-9 ans" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
     {!nu && <Entete />}
     <main id="contenu"><slot /></main>
     {!nu && <PiedDePage />}
+    {!nu && (
+      <a class="haut-page" href="#contenu" aria-label="Revenir en haut de la page" data-haut hidden>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle class="hp-lueur" cx="20" cy="24" r="14" /><ellipse cx="20" cy="27" rx="7" ry="6" fill="#F4C430" /><ellipse cx="13" cy="15" rx="7" ry="4" transform="rotate(-30 13 15)" fill="#fffdf7" stroke="#2D6A4F" stroke-width="1.6" /><ellipse cx="27" cy="15" rx="7" ry="4" transform="rotate(30 27 15)" fill="#fffdf7" stroke="#2D6A4F" stroke-width="1.6" /><circle cx="20" cy="18" r="6" fill="#2D6A4F" /><path d="M20 8v-4M16 5l4-3 4 3" stroke="#2D6A4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </a>
+    )}
     {visionneuse && (
       <>
         <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -40,7 +53,25 @@ const canonique = new URL(Astro.url.pathname, Astro.site);
   </body>
 </html>
 
+<script>
+  // Bouton luciole : apparaît après un écran de défilement
+  const haut = document.querySelector<HTMLAnchorElement>('[data-haut]');
+  if (haut) {
+    const maj = () => (haut.hidden = window.scrollY < window.innerHeight * 1.2);
+    addEventListener('scroll', maj, { passive: true });
+    maj();
+    haut.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
+  }
+</script>
+
 <style is:global>
+  .haut-page { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(18px, env(safe-area-inset-bottom, 0px)); z-index: 40; width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: var(--creme-carte); border: 2px solid var(--encre); box-shadow: 3px 3px 0 var(--encre); transition: transform 0.2s; }
+  .haut-page:hover { transform: translateY(-4px) rotate(-6deg); }
+  .haut-page[hidden] { display: none; }
+  .haut-page svg { width: 40px; height: 40px; }
+  .hp-lueur { fill: #F4C430; opacity: 0.25; animation: hp-briller 2.4s ease-in-out infinite; }
+  @keyframes hp-briller { 50% { opacity: 0.55; } }
+  @media (prefers-reduced-motion: reduce) { .hp-lueur { animation: none; } }
   .evitement { position: absolute; left: -999px; top: 8px; z-index: 100; background: var(--soleil); padding: 8px 16px; border-radius: 8px; font-weight: 700; }
   .evitement:focus { left: 8px; }
 </style>

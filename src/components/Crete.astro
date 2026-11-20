@@ -20,6 +20,7 @@ const miroir = forme === 2 ? 'scale(-1 1) translate(-1440 0)' : undefined;
 >
   <g transform={miroir}>
     <path d={crete} />
+    <path class="crete-neige" d="M193 46.5 L198 39.8 L204 32.9 L210 24.6 L215 17.2 L221 7.9 L226 14.1 L232 23.7 L237 32.1 L243 39.8 L248 47.2 L240 43 L233 47.5 L226 41 L219 46.5 L212 40 L204 45.5 L198 42 Z" />
     <path class="crete-ligne" d={ligne} />
   </g>
 </svg>
@@ -28,5 +29,7 @@ const miroir = forme === 2 ? 'scale(-1 1) translate(-1440 0)' : undefined;
   .crete { display: block; width: 100%; height: clamp(44px, 7vw, 100px); fill: var(--c); position: absolute; left: 0; z-index: 2; pointer-events: none; }
   .crete-haut { top: 2px; transform: translateY(-100%); }
   .crete-bas { bottom: 2px; transform: translateY(100%) scaleY(-1); }
+  .crete-neige { fill: #fff; display: none; }
+  :global(html[data-saison='hiver']) .crete-neige { display: block; }
   .crete-ligne { fill: none; stroke: var(--soleil, #F4C430); stroke-width: 4; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
 </style>
