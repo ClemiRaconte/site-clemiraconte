@@ -21,9 +21,11 @@ import { u } from '../lib/url';
   description="Ange, le loup qui chantait avec le vent : une histoire sur la différence pour les 4-9 ans, offerte avec sa fiche papote et ses 12 activités à imprimer."
 >
   <!-- En-tête : la nuit dans la forêt de Daillon -->
+  <div class="luciole-lecture" aria-hidden="true"><span data-lecture></span></div>
   <section class="bandeau-section ange-tete">
     <Image class="ange-fond" src={photo('loup')} alt="" widths={[800, 1400, 1800]} sizes="100vw" loading="eager" />
     <Bulles nombre={12} ton="creme" graine={21} />
+    <div class="ange-nuit" aria-hidden="true"><i class="an-lune"></i></div>
     <div class="conteneur at-grille">
       <div class="at-texte">
         <p class="surtitre-main">Séance offerte · 4-6 et 7-9 ans</p>
@@ -38,6 +40,13 @@ import { u } from '../lib/url';
         <div class="at-actions">
           <a class="btn btn-soleil" href="#video">Regarder l’histoire</a>
           <a class="btn btn-contour" href="#activites">Les 12 activités</a>
+        </div>
+        <div class="partage" data-partage>
+          <span class="main">Envoyer Ange à un parent :</span>
+          <a class="partage-lien" data-wa href="https://wa.me/?text=">WhatsApp</a>
+          <a class="partage-lien" data-mail href="mailto:?subject=">Email</a>
+          <button class="partage-lien" type="button" data-copier>Copier le lien</button>
+          <span class="partage-ok" data-copie role="status"></span>
         </div>
       </div>
       <div class="at-couv"><Livre3D age="Il était une fois…" paragraphes={texte46.paragraphes.slice(0, 3)} lien="La suite dans la liseuse ↓" href="#lire" /></div>
@@ -158,6 +167,24 @@ import { u } from '../lib/url';
 </Base>
 
 <script>
+  // Partager l'histoire offerte
+  const lienAnge = location.origin + location.pathname;
+  const message = 'Une histoire offerte pour les 4-9 ans : Ange, le loup qui chantait avec le vent. L’histoire, sa fiche papote et 12 activités à imprimer : ';
+  const wa = document.querySelector<HTMLAnchorElement>('[data-wa]');
+  const mail = document.querySelector<HTMLAnchorElement>('[data-mail]');
+  if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent(message + lienAnge);
+  if (mail) mail.href = 'mailto:?subject=' + encodeURIComponent('Une histoire pour les enfants : Ange le loup') + '&body=' + encodeURIComponent(message + lienAnge);
+  document.querySelector<HTMLButtonElement>('[data-copier]')?.addEventListener('click', async () => {
+    const ok = document.querySelector<HTMLElement>('[data-copie]')!;
+    try { await navigator.clipboard.writeText(lienAnge); ok.textContent = 'Lien copié !'; } catch { ok.textContent = lienAnge; }
+  });
+  // Luciole de lecture : avance avec le défilement de la page
+  const barre = document.querySelector<HTMLElement>('[data-lecture]');
+  if (barre) {
+    const maj = () => { const h = document.documentElement.scrollHeight - innerHeight; barre.style.width = `${h > 0 ? Math.min(100, (scrollY / h) * 100) : 0}%`; };
+    addEventListener('scroll', maj, { passive: true }); maj();
+  }
+
   // Vidéo : l'iframe YouTube ne se charge qu'au clic
   document.querySelectorAll<HTMLButtonElement>('.video-facade').forEach((b) => {
     b.addEventListener('click', () => {
@@ -191,6 +218,25 @@ import { u } from '../lib/url';
 </script>
 
 <style>
+  /* Luciole de lecture */
+  .luciole-lecture { position: fixed; left: 0; right: 0; top: 0; height: 4px; z-index: 60; pointer-events: none; }
+  .luciole-lecture span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, rgba(244, 196, 48, 0.15), #f4c430); position: relative; }
+  .luciole-lecture span::after { content: ''; position: absolute; right: -7px; top: -5px; width: 14px; height: 14px; border-radius: 50%; background: #f4c430; box-shadow: 0 0 12px 4px rgba(244, 196, 48, 0.7); }
+  /* Ciel de nuit : étoiles et lune, le soir seulement */
+  .ange-nuit { display: none; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(circle, #fffdf7 0 1.2px, transparent 2px), radial-gradient(circle, #fffdf7 0 1px, transparent 1.8px);
+    background-size: 110px 90px, 170px 130px; background-position: 0 0, 50px 40px; animation: an-scintille 3.5s ease-in-out infinite alternate; }
+  :global(html[data-moment='nuit']) .ange-nuit { display: block; }
+  .an-lune { position: absolute; right: 6%; top: 10%; width: 56px; height: 56px; border-radius: 50%; box-shadow: inset -14px 6px 0 0 #f7d873; filter: drop-shadow(0 0 14px rgba(247, 216, 115, 0.5)); }
+  @keyframes an-scintille { from { opacity: 0.45; } to { opacity: 0.95; } }
+  /* Partage */
+  .partage { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 4px; }
+  .partage .main { color: var(--soleil); font-size: 1.35rem; }
+  .partage-lien { font: 800 0.88rem var(--f-label); color: #fff; background: rgba(255, 255, 255, 0.12); border: 1.5px solid rgba(255, 255, 255, 0.5); border-radius: 999px; padding: 5px 12px; cursor: pointer; text-decoration: none; }
+  .partage-lien:hover { background: rgba(255, 255, 255, 0.24); }
+  .partage-ok { color: var(--soleil-doux); font-weight: 700; font-size: 0.9rem; }
+  @media (prefers-reduced-motion: reduce) { .ange-nuit { animation: none; } }
+
   /* En-tête nuit */
   .ange-tete { background: #1c3a2d; color: var(--creme); padding-block: clamp(48px, 7vw, 96px) clamp(96px, 11vw, 140px); }
   .ange-tete :global(.ange-fond) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 22%; z-index: -1; }
