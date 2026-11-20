@@ -22,7 +22,7 @@
     var scene=el('div','vz-scene'),toile=el('canvas'),attente=el('div','vz-attente','Ange arrive sur la pointe des pattes…');
     var lis=el('div','vz-lis'),lisTexte=el('div','vz-lis-texte');lis.appendChild(lisTexte);
     scene.appendChild(toile);scene.appendChild(lis);scene.appendChild(attente);
-    var mode=el('button','vz-mode');mode.type='button';
+    var mode=el('button','vz-mode');mode.type='button';mode.setAttribute('aria-label','Changer de mode de lecture');
     var pied=el('div','vz-pied','<b>Visionneuse Clémi Raconte</b><span>'+(box.getAttribute('data-pied')||'Lecture en ligne, page par page.')+'</span>');
     pied.insertBefore(mode,pied.children[1]);
     box.innerHTML='';box.appendChild(barre);box.appendChild(scene);box.appendChild(pied);

@@ -71,14 +71,14 @@ const annee = new Date().getFullYear();
   .pied a:hover { color: var(--soleil-doux); text-decoration: underline; text-underline-offset: 3px; }
   .pied-grille { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
   .pied-marque { display: grid; gap: 14px; align-content: start; max-width: 340px; }
-  .pied-marque p { font-size: 0.98rem; opacity: 0.9; }
+  .pied-marque p { font-size: 0.98rem; }
   .conteur a { color: var(--soleil-doux); font-weight: 600; }
   .pied-titre { font: 800 0.8rem var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--soleil-doux); margin-bottom: 12px; }
   .pied ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 0.98rem; }
   .pied-bas {
     display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
     margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(231, 240, 234, 0.2);
-    font-size: 0.88rem; opacity: 0.85;
+    font-size: 0.88rem;
   }
   @media (max-width: 860px) { .pied-grille { grid-template-columns: 1fr 1fr; } .pied-marque { grid-column: 1 / -1; } }
   @media (max-width: 480px) { .pied-grille { grid-template-columns: 1fr; } }
