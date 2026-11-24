@@ -13,6 +13,8 @@ const liens = [
   { label: 'La démarche', href: '/demarche' },
   { label: 'Contact', href: '/contact' },
 ];
+// Avant le lancement (PUBLIC_ESPACE_OUVERT=true), « Espace abonnés » mène directement à l'espace, sans connexion.
+const lienAbonnes = import.meta.env.PUBLIC_ESPACE_OUVERT === 'true' ? u('/mon-espace') : u('/connexion');
 ---
 <p class="annonce" data-annonce data-lancement={u('/#lancement')} data-histoires={u('/histoires')} data-cse={u('/cse')} data-enseignants={u('/enseignants')}>
   {site.prelancement ? (
@@ -39,7 +41,7 @@ const liens = [
           <li><a class="lien" href={u(l.href)} aria-current={actif(l.href) ? 'page' : undefined}>{l.label}</a></li>
         ))}
       </ul>
-      <a class="abonnes" href={u('/connexion')}>Espace abonnés</a>
+      <a class="abonnes" href={lienAbonnes}>Espace abonnés</a>
       <a class="btn btn-plein" href={u('/abonnement')}>Choisir ma formule</a>
     </nav>
 
@@ -87,7 +89,7 @@ const liens = [
     </ul>
     <div class="mm-actions">
       <a class="btn btn-soleil" href={u('/abonnement')}>Choisir ma formule</a>
-      <a class="mm-abonnes" href={u('/connexion')}>Espace abonnés</a>
+      <a class="mm-abonnes" href={lienAbonnes}>Espace abonnés</a>
     </div>
   </nav>
 </div>

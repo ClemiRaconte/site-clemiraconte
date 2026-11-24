@@ -47,6 +47,7 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
     <div class="vue" data-vue="biblio" hidden>
       <h2>Ma bibliothèque</h2>
       <p class="me-intro">Une nouvelle histoire arrive chaque samedi à 9h. Tout ce que vous recevez reste dans votre bibliothèque</p>
+      <p id="me-ouvert" class="me-note" hidden>Avant-première : l’espace se visite librement jusqu’au lancement du 12 décembre. Ensuite, il sera réservé aux abonnés. <a href={u('/abonnement')}>Choisir une formule</a></p>
       <p id="me-pas-abonne" class="me-note" hidden>Vous n’avez pas d’abonnement en cours avec cette adresse. Ange vous est offert, et les histoires reçues pendant vos abonnements passés restent ici. <a href={u('/abonnement')}>Choisir une formule</a></p>
       <ul id="me-etagere" class="me-etagere"></ul>
 
@@ -93,7 +94,7 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
 </Base>
 
 <script>
-  import { branche, sb, maBibliotheque } from '../lib/abonne';
+  import { branche, sb, maBibliotheque, ouvert } from '../lib/abonne';
   import { formules, famillesElargies } from '../data/formules';
 
   const $ = (id: string) => document.getElementById(id)!;
@@ -110,7 +111,7 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
 
   type Act = { titre: string; type: string; pdf: string | null };
   type Adapt = { texte: unknown; histoire: string | null; papote: string | null; activites: Act[]; bonus: Act[] };
-  type Histoire = { slug: string; titre: string; theme: string | null; date_sortie: string; video: string | null; adaptations: Record<string, Adapt> };
+  type Histoire = { slug: string; titre: string; theme: string | null; date_sortie: string; a_venir?: boolean; video: string | null; adaptations: Record<string, Adapt> };
 
   function montrer(vue: string) {
     document.querySelectorAll<HTMLElement>('.vue').forEach((v) => (v.hidden = v.dataset.vue !== vue));
@@ -170,14 +171,16 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
     etat.hidden = true;
     (document.querySelector('.me-onglets') as HTMLElement).hidden = false;
     $('me-email').textContent = d.email;
-    $('me-pas-abonne').hidden = d.abonne;
+    $('me-pas-abonne').hidden = d.abonne || (d.ouvert && !d.email);
+    $('me-ouvert').hidden = !(d.ouvert && !d.email);
+    if (!d.email) (document.querySelector('[data-vue="compte"]') as HTMLElement).remove(), (document.querySelector('.me-onglets') as HTMLElement).remove();
     $('me-formules').innerHTML = d.periodes.length
       ? d.periodes.map((p) => `<li>${texte(nomFormule(p.formule))} : depuis le ${date(p.debut)}${p.fin ? (new Date(p.fin) > new Date() ? `, jusqu’au ${date(p.fin)}` : `, terminée le ${date(p.fin)}`) : ', sans engagement'}</li>`).join('')
       : '<li>Aucune formule pour le moment</li>';
 
     $('me-etagere').innerHTML = d.bibliotheque.map((h, i) =>
-      `<li><button type="button" class="me-livre" data-i="${i}"><strong>${texte(h.titre)}</strong>${h.theme ? `<span>${texte(h.theme)}</span>` : ''}<span class="me-lien">Ouvrir →</span></button></li>`).join('');
-    $('me-etagere').querySelectorAll<HTMLButtonElement>('.me-livre').forEach((b) => (b.onclick = () => ouvrirHistoire(d.bibliotheque[Number(b.dataset.i)])));
+      `<li><button type="button" class="me-livre${h.a_venir ? ' me-a-venir' : ''}" data-i="${i}"${h.a_venir ? ' disabled' : ''}><strong>${texte(h.titre)}</strong>${h.theme ? `<span>${texte(h.theme)}</span>` : ''}<span class="me-lien">${h.a_venir ? `Sortie le ${date(h.date_sortie)}` : 'Ouvrir →'}</span></button></li>`).join('');
+    $('me-etagere').querySelectorAll<HTMLButtonElement>('.me-livre:not([disabled])').forEach((b) => (b.onclick = () => ouvrirHistoire(d.bibliotheque[Number(b.dataset.i)])));
     let dec: string | null = null;
     try { dec = localStorage.getItem('clemi-decor'); } catch {}
     montrer(dec ? 'biblio' : 'decors');
@@ -238,6 +241,7 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
   :global(.me-etagere li:nth-child(4n) .me-livre) { background: linear-gradient(160deg, #a9d0bd, #6fa58a); color: var(--encre); }
   :global(.me-livre:hover) { transform: translateY(-10px) rotate(-2deg); }
   :global(.me-livre strong) { font-family: var(--f-titre); font-size: 1.2rem; line-height: 1.2; }
+  :global(.me-a-venir) { opacity: 0.6; cursor: default; }
   :global(.me-lien) { font-weight: 800; }
   :global(html.decor-ciel .me-livre), :global(html.decor-jardin .me-livre) { border-radius: 999px; aspect-ratio: 1; min-height: 0; text-align: center; align-content: center; padding: 30px; }
   :global(html.decor-mer .me-livre) { border-radius: 50%; box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.4); animation: me-flotte 5s ease-in-out infinite; }

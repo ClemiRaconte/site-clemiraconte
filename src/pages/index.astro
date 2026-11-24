@@ -1,4 +1,5 @@
 ---
+import Etagere from '../components/blocs/Etagere.astro';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Bulles from '../components/Bulles.astro';
@@ -13,7 +14,7 @@ import { u } from '../lib/url';
 const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le groupe', 'Les nouvelles familles', 'La séparation des parents', 'Le handicap, visible et invisible', 'Apprendre autrement', 'Le harcèlement', 'Le consentement', 'Les écrans', 'Grandir, à son rythme'];
 ---
 <Base
-  titre="Clémi Raconte · Une histoire chaque samedi pour les 4-9 ans"
+  titre="Clémi Raconte · Histoires pour enfants de 4 à 9 ans, chaque samedi"
   description="Des histoires d’aujourd’hui pour les 4-9 ans, sans méchant ni morale imposée, écrites dans les Hautes-Alpes. À lire, à écouter ou à regarder, avec une fiche papote et 12 activités."
 >
   <!-- 1. L'objectif de la plateforme, dans la forêt conteuse qui change avec les saisons -->
@@ -159,9 +160,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
       </div>
       <div class="themes">
         <p class="main">Au programme de l’année</p>
-        <ul>
-          {themes.map((t) => <li>{t}</li>)}
-        </ul>
+        <Etagere items={themes} />
       </div>
     </div>
   </section>
@@ -310,16 +309,6 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
 
   .themes { margin-top: 36px; display: grid; gap: 14px; justify-items: center; }
   .themes .main { font-size: 1.8rem; }
-  .themes ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-  .themes li {
-    background: var(--creme); color: var(--encre); font: 800 0.92rem var(--f-label);
-    padding: 7px 14px; box-shadow: 0 3px 0 var(--sapin-fonce); transform: rotate(var(--r, -2deg));
-    transition: transform 0.2s;
-  }
-  .themes li:nth-child(3n) { --r: 2.5deg; background: var(--soleil-doux); }
-  .themes li:nth-child(3n + 1) { --r: -1.5deg; }
-  .themes li:nth-child(4n) { --r: 1deg; background: var(--menthe); }
-  .themes li:hover { animation: gigoter 0.4s ease; }
 
   /* Petites animations ludiques au survol */
   .tuile:hover .tuile-note, .public:hover .public-prix { animation: gigoter 0.45s ease; }
