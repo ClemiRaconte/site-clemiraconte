@@ -1,4 +1,5 @@
 ---
+import Etiquettes from '../components/blocs/Etiquettes.astro';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Bulles from '../components/Bulles.astro';
@@ -172,9 +173,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
       </div>
       <div class="themes">
         <p class="main">Au programme de l’année</p>
-        <ul>
-          {themes.map((t) => <li>{t}</li>)}
-        </ul>
+        <Etiquettes items={themes} centre />
       </div>
     </div>
   </section>
@@ -307,18 +306,9 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   .lancement-form input[type='email'] { flex: 1 1 240px; padding: 14px 20px; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); border-radius: var(--trait-2); font: inherit; }
   .lancement-formule { color: #fff; }
 
-  .themes { margin-top: 36px; display: grid; gap: 14px; justify-items: center; }
+  .themes { margin-top: 36px; display: grid; gap: 4px; justify-items: center; }
+  .themes :global(.etiquettes) { max-width: 980px; }
   .themes .main { font-size: 1.8rem; }
-  .themes ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-  .themes li {
-    background: var(--creme); color: var(--encre); font: 800 0.92rem var(--f-label);
-    padding: 7px 14px; box-shadow: 0 3px 0 var(--sapin-fonce); transform: rotate(var(--r, -2deg));
-    transition: transform 0.2s;
-  }
-  .themes li:nth-child(3n) { --r: 2.5deg; background: var(--soleil-doux); }
-  .themes li:nth-child(3n + 1) { --r: -1.5deg; }
-  .themes li:nth-child(4n) { --r: 1deg; background: var(--menthe); }
-  .themes li:hover { animation: gigoter 0.4s ease; }
 
   /* Petites animations ludiques au survol */
   .tuile:hover .tuile-note, .public:hover .public-prix { animation: gigoter 0.45s ease; }
