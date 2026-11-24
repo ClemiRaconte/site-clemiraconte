@@ -97,7 +97,7 @@ Le site change avec les saisons, le moment de la journée et quelques rendez-vou
 
 - **Le soir** (19h → 7h) : ciel de nuit en haut de l'accueil, étoiles sur la page d'Ange, décors de l'espace abonné assombris.
 - **Rendez-vous** : le samedi de 9h à midi après le lancement (« Nouvelle histoire ce matin ! »), Noël (décembre), la rentrée (20 août → 10 septembre).
-- **Où** : la scène illustrée en haut de l'accueil (`public/js/scene-saisons.js`) ; ailleurs, les bulles deviennent feuilles, flocons, pétales ou pollen, la crête prend sa couleur de saison, une guirlande court sous le menu en décembre, l'icône d'onglet se couvre de neige.
+- **Où** : la scène illustrée en haut de l'accueil (`public/js/scene-saisons.js`) ; sur toutes les pages, un fond de saison (`public/js/fond-saisons.js`) fait passer feuilles, flocons, pétales ou fleurs des prés, avec un motif discret sur les bandeaux clairs (plus calme sur Formules, Contact, Connexion : option `fond="calme"` de `Base`) ; la crête prend sa couleur de saison, une guirlande court sous le menu en décembre, l'icône d'onglet se couvre de neige.
 - **Réglages** : `saisons` dans `src/data/site.ts` (dates, heure du soir, rendez-vous, `forcer` une saison, `actives: false` pour tout couper).
 - **Prévisualiser** : ajouter `?saison=hiver`, `?moment=nuit` ou `?evt=noel` (ou `samedi`, `rentree`) à l'adresse d'une page.
 - Rien ne bouge pour les personnes qui ont demandé à réduire les animations ; la scène se met en pause hors de l'écran.

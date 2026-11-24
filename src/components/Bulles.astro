@@ -102,25 +102,8 @@ const bulles = Array.from({ length: nombre }, (_, i) => {
   }
   @media (prefers-reduced-motion: reduce) { .bulles { display: none; } }
 
-  /* ----- Saisons ----- */
+  /* Les saisons sont portées par le fond de saison du site (fond-saisons.js) : les bulles gardent les formes Clémi. */
   .b-saison { display: none !important; }
-  :global(html[data-saison]) .saisonniere svg:not(.b-saison) { display: none; }
-  :global(html[data-saison='automne']) .saisonniere .b-automne,
-  :global(html[data-saison='hiver']) .saisonniere .b-hiver,
-  :global(html[data-saison='printemps']) .saisonniere .b-printemps,
-  :global(html[data-saison='ete']) .saisonniere .b-ete { display: block !important; }
-  :global(html[data-saison]) .saisonniere { --o: var(--os); }
-  /* Feuilles, flocons et pétales tombent au lieu de monter */
-  :global(html[data-saison='automne']) .saisonniere,
-  :global(html[data-saison='hiver']) .saisonniere,
-  :global(html[data-saison='printemps']) .saisonniere { animation-direction: reverse; }
-  :global(html[data-saison='automne']) .saisonniere { color: #c8642a; }
-  :global(html[data-saison='automne']) .saisonniere:nth-child(4n + 1) { color: #e09a3c; }
-  :global(html[data-saison='hiver']) .bulles-sapin .saisonniere { color: #8fb3c9; }
-  :global(html[data-saison='hiver']) .bulles-creme .saisonniere { color: #ffffff; }
-  :global(html[data-saison='printemps']) .saisonniere { color: #e79bb0; }
-  :global(html[data-saison='ete']) .saisonniere { color: #e0b020; }
-  :global(html[data-saison='ete']) .saisonniere .b-ete { width: 45%; margin: 0 auto; }
 
   /* Téléphone : moitié moins d'éléments, pour ne pas gêner la lecture */
   @media (max-width: 600px) {
