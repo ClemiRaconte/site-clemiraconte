@@ -37,8 +37,8 @@ Puis relancer un déploiement. Tant que ces valeurs manquent, les pages affichen
 
 ### Stripe
 1. Sur chaque prix, mettre la clé de recherche (lookup key) égale à l'identifiant de la formule : `famille-2-adaptations`, `famille-mois`, `famille-2-acces`, `famille-3-acces`, `famille-5-acces`, `enseignant`, `ecole`, `professionnel`, `association`.
-3. Développeurs > Webhooks > Ajouter : adresse `https://clemiraconte.fr/.netlify/functions/stripe-webhook`, événements `checkout.session.completed` et `customer.subscription.deleted`. Copier le secret whsec_ dans Netlify.
-4. Paramètres > Portail client : l'activer et copier son lien de connexion dans `PUBLIC_STRIPE_PORTAIL`.
+2. Développeurs > Webhooks > Ajouter : adresse `https://clemiraconte.fr/.netlify/functions/stripe-webhook`, événements `checkout.session.completed` et `customer.subscription.deleted`. Copier le secret whsec_ dans Netlify.
+3. Paramètres > Portail client : l'activer et copier son lien de connexion dans `PUBLIC_STRIPE_PORTAIL`.
 
 ### Tester sans paiement
 Dans Supabase > Table Editor > `periodes` > Insert row : son propre email, formule `famille-2-adaptations`, debut aujourd'hui, fin dans un an. Puis se connecter sur `/connexion`.
