@@ -1,5 +1,5 @@
 ---
-import Etiquettes from '../components/blocs/Etiquettes.astro';
+import Etagere from '../components/blocs/Etagere.astro';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Bulles from '../components/Bulles.astro';
@@ -173,7 +173,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
       </div>
       <div class="themes">
         <p class="main">Au programme de l’année</p>
-        <Etiquettes items={themes} centre />
+        <Etagere items={themes} />
       </div>
     </div>
   </section>
@@ -306,8 +306,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   .lancement-form input[type='email'] { flex: 1 1 240px; padding: 14px 20px; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); border-radius: var(--trait-2); font: inherit; }
   .lancement-formule { color: #fff; }
 
-  .themes { margin-top: 36px; display: grid; gap: 4px; justify-items: center; }
-  .themes :global(.etiquettes) { max-width: 980px; }
+  .themes { margin-top: 36px; display: grid; gap: 14px; justify-items: center; }
   .themes .main { font-size: 1.8rem; }
 
   /* Petites animations ludiques au survol */

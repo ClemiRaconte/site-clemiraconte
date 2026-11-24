@@ -1,0 +1,78 @@
+---
+/**
+ * « Au programme de l'année » : chaque thème est un livre posé couverture face à nous
+ * sur une étagère en bois (choix de Clément du 24/11). Titres à l'horizontale, lisibles sans tourner la tête.
+ * Au survol ou au toucher, le livre sort de l'étagère et sa couverture s'entrouvre.
+ */
+interface Props { items: string[] }
+const { items } = Astro.props;
+const couleurs = ['#f4c430', '#ec8f6f', '#9ccbe6', '#bfe3cc', '#f4b6c2', '#bba8dc', '#fbf3e3', '#f7d873', '#e98a6b', '#a9d3ea', '#cfe8d6'];
+const hauteurs = [150, 164, 156, 170, 148, 168, 152, 160, 146, 166, 154];
+// Césures possibles seulement dans les mots trop longs pour un petit écran (sinon « Les nou-velles »).
+const coupe = (t: string) => t.replace('consentement', 'consen\u00ADtement').replace('harcèlement', 'harcè\u00ADlement');
+const penche = [-2, 1.5, -1, 2, -1.5, 1, -2, 1.5, -1, 2, -1.5];
+---
+<ul class="etagere" role="list">
+  {items.map((t, i) => (
+    <li class="case">
+      <button
+        type="button"
+        class="livre"
+        style={`--c:${couleurs[i % couleurs.length]};--h:${hauteurs[i % hauteurs.length]}px;--r:${penche[i % penche.length]}deg`}
+      >
+        <span class="page">une histoire par semaine</span>
+        <span class="couv">
+          <span class="num">n°{i + 1}</span>
+          <span class="titre">{coupe(t)}</span>
+          <i class="etoile"></i>
+        </span>
+      </button>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .etagere {
+    list-style: none; margin: 0 auto; padding: 0 12px; max-width: 700px; /* 4 livres par rangée : 4 + 4 + 3 */
+    display: flex; flex-wrap: wrap; justify-content: center; column-gap: 16px;
+    /* une planche de bois à chaque rangée : chaque rangée de livres pose dessus */
+    background: linear-gradient(transparent 202px, #9a6a46 202px, #8a5a3b 212px, #6f4730 220px) 0 0 / 100% 220px;
+  }
+  .case { height: 220px; display: flex; align-items: flex-end; padding-bottom: 18px; perspective: 900px; }
+  .livre {
+    position: relative; width: 148px; height: var(--h); padding: 0; border: 0; background: none; cursor: pointer;
+    rotate: var(--r); transform-origin: bottom center; transition: translate 0.35s cubic-bezier(0.3, 1.6, 0.5, 1), rotate 0.35s;
+    font: inherit; color: var(--encre);
+  }
+  /* tranche des pages, à droite */
+  .livre::before {
+    content: ''; position: absolute; inset: 4px -7px -3px 6px; border-radius: 2px 8px 8px 2px;
+    background: repeating-linear-gradient(90deg, #fffaf0 0 2px, #e5d7b6 2px 3px);
+    box-shadow: 0 14px 18px -10px rgba(0, 0, 0, 0.55);
+  }
+  .page {
+    position: absolute; inset: 0; display: grid; place-items: center; padding: 14px; text-align: center;
+    background: var(--creme-carte); border-radius: 2px 8px 8px 2px; font: 700 1.15rem / 1.1 var(--f-main); color: var(--sapin);
+  }
+  .couv {
+    position: absolute; inset: 0; display: flex; flex-direction: column; gap: 6px; padding: 12px 8px 12px 19px; text-align: left;
+    background: var(--c); border-radius: 2px 8px 8px 2px; transform-origin: left center; backface-visibility: hidden;
+    box-shadow: inset 9px 0 0 rgba(0, 0, 0, 0.13), inset 11px 0 0 rgba(255, 255, 255, 0.25), inset 0 -4px 0 rgba(0, 0, 0, 0.06);
+    transition: transform 0.6s cubic-bezier(0.3, 0.1, 0.2, 1);
+  }
+  .num { font: 700 1.1rem var(--f-main); opacity: 0.7; }
+  .titre { font: 700 0.98rem / 1.18 var(--f-titre); hyphens: manual; }
+  .etoile { margin-top: auto; align-self: flex-end; width: 18px; height: 18px; background: var(--sapin); opacity: 0.4; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
+  .livre:hover, .livre:focus-visible { translate: 0 -14px; rotate: 0deg; }
+  .livre:hover .couv, .livre:focus-visible .couv { transform: rotateY(-32deg); }
+  .livre:focus-visible { outline: 3px solid var(--soleil); outline-offset: 6px; }
+  @media (max-width: 520px) {
+    .etagere { padding: 0 4px; column-gap: 10px; background-size: 100% 190px; background-image: linear-gradient(transparent 172px, #9a6a46 172px, #8a5a3b 182px, #6f4730 190px); }
+    .case { height: 190px; padding-bottom: 18px; }
+    .livre { width: 104px; height: calc(var(--h) - 22px); }
+    .couv { padding: 10px 8px 10px 17px; gap: 4px; }
+    .titre { font-size: 0.84rem; }
+    .num { font-size: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .livre, .couv { transition: none; } }
+</style>
