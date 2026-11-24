@@ -7,17 +7,26 @@ const DUREE_LIEN = 60 * 60; // secondes
 
 export default async (req) => {
   const jeton = (req.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
-  if (!jeton) return json(401, { erreur: 'non-connecte' });
+  // Mode ouvert (avant le lancement) : variable Netlify PUBLIC_ESPACE_OUVERT=true.
+  // Tout le monde voit les histoires déjà parues ; celles à venir apparaissent fermées, sans contenu.
+  const ouvert = process.env.PUBLIC_ESPACE_OUVERT === 'true';
+  if (!jeton && !ouvert) return json(401, { erreur: 'non-connecte' });
 
   let sb;
   try { sb = supabaseAdmin(); } catch { return json(503, { erreur: 'pas-branche' }); }
 
-  const { data: u, error: eu } = await sb.auth.getUser(jeton);
-  if (eu || !u?.user?.email) return json(401, { erreur: 'non-connecte' });
-  const email = u.user.email.toLowerCase();
-
-  const { data: periodes, error: ep } = await sb.from('periodes').select('formule, adaptations, debut, fin').ilike('email', email).order('debut');
-  if (ep) return json(500, { erreur: 'base' });
+  let email = null;
+  let periodes = [];
+  if (jeton) {
+    const { data: u, error: eu } = await sb.auth.getUser(jeton);
+    if (eu || !u?.user?.email) { if (!ouvert) return json(401, { erreur: 'non-connecte' }); }
+    else email = u.user.email.toLowerCase();
+  }
+  if (email) {
+    const { data, error: ep } = await sb.from('periodes').select('formule, adaptations, debut, fin').ilike('email', email).order('debut');
+    if (ep) return json(500, { erreur: 'base' });
+    periodes = data;
+  }
 
   const { data: histoires, error: eh } = await sb.from('histoires').select('*').order('date_sortie', { ascending: false });
   if (eh) return json(500, { erreur: 'base' });
@@ -31,8 +40,12 @@ export default async (req) => {
   const maintenant = new Date();
   const bibliotheque = [];
   for (const h of histoires) {
-    const ages = adaptationsOuvertes(h, periodes, maintenant);
-    if (!ages.length) continue;
+    const parue = new Date(h.date_sortie) <= maintenant;
+    const ages = ouvert && !email ? (parue ? ['4-6', '7-9'] : []) : adaptationsOuvertes(h, periodes, maintenant);
+    if (!ages.length) {
+      if (ouvert && !parue) bibliotheque.push({ slug: h.slug, titre: h.titre, theme: h.theme, date_sortie: h.date_sortie, a_venir: true, adaptations: {} });
+      continue;
+    }
     const adaptations = {};
     for (const age of ages) {
       const c = h.contenu?.[age];
@@ -49,5 +62,5 @@ export default async (req) => {
   }
 
   const actives = periodes.filter((p) => !p.fin || new Date(p.fin) > maintenant);
-  return json(200, { email, abonne: actives.length > 0, periodes, bibliotheque });
+  return json(200, { email, ouvert, abonne: actives.length > 0, periodes, bibliotheque });
 };

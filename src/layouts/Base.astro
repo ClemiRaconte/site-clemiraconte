@@ -4,9 +4,10 @@ import Entete from '../components/Entete.astro';
 import PiedDePage from '../components/PiedDePage.astro';
 import { u } from '../lib/url';
 
-interface Props { titre: string; description: string; visionneuse?: boolean; nu?: boolean }
-const { titre, description, visionneuse = false, nu = false } = Astro.props;
-const canonique = new URL(Astro.url.pathname, Astro.site);
+interface Props { titre: string; description: string; visionneuse?: boolean; nu?: boolean; masque?: boolean }
+const { titre, description, visionneuse = false, nu = false, masque = false } = Astro.props;
+const chemin = Astro.url.pathname.replace(/(^|\/)index(\.html)?$/, "$1");
+const canonique = new URL(chemin, Astro.site);
 ---
 <!doctype html>
 <html lang="fr">
@@ -15,7 +16,7 @@ const canonique = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titre}</title>
     <meta name="description" content={description} />
-    {nu && <meta name="robots" content="noindex" />}
+    {(nu || masque) && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonique} />
     <link rel="icon" type="image/svg+xml" href={u('/favicon.svg')} />
     <meta name="theme-color" content="#2D6A4F" />

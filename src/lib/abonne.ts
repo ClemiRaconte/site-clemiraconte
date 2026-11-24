@@ -8,6 +8,8 @@ const url = import.meta.env.PUBLIC_SUPABASE_URL as string | undefined;
 const cle = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
 
 export const branche = Boolean(url && cle);
+/** Mode ouvert avant le lancement : l'espace se visite sans compte. Variable Netlify PUBLIC_ESPACE_OUVERT=true. */
+export const ouvert = import.meta.env.PUBLIC_ESPACE_OUVERT === 'true';
 export const sb: SupabaseClient | null = branche ? createClient(url!, cle!) : null;
 
 /** Envoie le lien de connexion. L'adresse de retour doit être autorisée dans Supabase (Redirect URLs). */
@@ -26,8 +28,8 @@ export async function maBibliotheque() {
   if (!sb) return { erreur: 'pas-branche' as const };
   const { data } = await sb.auth.getSession();
   const jeton = data.session?.access_token;
-  if (!jeton) return { erreur: 'non-connecte' as const };
-  const r = await fetch('/.netlify/functions/mes-histoires', { headers: { authorization: `Bearer ${jeton}` } });
+  if (!jeton && !ouvert) return { erreur: 'non-connecte' as const };
+  const r = await fetch('/.netlify/functions/mes-histoires', { headers: jeton ? { authorization: `Bearer ${jeton}` } : {} });
   if (r.status === 401) return { erreur: 'non-connecte' as const };
   if (!r.ok) return { erreur: 'serveur' as const };
   return { donnees: await r.json() };

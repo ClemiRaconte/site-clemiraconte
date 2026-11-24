@@ -5,7 +5,6 @@
 // Réglages Stripe attendus (voir docs/espace-abonne.md) :
 // - chaque prix a une « clé de recherche » (lookup key) égale à l'identifiant de la formule
 //   dans src/data/formules.ts, par exemple famille-2-adaptations ;
-// - le lien de la formule « Une adaptation » a un champ personnalisé « adaptation » (4-6 ou 7-9).
 import Stripe from 'stripe';
 import { supabaseAdmin, json } from './_commun.mjs';
 
@@ -35,20 +34,18 @@ export default async (req) => {
     const formule = s.line_items?.data?.[0]?.price?.lookup_key;
     if (!email || !formule) return json(200, { ok: 'ignore', raison: 'email ou formule manquant' });
 
-    let adaptations = ['4-6', '7-9'];
-    if (formule === 'famille-1-adaptation') {
-      const champ = (s.custom_fields || []).find((c) => c.key === 'adaptation');
-      const v = champ?.dropdown?.value || '';
-      adaptations = [v.includes('7') ? '7-9' : '4-6'];
-    }
+    const adaptations = ['4-6', '7-9']; // un seul pack 4-6 + 7-9 depuis le 18/11
     const debut = new Date();
-    const auMois = s.mode === 'subscription';
+    // Mois et année familles = abonnements Stripe renouvelés (décision du 24/11) : la période reste
+    // ouverte tant que l'abonnement vit, et se ferme sur customer.subscription.deleted.
+    // Paiement unique (cas éventuel) : un an.
+    const abonnement = s.mode === 'subscription';
     const { error } = await sb.from('periodes').upsert({
       email, formule, adaptations,
       debut: debut.toISOString(),
-      fin: auMois ? null : new Date(debut.getTime() + UN_AN).toISOString(), // annuel : un an, pas de reconduction tacite
+      fin: abonnement ? null : new Date(debut.getTime() + UN_AN).toISOString(),
       stripe_session: s.id,
-      stripe_abonnement: auMois ? s.subscription : null,
+      stripe_abonnement: abonnement ? s.subscription : null,
     }, { onConflict: 'stripe_session', ignoreDuplicates: true });
     if (error) return json(500, { erreur: 'base' }); // Stripe réessaiera
     return json(200, { ok: 'ouvert' });
