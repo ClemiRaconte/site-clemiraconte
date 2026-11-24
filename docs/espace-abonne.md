@@ -3,7 +3,7 @@
 ## Le parcours d'un abonné
 
 1. Il choisit sa formule et paie sur Stripe (liens de paiement, prochaine étape).
-2. Stripe prévient le site (fonction `stripe-webhook`). Le site enregistre une « période » dans Supabase : son email, sa formule, ses adaptations, la date de début et la date de fin (un an pour l'annuel, pas de reconduction tacite ; ouverte tant qu'il paie pour le mois).
+2. Stripe prévient le site (fonction `stripe-webhook`). Le site enregistre une « période » dans Supabase : son email, sa formule, ses adaptations, la date de début et la date de fin (ouverte tant que l'abonnement, au mois ou à l'année, est renouvelé ; fermée quand il s'arrête).
 3. Stripe lui envoie son reçu. Le site ne fait aucune facture.
 4. Il va sur `/connexion`, tape son email et reçoit un lien. Pas de mot de passe.
 5. Le lien l'amène sur `/mon-espace` : sa bibliothèque, calculée par la fonction `mes-histoires` selon la règle validée le 06/11 (histoires sorties pendant son abonnement actif, pas de rétroactivité, il les garde après l'arrêt). Ange est offert à tous.
@@ -36,8 +36,7 @@
 Puis relancer un déploiement. Tant que ces valeurs manquent, les pages affichent « l'espace ouvre avec les premières histoires » : rien ne casse.
 
 ### Stripe
-1. Sur chaque prix, mettre la clé de recherche (lookup key) égale à l'identifiant de la formule : `famille-1-adaptation`, `famille-2-adaptations`, `famille-mois`, `famille-2-acces`, `famille-3-acces`, `famille-5-acces`, `enseignant`, `ecole`, `professionnel`, `association`.
-2. Sur le lien de paiement « Une adaptation », ajouter un champ personnalisé de type liste, clé `adaptation`, choix « 4-6 ans » et « 7-9 ans ».
+1. Sur chaque prix, mettre la clé de recherche (lookup key) égale à l'identifiant de la formule : `famille-2-adaptations`, `famille-mois`, `famille-2-acces`, `famille-3-acces`, `famille-5-acces`, `enseignant`, `ecole`, `professionnel`, `association`.
 3. Développeurs > Webhooks > Ajouter : adresse `https://clemiraconte.fr/.netlify/functions/stripe-webhook`, événements `checkout.session.completed` et `customer.subscription.deleted`. Copier le secret whsec_ dans Netlify.
 4. Paramètres > Portail client : l'activer et copier son lien de connexion dans `PUBLIC_STRIPE_PORTAIL`.
 
