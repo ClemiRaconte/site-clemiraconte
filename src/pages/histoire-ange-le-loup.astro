@@ -49,7 +49,7 @@ import { u } from '../lib/url';
     <Tete surtitre="À regarder" titre="Racontée dans la forêt conteuse" intro="La version à écouter arrive bientôt" />
     <div class="video" data-video>
       <button class="video-facade" type="button" data-src={`${videoAnge}?autoplay=1`} aria-label="Lancer la vidéo d’Ange, le loup qui chantait avec le vent">
-        <Image src={photo('regarder')} alt="" widths={[600, 1000, 1400]} sizes="(min-width: 1160px) 1000px, 92vw" loading="lazy" />
+        <img src={u('/img/ange-interieur.webp')} alt="" width="1024" height="687" loading="lazy" />
         <span class="video-jouer" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
         <span class="video-legende main">Ange, l’histoire en vidéo</span>
       </button>
