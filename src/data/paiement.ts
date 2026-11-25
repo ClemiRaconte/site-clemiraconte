@@ -23,4 +23,11 @@ export const liensStripe: Record<string, string> = {
 export const mentionTva = 'Prix nets, TVA non applicable (franchise en base)';
 
 /** Adresse du bouton d'une formule : Stripe si le lien existe, sinon la réservation. */
-export const lienFormule = (id: string, reservation: string) => liensStripe[id] || reservation;
+// Les liens de test (buy.stripe.com/test_…) ne servent que sur les versions d'essai Netlify.
+// Sur le site en ligne (CONTEXT=production), ils sont ignorés : le bouton garde la réservation
+// tant que les liens du mode réel ne sont pas collés ici.
+const enLigne = process.env.CONTEXT === 'production';
+export const lienFormule = (id: string, reservation: string) => {
+  const lien = liensStripe[id];
+  return lien && !(enLigne && lien.includes('/test_')) ? lien : reservation;
+};
