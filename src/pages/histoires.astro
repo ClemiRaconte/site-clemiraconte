@@ -4,7 +4,7 @@ import PageTete from '../components/blocs/PageTete.astro';
 import Bandeau from '../components/blocs/Bandeau.astro';
 import Tete from '../components/blocs/Tete.astro';
 import AppelFinal from '../components/blocs/AppelFinal.astro';
-import Etiquettes from '../components/blocs/Etiquettes.astro';
+import Etagere from '../components/blocs/Etagere.astro';
 import CouvertureAnge from '../components/CouvertureAnge.astro';
 import { u } from '../lib/url';
 
@@ -91,7 +91,7 @@ const themes = [
 
   <Bandeau fond="beige" crete={3}>
     <Tete surtitre="Par thème" titre="Les histoires par thème" intro="Un thème après l’autre, au fil de l’année" />
-    <Etiquettes items={themes.map((t) => t.nom)} centre />
+    <Etagere items={themes.map((t) => t.nom)} />
     <p class="themes-lien"><a class="btn btn-soleil" href={u('/histoires-sur-la-difference')}>Commencer par la différence</a></p>
   </Bandeau>
 
