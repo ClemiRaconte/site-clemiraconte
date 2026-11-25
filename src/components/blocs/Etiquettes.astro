@@ -14,12 +14,12 @@ const decor = (t: string) => {
   return '';
 };
 // Nuages dessinés (Gemini, 25/11) : public/nuages/<cle>.webp. x, y = centre du titre en %, r = hauteur / largeur.
-const DESSINS: Record<string, { r: number; x: number; y: number }> = {"consentement": {"r": 0.5, "x": 58, "y": 60.3}, "harcelement": {"r": 0.792, "x": 50.0, "y": 80}, "apprendre": {"r": 0.595, "x": 52.0, "y": 66.7}, "separation": {"r": 0.378, "x": 49.8, "y": 63.1}, "familles": {"r": 0.505, "x": 43.1, "y": 61.0}, "groupe": {"r": 0.556, "x": 48.7, "y": 64.5}, "emotions": {"r": 0.599, "x": 50.0, "y": 56.9}, "difference": {"r": 0.573, "x": 50.1, "y": 65.8}, "grandir": {"r": 0.638, "x": 50.0, "y": 77.1}, "ecrans": {"r": 0.613, "x": 49.9, "y": 70.1}, "handicap": {"r": 0.624, "x": 49.9, "y": 47.9}};
+const DESSINS: Record<string, { r: number; x: number; y: number }> = {"stereotypes": {"r": 0.578, "x": 50.0, "y": 69.5}, "consentement": {"r": 0.5, "x": 58, "y": 60.3}, "harcelement": {"r": 0.792, "x": 50.0, "y": 80}, "apprendre": {"r": 0.595, "x": 52.0, "y": 66.7}, "separation": {"r": 0.378, "x": 49.8, "y": 63.1}, "familles": {"r": 0.505, "x": 43.1, "y": 61.0}, "groupe": {"r": 0.556, "x": 48.7, "y": 64.5}, "emotions": {"r": 0.599, "x": 50.0, "y": 56.9}, "difference": {"r": 0.573, "x": 50.1, "y": 65.8}, "grandir": {"r": 0.638, "x": 50.0, "y": 77.1}, "ecrans": {"r": 0.613, "x": 49.9, "y": 70.1}, "handicap": {"r": 0.624, "x": 49.9, "y": 47.9}};
 const dessin = (t: string) => {
   const m = t.toLowerCase();
   const cle = m.includes('consentement') ? 'consentement' : m.includes('harcèlement') ? 'harcelement' : m.includes('apprendre') ? 'apprendre'
     : m.includes('séparation') ? 'separation' : m.includes('famille') ? 'familles' : m.includes('groupe') ? 'groupe' : m.includes('émotion') ? 'emotions'
-    : m.includes('différence') ? 'difference' : m.includes('grandir') ? 'grandir' : m.includes('écran') ? 'ecrans' : m.includes('handicap') ? 'handicap' : '';
+    : m.includes('différence') ? 'difference' : m.includes('grandir') ? 'grandir' : m.includes('écran') ? 'ecrans' : m.includes('handicap') ? 'handicap' : m.includes('stéréotype') ? 'stereotypes' : '';
   return cle ? { cle, ...DESSINS[cle] } : null;
 };
 ---
