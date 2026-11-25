@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <style>
+    .anim-part { transform-box: fill-box; }
+    #poitrine-groupe { transform-origin: 290px 510px; animation: respirer 6s ease-in-out infinite; }
+    @keyframes respirer { 0%, 100% { transform: scale(1, 1) translate(0, 0); } 45% { transform: scale(1.032, 1.015) translate(4px, -2px); } 75% { transform: scale(1.01, 1.005) translate(1px, 0); } }
+    #queue-groupe { transform-origin: 215px 625px; animation: balancer-queue 6s ease-in-out infinite; }
+    @keyframes balancer-queue { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(3.8deg); } }
+    #oreille-arriere { transform-origin: 278px 342px; animation: fremir-oreille-arriere 6s ease-in-out infinite; }
+    #oreille-avant { transform-origin: 256px 350px; animation: fremir-oreille-avant 6s ease-in-out infinite; }
+    @keyframes fremir-oreille-arriere { 0%, 24%, 44%, 100% { transform: rotate(0deg); } 30% { transform: rotate(-5deg); } 36% { transform: rotate(2deg); } }
+    @keyframes fremir-oreille-avant { 0%, 26%, 46%, 100% { transform: rotate(0deg); } 32% { transform: rotate(-4deg); } 38% { transform: rotate(1.5deg); } }
+    .ruban-vent { fill: none; stroke: #F4C430; stroke-linecap: round; stroke-dasharray: 290; stroke-dashoffset: 290; opacity: 0; }
+    #ruban-1 { stroke-width: 7.5; animation: souffler-ruban-1 6s ease-in-out infinite; }
+    #ruban-2 { stroke-width: 5.5; animation: souffler-ruban-2 6s ease-in-out infinite; }
+    #ruban-3 { stroke-width: 4; animation: souffler-ruban-3 6s ease-in-out infinite; }
+    @keyframes souffler-ruban-1 { 0%, 6% { stroke-dashoffset: 290; opacity: 0; transform: translate(0, 0); } 18% { opacity: 0.92; } 46% { stroke-dashoffset: 0; opacity: 0.85; } 62%, 100% { stroke-dashoffset: -140; opacity: 0; transform: translate(16px, -12px); } }
+    @keyframes souffler-ruban-2 { 0%, 22% { stroke-dashoffset: 290; opacity: 0; transform: translate(0, 0); } 34% { opacity: 0.88; } 64% { stroke-dashoffset: 0; opacity: 0.8; } 80%, 100% { stroke-dashoffset: -140; opacity: 0; transform: translate(18px, -10px); } }
+    @keyframes souffler-ruban-3 { 0%, 38% { stroke-dashoffset: 290; opacity: 0; transform: translate(0, 0); } 50% { opacity: 0.85; } 80% { stroke-dashoffset: 0; opacity: 0.75; } 96%, 100% { stroke-dashoffset: -140; opacity: 0; transform: translate(14px, -14px); } }
+    .etincelle-vent { fill: #F4C430; opacity: 0; }
+    #etincelle-1 { animation: flotter-etincelle-1 6s ease-in-out infinite; }
+    #etincelle-2 { animation: flotter-etincelle-2 6s ease-in-out infinite; }
+    #etincelle-3 { animation: flotter-etincelle-3 6s ease-in-out infinite; }
+    @keyframes flotter-etincelle-1 { 0%, 15%, 60%, 100% { opacity: 0; transform: translate(0, 0) scale(0.7); } 35% { opacity: 0.9; transform: translate(8px, -6px) scale(1); } }
+    @keyframes flotter-etincelle-2 { 0%, 32%, 78%, 100% { opacity: 0; transform: translate(0, 0) scale(0.7); } 52% { opacity: 0.85; transform: translate(10px, -8px) scale(1); } }
+    @keyframes flotter-etincelle-3 { 0%, 48%, 92%, 100% { opacity: 0; transform: translate(0, 0) scale(0.7); } 68% { opacity: 0.8; transform: translate(8px, -10px) scale(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      #poitrine-groupe, #queue-groupe, #oreille-arriere, #oreille-avant, .ruban-vent, .etincelle-vent { animation: none !important; transform: none !important; }
+      .ruban-vent { stroke-dasharray: none; stroke-dashoffset: 0; opacity: 0.85; }
+      .etincelle-vent { opacity: 0.8; }
+    }
+  </style>
+  <g id="sol-foret">
+    <path d="M 145 668 Q 275 648 415 668 Q 345 680 275 680 Q 205 680 145 668 Z" fill="#2D6A4F" opacity="0.92" />
+    <path d="M 186 663 Q 181 644 174 636 M 192 662 Q 192 642 190 632 M 198 663 Q 204 646 208 638" fill="none" stroke="#2D6A4F" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 366 664 Q 368 644 364 634 M 373 664 Q 379 646 385 638" fill="none" stroke="#2D6A4F" stroke-width="3.5" stroke-linecap="round" />
+  </g>
+  <g id="souffle-vent">
+    <path id="ruban-1" class="ruban-vent" d="M 382 288 C 430 258, 475 284, 524 242 C 562 208, 608 214, 650 176 C 674 154, 652 134, 636 150" />
+    <path id="ruban-2" class="ruban-vent" d="M 390 302 C 446 286, 496 312, 554 276 C 602 246, 654 252, 704 214" />
+    <path id="ruban-3" class="ruban-vent" d="M 384 316 C 434 316, 482 344, 538 318 C 584 296, 626 302, 668 272" />
+    <circle id="etincelle-1" class="etincelle-vent" cx="508" cy="232" r="3.5" />
+    <circle id="etincelle-2" class="etincelle-vent" cx="614" cy="242" r="3" />
+    <circle id="etincelle-3" class="etincelle-vent" cx="576" cy="316" r="2.8" />
+  </g>
+  <g id="loup-ange">
+    <g id="queue-groupe">
+      <path d="M 220 632 C 165 636, 128 594, 134 532 C 138 494, 156 462, 174 446 L 178 466 L 190 456 C 204 494, 206 544, 198 584 C 194 604, 208 614, 224 614 Z" fill="#8F9496" stroke="#5D6264" stroke-width="3" stroke-linejoin="round" />
+      <path d="M 142 508 C 148 480, 160 458, 174 446 L 178 466 L 190 456 C 197 476, 201 496, 201 516 C 188 506, 178 518, 168 508 C 158 518, 150 510, 142 508 Z" fill="#F4EFE6" stroke="#5D6264" stroke-width="2.5" stroke-linejoin="round" />
+    </g>
+    <path d="M 326 496 L 342 642 C 344 654, 368 656, 368 644 C 368 634, 358 630, 355 622 L 348 496 Z" fill="#7D8284" stroke="#5D6264" stroke-width="3" stroke-linejoin="round" />
+    <path d="M 250 388 C 228 436, 206 498, 206 566 C 206 620, 228 654, 276 656 L 324 656 L 336 476 L 314 396 Z" fill="#969B9D" stroke="#5D6264" stroke-width="3" stroke-linejoin="round" />
+    <g id="poitrine-groupe">
+      <path d="M 304 398 C 328 424, 344 466, 342 518 C 340 554, 324 584, 304 598 C 294 582, 302 568, 292 556 C 302 542, 294 526, 304 512 C 294 496, 302 480, 292 464 C 300 444, 294 420, 304 398 Z" fill="#F4EFE6" />
+      <path d="M 324 424 C 338 450, 344 484, 342 518 C 340 546, 330 572, 314 590" fill="none" stroke="#5D6264" stroke-width="3" stroke-linecap="round" />
+    </g>
+    <g id="patte-arriere-avant">
+      <path d="M 244 524 C 216 544, 206 588, 218 628 C 224 648, 240 656, 266 656 L 306 656 C 316 656, 318 642, 306 638 C 294 634, 276 634, 268 626 C 284 612, 292 586, 286 558" fill="#969B9D" stroke="#5D6264" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 296 655 C 296 648, 292 644, 288 644 M 306 655 C 306 648, 302 644, 298 644" fill="none" stroke="#5D6264" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+    <g id="patte-avant">
+      <path d="M 300 492 L 316 644 C 318 656, 352 658, 352 645 C 352 634, 338 632, 334 622 L 326 492" fill="#969B9D" stroke="#5D6264" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 334 654 C 334 647, 330 643, 326 643 M 344 653 C 344 646, 340 642, 336 642" fill="none" stroke="#5D6264" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+    <g id="oreille-arriere">
+      <path d="M 272 346 L 284 282 C 286 274, 294 276, 296 284 L 306 336 Z" fill="#7D8284" stroke="#5D6264" stroke-width="3" stroke-linejoin="round" />
+    </g>
+    <g id="tete-ange">
+      <path d="M 248 394 C 234 374, 236 346, 254 330 C 272 316, 296 318, 316 322 L 368 294 C 374 292, 378 298, 376 306 L 352 332 L 366 334 C 368 342, 358 352, 344 360 C 330 370, 316 386, 304 402 Z" fill="#969B9D" stroke="#5D6264" stroke-width="3" stroke-linejoin="round" />
+      <path d="M 262 386 C 254 372, 260 356, 274 352 C 286 348, 296 354, 306 348 L 368 302 L 352 332 L 365 334 C 365 344, 352 354, 336 364 C 322 374, 312 388, 302 402 L 274 396 L 280 388 L 266 392 Z" fill="#F4EFE6" />
+      <path d="M 352 332 L 365 334 C 365 344, 352 354, 336 364 C 322 374, 312 388, 302 402 M 266 392 L 280 388 L 274 396" fill="none" stroke="#5D6264" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 350 331 C 356 327, 362 329, 365 333 C 360 336, 354 335, 350 331 Z" fill="#5D6264" />
+      <path d="M 362 296 C 368 291, 376 293, 377 299 C 378 305, 372 309, 366 306 C 362 304, 360 299, 362 296 Z" fill="#2B2D2F" />
+      <path d="M 294 334 C 302 338, 310 335, 314 329" fill="none" stroke="#3B3E40" stroke-width="3.2" stroke-linecap="round" />
+      <path d="M 292 325 C 299 322, 306 322, 311 324" fill="none" stroke="#686D70" stroke-width="2.2" stroke-linecap="round" />
+    </g>
+    <g id="oreille-avant">
+      <path d="M 244 352 L 248 286 C 249 277, 258 276, 263 284 L 284 338 Z" fill="#969B9D" stroke="#5D6264" stroke-width="3" stroke-linejoin="round" />
+      <path d="M 251 344 L 253 296 L 262 314 L 267 308 L 276 334 Z" fill="#F4EFE6" />
+    </g>
+  </g>
+</svg>
