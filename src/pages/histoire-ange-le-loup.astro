@@ -46,7 +46,7 @@ import { u } from '../lib/url';
 
   <!-- La vidéo -->
   <Bandeau fond="beige" crete={1} id="video">
-    <Tete surtitre="À regarder" titre="Racontée dans la forêt conteuse" intro="La version à écouter arrive bientôt" />
+    <Tete surtitre="À regarder" titre="Racontée dans la forêt conteuse" intro="À regarder en vidéo, ou à écouter les yeux fermés" />
     <div class="video" data-video>
       <button class="video-facade" type="button" data-src={`${videoAnge}?autoplay=1`} aria-label="Lancer la vidéo d’Ange, le loup qui chantait avec le vent">
         <img src={u('/img/ange-interieur.webp')} alt="" width="1024" height="687" loading="lazy" />
@@ -55,6 +55,10 @@ import { u } from '../lib/url';
       </button>
     </div>
     <p class="video-note">La vidéo est hébergée sur YouTube, en mode sans cookie. Elle ne se charge que si vous cliquez</p>
+    <figure class="ecoute">
+      <figcaption><span class="main">À écouter</span> L’histoire d’Ange racontée, 11 minutes</figcaption>
+      <audio controls preload="none" src={u('/ange-le-loup.mp3')}>Votre navigateur ne lit pas l’audio.</audio>
+    </figure>
   </Bandeau>
 
   <!-- Le début de l'histoire, comme un livre ouvert -->
@@ -284,4 +288,8 @@ import { u } from '../lib/url';
     .page-d { border-top: 0; }
   }
   @media (max-width: 520px) { .activites { grid-template-columns: 1fr; } }
+  .ecoute { max-width: 720px; margin: 28px auto 0; padding: 18px 22px; background: var(--creme-carte, #fbf3e3); border-radius: 18px; box-shadow: 0 10px 24px rgba(36, 59, 50, 0.1); }
+  .ecoute figcaption { margin-bottom: 10px; color: var(--encre); }
+  .ecoute figcaption .main { color: var(--sapin); font-size: 1.4rem; margin-right: 8px; }
+  .ecoute audio { width: 100%; }
 </style>
