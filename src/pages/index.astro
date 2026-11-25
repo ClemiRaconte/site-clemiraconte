@@ -4,7 +4,8 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Bulles from '../components/Bulles.astro';
 import Crete from '../components/Crete.astro';
-import CouvertureAnge from '../components/CouvertureAnge.astro';
+import Livre3D from '../components/Livre3D.astro';
+import texte46 from '../data/textes/ange-4-6.json';
 import Icone from '../components/Icone.astro';
 import MomentFamille from '../components/MomentFamille.astro';
 import { site, formats, publics, chiffres } from '../data/site';
@@ -126,7 +127,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
         <p class="ange-inclus">L’histoire, sa fiche papote et ses 12 activités : la séance complète, sans abonnement</p>
         <a class="btn btn-soleil" href={u('/histoire-ange-le-loup')}>Lire Ange gratuitement <Icone nom="fleche" taille={20} /></a>
       </div>
-      <div class="ange-couverture"><CouvertureAnge /></div>
+      <div class="ange-couverture"><Livre3D age="Il était une fois…" paragraphes={texte46.paragraphes.slice(0, 2)} lien="Lire la suite →" href={u('/histoire-ange-le-loup')} /></div>
     </div>
   </section>
 
@@ -280,7 +281,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   .etiquette { font: 700 0.85rem var(--f-label); padding: 4px 12px; border: 2px solid var(--soleil-doux); color: var(--soleil-doux); transform: rotate(-1deg); }
   .etiquette:nth-child(2) { transform: rotate(1.5deg); }
   .ange-inclus { font-weight: 600; color: #fff !important; }
-  .ange-couverture { max-width: 340px; justify-self: center; transform: rotate(4deg); filter: drop-shadow(10px 10px 0 rgba(0, 0, 0, 0.35)); }
+  .ange-couverture { max-width: 340px; justify-self: center; }
 
   /* 5. Publics */
   .publics-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
@@ -340,7 +341,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
     .objectif-grille, .qui-grille, .ange-grille { grid-template-columns: 1fr; }
     .objectif-visuel { max-width: 560px; }
     .qui-photo { max-width: 360px; justify-self: center; }
-    .ange-couverture { max-width: 240px; }
+    .ange-couverture { max-width: 280px; margin-bottom: 40px; }
     .ange::before { background: rgba(28, 58, 45, 0.9); }
     .chiffres-grille { grid-template-columns: 1fr 1fr; }
     .chiffre:nth-child(n) { border-left: 0; }
