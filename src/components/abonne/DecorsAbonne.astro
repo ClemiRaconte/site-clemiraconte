@@ -21,11 +21,13 @@
   const img = document.querySelector<HTMLImageElement>('.me-decor-img')!;
   const maj = () => {
     const d = (document.documentElement.className.match(/\bdecor-(\S+)/) || [])[1];
-    if (!d) { img.removeAttribute('src'); document.documentElement.classList.remove('a-decor'); return; }
+    if (!d) { img.removeAttribute('src'); if (document.documentElement.classList.contains('a-decor')) document.documentElement.classList.remove('a-decor'); return; }
     const src = imageDecor(d);
     if (!img.src.endsWith(src)) { img.style.opacity = '0'; img.onload = () => (img.style.opacity = '1'); img.src = src; }
-    document.documentElement.classList.add('a-decor');
-    document.documentElement.classList.toggle('decor-nuit', nuit());
+    // On ne touche la classe que si elle change : sinon l'observateur se relance sans fin et la page se bloque
+    const cl = document.documentElement.classList;
+    if (!cl.contains('a-decor')) cl.add('a-decor');
+    if (cl.contains('decor-nuit') !== nuit()) cl.toggle('decor-nuit', nuit());
   };
   maj();
   new MutationObserver(maj).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
