@@ -11,10 +11,10 @@ import Logo from '../components/logo/Logo.astro';
 import '../styles/visionneuse.css';
 import { u } from '../lib/url';
 const portail = import.meta.env.PUBLIC_STRIPE_PORTAIL ?? '';
-const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}, {id: 'cabane', nom: 'La cabane'}, {id: 'foret', nom: 'La forêt de Daillon'}, {id: 'feu', nom: 'Le feu de camp'}, {id: 'refuge', nom: 'Le refuge'}, {id: 'mer', nom: 'La mer'}, {id: 'jardin', nom: 'Le jardin'}];
+const decors = [{id: 'feu', nom: 'Le feu de camp'}, {id: 'refuge', nom: 'Le refuge'}, {id: 'clairiere', nom: 'La clairière de la Daillon Party'}, {id: 'bateau', nom: 'Le bateau-bibliothèque'}, {id: 'lac', nom: 'Le lac de montagne'}, {id: 'jardin', nom: 'Le jardin'}, {id: 'cabane', nom: 'La cabane'}, {id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}];
 ---
 <Base visionneuse nu titre="Mon espace · Clémi Raconte" description="Votre bibliothèque Clémi Raconte : vos histoires, leurs fiches papote et leurs activités.">
-  <script is:inline>try{var d=localStorage.getItem('clemi-decor');if(d)document.documentElement.classList.add('decor-'+d)}catch(e){}</script>
+  <script is:inline>try{var d=localStorage.getItem('clemi-decor');if(['foret','mer'].indexOf(d)>=0)d=null;if(d)document.documentElement.classList.add('decor-'+d)}catch(e){}</script>
   <DecorsAbonne />
   <header class="me-barre">
     <a class="me-logo" href={u('/')} aria-label="Clémi Raconte, revenir au site"><Logo taille={36} /></a>
@@ -62,6 +62,14 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
         <div id="me-h-bonus-bloc" hidden>
           <h3>Les activités bonus</h3>
           <ul id="me-h-bonus" class="me-liste"></ul>
+        </div>
+        <div id="me-h-audio" hidden>
+          <h3>À écouter</h3>
+          <button type="button" class="me-enceinte" aria-label="Écouter l’histoire">
+            <span class="me-hp"><i></i></span><span class="me-hp-play" aria-hidden="true"></span>
+            <span class="me-ondes" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+          <audio preload="none"></audio>
         </div>
         <div id="me-h-video" hidden>
           <h3>À regarder</h3>
@@ -154,6 +162,16 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
     $('me-h-activites').innerHTML = liste(ad.activites);
     $('me-h-bonus').innerHTML = liste(ad.bonus);
     $('me-h-bonus-bloc').hidden = !ad.bonus.length;
+    const AUDIOS: Record<string, string> = { 'ange-le-loup': '/ange-le-loup.mp3' };
+    const bloc = $('me-h-audio'), son = bloc.querySelector('audio')!, hp = bloc.querySelector<HTMLButtonElement>('.me-enceinte')!;
+    son.pause(); bloc.classList.remove('joue');
+    bloc.hidden = !AUDIOS[h.slug];
+    if (AUDIOS[h.slug]) {
+      son.src = AUDIOS[h.slug];
+      hp.onclick = () => (son.paused ? son.play() : son.pause());
+      son.onplay = () => { bloc.classList.add('joue'); hp.setAttribute('aria-label', 'Mettre en pause'); };
+      son.onpause = son.onended = () => { bloc.classList.remove('joue'); hp.setAttribute('aria-label', 'Écouter l’histoire'); };
+    }
     $('me-h-video').hidden = !h.video;
     if (h.video) $('me-h-video').querySelector('.me-video')!.innerHTML = `<iframe loading="lazy" src="${h.video}" title="${texte(h.titre)}, en vidéo" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
     $('me-histoire').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -175,14 +193,14 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
     $('me-ouvert').hidden = !(d.ouvert && !d.email);
     if (!d.email) (document.querySelector('[data-vue="compte"]') as HTMLElement).remove(), (document.querySelector('.me-onglets') as HTMLElement).remove();
     $('me-formules').innerHTML = d.periodes.length
-      ? d.periodes.map((p) => `<li>${texte(nomFormule(p.formule))} : depuis le ${date(p.debut)}${p.fin ? (new Date(p.fin) > new Date() ? `, jusqu’au ${date(p.fin)}` : `, terminée le ${date(p.fin)}`) : ', sans engagement'}</li>`).join('')
+      ? d.periodes.map((p) => `<li>${texte(nomFormule(p.formule))} : depuis le ${date(p.debut)}${p.fin ? (new Date(p.fin) > new Date() ? `, jusqu’au ${date(p.fin)}` : `, terminée le ${date(p.fin)}`) : p.formule === 'famille-mois' ? ', sans engagement' : ', renouvelée chaque année'}</li>`).join('')
       : '<li>Aucune formule pour le moment</li>';
 
     $('me-etagere').innerHTML = d.bibliotheque.map((h, i) =>
       `<li><button type="button" class="me-livre${h.a_venir ? ' me-a-venir' : ''}" data-i="${i}"${h.a_venir ? ' disabled' : ''}><strong>${texte(h.titre)}</strong>${h.theme ? `<span>${texte(h.theme)}</span>` : ''}<span class="me-lien">${h.a_venir ? `Sortie le ${date(h.date_sortie)}` : 'Ouvrir →'}</span></button></li>`).join('');
     $('me-etagere').querySelectorAll<HTMLButtonElement>('.me-livre:not([disabled])').forEach((b) => (b.onclick = () => ouvrirHistoire(d.bibliotheque[Number(b.dataset.i)])));
     let dec: string | null = null;
-    try { dec = localStorage.getItem('clemi-decor'); } catch {}
+    try { dec = localStorage.getItem('clemi-decor'); if (dec === 'foret' || dec === 'mer') dec = null; } catch {}
     montrer(dec ? 'biblio' : 'decors');
   }
 
@@ -214,7 +232,7 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
   .me-tete h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); margin: 0.1em 0; text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6); }
   .me-samedi { display: inline-flex; align-items: center; gap: 12px; background: #fff; border-radius: 999px; padding: 6px 18px 6px 6px; font-weight: 700; box-shadow: 0 5px 0 var(--beige); animation: me-flotte 5s ease-in-out infinite; }
   .me-samedi b { background: var(--sapin); color: #fff; border-radius: 999px; padding: 8px 16px; font-family: var(--f-titre); }
-  .vue, .me-etat { background: rgba(251, 243, 227, 0.72); backdrop-filter: blur(3px); border-radius: 28px; padding: 26px; margin-top: 26px; box-shadow: 0 10px 30px rgba(36, 59, 50, 0.12); }
+  .vue, .me-etat { background: rgba(251, 243, 227, 0.9); backdrop-filter: blur(3px); border-radius: 28px; padding: 26px; margin-top: 26px; box-shadow: 0 10px 30px rgba(36, 59, 50, 0.12); }
   .vue h2 { margin-top: 0; }
   .me-note { background: var(--soleil-doux); padding: 12px 16px; font-weight: 600; border-radius: 16px; }
   /* Portes des décors */
@@ -224,15 +242,7 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
   .me-porte { all: unset; cursor: pointer; display: block; width: 100%; border-radius: 26px; overflow: hidden; background: #fff; box-shadow: 0 8px 0 var(--beige); transition: transform 0.18s, box-shadow 0.18s; }
   .me-porte:hover, .me-porte:focus-visible { transform: translateY(-8px) rotate(-1deg); box-shadow: 0 16px 0 var(--beige); }
   .me-porte b { display: block; padding: 12px 14px; font: 700 1.1rem var(--f-titre); color: var(--encre); }
-  .me-porte-vue { display: block; height: 130px; background: var(--v); }
-  .porte-chambre { --v: radial-gradient(circle at 50% 70%, #fff3c4 0 18px, transparent 19px), linear-gradient(#f6e7c9 65%, #c9a06e 65%); }
-  .porte-ciel { --v: radial-gradient(circle at 78% 30%, #F4C430 0 22px, transparent 23px), radial-gradient(ellipse at 35% 60%, #fff 0 40px, transparent 41px), linear-gradient(#bfe3dc, #fbf3e3); }
-  .porte-cabane { --v: radial-gradient(circle at 50% 35%, #c9452b 0 50px, transparent 51px), linear-gradient(90deg, transparent 45%, #7a5030 45% 55%, transparent 55%), linear-gradient(#f6d9a8, #fbefd8); }
-  .porte-foret { --v: radial-gradient(circle at 25% 45%, #e0782f 0 30px, transparent 31px), radial-gradient(circle at 70% 40%, #c9452b 0 36px, transparent 37px), linear-gradient(#f6d9a8, #b5651d); }
-  .porte-feu { --v: radial-gradient(ellipse at 50% 75%, #F4C430 0 14px, #e67e3a 15px 22px, transparent 40px), linear-gradient(#0f2238, #2c4a63); }
-  .porte-refuge { --v: radial-gradient(circle at 25% 65%, #ffe27a 0 14px, #3a3a3a 15px 30px, transparent 31px), repeating-linear-gradient(#b98f5d 0 18px, #8a6239 18px 20px); }
-  .porte-mer { --v: radial-gradient(ellipse at 50% 50%, #F4C430 0 26px, transparent 27px), linear-gradient(#8fd3e0, #1d6478); }
-  .porte-jardin { --v: radial-gradient(circle at 50% 40%, #243b32 0 8px, #d63a2a 9px 22px, transparent 23px), linear-gradient(90deg, transparent 49%, #3f8266 49% 51%, transparent 51%), linear-gradient(#bfe3f0 70%, #8a5d36 70%); }
+  .me-porte-vue { display: block; height: 130px; background: #2a3a30 center / cover no-repeat; }
   /* Les histoires, qui prennent la forme du décor */
   .me-etagere { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 26px; }
   :global(.me-livre) { position: relative; width: 100%; min-height: 220px; text-align: left; border: 0; border-radius: 4px 14px 14px 4px; padding: 20px 18px; display: grid; align-content: end; gap: 6px; font: inherit; color: #fff; cursor: pointer; background: linear-gradient(160deg, #3f8266, #2D6A4F); box-shadow: inset 12px 0 0 rgba(0, 0, 0, 0.2), 0 12px 22px rgba(36, 59, 50, 0.25); transition: transform 0.18s; }
@@ -253,6 +263,19 @@ const decors = [{id: 'chambre', nom: 'La chambre'}, {id: 'ciel', nom: 'Le ciel'}
   :global(#me-h-activites), :global(#me-h-bonus) { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
   :global(#me-h-activites li), :global(#me-h-bonus li) { background: #fff; border-radius: 20px; padding: 14px 16px; box-shadow: 0 4px 0 var(--beige); font-weight: 700; }
   .me-bloc { margin-bottom: 24px; background: #fff; border-radius: 20px; padding: 16px 18px; }
+  /* petite enceinte en bois : on appuie, elle vibre et l'histoire se lit */
+  .me-enceinte { position: relative; width: 120px; height: 150px; border: 0; cursor: pointer; border-radius: 16px 16px 12px 12px; background: repeating-linear-gradient(95deg, #c99a62 0 9px, #b8864f 9px 11px, #d1a46d 11px 19px); box-shadow: inset 0 0 0 4px #8a5f33, 0 10px 18px rgba(36, 59, 50, 0.25); display: grid; place-items: center; transition: transform 0.15s; }
+  .me-enceinte:hover { transform: rotate(-3deg) scale(1.04); }
+  .me-hp { width: 76px; height: 76px; border-radius: 50%; background: radial-gradient(circle, #5a4636 0 18%, #2f2620 19% 58%, #4b3a2d 60% 100%); box-shadow: inset 0 0 0 5px #6e5440; display: grid; place-items: center; }
+  .me-hp-play { position: absolute; width: 0; height: 0; border-left: 20px solid var(--soleil); border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 6px; }
+  #me-h-audio.joue .me-hp-play { border: 0; width: 18px; height: 22px; margin: 0; background: linear-gradient(90deg, var(--soleil) 0 35%, transparent 35% 65%, var(--soleil) 65%); }
+  #me-h-audio.joue .me-hp { animation: me-boum 0.45s ease-in-out infinite; }
+  .me-ondes { position: absolute; left: 100%; top: 50%; translate: 6px -50%; display: flex; gap: 5px; opacity: 0; transition: opacity 0.3s; }
+  .me-ondes i { width: 10px; height: 30px; border: 3px solid var(--soleil); border-left: 0; border-radius: 0 50% 50% 0; animation: me-onde 1.2s ease-out infinite; }
+  .me-ondes i:nth-child(2) { height: 44px; animation-delay: 0.2s; } .me-ondes i:nth-child(3) { height: 58px; animation-delay: 0.4s; }
+  #me-h-audio.joue .me-ondes { opacity: 1; }
+  @keyframes me-boum { 50% { transform: scale(1.08); } }
+  @keyframes me-onde { from { opacity: 1; } to { opacity: 0.1; } }
   .me-video { position: relative; aspect-ratio: 16 / 9; max-width: 720px; }
   .me-video :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 16px; }
   @keyframes me-flotte { 50% { translate: 0 -6px; } }

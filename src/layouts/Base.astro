@@ -6,7 +6,7 @@ import { u } from '../lib/url';
 import { scriptSaison } from '../lib/saison';
 
 interface Props { titre: string; description: string; visionneuse?: boolean; nu?: boolean; masque?: boolean; image?: string; fond?: 'normal' | 'calme' | 'aucun' }
-const { titre, description, visionneuse = false, nu = false, masque = false, image = '/img/partage.png', fond = 'normal' } = Astro.props;
+const { titre, description, visionneuse = false, nu = false, masque = false, image = '/img/ange-partage.jpg', fond = 'normal' } = Astro.props;
 const chemin = Astro.url.pathname.replace(/(^|\/)index(\.html)?$/, "$1");
 const canonique = new URL(chemin, Astro.site);
 const imagePartage = new URL(u(image), Astro.site);
@@ -32,7 +32,7 @@ const imagePartage = new URL(u(image), Astro.site);
     <meta property="og:image" content={imagePartage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Clémi Raconte : une histoire chaque samedi pour les 4-9 ans" />
+    <meta property="og:image:alt" content="Ange, le loup qui chantait avec le vent" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body data-fond={fond}>

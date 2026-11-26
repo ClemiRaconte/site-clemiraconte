@@ -38,7 +38,9 @@ Puis relancer un déploiement. Tant que ces valeurs manquent, les pages affichen
 ### Stripe
 1. Sur chaque prix, mettre la clé de recherche (lookup key) égale à l'identifiant de la formule : `famille-2-adaptations`, `famille-mois`, `famille-2-acces`, `famille-3-acces`, `famille-5-acces`, `enseignant`, `ecole`, `professionnel`, `association`.
 2. Développeurs > Webhooks > Ajouter : adresse `https://clemiraconte.fr/.netlify/functions/stripe-webhook`, événements `checkout.session.completed` et `customer.subscription.deleted`. Copier le secret whsec_ dans Netlify.
-3. Paramètres > Portail client : l'activer et copier son lien de connexion dans `PUBLIC_STRIPE_PORTAIL`.
+   En mode test (25/11), la destination `site-version-essai` vise la version d'essai : `https://deploy-preview-9--clemiraconte.netlify.app/.netlify/functions/stripe-webhook`. Au passage en réel, créer une destination en mode réel vers clemiraconte.fr et remplacer les clés Netlify par celles du mode réel.
+3. Paramètres > Billing > Portail client : annulation à la fin de la période, pas de changement d'offre, puis « Activer le lien » et le copier dans `PUBLIC_STRIPE_PORTAIL`.
+4. Paramètres > Billing > Abonnements et e-mails : activer l'e-mail de rappel avant chaque renouvellement annuel (obligation L215-1).
 
 ### Tester sans paiement
 Dans Supabase > Table Editor > `periodes` > Insert row : son propre email, formule `famille-2-adaptations`, debut aujourd'hui, fin dans un an. Puis se connecter sur `/connexion`.

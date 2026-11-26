@@ -57,4 +57,4 @@ export const adaptations = [
   },
 ];
 
-export const videoAnge = 'https://www.youtube-nocookie.com/embed/n7nQT0v49cU';
+export const videoAnge = 'https://www.youtube-nocookie.com/embed/61VQhY_nm2Y';
