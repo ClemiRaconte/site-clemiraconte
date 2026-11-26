@@ -14,7 +14,7 @@
   --soleil: #f4c430;
   --soleil-doux: #f7d873;
   --encre: #243b32;
-  --gris: #5b6b63;
+  --gris: #4f5f57;
   --creme: #fbf3e3;
   --creme-carte: #fffdf7;
   --beige: #efe4cc;
@@ -221,3 +221,33 @@ p { margin: 0; }
 @keyframes form-arrive { from { opacity: 0; transform: translateY(30px) rotate(-3deg); } }
 .ciel-form .btn { transition: transform .15s; } .ciel-form .btn:hover { transform: translateY(-3px) rotate(-1deg); }
 @media (prefers-reduced-motion: reduce) { .ciel-form *, .ciel-form .formulaire { animation: none !important; } }
+
+/* ---------- Saisons (attributs data-saison, data-moment, data-evt posés sur <html>) ---------- */
+html, body { overflow-x: clip; }
+html[data-saison='automne'] { --soleil-saison: #e8963c; }
+html[data-saison='hiver'] { --soleil-saison: #ffffff; }
+html[data-saison='printemps'] { --soleil-saison: #f4c430; }
+html[data-saison='ete'] { --soleil-saison: #f4c430; }
+html[data-saison] .crete-ligne { stroke: var(--soleil-saison); }
+html[data-saison='hiver'] .crete-ligne { stroke-width: 5; }
+
+/* Fond de saison : calque animé (fond-saisons.js) et motif discret sur les bandeaux clairs */
+.fond-saison { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 40; transition: opacity 0.6s; }
+html[data-saison='automne'] { --motif-saison: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg fill='%23c8642a' fill-opacity='.06'%3E%3Cpath d='M30 60c0-18 12-30 30-30 0 18-12 30-30 30z'/%3E%3Cpath d='M150 140c0-16 11-27 27-27 0 16-11 27-27 27z' fill='%23e09a3c'/%3E%3Cpath d='M120 40c0-12 8-20 20-20 0 12-8 20-20 20z'/%3E%3Cpath d='M50 170c0-14 10-24 24-24 0 14-10 24-24 24z' fill='%23e09a3c'/%3E%3C/g%3E%3C/svg%3E"); }
+html[data-saison='hiver'] { --motif-saison: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg stroke='%2381a7bd' stroke-opacity='.16' stroke-width='2' stroke-linecap='round' fill='none'%3E%3Cpath d='M50 30v40M33 40l34 20M33 60l34-20'/%3E%3Cpath d='M160 120v30M147 128l26 15M147 143l26-15'/%3E%3Cpath d='M90 170v24M80 176l20 12M80 188l20-12'/%3E%3C/g%3E%3C/svg%3E"); }
+html[data-saison='printemps'] { --motif-saison: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg fill='%23e79bb0' fill-opacity='.12'%3E%3Cellipse cx='50' cy='50' rx='12' ry='6' transform='rotate(-30 50 50)'/%3E%3Cellipse cx='160' cy='130' rx='10' ry='5' transform='rotate(20 160 130)'/%3E%3Cellipse cx='90' cy='180' rx='9' ry='5' transform='rotate(-60 90 180)'/%3E%3C/g%3E%3C/svg%3E"); }
+html[data-saison='ete'] { --motif-saison: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg fill-opacity='.11'%3E%3Cg fill='%23e2493b' transform='translate(50 50)'%3E%3Ccircle cx='0' cy='-7' r='6'/%3E%3Ccircle cx='7' cy='0' r='6'/%3E%3Ccircle cx='0' cy='7' r='6'/%3E%3Ccircle cx='-7' cy='0' r='6'/%3E%3C/g%3E%3Ccircle cx='160' cy='140' r='4' fill='%23f4c430' fill-opacity='.6'/%3E%3C/g%3E%3C/svg%3E"); }
+html[data-saison] .fond-creme:not(.scene-accueil), html[data-saison] .fond-beige { background-image: var(--motif-saison); background-size: 220px 220px; }
+@media (prefers-reduced-motion: reduce) { .fond-saison { display: none; } }
+
+/* ---------- Lumière tamisée du soir ----------
+   Un voile chaud passe sur tout le site, comme une lampe de chevet qu'on baisse.
+   doux (19h-21h) : moins de bleu ; veilleuse (21h-6h) : plus sombre et ambré. Bouton lune : components/Lune.astro */
+html::after {
+  content: ''; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  background: #ffcf8f; mix-blend-mode: multiply; opacity: 0; transition: opacity 1.6s ease, background-color 1.6s ease;
+}
+html[data-lumiere='doux']::after { opacity: 0.26; }
+html[data-lumiere='veilleuse']::after { background: #8a5a2e; opacity: 0.36; }
+html[data-lumiere='veilleuse'] .vz.vz-en-liseuse .vz-scene { background: #f3e3c4; }
+@media print { html::after { display: none; } }

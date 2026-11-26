@@ -9,8 +9,29 @@ export const site = {
   conteur: 'Clément Joubert',
   prelancement: true,
   lancement: 'le samedi 12 décembre',
+  /** Date et heure de la première histoire (heure de Paris), pour le compte à rebours */
+  lancementISO: '2026-12-12T09:00:00',
   /** Logo retenu : le livre-sapin */
   logo: 'livre' as 'luciole' | 'livre' | 'bulle',
+};
+
+/**
+ * Saisons du site. Dates de début (mois-jour) :
+ * été 15 juin → 31 août · automne 1er septembre → 30 novembre · hiver 1er décembre → 31 mars · printemps 1er avril → 14 juin.
+ * `forcer` : '' (automatique), 'automne', 'hiver', 'printemps' ou 'ete'.
+ * Pour prévisualiser une page : ajouter ?saison=hiver, ?moment=nuit ou ?evt=noel à son adresse.
+ */
+export const saisons = {
+  actives: true,
+  forcer: '' as '' | 'automne' | 'hiver' | 'printemps' | 'ete',
+  debuts: { printemps: '04-01', ete: '06-15', automne: '09-01', hiver: '12-01' },
+  /** Le soir commence à 19h et finit à 7h */
+  soir: { debut: 19, fin: 7 },
+  /** Rendez-vous : Noël et la rentrée (mois-jour inclus) ; le samedi de 9h à midi après le lancement */
+  noel: { du: '12-01', au: '12-31' },
+  rentree: { du: '08-20', au: '09-10' },
+  /** Lumière tamisée : douce à partir de 19h, veilleuse à partir de 21h, jusqu'à 6h. Le bouton lune vaut pour la soirée */
+  lumiere: { douce: 19, veilleuse: 21, matin: 6 },
 };
 
 export const navigation = [

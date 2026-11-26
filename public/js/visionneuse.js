@@ -19,10 +19,10 @@
     moins.setAttribute('aria-label','Réduire');plus.setAttribute('aria-label','Agrandir');plein.setAttribute('aria-label','Plein écran');
     [prec,num,suiv,moins,plus,plein].forEach(function(x){if(x.tagName==='BUTTON')x.type='button';cmd.appendChild(x);});
     barre.appendChild(choix);barre.appendChild(cmd);
-    var scene=el('div','vz-scene'),toile=el('canvas'),attente=el('div','vz-attente','Ouverture de la visionneuse…');
+    var scene=el('div','vz-scene'),toile=el('canvas'),attente=el('div','vz-attente','Ange arrive sur la pointe des pattes…');
     var lis=el('div','vz-lis'),lisTexte=el('div','vz-lis-texte');lis.appendChild(lisTexte);
     scene.appendChild(toile);scene.appendChild(lis);scene.appendChild(attente);
-    var mode=el('button','vz-mode');mode.type='button';
+    var mode=el('button','vz-mode');mode.type='button';mode.setAttribute('aria-label','Changer de mode de lecture');
     var pied=el('div','vz-pied','<b>Visionneuse Clémi Raconte</b><span>'+(box.getAttribute('data-pied')||'Lecture en ligne, page par page.')+'</span>');
     pied.insertBefore(mode,pied.children[1]);
     box.innerHTML='';box.appendChild(barre);box.appendChild(scene);box.appendChild(pied);
@@ -83,7 +83,7 @@
       });
     }
     function charger(i){
-      pdf=null;attente.style.display='flex';attente.textContent='Ouverture de la visionneuse…';
+      pdf=null;attente.style.display='flex';attente.textContent='Ange arrive sur la pointe des pattes…';
       pdfjsLib.getDocument({url:docs[i].src}).promise.then(function(d){if(i!==courant)return;pdf=d;rendre();},function(){attente.textContent='Le document n\'a pas pu s\'ouvrir. Réessayez dans un instant.';});
     }
     function ouvrir(i){

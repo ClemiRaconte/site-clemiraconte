@@ -1,0 +1,43 @@
+---
+/** Page introuvable : Ange s'est perdu dans la forêt de Daillon. Netlify l'affiche pour toute adresse inconnue. */
+import Base from '../layouts/Base.astro';
+import Bulles from '../components/Bulles.astro';
+import { u } from '../lib/url';
+---
+<Base masque titre="Page introuvable · Clémi Raconte" description="Cette page n’existe pas. Ange s’est perdu dans la forêt de Daillon.">
+  <section class="bandeau-section fond-creme perdu">
+    <Bulles nombre={12} graine={404} />
+    <div class="conteneur perdu-grille">
+      <svg class="perdu-loup" viewBox="0 0 240 220" role="img" aria-label="Ange le loup, perdu, avec une loupe">
+        <ellipse cx="120" cy="204" rx="96" ry="10" fill="#efe4cc" />
+        <path d="M70 200c-26-4-40-26-30-46 8 12 22 18 36 18z" fill="#9aa4a8" />
+        <path d="M66 200c-6-50 14-86 54-92l30 6c12 36 14 64 10 86z" fill="#c7cdd0" />
+        <path d="M112 112c-10-28 2-56 26-62l10-26 10 26 30-18c4 12-2 24-16 34 10 12 4 30-14 38-14 14-30 16-46 8z" fill="#c7cdd0" />
+        <path d="M148 24l10 26-14 2z" fill="#9aa4a8" />
+        <path d="M150 76q6-4 12 0" stroke="#243b32" stroke-width="3" fill="none" stroke-linecap="round" />
+        <circle cx="188" cy="82" r="5" fill="#243b32" />
+        <path d="M164 104q8 5 16-2" stroke="#243b32" stroke-width="3" fill="none" stroke-linecap="round" />
+        <text x="196" y="44" font-family="Caveat, cursive" font-size="40" font-weight="700" fill="#2D6A4F">?</text>
+        <text x="214" y="70" font-family="Caveat, cursive" font-size="28" font-weight="700" fill="#F4C430">?</text>
+      </svg>
+      <div class="perdu-texte">
+        <p class="surtitre-main">Oups, page introuvable</p>
+        <h1>Ange s’est perdu dans la forêt de Daillon</h1>
+        <p>La page que vous cherchez n’existe pas, ou elle a changé de chemin. Pas de panique : Ange connaît la route du retour</p>
+        <div class="perdu-actions">
+          <a class="btn btn-plein" href={u('/')}>Retrouver le chemin de l’accueil</a>
+          <a class="btn btn-contour" href={u('/histoire-ange-le-loup')}>Lire l’histoire d’Ange</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .perdu { padding-block: clamp(56px, 8vw, 110px); }
+  .perdu-grille { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(28px, 6vw, 72px); align-items: center; }
+  .perdu-loup { width: 100%; max-width: 340px; justify-self: center; transform: rotate(-3deg); }
+  .perdu-texte { display: grid; gap: 16px; justify-items: start; }
+  .perdu-texte > p:not(.surtitre-main) { color: var(--gris); font-size: 1.12rem; }
+  .perdu-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  @media (max-width: 760px) { .perdu-grille { grid-template-columns: 1fr; } .perdu-loup { max-width: 220px; } }
+</style>

@@ -9,7 +9,7 @@ const { age, texte, paragraphes, lien, href } = Astro.props;
   <span class="l3-page">
     {age && <span class="l3-age">{age}</span>}
     {texte && <span class="l3-texte">{texte}</span>}
-    {paragraphes && <span class="l3-recit">{paragraphes.map((p) => <span class="l3-par">{p}</span>)}</span>}
+    {paragraphes && <span class="l3-recit" tabindex="0" aria-label="Début de l’histoire">{paragraphes.map((p) => <span class="l3-par">{p}</span>)}</span>}
     {lien && (href ? <a class="l3-lien" href={href}>{lien}</a> : <span class="l3-lien">{lien}</span>)}
   </span>
   <span class="l3-couv"><CouvertureAnge /></span>

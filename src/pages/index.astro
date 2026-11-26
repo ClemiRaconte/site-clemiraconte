@@ -18,47 +18,34 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   titre="Clémi Raconte · Histoires pour enfants de 4 à 9 ans, chaque samedi"
   description="Des histoires d’aujourd’hui pour les 4-9 ans, sans méchant ni morale imposée, écrites dans les Hautes-Alpes. À lire, à écouter ou à regarder, avec une fiche papote et 12 activités."
 >
-  <!-- 1. L'objectif de la plateforme -->
-  <section class="bandeau-section fond-creme objectif">
-    <Bulles nombre={18} graine={3} />
-    <div class="conteneur objectif-grille">
-      <div class="objectif-texte">
-        <p class="surtitre-main">Bienvenue dans la forêt conteuse</p>
-        <h1>Des histoires d’aujourd’hui pour aider les 4-9 ans à <span class="feutre">grandir</span></h1>
-        <p class="objectif-sous">
-          Clémi Raconte, ce sont des histoires qui parlent de ce que vivent vraiment les enfants : la différence,
-          les émotions, la famille, la vie en groupe. Une nouvelle <strong>chaque samedi</strong>, à lire, à écouter
-          ou à regarder, avec tout ce qu’il faut pour en parler ensuite, en famille
-        </p>
-        <div class="objectif-actions">
-          <a class="btn btn-plein" href={u('/abonnement')}>Choisir ma formule <Icone nom="fleche" taille={20} /></a>
-          <a class="btn btn-contour" href={u('/histoire-ange-le-loup')}>Lire Ange gratuitement</a>
-        </div>
-      </div>
-      <div class="objectif-visuel">
-        <figure class="cadre cadre-grand">
-          <Image src={photo('montagnes-brume')} alt="Forêt de sapins dans la brume, au pied des montagnes" widths={[600, 900, 1200]} sizes="(min-width: 900px) 520px, 90vw" loading="eager" />
-          <span class="scotch scotch-g" aria-hidden="true"></span>
-        </figure>
-        <figure class="cadre cadre-petit polaroid">
-          <Image src={photo('lire')} alt="Un papa lit une histoire à son enfant au moment du coucher" widths={[300, 500]} sizes="220px" loading="eager" />
-          <figcaption class="main">le soir venu…</figcaption>
-        </figure>
-        <p class="note-fleche main" aria-hidden="true">
-          chaque samedi à 9h
-          <svg viewBox="0 0 80 50"><path d="M4 6c20 2 44 10 58 34M50 38l13 4 2-14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </p>
+  <!-- 1. L'objectif de la plateforme, dans la forêt conteuse qui change avec les saisons -->
+  <section class="scene-accueil" data-scene>
+    <canvas aria-hidden="true"></canvas>
+    <div class="conteneur sa-texte">
+      <p class="surtitre-main" data-scene-sur>Bienvenue dans la forêt conteuse</p>
+      <h1>Des histoires d’aujourd’hui pour aider les 4-9 ans à <span class="feutre">grandir</span></h1>
+      <p class="objectif-sous">
+        Clémi Raconte, ce sont des histoires qui parlent de ce que vivent vraiment les enfants : la différence,
+        les émotions, la famille, la vie en groupe. Une nouvelle <strong>chaque samedi</strong>, à lire, à écouter
+        ou à regarder, avec tout ce qu’il faut pour en parler ensuite, en famille
+      </p>
+      <div class="objectif-actions">
+        <a class="btn btn-plein" href={u('/abonnement')}>Choisir ma formule <Icone nom="fleche" taille={20} /></a>
+        <a class="btn btn-contour" href={u('/histoire-ange-le-loup')}>Lire Ange gratuitement</a>
       </div>
     </div>
+    <p class="sa-astuce main" data-scene-astuce aria-hidden="true">touchez la forêt pour faire souffler le vent</p>
+    <button class="sa-pause" type="button" data-scene-pause aria-pressed="false">Mettre en pause</button>
   </section>
+  <script is:inline defer src={u('/js/scene-saisons.js')}></script>
 
   <!-- 2. Qui suis-je ? -->
   <section class="bandeau-section fond-sapin qui">
     <Crete couleur="var(--sapin)" forme={1} />
     <div class="conteneur qui-grille">
       <figure class="cadre polaroid qui-photo">
-        <Image src={photo('vallee')} alt="Vallée de montagne et forêt de sapins dans les Hautes-Alpes" widths={[400, 700]} sizes="(min-width: 900px) 420px, 80vw" loading="lazy" />
-        <figcaption class="main">Le Champsaur, ma vallée</figcaption>
+        <img src={u('/img/clement-foret.webp')} alt="Clément, le conteur, dans sa forêt conteuse" width="1200" height="800" loading="lazy" />
+        <figcaption class="main">Dans ma forêt conteuse</figcaption>
         <span class="scotch scotch-d" aria-hidden="true"></span>
       </figure>
       <div class="qui-texte">
@@ -206,10 +193,12 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   .bandeau-section { padding-block: clamp(72px, 10vw, 128px); }
 
   /* 1. Objectif */
-  .objectif { padding-block: clamp(48px, 7vw, 96px) clamp(96px, 12vw, 150px); }
-  .objectif-grille { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
-  .objectif-texte { display: grid; gap: 22px; justify-items: start; }
-  .objectif h1 { font-size: clamp(2.3rem, 5vw, 3.9rem); }
+  /* 1. Scène de saison : le décor occupe la marge basse, le texte reste au-dessus */
+  .scene-accueil { position: relative; isolation: isolate; overflow: hidden; background: var(--creme); padding-block: clamp(40px, 6vw, 80px) clamp(290px, 34vw, 430px); cursor: pointer; }
+  .scene-accueil canvas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; }
+  .sa-texte { display: grid; gap: 22px; justify-items: start; }
+  .sa-texte > * { max-width: 640px; }
+  .scene-accueil h1 { font-size: clamp(2.3rem, 5vw, 3.9rem); }
   .feutre { position: relative; color: var(--sapin); font-style: italic; white-space: nowrap; }
   .feutre::after {
     content: ''; position: absolute; left: -4px; right: -6px; bottom: 0.02em; height: 0.3em; z-index: -1;
@@ -217,22 +206,34 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
   }
   .objectif-sous { font-size: 1.15rem; color: var(--gris); max-width: 34em; }
   .objectif-sous strong { color: var(--encre); }
-  .objectif-actions { display: flex; flex-wrap: wrap; gap: 16px 20px; margin-top: 6px; }
+  .objectif-actions { display: flex; flex-wrap: wrap; gap: 16px 20px; margin-top: 6px; cursor: auto; }
+  .sa-astuce { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); bottom: clamp(56px, 7vw, 108px); font-size: 1.25rem; color: var(--encre); background: rgba(255, 253, 247, 0.85); padding: 2px 10px; transform: rotate(-2deg); pointer-events: none; z-index: 3; }
+  .sa-pause { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); bottom: clamp(56px, 7vw, 108px); z-index: 3; font: 700 0.85rem var(--f-label); background: rgba(255, 253, 247, 0.92); color: var(--encre); border: 2px solid var(--encre); padding: 4px 12px; cursor: pointer; border-radius: 6px 12px 8px 14px; }
+  .sa-astuce[hidden] { display: none; }
+  @media (max-width: 600px) {
+    .scene-accueil { padding-bottom: 340px; }
+    .sa-astuce { display: none; }
+    .sa-pause { bottom: auto; top: 10px; font-size: 0.78rem; }
+  }
+  /* Le soir : texte clair sur le ciel de nuit */
+  :global(html[data-moment='nuit']) .scene-accueil { background: #0d2620; }
+  :global(html[data-moment='nuit']) .scene-accueil h1, :global(html[data-moment='nuit']) .objectif-sous strong { color: #fff; }
+  :global(html[data-moment='nuit']) .scene-accueil .surtitre-main { color: var(--soleil); }
+  :global(html[data-moment='nuit']) .scene-accueil .feutre { color: var(--soleil-doux); }
+  :global(html[data-moment='nuit']) .scene-accueil .feutre::after { opacity: 0.35; }
+  :global(html[data-moment='nuit']) .objectif-sous { color: var(--menthe); }
+  :global(html[data-moment='nuit']) .scene-accueil .btn-contour { color: #fff; }
+  :global(html[data-moment='nuit']) .sa-astuce { background: rgba(15, 42, 34, 0.75); color: var(--soleil); }
+  /* Saisons coupées ou sans JavaScript : pas de grande marge vide */
+  :global(html[data-saisons='off']) .scene-accueil, :global(html:not([data-saison])) .scene-accueil { padding-bottom: clamp(96px, 12vw, 150px); }
+  :global(html[data-saisons='off']) .sa-astuce, :global(html[data-saisons='off']) .sa-pause, :global(html:not([data-saison])) .sa-astuce, :global(html:not([data-saison])) .sa-pause { display: none; }
 
-  .objectif-visuel { position: relative; padding: 0 8% 18% 0; }
   .cadre { margin: 0; position: relative; }
   .cadre :global(img) { display: block; width: 100%; height: auto; object-fit: cover; }
-  .cadre-grand { transform: rotate(2deg); border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); box-shadow: 0 10px 0 var(--sapin); }
-  .cadre-grand :global(img) { aspect-ratio: 4 / 3; }
   .polaroid { background: #fff; padding: 10px 10px 0; border: 0; border-radius: 3px 16px 16px 3px; background-image: linear-gradient(90deg, rgba(36,59,50,.16) 0 9px, rgba(36,59,50,.05) 9px 14px, transparent 14px); box-shadow: 0 6px 0 rgba(36, 59, 50, 0.25); }
   .polaroid figcaption { text-align: center; padding: 8px 4px 10px; font-size: 1.45rem; color: var(--encre); }
-  .cadre-petit { position: absolute; width: 46%; right: 0; bottom: 0; transform: rotate(-5deg); }
-  .cadre-petit :global(img) { aspect-ratio: 1; }
   .scotch { position: absolute; width: 96px; height: 28px; background: rgba(247, 216, 115, 0.85); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
-  .scotch-g { top: -14px; left: 18px; transform: rotate(-8deg); }
   .scotch-d { top: -14px; right: 22px; transform: rotate(7deg); }
-  .note-fleche { position: absolute; left: -2%; bottom: 2%; display: flex; align-items: flex-start; gap: 4px; transform: rotate(-4deg); font-size: 1.7rem; }
-  .note-fleche svg { width: 70px; margin-top: 10px; }
 
   /* 2. Qui suis-je */
   .qui-grille { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(36px, 7vw, 96px); align-items: center; }
@@ -338,8 +339,7 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
     .tuile-5 { grid-column: span 2; }
   }
   @media (max-width: 860px) {
-    .objectif-grille, .qui-grille, .ange-grille { grid-template-columns: 1fr; }
-    .objectif-visuel { max-width: 560px; }
+    .qui-grille, .ange-grille { grid-template-columns: 1fr; }
     .qui-photo { max-width: 360px; justify-self: center; }
     .ange-couverture { max-width: 280px; margin-bottom: 40px; }
     .ange::before { background: rgba(28, 58, 45, 0.9); }
@@ -354,6 +354,5 @@ const themes = ['La différence', 'Les émotions', 'Trouver sa place dans le gro
     .chiffre:nth-child(even) { border-left: 0; }
     .chiffre { padding-inline: 4px; }
     .feutre { white-space: normal; }
-    .note-fleche { font-size: 1.35rem; }
-  }
+    }
 </style>

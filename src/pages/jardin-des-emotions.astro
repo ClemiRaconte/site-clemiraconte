@@ -1,0 +1,1212 @@
+---
+/**
+ * Le jardin des émotions : choisir une histoire selon ce qu'on ressent.
+ * Design et mini-histoires générés avec AI Studio (26/11), adaptés au site : images dans public/emotions/,
+ * style dans styles/jardin-emotions.css (tout est préfixé par .jardin).
+ * Les textes, questions papote, rituels et mini-histoires se modifient dans ANGE_STORY_DATA, en haut du script.
+ * histoiresClement : les vraies histoires du samedi rattachées à une émotion.
+ */
+import Base from '../layouts/Base.astro';
+import '../styles/jardin-emotions.css';
+---
+<Base titre="Le jardin des émotions · Clémi Raconte" description="Comment tu te sens ce soir ? Choisis une planète, rencontre son gardien et trouve l’histoire qui va avec ton émotion." fond="aucun">
+  <div class="jardin">
+
+    <header class="site-header">
+      <div class="brand-lockup">
+        <div class="brand-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            <path d="M19 3v4" />
+            <path d="M21 5h-4" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title" id="site-title"></h1>
+          <p class="brand-subtitle" id="site-subtitle"></p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="progress-chip" aria-live="polite">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="progress-label">0 / 21 histoires écoutées</span>
+        </div>
+        <button type="button" class="btn-night-story" id="btn-bedtime-story">
+          Histoire du soir
+        </button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="sky-frame" id="sky-stage" aria-label="Le ciel étoilé des émotions d'Ange">
+        <img
+          src="/emotions/sky-bg.webp"
+          alt=""
+          class="sky-bg-img"
+          aria-hidden="true"
+        />
+
+        <div class="shooting-star-wrap" aria-hidden="true">
+          <img src="/emotions/shooting-star.webp" alt="" />
+        </div>
+
+        <svg
+          class="wind-ribbons-svg"
+          viewBox="0 0 1376 768"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          id="wind-ribbons-svg"
+        ></svg>
+
+        <div class="ange-stage-el" id="ange-el">
+          <div class="ange-visual">
+            <img src="/emotions/ange.webp" alt="Ange le petit loup assis sur sa lune moussue" class="ange-sprite" />
+            <img src="/emotions/ange.webp" alt="" aria-hidden="true" class="ange-ears-layer" />
+          </div>
+          <p class="ange-prompt-caption" id="ange-caption"></p>
+        </div>
+      </section>
+
+      <nav class="emotion-dock" id="emotion-dock" aria-label="Accès rapide aux sept émotions"></nav>
+
+      <section class="emotion-panel" id="emotion-panel" aria-live="polite"></section>
+    </main>
+
+    <dialog class="reader-dialog" id="story-dialog" aria-labelledby="reader-title">
+      <div class="reader-inner">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <img id="reader-orb-img" src="/emotions/orb-joie.webp" alt="" />
+            <div>
+              <p class="reader-kicker" id="reader-kicker"></p>
+              <h2 class="reader-title" id="reader-title"></h2>
+            </div>
+          </div>
+          <button type="button" class="reader-close-btn" id="reader-close" aria-label="Fermer l'histoire">
+            &times;
+          </button>
+        </div>
+
+        <div class="reader-page-box">
+          <p class="reader-page-text" id="reader-page-text"></p>
+          <p class="reader-closing" id="reader-closing" hidden></p>
+        </div>
+
+        <div class="reader-controls">
+          <button type="button" class="btn-secondary" id="reader-speak-btn">
+            Lire à voix haute
+          </button>
+          <div class="reader-nav-group">
+            <button type="button" class="btn-secondary" id="reader-prev-btn">Précédent</button>
+            <span id="reader-page-counter" style="font-size: 0.9rem; font-weight: 600;"></span>
+            <button type="button" class="btn-primary" id="reader-next-btn">Suivant</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    
+  </div>
+  <script is:inline>
+
+      /* ==========================================================================
+         BLOC DE DONNEES UNIQUE (TEXTES, QUESTIONS PAPOTE & HISTOIRES)
+         Modifiez librement ce bloc en haut du script pour changer les textes,
+         couleurs, questions papote ou histoires sans toucher au reste du code.
+         ========================================================================== */
+      const ANGE_STORY_DATA = {
+        texts: {
+          siteTitle: 'Ange — Le Jardin des Émotions',
+          siteSubtitle: 'Touche ou survole une planète pour réveiller son gardien et écouter ses orbes d’histoires.',
+          angeCaption: 'Comment tu te sens ce soir ?',
+          bedtimeButton: 'Histoire du soir',
+          bedtimeStoryId: 'orb-calme-2',
+          papoteHeading: 'Question papote',
+          ritualHeading: 'Petit rituel avec Ange',
+          grandeHistoireLabel: 'L’histoire du samedi',
+          storiesHeading: 'Les orbes d’histoires de cette planète',
+          openStoryLabel: 'Lire l’orbe',
+          readDoneLabel: 'Écoutée',
+          mixedOrbLabel: 'Orbe double',
+          speakStartLabel: 'Lire à voix haute',
+          speakStopLabel: 'Arrêter la voix',
+          prevPageLabel: 'Précédent',
+          nextPageLabel: 'Suivant',
+          finishStoryLabel: 'Terminer l’histoire',
+        },
+        ange: {
+          snoutX: 726,
+          snoutY: 362,
+        },
+        emotions: [
+          {
+            id: 'joie',
+            histoiresClement: [{ titre: 'Ange, le loup qui chantait avec le vent', lien: '/histoire-ange-le-loup.html', texte: 'La grande histoire de Clément : à lire, écouter ou regarder' }],
+                        name: 'Joie',
+            characterName: 'Étoile',
+            clock: '12h',
+            color: '#F4C430',
+            glow: 'rgba(244, 196, 48, 0.52)',
+            softText: '#FCE8A6',
+            image: '/emotions/planet-joie.webp',
+            ratio: '177 / 189',
+            xPct: 50.4,
+            yPct: 18.95,
+            wPct: 12.86,
+            restDur: '5.4s',
+            restDelay: '0s',
+            orbitRadiusX: 70,
+            orbitRadiusY: 54,
+            sentence: 'Quand ton cœur pétille comme des étincelles dorées dans les prairies.',
+            papoteQuestion: 'Quel petit moment d’aujourd’hui a fait briller ton sourire comme celui d’Étoile ?',
+            angeWhisper:
+              '« Étoile rit si fort que ses petites ailes font danser les fleurs de soleil. Quand tu es joyeux, garde un peu de cette lumière dans ta poche pour plus tard ! »',
+            ritualTitle: 'Le sourire qui s’étire',
+            ritualSteps: [
+              'Ouvre tes bras bien grands vers le ciel, comme Étoile qui déplie ses ailes.',
+              'Inspire par le nez en pensant à ton meilleur moment d’aujourd’hui.',
+              'Souffle doucement en posant tes deux mains sur ton cœur chaud.',
+            ],
+            stories: [
+              {
+                id: 'orb-joie-1',
+                title: 'La danse des pissenlits dorés',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-joie.webp',
+                summary: 'Étoile découvre que le rire se partage comme les graines de pissenlit dans le vent.',
+                pages: [
+                  'Ce matin-là, sur la planète jaune d’or, une brise tiède chatouilla les ailes d’Étoile. Elle éclata d’un rire si clair qu’il tinta comme une clochette.',
+                  'Aussitôt, trois fleurs de pissenlit s’envolèrent en petits flocons lumineux. Au lieu de s’envoler loin, elles tournoyèrent jusqu’à la lune d’Ange.',
+                  'Ange leva son museau et chanta une note dorée. Étoile comprit que plus on offre sa joie autour de soi, plus la prairie s’illumine.',
+                ],
+                closingWhisper: 'À qui pourrais-tu offrir un petit sourire demain matin ?',
+              },
+              {
+                id: 'orb-joie-2',
+                title: 'La poche aux rayons de soleil',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-joie.webp',
+                summary: 'Comment garder un souvenir heureux tout chaud près de son cœur avant de dormir.',
+                pages: [
+                  'Quand le soir tomba, Étoile eut peur que sa belle journée disparaisse avec le soleil. Elle essaya d’attraper un rayon dans ses petites mains.',
+                  'Ange lui souffla depuis sa colline : « Les vrais rayons ne se perdent pas, ils se rangent dans la mémoire comme des billes de lumière. »',
+                  'Étoile ferma les yeux et retrouva le goût sucré de sa journée. Son cœur brilla doucement jusqu’au matin.',
+                ],
+                closingWhisper: 'Quel joli moment d’aujourd’hui veux-tu ranger dans ta poche de lumière ?',
+              },
+              {
+                id: 'orb-mix-joie-timidite',
+                title: 'Le premier pas d’Étoile et Pivoine',
+                durationMinutes: 3,
+                orbImage: '/emotions/orb-mix-joie-timidite.webp',
+                partnerName: 'Timidité',
+                summary: 'Orbe double : quand on est très content mais un peu intimidé en même temps.',
+                pages: [
+                  'Une étoile filante avait déposé un ruban d’or entre la prairie d’Étoile et le jardin rose de Pivoine. Pivoine voulait aller jouer, mais ses joues devinrent toutes roses.',
+                  'Étoile remarqua son amie cachée derrière un pétale. Au lieu de crier fort, elle s’approcha sur la pointe des pieds et posa une fleur jaune devant elle.',
+                  'Pivoine sourit tout doucement. On pouvait avoir le cœur qui saute de joie tout en restant timide, et c’était parfait comme ça.',
+                ],
+                closingWhisper: 'Même tout doucement, ta joie a le droit de montrer le bout de son nez.',
+              },
+            ],
+          },
+          {
+            id: 'tristesse',
+            name: 'Tristesse',
+            characterName: 'Bruine',
+            clock: '2h',
+            color: '#6DB3E8',
+            glow: 'rgba(109, 179, 232, 0.5)',
+            softText: '#CBE6FB',
+            image: '/emotions/planet-tristesse.webp',
+            ratio: '183 / 200',
+            xPct: 73.07,
+            yPct: 33.72,
+            wPct: 13.3,
+            restDur: '6.1s',
+            restDelay: '-1.2s',
+            orbitRadiusX: 72,
+            orbitRadiusY: 56,
+            sentence: 'Quand une petite pluie douce tombe sur ton cœur et que tu as besoin d’un câlin.',
+            papoteQuestion: 'Quand ton cœur a un peu de pluie, qu’est-ce qui te console le mieux sous ton parapluie ?',
+            angeWhisper:
+              '« Bruine porte toujours un parapluie, mais elle sait que les larmes arrosent doucement la terre. On a toujours le droit de pleurer un peu. »',
+            ritualTitle: 'Sous le grand parapluie',
+            ritualSteps: [
+              'Enroule tes bras autour de tes épaules comme une couverture chaude.',
+              'Écoute ta respiration lente, comme des gouttes de pluie sur une feuille.',
+              'Laisse sortir un long soupir tranquille : le ciel s’éclaircit toujours après la pluie.',
+            ],
+            stories: [
+              {
+                id: 'orb-tristesse-1',
+                title: 'Le parapluie qui écoutait la pluie',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-tristesse.webp',
+                summary: 'Bruine apprend qu’on n’a pas besoin de cacher ses larmes pour être consolé.',
+                pages: [
+                  'Un nuage gris s’était assis au-dessus du lac bleu de Bruine. Une petite larme roula sur sa joue et fit un rond parfait dans l’eau.',
+                  'Bruine ouvrit son parapluie pour la cacher, mais Ange lui chanta une berceuse de brume : « Tes gouttes remplissent le lac pour que les nénuphars puissent fleurir. »',
+                  'Alors Bruine referma un peu son parapluie, respira l’air frais d’après l’averse et sentit son cœur plus léger.',
+                ],
+                closingWhisper: 'Si tu as gros cœur ce soir, qui peut s’asseoir à côté de toi sous le parapluie ?',
+              },
+              {
+                id: 'orb-tristesse-2',
+                title: 'Les ricochets du soir',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-tristesse.webp',
+                summary: 'Un chagrin devient plus doux quand on le confie à un ami fidèle.',
+                pages: [
+                  'Bruine avait perdu son petit caillou porte-bonheur dans l’herbe mouillée. Assise au bord de l’eau, elle n’avait envie ni de courir ni de rire.',
+                  'Un ruban de vent tiède vint sécher ses joues sans lui demander d’aller plus vite. Ange resta simplement là, à veiller sur elle depuis sa lune.',
+                  'Quand le nuage s’effila en coton blanc, la lune se refléta dans le lac calme comme un sourire argenté.',
+                ],
+                closingWhisper: 'Tu as le droit d’avoir besoin de douceur avant de retrouver ton élan.',
+              },
+              {
+                id: 'orb-mix-tristesse-calme',
+                title: 'Après l’averse, les lucioles',
+                durationMinutes: 3,
+                orbImage: '/emotions/orb-mix-tristesse-calme.webp',
+                partnerName: 'Calme',
+                summary: 'Orbe double : comment la tristesse laisse doucement place à un calme apaisant.',
+                pages: [
+                  'Quand les dernières gouttes de Bruine tombèrent sur les feuilles vertes de Mousse, quelque chose de magique arriva : chaque goutte devint un petit miroir pour les étoiles.',
+                  'Mousse invita Bruine à s’asseoir au bord de son étang silencieux. Aucune des deux ne parla, et le silence était doux comme du velours.',
+                  'Trois lucioles vinrent se poser sur le manche du parapluie. Le chagrin s’était transformé en paix tranquille.',
+                ],
+                closingWhisper: 'Sens comme ton souffle devient doux après un gros soupir.',
+              },
+            ],
+          },
+          {
+            id: 'colere',
+            name: 'Colère',
+            characterName: 'Braise',
+            clock: '4h',
+            color: '#E55B3C',
+            glow: 'rgba(229, 91, 60, 0.5)',
+            softText: '#FBC5B7',
+            image: '/emotions/planet-colere.webp',
+            ratio: '161 / 220',
+            xPct: 86.66,
+            yPct: 57.29,
+            wPct: 11.7,
+            restDur: '5.1s',
+            restDelay: '-2.1s',
+            orbitRadiusX: 68,
+            orbitRadiusY: 58,
+            sentence: 'Quand un petit volcan gronde dans ton ventre et chauffe tes joues.',
+            papoteQuestion: 'Où sens-tu ton petit volcan quand tu es fâché, et comment arrives-tu à souffler sur les braises ?',
+            angeWhisper:
+              '« Braise gonfle ses joues et fronce les sourcils, mais elle n’est pas méchante : elle te prévient juste que quelque chose ne te semble pas juste. »',
+            ritualTitle: 'Souffler sur les braises',
+            ritualSteps: [
+              'Serre tes poings bien fort pendant trois secondes… puis relâche tes doigts d’un coup.',
+              'Imagine une bougie devant toi et souffle très lentement pour faire danser sa flamme sans l’éteindre.',
+              'Sens tes joues et tes épaules devenir plus tièdes et plus légères.',
+            ],
+            stories: [
+              {
+                id: 'orb-colere-1',
+                title: 'Le petit volcan qui soufflait trop fort',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-colere.webp',
+                summary: 'Braise découvre comment transformer son feu bougon en chaleur rassurante.',
+                pages: [
+                  'Quelqu’un avait renversé les cailloux soigneusement empilés par Braise ! Ses joues gonflèrent comme deux pommes rouges et un petit nuage gris sortit de son volcan.',
+                  '« C’est injuste ! » grogna Braise en tapant du pied. Son feu dansait très haut, si chaud qu’il l’empêchait de réfléchir.',
+                  'Ange envoya une longue brise dorée. Braise souffla dedans très lentement, comme sur une soupe trop chaude. Son feu redevint une douce veilleuse.',
+                ],
+                closingWhisper: 'Quand ton volcan gronde, essaie de souffler comme sur un chocolat chaud.',
+              },
+              {
+                id: 'orb-colere-2',
+                title: 'La force de dire non doucement',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-colere.webp',
+                summary: 'La colère sert aussi à protéger ce qui est important pour toi.',
+                pages: [
+                  'Braise croyait parfois que sa colère était un défaut. Elle essayait de l’enfermer tout au fond de sa grotte, mais cela la faisait gronder encore plus fort.',
+                  'Ange lui expliqua que sa flamme était utile : elle lui donnait le courage de dire « stop, je n’aime pas ça » avec des mots clairs.',
+                  'Fière d’avoir compris son pouvoir, Braise s’assit près de son volcan tiède et sourit du coin des lèvres.',
+                ],
+                closingWhisper: 'Quels mots calmes peux-tu utiliser quand quelque chose ne te convient pas ?',
+              },
+              {
+                id: 'orb-mix-colere-peur',
+                title: 'Sous le grognement de Braise',
+                durationMinutes: 3,
+                orbImage: '/emotions/orb-mix-colere-peur.webp',
+                partnerName: 'Peur',
+                summary: 'Orbe double : parfois on crie fort parce qu’on a eu un peu peur juste avant.',
+                pages: [
+                  'Un bruit sec retentit près de la planète violette. Aussitôt, Braise se mit à rouspéter très fort pour faire fuir l’ombre.',
+                  'Mais derrière le grand arbre mauve, c’était seulement Frisson qui avait fait tomber une pomme de pin ! Frisson tremblait comme une feuille.',
+                  'Braise comprit qu’elle avait grogné parce qu’elle avait été surprise. Elle offrit une étincelle chaude à Frisson pour éclairer le sentier.',
+                ],
+                closingWhisper: 'Parfois la colère est juste le manteau d’une petite peur cachée dessous.',
+              },
+            ],
+          },
+          {
+            id: 'peur',
+            histoiresClement: [{ titre: 'Ange, le loup qui chantait avec le vent', lien: '/histoire-ange-le-loup.html', texte: 'La grande histoire de Clément : à lire, écouter ou regarder' }],
+                        name: 'Peur',
+            characterName: 'Frisson',
+            clock: '5h',
+            color: '#9D84E8',
+            glow: 'rgba(157, 132, 232, 0.5)',
+            softText: '#DFD6FA',
+            image: '/emotions/planet-peur.webp',
+            ratio: '169 / 196',
+            xPct: 69.95,
+            yPct: 75.52,
+            wPct: 12.28,
+            restDur: '5.9s',
+            restDelay: '-3.1s',
+            orbitRadiusX: 70,
+            orbitRadiusY: 54,
+            sentence: 'Quand les ombres paraissent grandes et que tu veux vérifier que tout va bien.',
+            papoteQuestion: 'Qu’est-ce qui rassure ton cœur comme une petite lanterne quand il fait sombre ?',
+            angeWhisper:
+              '« Frisson regarde derrière les arbres avec ses grands yeux ronds. La peur veille sur toi comme une petite lanterne qui dit : fais attention. »',
+            ritualTitle: 'La lanterne d’Ange',
+            ritualSteps: [
+              'Pose tes deux pieds bien à plat sur le sol ou blottis-toi sous ta couette.',
+              'Nomme tout bas trois choses douces que tu peux voir ou toucher autour de toi.',
+              'Écoute le chant d’Ange : même la nuit la plus sombre est remplie de petites étoiles.',
+            ],
+            stories: [
+              {
+                id: 'orb-peur-1',
+                title: 'L’ombre qui n’était qu’un sapin',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-peur.webp',
+                summary: 'Frisson apprend à regarder de plus près ce qui semble grand dans le noir.',
+                pages: [
+                  'Sous le croissant de lune violette, une longue silhouette semblait bouger entre les arbres. Frisson cacha la moitié de son visage derrière un tronc.',
+                  'Son cœur battait vite : toc-toc-toc ! Mais un ruban de vent d’Ange éclaira la clairière d’une lueur dorée.',
+                  'Ce n’était qu’un jeune sapin qui balançait ses branches au rythme de la berceuse. Frisson poussa un grand ouf et ses yeux devinrent tout doux.',
+                ],
+                closingWhisper: 'Quand une ombre te surprend le soir, allume ta curiosité comme une petite lampe.',
+              },
+              {
+                id: 'orb-peur-2',
+                title: 'La ronde des gardiens de la nuit',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-peur.webp',
+                summary: 'Même quand on tremble un peu, on n’est jamais tout seul dans le noir.',
+                pages: [
+                  'La nuit devenait profonde sur la planète mauve. Frisson serra sa tige contre son cœur en comptant les étoiles.',
+                  'Là-haut, la constellation de la montagne et celle du livre ouvert brillaient sans jamais s’éteindre. Ange veillait au centre du ciel.',
+                  'Frisson comprit que la peur était une petite sentinelle très attentive, qui pouvait maintenant se reposer jusqu’au lever du jour.',
+                ],
+                closingWhisper: 'Ange chante toute la nuit pour veiller sur ton sommeil.',
+              },
+              {
+                id: 'orb-mix-peur-joie',
+                title: 'Le grand saut dans l’herbe étoilée',
+                durationMinutes: 3,
+                orbImage: '/emotions/orb-mix-peur-joie.webp',
+                partnerName: 'Joie',
+                summary: 'Orbe double : le trac amusant juste avant d’essayer quelque chose de nouveau.',
+                pages: [
+                  'Frisson rêvait de glisser sur le grand ruban doré d’Ange, mais le vide lui chatouillait le ventre. Étoile vint l’encourager en agitant ses petites ailes.',
+                  '« Moi aussi j’avais un peu le trac avant mon premier vol ! » rit Étoile en lui tendant la main.',
+                  'À trois, ils glissèrent ensemble. Le frisson du début devint un immense éclat de rire entre les étoiles.',
+                ],
+                closingWhisper: 'Avoir le cœur qui bat un peu vite veut parfois dire qu’une belle aventure commence.',
+              },
+            ],
+          },
+          {
+            id: 'timidite',
+            histoiresClement: [{ titre: 'Ange, le loup qui chantait avec le vent', lien: '/histoire-ange-le-loup.html', texte: 'La grande histoire de Clément : à lire, écouter ou regarder' }],
+                        name: 'Timidité',
+            characterName: 'Pivoine',
+            clock: '7h',
+            color: '#EA84AC',
+            glow: 'rgba(234, 132, 172, 0.5)',
+            softText: '#FAD3E2',
+            image: '/emotions/planet-timidite.webp',
+            ratio: '174 / 169',
+            xPct: 30.45,
+            yPct: 78.45,
+            wPct: 12.65,
+            restDur: '6.3s',
+            restDelay: '-0.8s',
+            orbitRadiusX: 70,
+            orbitRadiusY: 50,
+            sentence: 'Quand tes joues rougissent et que tu préfères observer doucement avant d’oser.',
+            papoteQuestion: 'Y a-t-il un moment où tu as pris ton temps comme Pivoine avant d’ouvrir tes pétales ?',
+            angeWhisper:
+              '« Pivoine se cache un peu derrière ses grands pétales roses. Elle n’a pas besoin de se presser : les fleurs s’ouvrent chacune à leur rythme. »',
+            ritualTitle: 'Le pétale qui s’ouvre',
+            ritualSteps: [
+              'Ferme tes mains en deux petits boutons de fleur contre ton ventre.',
+              'À l’inspiration, ouvre doucement les doigts, pétale par pétale.',
+              'Souris juste un tout petit peu : c’est déjà une grande bravoure.',
+            ],
+            stories: [
+              {
+                id: 'orb-timidite-1',
+                title: 'La fleur qui prenait son temps',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-timidite.webp',
+                summary: 'Pivoine découvre que rester discret est aussi une très jolie façon d’être.',
+                pages: [
+                  'Sur la planète rose, toutes les pivoines semblaient s’ouvrir d’un seul coup. Seule la petite Pivoine gardait un pétale devant ses joues rosées.',
+                  'Elle pensait qu’elle devait parler plus fort pour se faire des amis. Mais Ange posa une note douce juste à côté de son bouton.',
+                  'Bientôt, les autres créatures s’approchèrent sans bruit pour admirer la douceur de ses pétales. Pivoine se sentit accueillie telle qu’elle était.',
+                ],
+                closingWhisper: 'Tu as le droit de prendre tout ton temps avant de dire bonjour.',
+              },
+              {
+                id: 'orb-timidite-2',
+                title: 'Le secret chuchoté au vent',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-timidite.webp',
+                summary: 'Un message murmuré doucement voyage aussi loin qu’un grand cri.',
+                pages: [
+                  'Pivoine avait une idée merveilleuse pour décorer le ciel avec des pétales, mais sa voix sortait toute petite, comme un souffle.',
+                  'Elle la chuchota tout bas à la brise d’Ange. Le vent doré recueillit son murmure avec soin et le porta jusqu’aux sept planètes.',
+                  'Tout le monde entendit sa douce idée, et Pivoine rougit de fierté.',
+                ],
+                closingWhisper: 'Même une petite voix douce peut porter de très belles idées.',
+              },
+              {
+                id: 'orb-mix-timidite-calme',
+                title: 'Le jardin secret du soir',
+                durationMinutes: 3,
+                orbImage: '/emotions/orb-mix-timidite-calme.webp',
+                partnerName: 'Calme',
+                summary: 'Orbe double : savourer un moment tranquille à l’abri du bruit.',
+                pages: [
+                  'Après une journée pleine de voix et de jeux, Pivoine adorait retrouver la planète verte de Mousse. Là-bas, personne ne demandait rien.',
+                  'Elles écoutaient le clapotis du petit étang et regardaient les lucioles dessiner des cercles paresseux.',
+                  'Pivoine sentit ses joues refroidir doucement. Se cacher un moment pour se reposer fait beaucoup de bien.',
+                ],
+                closingWhisper: 'Aimes-tu parfois avoir ton petit coin calme rien qu’à toi ?',
+              },
+            ],
+          },
+          {
+            id: 'inquietude',
+            name: 'Inquiétude',
+            characterName: 'Tourbillon',
+            clock: '8h',
+            color: '#EE8C3A',
+            glow: 'rgba(238, 140, 58, 0.5)',
+            softText: '#FCE0C3',
+            image: '/emotions/planet-inquietude.webp',
+            ratio: '176 / 197',
+            xPct: 13.88,
+            yPct: 58.66,
+            wPct: 12.79,
+            restDur: '5.5s',
+            restDelay: '-2.6s',
+            orbitRadiusX: 70,
+            orbitRadiusY: 54,
+            sentence: 'Quand mille petites questions tournent vite dans ta tête comme des feuilles d’automne.',
+            papoteQuestion: 'Quelle petite question tourne parfois dans ta tête que l’on pourrait ranger dans la boîte jusqu’à demain ?',
+            angeWhisper:
+              '« Tourbillon gigote dans le vent quand il imagine trop de "et si…". Ensemble, on peut attraper une seule feuille à la fois et la poser par terre. »',
+            ritualTitle: 'Poser les feuilles au sol',
+            ritualSteps: [
+              'Pose une main sur ton front et une main sur ton ventre.',
+              'Imagine que chaque pensée qui tourne est une feuille dorée qui se pose doucement sur l’herbe.',
+              'Compte trois souffles lents jusqu’à ce que le vent devienne une brise.',
+            ],
+            stories: [
+              {
+                id: 'orb-inquietude-1',
+                title: 'La boîte aux "et si…"',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-inquietude.webp',
+                summary: 'Tourbillon apprend à trier les questions utiles et celles qui peuvent attendre demain.',
+                pages: [
+                  'Des feuilles d’automne tournaient sans cesse autour de Tourbillon. « Et si j’oubliais mon doudou ? Et si demain il pleuvait ? »',
+                  'Sa tête tournait si vite qu’une petite goutte perlait sur son front. Ange lui envoya un fil doré pour attraper une feuille à la fois.',
+                  'Ensemble, ils posèrent les questions pour demain dans une jolie boîte sous l’oreiller. Ce soir, tout était déjà en sécurité.',
+                ],
+                closingWhisper: 'Tu peux déposer tes soucis du lendemain sur la table de nuit : ils attendront le matin.',
+              },
+              {
+                id: 'orb-inquietude-2',
+                title: 'Le nœud dénoué par le souffle',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-inquietude.webp',
+                summary: 'Quand l’estomac fait des nœuds, une grande respiration les démêle doucement.',
+                pages: [
+                  'Tourbillon sentait comme une pelote emmêlée dans son ventre. Il essayait de tirer très fort dessus, mais ça faisait encore plus de nœuds.',
+                  'Ange lui montra comment inspirer par le nez comme si l’on sentait un gâteau chaud, puis souffler très lentement.',
+                  'Au bout de trois respirations, le vent sur sa planète devint une brise légère qui caressait les feuilles sans les faire voler.',
+                ],
+                closingWhisper: 'Sens ton ventre se gonfler comme un ballon calme quand tu respires.',
+              },
+              {
+                id: 'orb-mix-inquietude-calme',
+                title: 'Quand la brise devient berceuse',
+                durationMinutes: 3,
+                orbImage: '/emotions/orb-mix-inquietude-calme.webp',
+                partnerName: 'Calme',
+                summary: 'Orbe double : passer des mille pensées qui tournent au repos du soir.',
+                pages: [
+                  'Tourbillon vint s’asseoir sur le bord de la colline d’Ange, juste en dessous de la planète de Mousse. Il tournait encore un peu sur place.',
+                  'Mousse lui prêta une pierre lisse et tiède à tenir dans sa main. En sentant la pierre immobile, Tourbillon ralentit.',
+                  'Ses pensées s’endormirent une par une, comme des oiseaux qui rentrent dans leur nid.',
+                ],
+                closingWhisper: 'Pose ta main sur ta couverture : sens comme elle est douce et immobile.',
+              },
+            ],
+          },
+          {
+            id: 'calme',
+            name: 'Calme',
+            characterName: 'Mousse',
+            clock: '10h',
+            color: '#4FA978',
+            glow: 'rgba(79, 169, 120, 0.52)',
+            softText: '#C5EBD6',
+            image: '/emotions/planet-calme.webp',
+            ratio: '165 / 212',
+            xPct: 28.6,
+            yPct: 32.94,
+            wPct: 11.99,
+            restDur: '6.6s',
+            restDelay: '-1.7s',
+            orbitRadiusX: 68,
+            orbitRadiusY: 56,
+            sentence: 'Quand tout devient silencieux et doux comme un étang où dorment les lucioles.',
+            papoteQuestion: 'À quel endroit ou à quel moment te sens-tu le plus paisible, comme Mousse près de son étang ?',
+            angeWhisper:
+              '« Mousse ferme les yeux sur son coussin vert. Une petite pousse grandit sur sa tête quand on écoute le silence de la nuit. »',
+            ritualTitle: 'L’étang des lucioles',
+            ritualSteps: [
+              'Laisse tes paupières devenir lourdes et douces comme celles d’Ange.',
+              'Imagine une luciole qui monte quand tu inspires et qui descend quand tu expires.',
+              'Laisse ton corps s’enfoncer doucement dans la mousse moelleuse.',
+            ],
+            stories: [
+              {
+                id: 'orb-calme-1',
+                title: 'La petite pousse du silence',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-calme.webp',
+                summary: 'Mousse montre à Ange tout ce qu’on entend quand on écoute le silence.',
+                pages: [
+                  'Sur la planète vert mousse, le silence n’était jamais vide. Mousse ferma les yeux et sourit paisiblement.',
+                  'On entendait le bruit minuscule de la rosée sur l’herbe, le battement d’ailes d’une luciole et le souffle régulier d’Ange au milieu du ciel.',
+                  'À chaque minute de paix, la petite pousse sur la tête de Mousse grandissait d’un millimètre doré.',
+                ],
+                closingWhisper: 'Ferme les yeux cinq secondes : quel petit bruit calme entends-tu autour de toi ?',
+              },
+              {
+                id: 'orb-calme-2',
+                title: 'Le chant du loup qui berce la nuit',
+                durationMinutes: 3,
+                orbImage: '/emotions/orb-calme.webp',
+                summary: 'La grande histoire du soir où les sept planètes s’endorment ensemble.',
+                pages: [
+                  'Tout au milieu du grand ciel bleu nuit, Ange s’assit bien droit sur sa lune moussue. Il ferma les yeux et sourit tendrement.',
+                  'De son chant s’échappèrent sept rubans d’or qui allèrent border chacune des sept planètes comme une couverture d’étoiles.',
+                  'Étoile, Bruine, Braise, Frisson, Pivoine, Tourbillon et Mousse se blottirent dans la nuit douce. Demain sera une nouvelle belle journée.',
+                ],
+                closingWhisper: 'Bonne nuit, petit voyageur des émotions. Ange veille sur tes rêves.',
+              },
+              {
+                id: 'orb-mix-calme-joie',
+                title: 'Le bonheur tout doux du soir',
+                durationMinutes: 2,
+                orbImage: '/emotions/orb-mix-calme-joie.webp',
+                partnerName: 'Joie',
+                summary: 'Orbe double : une joie paisible et silencieuse juste avant de s’endormir.',
+                pages: [
+                  'À la fin du soir, Étoile n’avait plus envie de sauter partout, mais son cœur était toujours rempli de lumière.',
+                  'Elle vint flotter au-dessus de l’étang de Mousse. Son reflet doré se mêla aux lucioles vertes sur l’eau immobile.',
+                  'C’était la plus douce des joies : celle d’être bien, là où l’on est, tout simplement.',
+                ],
+                closingWhisper: 'Respire cette douce chaleur tranquille au creux de ton cœur.',
+              },
+            ],
+          },
+        ],
+      };
+
+      /* ==========================================================================
+         LOGIQUE APPLICATIVE (VANILLA JS, SANS LIBRAIRIE EXTERNE)
+         ========================================================================== */
+      (function () {
+        const STORAGE_KEY = 'ange_jardin_emotions_read_v1';
+        const SVG_W = 1376;
+        const SVG_H = 768;
+
+        const state = {
+          selectedId: 'joie',
+          hoveredId: null,
+          readStoryIds: loadReadStories(),
+          activeStory: null,
+          activeEmotion: null,
+          pageIndex: 0,
+        };
+
+        const skyStage = document.getElementById('sky-stage');
+        const windSvg = document.getElementById('wind-ribbons-svg');
+        const emotionDock = document.getElementById('emotion-dock');
+        const emotionPanel = document.getElementById('emotion-panel');
+        const progressLabel = document.getElementById('progress-label');
+        const storyDialog = document.getElementById('story-dialog');
+        const readerOrbImg = document.getElementById('reader-orb-img');
+        const readerKicker = document.getElementById('reader-kicker');
+        const readerTitle = document.getElementById('reader-title');
+        const readerPageText = document.getElementById('reader-page-text');
+        const readerClosing = document.getElementById('reader-closing');
+        const readerPageCounter = document.getElementById('reader-page-counter');
+        const readerPrevBtn = document.getElementById('reader-prev-btn');
+        const readerNextBtn = document.getElementById('reader-next-btn');
+        const readerSpeakBtn = document.getElementById('reader-speak-btn');
+        const readerCloseBtn = document.getElementById('reader-close');
+        const bedtimeBtn = document.getElementById('btn-bedtime-story');
+
+        document.getElementById('site-title').textContent = ANGE_STORY_DATA.texts.siteTitle;
+        document.getElementById('site-subtitle').textContent = ANGE_STORY_DATA.texts.siteSubtitle;
+        document.getElementById('ange-caption').textContent = ANGE_STORY_DATA.texts.angeCaption;
+        bedtimeBtn.textContent = ANGE_STORY_DATA.texts.bedtimeButton;
+
+        const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const orbAnimators = [];
+        const clusterNodes = new Map();
+        const dockNodes = new Map();
+
+        function loadReadStories() {
+          try {
+            const raw = window.localStorage.getItem(STORAGE_KEY);
+            const parsed = raw ? JSON.parse(raw) : [];
+            return Array.isArray(parsed) ? parsed : [];
+          } catch (_err) {
+            return [];
+          }
+        }
+
+        function saveReadStories() {
+          try {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.readStoryIds));
+          } catch (_err) {
+            /* ignore storage restrictions */
+          }
+        }
+
+        function totalStoriesCount() {
+          return ANGE_STORY_DATA.emotions.reduce((sum, em) => sum + em.stories.length, 0);
+        }
+
+        function updateProgressChip() {
+          const total = totalStoriesCount();
+          const done = state.readStoryIds.length;
+          progressLabel.textContent = `${done} / ${total} histoires écoutées`;
+        }
+
+        function getEmotion(id) {
+          return ANGE_STORY_DATA.emotions.find((e) => e.id === id) || ANGE_STORY_DATA.emotions[0];
+        }
+
+        function createPlanetFxMarkup(emotion) {
+          switch (emotion.id) {
+            case 'joie':
+              return `
+                <img src="${emotion.image}" alt="" aria-hidden="true" class="fx-joie-sun" />
+                <span class="fx-joie-wing-glow" aria-hidden="true"></span>
+              `;
+            case 'tristesse':
+              return `
+                <span class="fx-tristesse-drop" aria-hidden="true"></span>
+                <span class="fx-tristesse-ripple" aria-hidden="true"></span>
+              `;
+            case 'colere':
+              return `
+                <span class="fx-colere-aura" aria-hidden="true"></span>
+                <img src="${emotion.image}" alt="" aria-hidden="true" class="fx-colere-flame" />
+              `;
+            case 'peur':
+              return `
+                <img src="${emotion.image}" alt="" aria-hidden="true" class="fx-peur-leaf" />
+                <img src="${emotion.image}" alt="" aria-hidden="true" class="fx-peur-tree-front" />
+              `;
+            case 'timidite':
+              return `
+                <span class="fx-timidite-blush" aria-hidden="true"></span>
+                <img src="${emotion.image}" alt="" aria-hidden="true" class="fx-timidite-petal-left" />
+                <img src="${emotion.image}" alt="" aria-hidden="true" class="fx-timidite-petal-right" />
+              `;
+            case 'inquietude':
+              return `
+                <img src="${emotion.image}" alt="" aria-hidden="true" class="fx-inquietude-swirl" />
+                <span class="fx-inquietude-leaf l1" aria-hidden="true"></span>
+                <span class="fx-inquietude-leaf l2" aria-hidden="true"></span>
+                <span class="fx-inquietude-leaf l3" aria-hidden="true"></span>
+              `;
+            case 'calme':
+              return `
+                <img src="${emotion.image}" alt="" aria-hidden="true" class="fx-calme-sprout" />
+              `;
+            default:
+              return '';
+          }
+        }
+
+        function elidePlaneteOf(name) {
+          return /^[AEIOUYÉÈÊÀÎÔÛ]/i.test(name) ? `Planète d’${name}` : `Planète de ${name}`;
+        }
+
+        function buildWindPath(emotion, offsetScale) {
+          const sx = ANGE_STORY_DATA.ange.snoutX;
+          const sy = ANGE_STORY_DATA.ange.snoutY;
+          const tx = (emotion.xPct / 100) * SVG_W;
+          const ty = (emotion.yPct / 100) * SVG_H;
+          if (emotion.id === 'joie') {
+            // Arc gently right around Joie's label instead of cutting behind the text
+            const s1 = offsetScale > 0 ? 1 : -0.45;
+            return `M ${sx} ${sy} C ${sx + 92 * s1} ${sy - 55}, ${tx + 122 * s1} ${ty + 110}, ${tx} ${ty}`;
+          }
+          const mx = (sx + tx) / 2;
+          const my = (sy + ty) / 2;
+          const dx = tx - sx;
+          const dy = ty - sy;
+          const c1x = sx + dx * 0.25 + dy * 0.16 * offsetScale;
+          const c1y = sy + dy * 0.25 - dx * 0.14 * offsetScale;
+          const c2x = mx + dx * 0.18 - dy * 0.14 * offsetScale;
+          const c2y = my + dy * 0.18 + dx * 0.1 * offsetScale;
+          return `M ${sx.toFixed(1)} ${sy.toFixed(1)} C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${tx.toFixed(1)} ${ty.toFixed(1)}`;
+        }
+
+        function renderWindRibbons() {
+          const selected = getEmotion(state.selectedId);
+          const bgPaths = ANGE_STORY_DATA.emotions
+            .map((em) => {
+              const d = buildWindPath(em, 1);
+              return `<path class="wind-ribbon-bg" d="${d}" stroke="#F4C430" stroke-width="2.5" />`;
+            })
+            .join('');
+
+          const activeMainD = buildWindPath(selected, 1);
+          const activeCurlD = buildWindPath(selected, -0.75);
+          windSvg.innerHTML = `
+            ${bgPaths}
+            <path class="wind-ribbon-active-glow" d="${activeMainD}" stroke="${selected.color}" stroke-width="11" />
+            <path class="wind-ribbon-active-flow" d="${activeMainD}" stroke="${selected.color}" stroke-width="4" />
+            <path class="wind-ribbon-secondary" d="${activeCurlD}" stroke="${selected.softText}" stroke-width="2.2" />
+          `;
+        }
+
+        function triggerTapBurst(btnEl) {
+          btnEl.classList.remove('is-tapped');
+          void btnEl.offsetWidth;
+          btnEl.classList.add('is-tapped');
+          window.clearTimeout(btnEl._tapTimer);
+          btnEl._tapTimer = window.setTimeout(() => {
+            btnEl.classList.remove('is-tapped');
+          }, 800);
+        }
+
+        function renderSkyPlanets() {
+          ANGE_STORY_DATA.emotions.forEach((emotion, idx) => {
+            const cluster = document.createElement('div');
+            cluster.className = 'planet-cluster';
+            cluster.dataset.emotion = emotion.id;
+            cluster.style.setProperty('--px', `${emotion.xPct}%`);
+            cluster.style.setProperty('--py', `${emotion.yPct}%`);
+            cluster.style.setProperty('--pw', `${emotion.wPct}%`);
+            cluster.style.setProperty('--ratio', emotion.ratio);
+            cluster.style.setProperty('--emotion-color', emotion.color);
+            cluster.style.setProperty('--emotion-glow', emotion.glow);
+            cluster.style.setProperty('--rest-dur', emotion.restDur);
+            cluster.style.setProperty('--rest-delay', emotion.restDelay);
+
+            const storyCount = emotion.stories.length;
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'planet-btn';
+            btn.dataset.emotion = emotion.id;
+            btn.setAttribute(
+              'aria-label',
+              `${emotion.name}, ${emotion.characterName}, ${storyCount} histoires`,
+            );
+            btn.setAttribute('aria-pressed', String(state.selectedId === emotion.id));
+            btn.innerHTML = `
+              <span class="planet-rest-float">
+                <span class="planet-halo" aria-hidden="true"></span>
+                <span class="planet-scale-wrap">
+                  <img src="${emotion.image}" alt="" class="planet-sprite" />
+                  <span class="planet-fx" aria-hidden="true">${createPlanetFxMarkup(emotion)}</span>
+                </span>
+              </span>
+            `;
+
+            const label = document.createElement('span');
+            label.className = 'planet-label';
+            label.setAttribute('aria-hidden', 'true');
+            label.innerHTML = `
+              <strong class="planet-label-name">${emotion.name}</strong>
+              <em class="planet-label-char">${emotion.characterName}</em>
+            `;
+
+            const orbsRing = document.createElement('div');
+            orbsRing.className = 'orbs-ring';
+
+            emotion.stories.forEach((story, orbIndex) => {
+              const orbBtn = document.createElement('button');
+              orbBtn.type = 'button';
+              orbBtn.className = 'orb-btn';
+              orbBtn.dataset.storyId = story.id;
+              orbBtn.setAttribute(
+                'aria-label',
+                `Histoire : ${story.title} (${emotion.name}, ${story.durationMinutes} minutes)`,
+              );
+              orbBtn.innerHTML = `<img src="${story.orbImage}" alt="" />`;
+              orbBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectEmotion(emotion.id);
+                openStoryModal(emotion, story);
+              });
+              orbsRing.appendChild(orbBtn);
+
+              orbAnimators.push({
+                emotionId: emotion.id,
+                el: orbBtn,
+                angle: (orbIndex * Math.PI * 2) / storyCount + idx * 0.65,
+                baseSpeed: 0.34 + idx * 0.025,
+                rx: emotion.orbitRadiusX,
+                ry: emotion.orbitRadiusY,
+              });
+            });
+
+            btn.addEventListener('pointerenter', () => {
+              state.hoveredId = emotion.id;
+            });
+            btn.addEventListener('pointerleave', () => {
+              if (state.hoveredId === emotion.id) {
+                state.hoveredId = null;
+              }
+            });
+            btn.addEventListener('pointerdown', () => {
+              triggerTapBurst(btn);
+            });
+            btn.addEventListener('click', () => {
+              triggerTapBurst(btn);
+              selectEmotion(emotion.id);
+            });
+
+            cluster.appendChild(btn);
+            cluster.appendChild(label);
+            cluster.appendChild(orbsRing);
+            skyStage.appendChild(cluster);
+            clusterNodes.set(emotion.id, { cluster, btn });
+          });
+        }
+
+        function renderEmotionDock() {
+          emotionDock.innerHTML = '';
+          ANGE_STORY_DATA.emotions.forEach((emotion) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'dock-btn';
+            btn.style.setProperty('--btn-color', emotion.color);
+            btn.style.setProperty('--btn-glow', emotion.glow);
+            btn.setAttribute('aria-pressed', String(state.selectedId === emotion.id));
+            btn.innerHTML = `
+              <span class="dock-dot" aria-hidden="true"></span>
+              <span>${emotion.name}</span>
+            `;
+            btn.addEventListener('click', () => {
+              const target = clusterNodes.get(emotion.id);
+              if (target) triggerTapBurst(target.btn);
+              selectEmotion(emotion.id);
+            });
+            emotionDock.appendChild(btn);
+            dockNodes.set(emotion.id, btn);
+          });
+        }
+
+        function renderEmotionPanel() {
+          const emotion = getEmotion(state.selectedId);
+          emotionPanel.style.setProperty('--emotion-color', emotion.color);
+          emotionPanel.style.setProperty('--emotion-glow', emotion.glow);
+          emotionPanel.style.setProperty('--emotion-soft', emotion.softText);
+
+          const storiesHtml = emotion.stories
+            .map((story) => {
+              const isRead = state.readStoryIds.includes(story.id);
+              const partnerTag = story.partnerName
+                ? `<span>${ANGE_STORY_DATA.texts.mixedOrbLabel} · ${emotion.name} &amp; ${story.partnerName}</span>`
+                : '';
+              const doneTag = isRead
+                ? `<span class="story-tag-done">✓ ${ANGE_STORY_DATA.texts.readDoneLabel}</span>`
+                : '';
+              return `
+                <button type="button" class="story-card-btn" data-open-story="${story.id}">
+                  <img src="${story.orbImage}" alt="" class="story-orb-img" />
+                  <div class="story-card-meta">
+                    <h4 class="story-card-title">${story.title}</h4>
+                    <p class="story-card-summary">${story.summary}</p>
+                    <div class="story-card-tags">
+                      <span>${story.durationMinutes} min</span>
+                      ${partnerTag}
+                      ${doneTag}
+                    </div>
+                  </div>
+                  <span class="story-open-cta">${ANGE_STORY_DATA.texts.openStoryLabel}</span>
+                </button>
+              `;
+            })
+            .join('');
+
+          const ritualHtml = emotion.ritualSteps
+            .map((step) => `<li>${step}</li>`)
+            .join('');
+
+          emotionPanel.innerHTML = `
+            <div class="panel-grid">
+              <div>
+                <div class="panel-emotion-head">
+                  <img src="${emotion.image}" alt="${emotion.name} — ${emotion.characterName}" class="panel-planet-thumb" />
+                  <div>
+                    <span class="panel-kicker">${elidePlaneteOf(emotion.characterName)} · ${emotion.clock}</span>
+                    <h2 class="panel-title">${emotion.name}</h2>
+                  </div>
+                </div>
+                <p class="panel-feeling">${emotion.sentence}</p>
+                <div class="whisper-box">${emotion.angeWhisper}</div>
+                <div class="papote-card">
+                  <div class="papote-badge">${ANGE_STORY_DATA.texts.papoteHeading}</div>
+                  <p class="papote-question">${emotion.papoteQuestion}</p>
+                </div>
+                <div class="ritual-card">
+                  <h3 class="ritual-title">${ANGE_STORY_DATA.texts.ritualHeading} : ${emotion.ritualTitle}</h3>
+                  <ol class="ritual-steps">${ritualHtml}</ol>
+                </div>
+              </div>
+              <div>
+                ${(emotion.histoiresClement || []).map((h) => `
+                  <a class="grande-histoire" href="${h.lien}">
+                    <img src="/img/ange-couverture.webp" alt="" />
+                    <span><small>${ANGE_STORY_DATA.texts.grandeHistoireLabel}</small><strong>${h.titre}</strong><em>${h.texte}</em></span>
+                  </a>`).join('')}
+                <h3 class="stories-heading">${ANGE_STORY_DATA.texts.storiesHeading}</h3>
+                <div class="story-list">${storiesHtml}</div>
+              </div>
+            </div>
+          `;
+
+          emotionPanel.querySelectorAll('[data-open-story]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              const storyId = btn.getAttribute('data-open-story');
+              const story = emotion.stories.find((s) => s.id === storyId);
+              if (story) openStoryModal(emotion, story);
+            });
+          });
+        }
+
+        function syncSelectedUI() {
+          clusterNodes.forEach(({ cluster, btn }, id) => {
+            const isSel = id === state.selectedId;
+            cluster.classList.toggle('is-selected', isSel);
+            btn.setAttribute('aria-pressed', String(isSel));
+          });
+          dockNodes.forEach((btn, id) => {
+            const isSel = id === state.selectedId;
+            btn.classList.toggle('is-selected', isSel);
+            btn.setAttribute('aria-pressed', String(isSel));
+          });
+          document.querySelectorAll('.orb-btn').forEach((orbEl) => {
+            const sid = orbEl.getAttribute('data-story-id');
+            orbEl.classList.toggle('is-read', Boolean(sid && state.readStoryIds.includes(sid)));
+          });
+        }
+
+        function selectEmotion(id) {
+          state.selectedId = id;
+          syncSelectedUI();
+          renderWindRibbons();
+          renderEmotionPanel();
+        }
+
+        function stopSpeech() {
+          if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+          }
+          readerSpeakBtn.textContent = ANGE_STORY_DATA.texts.speakStartLabel;
+        }
+
+        function updateReaderView() {
+          const { activeStory, activeEmotion, pageIndex } = state;
+          if (!activeStory || !activeEmotion) return;
+
+          const total = activeStory.pages.length;
+          const isLast = pageIndex >= total - 1;
+          readerOrbImg.src = activeStory.orbImage;
+          readerKicker.textContent = activeStory.partnerName
+            ? `${activeEmotion.name} & ${activeStory.partnerName} · ${activeStory.durationMinutes} min`
+            : `${activeEmotion.name} (${activeEmotion.characterName}) · ${activeStory.durationMinutes} min`;
+          readerTitle.textContent = activeStory.title;
+          readerPageText.textContent = activeStory.pages[pageIndex];
+          readerPageCounter.textContent = `Page ${pageIndex + 1} / ${total}`;
+
+          if (isLast) {
+            readerClosing.hidden = false;
+            readerClosing.textContent = `Chuchotement d’Ange : ${activeStory.closingWhisper}`;
+            readerNextBtn.textContent = ANGE_STORY_DATA.texts.finishStoryLabel;
+            readerNextBtn.classList.add('is-finish');
+          } else {
+            readerClosing.hidden = true;
+            readerNextBtn.textContent = ANGE_STORY_DATA.texts.nextPageLabel;
+            readerNextBtn.classList.remove('is-finish');
+          }
+          readerPrevBtn.disabled = pageIndex === 0;
+        }
+
+        function openStoryModal(emotion, story) {
+          stopSpeech();
+          state.activeEmotion = emotion;
+          state.activeStory = story;
+          state.pageIndex = 0;
+          updateReaderView();
+          if (typeof storyDialog.showModal === 'function') {
+            if (!storyDialog.open) storyDialog.showModal();
+          } else {
+            storyDialog.setAttribute('open', 'open');
+          }
+        }
+
+        function closeStoryModal() {
+          stopSpeech();
+          if (storyDialog.open && typeof storyDialog.close === 'function') {
+            storyDialog.close();
+          } else {
+            storyDialog.removeAttribute('open');
+          }
+        }
+
+        readerPrevBtn.addEventListener('click', () => {
+          if (state.pageIndex > 0) {
+            stopSpeech();
+            state.pageIndex -= 1;
+            updateReaderView();
+          }
+        });
+
+        readerNextBtn.addEventListener('click', () => {
+          if (!state.activeStory) return;
+          stopSpeech();
+          if (state.pageIndex < state.activeStory.pages.length - 1) {
+            state.pageIndex += 1;
+            updateReaderView();
+          } else {
+            if (!state.readStoryIds.includes(state.activeStory.id)) {
+              state.readStoryIds.push(state.activeStory.id);
+              saveReadStories();
+              updateProgressChip();
+              syncSelectedUI();
+              renderEmotionPanel();
+            }
+            closeStoryModal();
+          }
+        });
+
+        readerSpeakBtn.addEventListener('click', () => {
+          if (!('speechSynthesis' in window) || !state.activeStory) return;
+          if (window.speechSynthesis.speaking) {
+            stopSpeech();
+            return;
+          }
+          const utterance = new SpeechSynthesisUtterance(state.activeStory.pages[state.pageIndex]);
+          utterance.lang = 'fr-FR';
+          utterance.rate = 0.92;
+          utterance.onend = () => {
+            readerSpeakBtn.textContent = ANGE_STORY_DATA.texts.speakStartLabel;
+          };
+          readerSpeakBtn.textContent = ANGE_STORY_DATA.texts.speakStopLabel;
+          window.speechSynthesis.speak(utterance);
+        });
+
+        readerCloseBtn.addEventListener('click', closeStoryModal);
+        storyDialog.addEventListener('close', stopSpeech);
+
+        bedtimeBtn.addEventListener('click', () => {
+          const targetId = ANGE_STORY_DATA.texts.bedtimeStoryId;
+          for (const em of ANGE_STORY_DATA.emotions) {
+            const st = em.stories.find((s) => s.id === targetId);
+            if (st) {
+              selectEmotion(em.id);
+              openStoryModal(em, st);
+              return;
+            }
+          }
+        });
+
+        /* ========================================================================
+           ORBITES CONTINUES DES ORBES (ACCELERE AU SURVOL/TAP, FIGE SI REDUCE MOTION)
+           ======================================================================== */
+        let lastTs = performance.now();
+        let orbRafId = null;
+
+        function positionOrbs(dt, reduce) {
+          const isMobile = window.innerWidth <= 767;
+          const scaleFactor = isMobile ? 0.8 : Math.min(1.05, skyStage.clientWidth / 1050);
+          for (let i = 0; i < orbAnimators.length; i++) {
+            const orb = orbAnimators[i];
+            if (!reduce && dt > 0) {
+              const isBoosted =
+                state.hoveredId === orb.emotionId || state.selectedId === orb.emotionId;
+              const speedMult = isBoosted ? (state.hoveredId === orb.emotionId ? 3.2 : 1.75) : 1;
+              orb.angle += orb.baseSpeed * speedMult * dt;
+            }
+            const x = Math.cos(orb.angle) * orb.rx * scaleFactor;
+            const y = Math.sin(orb.angle) * orb.ry * scaleFactor;
+            orb.el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+          }
+        }
+
+        function animateOrbs(now) {
+          const dt = Math.min(0.05, (now - lastTs) / 1000);
+          lastTs = now;
+          if (reduceMotionQuery.matches) {
+            positionOrbs(0, true);
+            orbRafId = null;
+            return;
+          }
+          positionOrbs(dt, false);
+          orbRafId = window.requestAnimationFrame(animateOrbs);
+        }
+
+        function startOrStopOrbLoop() {
+          if (reduceMotionQuery.matches) {
+            if (orbRafId !== null) {
+              window.cancelAnimationFrame(orbRafId);
+              orbRafId = null;
+            }
+            positionOrbs(0, true);
+          } else if (orbRafId === null) {
+            lastTs = performance.now();
+            orbRafId = window.requestAnimationFrame(animateOrbs);
+          }
+        }
+
+        reduceMotionQuery.addEventListener('change', startOrStopOrbLoop);
+        window.addEventListener('resize', () => {
+          if (reduceMotionQuery.matches) positionOrbs(0, true);
+        });
+
+        renderSkyPlanets();
+        renderEmotionDock();
+        syncSelectedUI();
+        renderWindRibbons();
+        renderEmotionPanel();
+        updateProgressChip();
+        startOrStopOrbLoop();
+      })();
+    
+  </script>
+</Base>

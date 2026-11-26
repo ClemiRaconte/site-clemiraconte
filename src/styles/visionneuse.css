@@ -46,3 +46,11 @@
     .vz-scene{height:72vh;padding:10px;}
     .vz-cmd{gap:4px;} .vz-cmd button{width:32px;height:32px;}
   }
+/* Chargement : des empreintes de loup qui avancent sur la pointe des pattes */
+.vz-attente{flex-direction:column;gap:14px;font-family:'Caveat','Comic Sans MS',cursive;font-size:22px;color:#2D6A4F;}
+.vz-attente::before{content:'';width:132px;height:26px;background:
+  radial-gradient(ellipse 6px 8px at 50% 60%,#2D6A4F 98%,transparent) 0 0/33px 26px repeat-x;
+  -webkit-mask:linear-gradient(90deg,#000 0 25%,transparent 25%) 0 0/132px 26px;mask:linear-gradient(90deg,#000 0 25%,transparent 25%) 0 0/132px 26px;
+  animation:vz-pas 1.6s steps(4) infinite;opacity:.75;}
+@keyframes vz-pas{to{-webkit-mask-position:132px 0;mask-position:132px 0;}}
+@media (prefers-reduced-motion: reduce){.vz-attente::before{animation:none;}}
