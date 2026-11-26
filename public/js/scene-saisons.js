@@ -324,7 +324,7 @@
 
   // ----- Composition -----
   function dessiner(now) {
-    var dt = Math.min(3, (now - dernier) / 16.7); dernier = now;
+    var dt = Math.min(3, (now - dernier) / 16.7) * (document.documentElement.dataset.lumiere === 'veilleuse' ? 0.6 : 1); dernier = now;
     if (!pause) { temps += dt / 60; vent *= Math.pow(0.97, dt); chant = Math.max(0, chant - 0.01 * dt); cri = Math.max(0, cri - 0.008 * dt); }
     var t = temps, s = k, y0 = sol(), sway = Math.sin(t * 1.2) * 0.3 + vent * 2;
     var etroit = W < 700;

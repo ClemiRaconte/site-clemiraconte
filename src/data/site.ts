@@ -30,6 +30,8 @@ export const saisons = {
   /** Rendez-vous : Noël et la rentrée (mois-jour inclus) ; le samedi de 9h à midi après le lancement */
   noel: { du: '12-01', au: '12-31' },
   rentree: { du: '08-20', au: '09-10' },
+  /** Lumière tamisée : douce à partir de 19h, veilleuse à partir de 21h, jusqu'à 6h. Le bouton lune vaut pour la soirée */
+  lumiere: { douce: 19, veilleuse: 21, matin: 6 },
 };
 
 export const navigation = [

@@ -45,7 +45,7 @@
   var dessin = dessins[S] || dessins.automne;
 
   function boucle(now) {
-    var dt = Math.min(3, (now - dernier) / 16.7); dernier = now; temps += dt / 60;
+    var dt = Math.min(3, (now - dernier) / 16.7) * (document.documentElement.dataset.lumiere === 'veilleuse' ? 0.6 : 1); dernier = now; temps += dt / 60;
     ctx.clearRect(0, 0, W, H);
     var pousse = souffle * 0.12; souffle *= 0.9;
     elements.forEach(function (e) {

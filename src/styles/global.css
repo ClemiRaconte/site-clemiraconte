@@ -239,3 +239,15 @@ html[data-saison='printemps'] { --motif-saison: url("data:image/svg+xml,%3Csvg x
 html[data-saison='ete'] { --motif-saison: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg fill-opacity='.11'%3E%3Cg fill='%23e2493b' transform='translate(50 50)'%3E%3Ccircle cx='0' cy='-7' r='6'/%3E%3Ccircle cx='7' cy='0' r='6'/%3E%3Ccircle cx='0' cy='7' r='6'/%3E%3Ccircle cx='-7' cy='0' r='6'/%3E%3C/g%3E%3Ccircle cx='160' cy='140' r='4' fill='%23f4c430' fill-opacity='.6'/%3E%3C/g%3E%3C/svg%3E"); }
 html[data-saison] .fond-creme:not(.scene-accueil), html[data-saison] .fond-beige { background-image: var(--motif-saison); background-size: 220px 220px; }
 @media (prefers-reduced-motion: reduce) { .fond-saison { display: none; } }
+
+/* ---------- Lumière tamisée du soir ----------
+   Un voile chaud passe sur tout le site, comme une lampe de chevet qu'on baisse.
+   doux (19h-21h) : moins de bleu ; veilleuse (21h-6h) : plus sombre et ambré. Bouton lune : components/Lune.astro */
+html::after {
+  content: ''; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  background: #ffcf8f; mix-blend-mode: multiply; opacity: 0; transition: opacity 1.6s ease, background-color 1.6s ease;
+}
+html[data-lumiere='doux']::after { opacity: 0.26; }
+html[data-lumiere='veilleuse']::after { background: #8a5a2e; opacity: 0.36; }
+html[data-lumiere='veilleuse'] .vz.vz-en-liseuse .vz-scene { background: #f3e3c4; }
+@media print { html::after { display: none; } }
