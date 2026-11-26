@@ -5,9 +5,9 @@
  * Le titre est écrit sur l'étiquette vierge du dessin (l = gauche, haut, largeur, hauteur en %).
  * Au survol (ou au toucher sur téléphone), la couverture s'ouvre comme une porte sur une page crème.
  */
+import { LIVRES } from '../../data/livres';
 interface Props { items: string[] }
 const { items } = Astro.props;
-const LIVRES: Record<string, { n: number; r: number; l: number[]; a: string }> = {"La différence": {"n": 1, "r": 1.299, "l": [28.5, 11.3, 47.8, 16.9], "a": "Et si ce qui nous rend différents était ce qui nous rapproche ?"}, "Les émotions": {"n": 2, "r": 1.342, "l": [22.5, 11.6, 55.7, 17.4], "a": "Colère, joie, peur : apprendre à les reconnaître et à les accueillir."}, "Trouver sa place dans le groupe": {"n": 3, "r": 1.339, "l": [22.7, 11.2, 58.2, 21.5], "a": "Chacun a sa pièce du puzzle, il suffit de la trouver."}, "Les nouvelles familles": {"n": 4, "r": 1.396, "l": [25.2, 11.6, 52.3, 18.7], "a": "Toutes les familles ne se ressemblent pas, et c'est très bien comme ça."}, "La séparation des parents": {"n": 5, "r": 1.359, "l": [30.2, 11.0, 47.4, 16.6], "a": "Deux maisons, un pont, et un enfant toujours aimé."}, "Le handicap, visible et invisible": {"n": 6, "r": 1.361, "l": [24.9, 8.3, 50.2, 15.5], "a": "Jouer ensemble, avec nos forces et nos différences."}, "Apprendre autrement": {"n": 7, "r": 1.35, "l": [28.3, 10.4, 50.2, 19.3], "a": "Chacun apprend à sa façon, et à son rythme."}, "Le harcèlement": {"n": 8, "r": 1.355, "l": [29.8, 10.8, 49.7, 17.7], "a": "Quand ça ne va pas, on n'est jamais seul sous la pluie."}, "Le consentement": {"n": 9, "r": 1.188, "l": [24.4, 12.1, 45.1, 17.0], "a": "Avant un câlin, on demande. Et on écoute la réponse."}, "Les écrans": {"n": 10, "r": 1.435, "l": [26.7, 9.8, 52.9, 14.0], "a": "Et si on sortait de l'écran pour aller jouer dehors ?"}, "Grandir, à son rythme": {"n": 11, "r": 1.476, "l": [32.0, 9.4, 48.6, 15.2], "a": "Personne ne pousse à la même vitesse, et c'est normal."}};
 const taille = (t: string) => (t.length < 16 ? 7.4 : t.length < 24 ? 6.2 : 5.4);
 const rangees: string[][] = [];
 for (let i = 0; i < items.length; i += 4) rangees.push(items.slice(i, i + 4));
