@@ -191,7 +191,8 @@ const decors = [{id: 'feu', nom: 'Le feu de camp'}, {id: 'refuge', nom: 'Le refu
     $('me-email').textContent = d.email;
     $('me-pas-abonne').hidden = d.abonne || (d.ouvert && !d.email);
     $('me-ouvert').hidden = !(d.ouvert && !d.email);
-    if (!d.email) (document.querySelector('[data-vue="compte"]') as HTMLElement).remove(), (document.querySelector('.me-onglets') as HTMLElement).remove();
+    // Sans compte (avant-première) : on retire seulement « Mon compte », le choix du décor reste.
+    if (!d.email) document.querySelectorAll('[data-vue="compte"]').forEach((x) => x.remove());
     $('me-formules').innerHTML = d.periodes.length
       ? d.periodes.map((p) => `<li>${texte(nomFormule(p.formule))} : depuis le ${date(p.debut)}${p.fin ? (new Date(p.fin) > new Date() ? `, jusqu’au ${date(p.fin)}` : `, terminée le ${date(p.fin)}`) : p.formule === 'famille-mois' ? ', sans engagement' : ', renouvelée chaque année'}</li>`).join('')
       : '<li>Aucune formule pour le moment</li>';
@@ -221,7 +222,7 @@ const decors = [{id: 'feu', nom: 'Le feu de camp'}, {id: 'refuge', nom: 'Le refu
   :global(body) { background: transparent; min-height: 100vh; }
   .me-barre { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 20px; background: rgba(251, 243, 227, 0.82); backdrop-filter: blur(8px); }
   .me-logo { text-decoration: none; }
-  .me-onglets { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 auto; }
+  .me-onglets:not([hidden]) { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 auto; }
   .me-onglets button, :global(.me-ages button) { font: 800 0.92rem var(--f-label); border: 0; border-radius: 24px; padding: 9px 16px; background: #fff; color: var(--encre); box-shadow: 0 4px 0 var(--beige); cursor: pointer; transition: transform 0.12s; }
   .me-onglets button:hover, :global(.me-ages button:hover) { transform: translateY(-3px); }
   .me-onglets button[aria-selected='true'], :global(.me-ages button[aria-pressed='true']) { background: var(--sapin); color: #fff; box-shadow: 0 4px 0 var(--soleil); }
