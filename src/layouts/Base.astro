@@ -18,7 +18,10 @@ const canonique = new URL(chemin, Astro.site);
     <meta name="description" content={description} />
     {(nu || masque) && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonique} />
-    <link rel="icon" type="image/svg+xml" href={u('/favicon.svg')} />
+    <link rel="icon" href={u('/favicon.ico')} sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href={u('/favicon-32.png')} />
+    <link rel="icon" type="image/png" sizes="192x192" href={u('/favicon-192.png')} />
+    <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
     <meta name="theme-color" content="#2D6A4F" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Clémi Raconte" />
